@@ -4,6 +4,7 @@
 #include "ofxXmlSettings.h"
 #include "ofxDmx.h"
 
+
 #include "Lamp.h"
 
 class testApp : public ofBaseApp{
@@ -37,4 +38,6 @@ class testApp : public ofBaseApp{
     
     
     		ofEasyCam cam; // add mouse controls for camera movement
+    
+
 };

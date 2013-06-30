@@ -23,16 +23,28 @@ public:
     int dmxTiltMin;
     int dmxTiltMax;
     
+    float panMin;
+    float panMax;
+
+    float tiltMin;
+    float tiltMax;
+    
+
+    
+    int dmxAddress;
     
     void pointAt(ofVec3f dest);
+    void setRotation(float pan, float tilt);
     
     float getTilt();
     float getPan();
     
     float getDmxTilt();
     float getDmxPan();
+    
 
-
+    float tilt;
+    float pan;
 };
 
 

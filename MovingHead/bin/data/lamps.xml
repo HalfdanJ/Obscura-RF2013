@@ -1,5 +1,23 @@
+<PAN min=-270 max=270/>
+<TILT min=-180 max=0/>
+
+<PANDMX min=0 max=255/>
+<TILTDMX min=0 max=255/>
+	
+
 <LAMPS>
 	<LAMP>
-		<POSITION x="10" y="100" z=0/>
+		<POSITION x=10 y="10" z=0/>
+		<DMX address=100/>
+	</LAMP>
+	
+	<LAMP>
+		<POSITION x=-30 y="10" z=0/>
+		<DMX address=100/>
 	</LAMP>
 </LAMPS>
+
+
+<DEST x=15 y=0 z=10/>
+
+<!--<ROT pan=30 tilt=-10/>-->
