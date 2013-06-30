@@ -2,6 +2,9 @@
 
 
 void testApp::setup() {
+
+    oscSender.setup("HalfdanJ.local", 6745);
+
     ofSetVerticalSync(true);
     ofSetLogLevel(OF_LOG_VERBOSE);
     
@@ -16,7 +19,6 @@ void testApp::setup() {
     ofEnableAlphaBlending();
     
     // load the svg (transforms should be flattened before)
-    
     svg.load("input1.svg");
     
     int numTriangles = 0;
@@ -104,9 +106,26 @@ void testApp::setup() {
 void testApp::update() {
     
     
+    // send some fun stuff to the sharpy army
+
+    ofxOscMessage m;
+
+    m.setAddress("/sharpy");
+    m.addIntArg(0); // device number
+    m.addFloatArg(sin(ofGetElapsedTimeMillis()/4500.) * 8.); // x
+    m.addFloatArg(0); // y
+    m.addFloatArg(sin(ofGetElapsedTimeMillis()/4000.) * 2.); // z
+    oscSender.sendMessage(m);
+
+    ofxOscMessage m2;
+    m2.setAddress("/sharpy");
+    m2.addIntArg(1); // device number
+    m2.addFloatArg(sin(ofGetElapsedTimeMillis()/4500.) * 8.); // x
+    m2.addFloatArg(0); // y
+    m2.addFloatArg(sin(ofGetElapsedTimeMillis()/4000.) * 2.); // z
+    oscSender.sendMessage(m2);
+
 }
-
-
 
 
 void testApp::draw() {
@@ -117,20 +136,33 @@ void testApp::draw() {
     
     
     
-    
+    // waves going across red
     for(int i =0; i<triangles.size();i++) {
-        ofSetColor( ofNoise(triangles[i]->polyline.getCentroid2D().x - ofGetElapsedTimef())*255 );
+	ofSetColor( ofNoise(triangles[i]->centroid.y/600 - ofGetElapsedTimef()/2)*255, 100, 100);
+	triangles[i]->mesh.draw();
         
-        
-        
-        
-        triangles[i]->polyline.draw();
-        
+	ofSetColor( ofNoise(triangles[i]->centroid.x/600 - ofGetElapsedTimef()/2) *255, 90, 90 );
+	triangles[i]->mesh.drawWireframe();
     }
     
     
-    //debugDraw();
+    // Exploding flowers
+
+
+
+    // =================
+
     
+
+    // Corner crawler tree
+    //  pick a triangle
+    //  pick a coner
+    //  pick another corner to move towards
+    //  when new corner reached expand across 2 lines
+
+
+
+    //debugDraw();
     ofPopMatrix();
 }
 
@@ -231,7 +263,8 @@ void testApp::exit()
 {
     
     //gui->saveSettings("GUI/guiSettings.xml");
-    //delete gui;
+    //delete gui;s
+
     
 }
 
