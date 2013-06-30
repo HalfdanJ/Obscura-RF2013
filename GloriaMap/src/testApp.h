@@ -41,6 +41,11 @@ struct InputTriangle {
 };
 
 
+/*struct Walker {
+
+}*/
+
+
 class testApp : public ofBaseApp {
 public:
     
@@ -62,7 +67,9 @@ public:
     void dragEvent(ofDragInfo dragInfo);
     void gotMessage(ofMessage msg);
     
-    ofxOscReceiver oscReceiver;    
+    ofxOscReceiver oscReceiver;
+    ofxOscSender oscSender;
+
     ofxSyphonServer syphonOut;
     
     void setGUI(); 
@@ -74,7 +81,6 @@ public:
     ofFbo fboOut;
     
     ofImage image;
-    
     
     vector<InputTriangle*> triangles;
     vector<Corner*> corners;
@@ -93,5 +99,8 @@ public:
     
     ofxSVG svg;
     
+    // stuff for specifc scenes
+
+
     
 };
