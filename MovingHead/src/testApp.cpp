@@ -24,10 +24,31 @@ void testApp::setup(){
     
     ofSetFrameRate(30);
     
+    osc = new ofxOscReceiver();
+    osc->setup(6745);
+    
 }
 
 //--------------------------------------------------------------
 void testApp::update(){
+    
+    while(osc->hasWaitingMessages() > 0){
+        ofxOscMessage  m;
+        osc->getNextMessage(&m);
+        
+        if(m.getAddress() == "/sharpy"){
+            int lamp = m.getArgAsInt32(0);
+            cout<<lamp<<endl;
+            ofVec3f p = ofVec3f(m.getArgAsFloat(1), m.getArgAsFloat(2), m.getArgAsFloat(3));
+            
+            if(lamps.size() > lamp){
+                lamps[lamp].pointAt(p);
+            }
+        }
+
+        
+    }
+    
     if(ofGetFrameNum() % 30 ==0){
         loadXml();
     }
@@ -47,6 +68,8 @@ void testApp::update(){
         dmx.setLevel(2, 255 - level);*/
         
     }
+    
+      dmx.setLevel(10, 0);
     dmx.update();
 
 }

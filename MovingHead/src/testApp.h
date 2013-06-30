@@ -3,7 +3,7 @@
 #include "ofMain.h"
 #include "ofxXmlSettings.h"
 #include "ofxDmx.h"
-
+#include "ofxOsc.h"
 
 #include "Lamp.h"
 
@@ -37,7 +37,9 @@ class testApp : public ofBaseApp{
     string message;
     
     
-    		ofEasyCam cam; // add mouse controls for camera movement
+    ofEasyCam cam; // add mouse controls for camera movement
+    
+    ofxOscReceiver * osc;
     
 
 };
