@@ -4,65 +4,19 @@
 
 #include "ofxSyphon.h"
 #include "ofxOsc.h"
-#include "ofxSvg.h"
 #include "ofxOpenCv.h"
 
+#include "LampWalker.h"
+
 #include "ofxUI.h"
+
+#include "mapping.h"
 
 #define PORT 9999
 #define OUTHEIGHT 1080
 #define OUTWIDTH 1920
 
 
-struct InputTriangle;
-
-struct WorldPoint {
-    ofVec3f pos;
-};
-
-struct Corner {
-    
-    vector<InputTriangle*> triangles;
-    
-    vector<Corner*> joinedCorners;
-
-    ofVec2f pos;
-    ofVec3f worldPos;
-
-
-    void addTriangleReference(InputTriangle* triangle) {
-
-
-	bool found = false;
-	for(int i=0;i<triangles.size();i++) {
-	    if(triangle == triangles[i]) {
-		found = true;
-	    }
-	}
-
-	if(!found) {
-	    triangles.push_back(triangle);
-	}
-
-
-    }
-};
-
-
-struct InputTriangle {
-    
-    int index;
-    void debugDraw();
-    ofPoint centroid;
-    ofPolyline polyline;
-    
-    Corner * corners[3];
-    
-    ofMesh mesh;
-    
-    ofColor color;
-
-};
 
 
 struct Walker {
@@ -107,17 +61,17 @@ public:
     ofColor bg;
     ofFbo fboOut;
     
+    Mapping mapping;
     
-    ofxSVG svg;
-    vector<InputTriangle*> triangles;
-    vector<Corner*> corners;
-    
+  
     ofxXmlSettings XML;
     
-    vector<WorldPoint*> worldPoints;
     
     // stuff for specifc scenes
 
     vector<Walker> walkers;
+    
+    
+    LampWalker lampWalker;
     
 };
