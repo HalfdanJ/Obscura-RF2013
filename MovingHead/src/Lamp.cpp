@@ -11,6 +11,9 @@
 
 void Lamp::pointAt(ofVec3f point){
     ofVec3f dir = point - position;
+    dir.rotate(rotation.y, ofVec3f(0,1,0));
+    dir.rotate(rotation.x, ofVec3f(1,0,0));
+    dir.rotate(rotation.z, ofVec3f(0,0,1));
     cout<<"Point at "<<dir.x<<"  "<<dir.y<<"  "<<dir.z<<endl;
     tilt = RAD_TO_DEG *  asin(dir.y/dir.length());
     
@@ -30,14 +33,14 @@ void Lamp::pointAt(ofVec3f point){
 }
 
 void Lamp::setRotation(float _pan, float _tilt) {
-  /*  pan = _pan;
+    pan = _pan;
     tilt = _tilt;
     
     ofVec3f v = ofVec3f(10,0,0);
     v.rotate(tilt, ofVec3f(0,0,1));
     v.rotate(-pan, ofVec3f(0,1,0));
     
-    dest = position + v;*/
+    dest = position + v;
 }
 
 

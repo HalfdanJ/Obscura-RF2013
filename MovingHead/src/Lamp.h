@@ -29,9 +29,12 @@ public:
     float tiltMin;
     float tiltMax;
     
+    ofVec3f rotation;
+    
 
     
     int dmxAddress;
+    int dmxOffset;
     
     void pointAt(ofVec3f dest);
     void setRotation(float pan, float tilt);

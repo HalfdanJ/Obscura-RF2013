@@ -20,7 +20,7 @@ void testApp::setup(){
     TTF.loadFont("mono.ttf", 7);
     
     dmx.connect(0);
-    
+    dmx.setChannels(512);
     
     ofSetFrameRate(30);
     
@@ -38,12 +38,45 @@ void testApp::update(){
         
         if(m.getAddress() == "/sharpy"){
             int lamp = m.getArgAsInt32(0);
-            cout<<lamp<<endl;
             ofVec3f p = ofVec3f(m.getArgAsFloat(1), m.getArgAsFloat(2), m.getArgAsFloat(3));
             
-            if(lamps.size() > lamp){
-                lamps[lamp].pointAt(p);
+            if(lamp == 0){
+                for(int i=0;i<lamps.size();i++){
+                    lamps[i].pointAt(p);
+                }
             }
+            if(lamps.size() > lamp-1){
+                lamps[lamp-1].pointAt(p);
+            }
+        } else if(m.getAddress() == "/sharpy/x"){
+            int lamp = 0;
+            ofVec3f p = lamps[0].dest;
+            p.x = (m.getArgAsFloat(0)-0.5)*50;
+            if(lamp == 0){
+                for(int i=0;i<lamps.size();i++){
+                    lamps[i].pointAt(p);
+                }
+            }
+        } else if(m.getAddress() == "/sharpy/y"){
+            int lamp = 0;
+            ofVec3f p = lamps[0].dest;
+            p.y = (m.getArgAsFloat(0)-0.5)*50;
+            if(lamp == 0){
+                for(int i=0;i<lamps.size();i++){
+                    lamps[i].pointAt(p);
+                }
+            }
+        } else if(m.getAddress() == "/sharpy/z"){
+            int lamp = 0;
+            ofVec3f p = lamps[0].dest;
+            p.z = (m.getArgAsFloat(0)-0.5)*50;
+            if(lamp == 0){
+                for(int i=0;i<lamps.size();i++){
+                    lamps[i].pointAt(p);
+                }
+            }
+        } else {
+            cout<<m.getAddress()<<endl;
         }
 
         
@@ -55,8 +88,8 @@ void testApp::update(){
     
     for(int i=0;i<lamps.size();i++){
         
-        float pan = lamps[i].getPan();
-        float tilt = lamps[i].getTilt();
+        float pan = ofClamp(lamps[i].getDmxPan(), 0, 255);
+        float tilt = ofClamp(lamps[i].getDmxTilt(),0,255);
         
         int majorPan = floor(pan);
         int majorTilt = floor(tilt);
@@ -64,12 +97,25 @@ void testApp::update(){
         int minorPan = (pan - majorPan)* 255 ;
         int minorTilt = (tilt - majorTilt)* 255 ;
 
-/*        dmx.setLevel(dmxAddress, majorPan);
-        dmx.setLevel(2, 255 - level);*/
+        dmx.setLevel(lamps[i].dmxAddress+lamps[i].dmxOffset, majorPan);
+        dmx.setLevel(lamps[i].dmxAddress+lamps[i].dmxOffset+1, minorPan);
+        
+        dmx.setLevel(lamps[i].dmxAddress+lamps[i].dmxOffset+2, majorTilt);
+        dmx.setLevel(lamps[i].dmxAddress+lamps[i].dmxOffset+3, minorTilt);
+        
+        dmx.setLevel(lamps[i].dmxAddress+0, 0);
+        dmx.setLevel(lamps[i].dmxAddress+1, 255);
+        dmx.setLevel(lamps[i].dmxAddress+2, 100);
+        dmx.setLevel(lamps[i].dmxAddress+3, 0);
+        dmx.setLevel(lamps[i].dmxAddress+4, 0);
+        dmx.setLevel(lamps[i].dmxAddress+5, 0);
+        dmx.setLevel(lamps[i].dmxAddress+6, 0);
+        dmx.setLevel(lamps[i].dmxAddress+7, 0);
+        dmx.setLevel(lamps[i].dmxAddress+8, 0);
         
     }
     
-      dmx.setLevel(10, 0);
+//      dmx.setLevel(13, 128+ sin(ofGetElapsedTimeMillis()/5000.)*128);
     dmx.update();
 
 }
@@ -103,6 +149,7 @@ void testApp::draw(){
                lamps[i].dest.x, lamps[i].dest.y, lamps[i].dest.z);
         
         ofTranslate(lamps[i].position.x, lamps[i].position.y, lamps[i].position.z);
+
         ofRotate(-lamps[i].getPan()-90, 0, 1, 0);
         ofRotate(lamps[i].getTilt(), 1, 0, 0);
         
@@ -160,8 +207,15 @@ void testApp::loadXml(){
     float panMin = XML.getAttribute("PAN", "min", 0.0);
     float panMax = XML.getAttribute("PAN", "max", 0.0);
     
+/*    float tiltRange = XML.getAttribute("TILT", "range", 0.0);
+    float tiltMin = -180-(tiltRange - 180)/2;
+    float tiltMax = (tiltRange - 180)/2;
+  */
+    
     float tiltMin = XML.getAttribute("TILT", "min", 0.0);
     float tiltMax = XML.getAttribute("TILT", "max", 0.0);
+
+    cout<<tiltMin + tiltMax<<endl;
 
     
 
@@ -191,7 +245,14 @@ void testApp::loadXml(){
         lamps[i].tiltMin = tiltMin;
         lamps[i].tiltMax = tiltMax;
         
+        if(XML.getNumTags("ROTATION")){
+            lamps[i].rotation.x = XML.getAttribute("ROTATION", "x", 0.0);
+            lamps[i].rotation.y = XML.getAttribute("ROTATION", "y", 0.0);
+            lamps[i].rotation.z = XML.getAttribute("ROTATION", "z", 0.0);
+        }
+        
         lamps[i].dmxAddress = XML.getAttribute("DMX", "address", 1);
+        lamps[i].dmxOffset = XML.getAttribute("DMX", "offset", 1);
 
         
         XML.popTag();

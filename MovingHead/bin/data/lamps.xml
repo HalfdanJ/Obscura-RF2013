@@ -1,23 +1,31 @@
 <PAN min=-270 max=270/>
 <TILT min=-180 max=0/>
 
-<PANDMX min=0 max=255/>
-<TILTDMX min=0 max=255/>
+<PANDMX min=0 max=256/>
+<TILTDMX min=30 max=220/>
 	
 
 <LAMPS>
 	<LAMP>
-		<POSITION x=10 y="10" z=0/>
-		<DMX address=100/>
+		<POSITION x=0 y=0 z=0/>
+       <ROTATION x=-2.6 y=-3 z=3/>
+		<DMX address=161 offset=9/>
 	</LAMP>
+    
+    <!--<LAMP>
+		<POSITION x=30 y=30 z=0/>-->
+       <!-- <ROTATION x=23 y=30 z=5/>-->
+		<!--<DMX address=383 offset=12/>-->
+	<!--</LAMP>-->
 	
-	<LAMP>
+<!--	<LAMP>
 		<POSITION x=-30 y="10" z=0/>
 		<DMX address=100/>
-	</LAMP>
+	</LAMP>-->
 </LAMPS>
 
 
-<!--<DEST x=15 y=0 z=10/>-->
+<DEST x=-0 y=-10 z=-0.0/>
+<!--<ROT pan=187 tilt=-180/>
 
-<!--<ROT pan=30 tilt=-10/>-->
+<ROT pan=7 tilt=0/>-->
