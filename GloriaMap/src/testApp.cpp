@@ -246,6 +246,9 @@ void testApp::draw() {
 
     //debugDraw();
     ofPopMatrix();
+    
+    ofDrawBitmapString(ofToString(ofGetFrameRate()), 20, 20);
+    
 }
 
 
