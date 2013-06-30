@@ -16,12 +16,36 @@
 
 struct InputTriangle;
 
+struct WorldPoint {
+    ofVec3f pos;
+};
+
 struct Corner {
     
     vector<InputTriangle*> triangles;
     
+    vector<Corner*> joinedCorners;
+
     ofVec2f pos;
     ofVec3f worldPos;
+
+
+    void addTriangleReference(InputTriangle* triangle) {
+
+
+	bool found = false;
+	for(int i=0;i<triangles.size();i++) {
+	    if(triangle == triangles[i]) {
+		found = true;
+	    }
+	}
+
+	if(!found) {
+	    triangles.push_back(triangle);
+	}
+
+
+    }
 };
 
 
@@ -41,9 +65,13 @@ struct InputTriangle {
 };
 
 
-/*struct Walker {
+struct Walker {
+    ofPolyline line;
+    vector<ofVec2f> points;
 
-}*/
+    Corner * corner;
+
+};
 
 
 class testApp : public ofBaseApp {
@@ -52,7 +80,6 @@ public:
     void setup();
     void update();
     void draw();
-    
     void debugDraw();
     
     void exit();
@@ -80,27 +107,17 @@ public:
     ofColor bg;
     ofFbo fboOut;
     
-    ofImage image;
     
+    ofxSVG svg;
     vector<InputTriangle*> triangles;
     vector<Corner*> corners;
     
-    ofxCvColorImage			colorImg;
+    ofxXmlSettings XML;
     
-    ofxCvGrayscaleImage 	grayImage;
-    ofxCvGrayscaleImage 	grayBg;
-    ofxCvGrayscaleImage 	grayDiff;
-    
-    ofxCvContourFinder 	contourFinder;
-    
-    int 				threshold;
-    bool				bLearnBakground;
-    
-    
-    ofxSVG svg;
+    vector<WorldPoint*> worldPoints;
     
     // stuff for specifc scenes
 
-
+    vector<Walker> walkers;
     
 };

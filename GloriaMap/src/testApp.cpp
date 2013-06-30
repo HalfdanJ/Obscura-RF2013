@@ -18,7 +18,35 @@ void testApp::setup() {
     ofEnableSmoothing();
     ofEnableAlphaBlending();
     
+    // load the worldpoints
+
+    XML.loadFile("calibration.xml");
+
+    int worldPointTags = XML.getNumTags("WORLDPOINT:PT");
+
+    if(worldPointTags > 0){
+
+	for(int i = 0; i < worldPointTags; i++){
+
+	    int x = XML.getValue("PT:X", 0, i);
+	    int y = XML.getValue("PT:Y", 0, i);
+	    int z = XML.getValue("PT:Z", 0, i);
+
+	    WorldPoint * wp = new WorldPoint();
+	    wp->pos.set(ofVec3f(x,y,z));
+	    worldPoints.push_back(wp);
+
+	}
+
+    }
+
+
+
     // load the svg (transforms should be flattened before)
+
+
+    // todo - try to load this data from xml files
+
     svg.load("input1.svg");
     
     int numTriangles = 0;
@@ -43,6 +71,9 @@ void testApp::setup() {
                 
                 cout<<"Creating triangle..."<<endl;
                 
+
+
+
                 // For each of 3 vertices in triangle create a corner pointer
                 for(int vi=0; vi<3; vi++) {
                     
@@ -56,7 +87,10 @@ void testApp::setup() {
                             
                             if (vert.distance(triangles[ti]->corners[cti]->pos) < cornerThreshold) {
                                 cout<<"Setting corner: "<<vert.x<<", "<<vert.y<<endl;
-                                triangle->corners[vi] = triangles[ti]->corners[cti];
+				triangle->corners[vi] = triangles[ti]->corners[cti];
+
+				triangle->corners[vi]->addTriangleReference(triangle);
+
                                 set = true;
                             }
                         }
@@ -68,13 +102,12 @@ void testApp::setup() {
                         triangle->corners[vi] = new Corner;
                         triangle->corners[vi]->pos = vert;
                         
-                        triangle->corners[vi]->triangles.push_back(triangle);
-                        
                         corners.push_back(triangle->corners[vi]);
+
+			triangle->corners[vi]->addTriangleReference(triangle);
                     }
-                    
+
                 }
-                
                 
                 triangle->color.set(ofRandom(100,255));
                 
@@ -100,6 +133,24 @@ void testApp::setup() {
     //gui->setDrawBack(true);
     //gui->loadSettings("GUI/guiSettings.xml");
     
+
+
+
+
+
+    // effects scenes
+
+
+    walkers.resize(1);
+
+    for(int i=0;i<walkers.size();i++) {
+
+	walkers[i].corner = corners[0];
+
+    }
+
+
+
 }
 
 //--------------------------------------------------------------
@@ -135,7 +186,7 @@ void testApp::draw() {
     ofBackground(0);
     
     
-    
+    ofSetLineWidth(2);
     // waves going across red
     for(int i =0; i<triangles.size();i++) {
 	ofSetColor( ofNoise(triangles[i]->centroid.y/600 - ofGetElapsedTimef()/2)*255, 100, 100);
@@ -146,21 +197,52 @@ void testApp::draw() {
     }
     
     
-    // Exploding flowers
-
-
-
     // =================
+    // Walker v1
+    // =================
+
+    for(int i=0;i<walkers.size();i++) {
+
+
+	walkers[i].points.push_back(walkers[i].corner->pos);
+
+	if(walkers[i].points.size() > 100) {
+	    walkers[i].points.erase(walkers[i].points.begin());
+	}
+
+	ofBeginShape();
+	ofFill();
+	ofSetLineWidth(4);
+
+	for(int p=0; p<walkers[i].points.size(); p++) {
+	    //ofCircle(walkers[i].points[p].x, walkers[i].points[p].y, 4);
+	    ofSetColor(255,255,255,ofMap(p,0,walkers[i].points.size(), 0, 200));
+	    ofCircle(walkers[i].points[p].x, walkers[i].points[p].y, 4);
+	    ofVertex(walkers[i].points[p].x,walkers[i].points[p].y);
+	}
+	ofEndShape();
+
+	/*while (nt == walkers[i].corner) {
+
+	}*/
+	InputTriangle * nt;
+	nt = walkers[i].corner->triangles[ofRandom(walkers[i].corner->triangles.size())];
+
+	walkers[i].corner = nt->corners[(int)ofRandom(0,3)];
+
+
+    }
+
 
     
 
+    // =================
     // Corner crawler tree
+    // =================
     //  pick a triangle
     //  pick a coner
     //  pick another corner to move towards
     //  when new corner reached expand across 2 lines
-
-
 
     //debugDraw();
     ofPopMatrix();
@@ -171,15 +253,12 @@ void testApp::draw() {
 void InputTriangle::debugDraw() {
     
     
-    
     ofFill();
     ofSetColor(255, 255, 255, 40);
     ofRect(polyline.getBoundingBox());
     
     //path.draw();
-    
     //vector<ofPolyline>& lines = path.getOutline();
-    
     //for(int j=0;j<(int)lines.size();j++){
     
     ofFill();
@@ -194,7 +273,6 @@ void InputTriangle::debugDraw() {
         ofCircle(polyline.getVertices()[i].x, polyline.getVertices()[i].y, 20);
     }
     
-
     
 }
 
@@ -265,6 +343,7 @@ void testApp::exit()
     //gui->saveSettings("GUI/guiSettings.xml");
     //delete gui;s
 
+    XML.saveFile("calibration.xml");
     
 }
 
