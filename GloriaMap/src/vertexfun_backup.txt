@@ -1,0 +1,508 @@
+//
+//  File.c
+//  kloLys
+//
+//  Created by Johan Bichel Lindegaard on 4/13/13.
+//
+//
+
+#include "testApp.h"
+
+
+void testApp::setup() {
+    
+    receiver.setup(PORT);
+    
+    ofSetWindowTitle("KLO ALPHA");
+    syphonOut.setName("KLO Output");
+    
+    
+    ofBackground(0);
+	glEnable(GL_DEPTH_TEST);
+    ofSetSmoothLighting(true);
+    ofSetSphereResolution(100);
+    ofEnableAlphaBlending();
+    ofEnableSmoothing();
+    ofSetGlobalAmbientColor(ofColor(255, 255, 255));
+    
+    
+	radius = 300.f;
+	center.set(ofGetWidth()*.5, ofGetHeight()*.5, 0);
+    
+    // Point lights emit light in all directions //
+    // set the diffuse color, color reflected from the light source //
+    pointLight.setDiffuseColor( ofColor(0.f, 255.f, 0.f));
+    
+    // specular color, the highlight/shininess color //
+	pointLight.setSpecularColor( ofColor(255.f, 255.f, 255.f));
+    pointLight.setPosition(center.x, center.y, 10);
+    
+    /*
+     // size of the cone of emitted light, angle between light axis and side of cone //
+     // angle range between 0 - 90 in degrees //
+     pointLight.setSpotlightCutOff( 30 );
+     
+     // rate of falloff, illumitation decreases as the angle from the cone axis increases //
+     // range 0 - 128, zero is even illumination, 128 is max falloff //
+     pointLight.setSpotConcentration( 30 );*/
+    
+    // shininess is a value between 0 - 128, 128 being the most shiny //
+	material.setShininess( 20 );
+    
+    colorHue = ofRandom(0, 250);
+    
+    lightColor.setBrightness( 180.f );
+    lightColor.setSaturation( 150.f );
+    
+    materialColor.setBrightness(200);
+    materialColor.setSaturation(200);
+    
+    numShards = 6;
+    
+    for(int i = 0; i < numShards; i++){
+        Shard shard;
+        shard.center = ofVec3f(0, 0, 0);
+        
+        ofMesh mesh;
+        
+        
+        
+        /*    mesh.addVertex(ofVec3f(0,0,0));
+         mesh.addVertex(ofVec3f(0,100,0));
+         mesh.addVertex(ofVec3f(0,0,0));
+         mesh.addVertex(ofVec3f(100,0,0));
+         mesh.addVertex(ofVec3f(100,100,0));
+         mesh.addVertex(ofVec3f(0,0,0));
+         mesh.addVertex(ofVec3f(0,10,40));
+         mesh.addVertex(ofVec3f(80,10,40));
+         mesh.addVertex(ofVec3f(0,10,40));
+         mesh.addVertex(ofVec3f(0,0,0));
+         
+         mesh.addVertex(ofVec3f(20,0,0));
+         mesh.addVertex(ofVec3f(0,100,0));
+         mesh.addVertex(ofVec3f(0,100,-50));
+         mesh.addVertex(ofVec3f(100,0,0));
+         mesh.addVertex(ofVec3f(0,100,0));
+         mesh.addVertex(ofVec3f(0,100,-50));
+         mesh.addVertex(ofVec3f(100,100,10));
+         mesh.addVertex(ofVec3f(0,0,0));
+         mesh.addVertex(ofVec3f(0,100,0));
+         mesh.addVertex(ofVec3f(0,100,-50));
+         mesh.addVertex(ofVec3f(100,0,0));
+         mesh.addVertex(ofVec3f(0,100,0));
+         mesh.addVertex(ofVec3f(0,100,-50));
+         mesh.addVertex(ofVec3f(100,100,10));*/
+        
+        
+        
+        
+        
+        
+        // ICOSAHEDRON 2
+        float phi = (1.0 + sqrt(5.0)) * 0.5;
+        
+        ofVec3f A = ofVec3f(0,1, phi);
+        ofVec3f B = ofVec3f(0, -1, phi);
+        ofVec3f C = ofVec3f(0, -1, -phi);
+        ofVec3f D = ofVec3f(0,1, -phi);
+        ofVec3f E = ofVec3f(phi,0,1);
+        ofVec3f F = ofVec3f(-phi,0,1);
+        ofVec3f G = ofVec3f(-phi,0, -1);
+        ofVec3f H = ofVec3f(phi,0, -1);
+        ofVec3f I = ofVec3f(1, phi,0);
+        ofVec3f J = ofVec3f(-1, phi,0);
+        ofVec3f K = ofVec3f(-1, -phi,0);
+        ofVec3f L = ofVec3f(1, -phi,0);
+        
+        
+        
+        // 20 triangles in the icosahedron
+        ofVec3f triangles[] = { A,I,J, A,J,F, A,F,B, A,B,E, A,E,I,
+            B,F,K, B,K,L, B,L,E, C,D,H, C,H,L,
+            C,L,K, C,K,G, C,G,D, D,G,J, D,J,I,
+            D,I,H, E,L,H, E,H,I, F,J,G, F,G,K  };
+        
+        
+        // 30 edges of the triangles
+        ofVec3f edges[] = { A,B, A,E, A,F, A,I, A,J, B,E, B,F, B,K, B,L, C,D,
+            C,G, C,H, C,K, C,L, D,G, D,H, D,I, D,J, E,H, E,I,
+            E,L, F,G, F,J, F,K, G,J, G,K, H,I, H,L, I,J, K,L  };
+        
+        
+        /*vector<ofVec3f> vl;
+         vl.assign(triangles, triangles+60);
+         
+         mesh.setMode(OF_PRIMITIVE_TRIANGLES);
+         mesh.addVertices(vl);
+         */
+        
+        
+        vector<ofVec3f> ed;
+        ed.assign(edges, edges+60);
+        
+        mesh.setMode(OF_PRIMITIVE_LINES);
+        mesh.addVertices(ed);
+        
+        
+        /* ICOSAHEDRON 1
+         
+         int rad = 1000;
+         
+         // Phi - the square root of 5 plus 1 divided by 2
+         float phi = (1.0 + sqrt(5.0)) * 0.5;
+         // Golden ratio - the ratio of edgelength to radius
+         float ratio = sqrt(10.0 + (2.0 * sqrt(5.0))) / (4.0 * phi);
+         
+         float a = (rad / ratio) * 0.5;
+         float b = (rad / ratio) / (2.0 * phi);
+         
+         //' Define the icosahedron's 12 vertices
+         
+         glPointSize(2);
+         mesh.addVertex(ofVec3f( 0, b,-a));
+         mesh.addVertex(ofVec3f( b, a, 0));
+         mesh.addVertex(ofVec3f(-b, a, 0));
+         mesh.addVertex(ofVec3f( 0, b, a));
+         mesh.addVertex(ofVec3f( 0,-b, a));
+         mesh.addVertex(ofVec3f(-a, 0, b));
+         mesh.addVertex(ofVec3f( 0,-b,-a));
+         mesh.addVertex(ofVec3f( a, 0,-b));
+         mesh.addVertex(ofVec3f( a, 0, b));
+         mesh.addVertex(ofVec3f(-a, 0,-b));
+         mesh.addVertex(ofVec3f( b,-a, 0));
+         mesh.addVertex(ofVec3f(-b,-a, 0));
+         
+         */
+        
+        
+        /*v(0)  = Rhino.PointAdd(center, Array( 0,  b, -a))
+         v(1)  = Rhino.PointAdd(center, Array( b,  a,  0))
+         v(2)  = Rhino.PointAdd(center, Array(-b,  a,  0))
+         v(3)  = Rhino.PointAdd(center, Array( 0,  b,  a))
+         v(4)  = Rhino.PointAdd(center, Array( 0, -b,  a))
+         v(5)  = Rhino.PointAdd(center, Array(-a,  0,  b))
+         v(6)  = Rhino.PointAdd(center, Array( 0, -b, -a))
+         v(7)  = Rhino.PointAdd(center, Array( a,  0, -b))
+         v(8)  = Rhino.PointAdd(center, Array( a,  0,  b))
+         v(9)  = Rhino.PointAdd(center, Array(-a,  0, -b))
+         v(10) = Rhino.PointAdd(center, Array( b, -a,  0))
+         v(11) = Rhino.PointAdd(center, Array(-b, -a,  0))*/
+        
+        
+        /* ' Create the icosahedron's 20 triangular faces
+         s(0)  = Rhino.AddSrfPt(Array(v(0), v(1), v(2)))
+         s(1)  = Rhino.AddSrfPt(Array(v(3), v(2), v(1)))
+         s(2)  = Rhino.AddSrfPt(Array(v(3), v(4), v(5)))
+         s(3)  = Rhino.AddSrfPt(Array(v(3), v(8), v(4)))
+         s(4)  = Rhino.AddSrfPt(Array(v(0), v(6), v(7)))
+         s(5)  = Rhino.AddSrfPt(Array(v(0), v(9), v(6)))
+         s(6)  = Rhino.AddSrfPt(Array(v(4), v(10), v(11)))
+         s(7)  = Rhino.AddSrfPt(Array(v(6), v(11), v(10)))
+         s(8)  = Rhino.AddSrfPt(Array(v(2), v(5), v(9)))
+         s(9)  = Rhino.AddSrfPt(Array(v(11), v(9), v(5)))
+         s(10) = Rhino.AddSrfPt(Array(v(1), v(7), v(8)))
+         s(11) = Rhino.AddSrfPt(Array(v(10), v(8), v(7)))
+         s(12) = Rhino.AddSrfPt(Array(v(3), v(5), v(2)))
+         s(13) = Rhino.AddSrfPt(Array(v(3), v(1), v(8)))
+         s(14) = Rhino.AddSrfPt(Array(v(0), v(2), v(9)))
+         s(15) = Rhino.AddSrfPt(Array(v(0), v(7), v(1)))
+         s(16) = Rhino.AddSrfPt(Array(v(6), v(9), v(11)))
+         s(17) = Rhino.AddSrfPt(Array(v(6), v(10), v(7)))
+         s(18) = Rhino.AddSrfPt(Array(v(4), v(11), v(5)))
+         s(19) = Rhino.AddSrfPt(Array(v(4), v(8), v(10)))*/
+        
+        shard.baseMesh = mesh;
+        shard.mesh = mesh;
+        shard.size = 0.5;
+        shards.push_back(shard);
+    }
+}
+
+//--------------------------------------------------------------
+void testApp::update() {
+    
+    pointLight.setPosition(cos(ofGetElapsedTimef()*.6f) * radius * 2 + center.x,
+						   sin(ofGetElapsedTimef()*.8f) * radius * 2 + center.y,
+						   -cos(ofGetElapsedTimef()*.8f) * radius * 2 + center.z);
+	
+    //spotLight.setOrientation( ofVec3f( 0, cos(ofGetElapsedTimef()) * RAD_TO_DEG, 0) );
+	//spotLight.setPosition( mouseX, mouseY, 200);
+    
+    //lightColor.setHue(255);
+    pointLight.setDiffuseColor(200);
+    
+    materialColor.setHue(100);
+    // the light highlight of the material //
+	material.setSpecularColor(materialColor);
+    
+    
+    // check for waiting messages
+	while(receiver.hasWaitingMessages()){
+		// get the next message
+		ofxOscMessage m;
+		receiver.getNextMessage(&m);
+        
+        if(m.getAddress() ==  "/shards/x"){
+            for(int i = 0; i < shards.size(); i++) {
+                shards[i].center.x = m.getArgAsFloat(i)*ofGetWidth();
+            }
+		} else if(m.getAddress() == "/shards/y"){
+            for(int i = 0; i < shards.size(); i++) {
+                shards[i].center.y = ofGetHeight()-(m.getArgAsFloat(i)*ofGetHeight());
+            }
+        } else if(m.getAddress() == "/shards/z"){
+            for(int i = 0; i < shards.size(); i++) {
+                shards[i].center.z = ofMap(m.getArgAsFloat(i), 0, 1, -10, 10);
+            }
+		} else if(m.getAddress() == "/afr/pressure/1") {
+            shards[0].size = m.getArgAsFloat(0);
+        } else if(m.getAddress() == "/afr/pressure/2") {
+            shards[2].size = m.getArgAsFloat(0);
+        } else if(m.getAddress() == "/afr/pressure/3") {
+            shards[3].size = m.getArgAsFloat(0);
+        } else if(m.getAddress() == "/afr/pressure/4") {
+            shards[4].size = m.getArgAsFloat(0);
+        } else if(m.getAddress() == "/lasse/pitch") {
+            shards[1].size = m.getArgAsFloat(0);
+            shards[5].size = 1-m.getArgAsFloat(0);
+        } else if(m.getAddress() == "/tobias/color") {
+            shards[m.getArgAsInt32(0)].color.setHue(m.getArgAsFloat(1)*255);
+            shards[m.getArgAsInt32(0)].color.setBrightness(200);
+            shards[m.getArgAsInt32(0)].color.setSaturation(200);
+            
+        } else if(m.getAddress() == "/lasse/draw") {
+            
+            int mode = m.getArgAsInt32(0);
+            
+            //cout<<ofToString(mode)<<endl;
+            bg.set(0);
+            for(int i = 0; i < shards.size(); i++) {
+                shards[i].color.set(220);
+            }
+            
+            glPointSize(2);
+            if(mode == 0) {
+                for(int i = 0; i < shards.size(); i++) {
+                    glPointSize(4);
+                    shards[i].mesh.setMode(OF_PRIMITIVE_POINTS);
+                    shards[i].color.set(200,0,0);
+                }
+            } else if(mode == 1) {
+                for(int i = 0; i < shards.size(); i++) {
+                    shards[i].mesh.setMode(OF_PRIMITIVE_LINES);
+                }
+            } else if(mode == 2) {
+                for(int i = 0; i < shards.size(); i++) {
+                    glLineWidth(2);
+                    shards[i].mesh.setMode(OF_PRIMITIVE_LINE_LOOP);
+                    
+                    
+                }
+                
+            } else if(mode == 3) {
+                for(int i = 0; i < shards.size(); i++) {
+                    glLineWidth(4);
+                    shards[i].mesh.setMode(OF_PRIMITIVE_LINE_STRIP);
+                    shards[i].color.set(10*i);
+                    bg.set(255,0,10*i);
+                }
+                
+            } else if(mode == 4) {
+                for(int i = 0; i < shards.size(); i++) {
+                    glPointSize(4);
+                    glLineWidth(4);
+                    shards[i].color.set(0);
+                    bg.set(255,10*i,0);
+                }
+                
+            }
+        }
+	}
+}
+
+//--------------------------------------------------------------
+void testApp::draw() {
+    
+    
+    /*float rotateAmount = ofMap(sin(ofGetFrameNum()/100), 0, 1, 0, 360);
+     ofVec3f furthestPoint;
+     furthestPoint = ofVec3f(1000, 1000, 500);
+     
+     ofVec3f directionToFurthestPoint = (furthestPoint - center);
+     ofVec3f directionToFurthestPointRotated = directionToFurthestPoint.rotated(rotateAmount, ofVec3f(0,1,0));
+     
+     camera.setPosition(center + directionToFurthestPointRotated);
+     camera.lookAt(center);
+     
+     */
+    
+    camera.begin();
+    
+    
+    
+    /*if(sin(ofGetFrameNum())>0.5) { // noisy strobe
+     bg.setBrightness(255);
+     } else {
+     bg.setBrightness(ofNoise(ofGetFrameNum())*255);
+     }*/
+    
+    ofBackground(0);
+    
+    // enable lighting //
+    
+    ///lightColor.setHue(250);
+    //lightColor.setBrightness(255);
+    //pointLight.setDiffuseColor(lightColor);
+    
+    
+    ofPushMatrix();
+    
+    pointLight.setPosition(ofGetWidth()/2, ofGetHeight()/2, 150);
+    
+    ofEnableLighting();
+    // the position of the light must be updated every frame,
+    // call enable() so that it can update itself //
+    pointLight.enable();
+    //material.begin();
+    
+    
+    for(int i = 0; i < shards.size(); i++){
+        ofPushMatrix();
+        ofTranslate(shards[i].center);
+        ofScale(shards[i].size, shards[i].size, shards[i].size);
+        ofScale(100, 100, 100);
+        ofRotate(ofNoise(ofGetFrameNum() / 300.0)*360);
+        
+        ofSetColor(shards[i].color);
+        
+        //ofSphere(-10, -10, -10, 30);
+        //ofBox(40, 30, 30, 40);
+        
+        vector<ofVec3f> * verts;
+        verts = &shards[i].baseMesh.getVertices();
+        
+        int vertnum = shards[i].baseMesh.getNumVertices();
+        
+        for(int v=0; v < vertnum; v++) {
+            
+            ofVec3f basevert = shards[i].baseMesh.getVertex(v);
+            ofVec3f vert = shards[i].mesh.getVertex(v);
+            //cout<<"has new vert"<<endl;
+            float c = ofGetFrameNum() / 50.0;
+            
+            vert.x = basevert.x;// - ofNoise(ofGetFrameNum() / 30.0-basevert.x*i)*100;
+            vert.y = basevert.y;// + 100*sin(ofNoise(ofGetFrameNum() / 30.0+basevert.y*i));
+            vert.z = basevert.z;// - ofNoise(ofGetFrameNum() / 30.0-basevert.z*i)*40;
+            
+            vert.set(vert);
+            shards[i].mesh.setVertex(v, vert);
+            shards[i].mesh.draw();
+        }
+        
+        shards[i].lightColor.setHue(250);
+        shards[i].lightColor.setBrightness(200);
+        shards[i].light.setDiffuseColor(shards[i].color);
+        
+        shards[i].light.setPosition(shards[i].center);
+        shards[i].light.enable();
+        
+        ofPopMatrix();
+    }
+    
+    
+    
+	//material.end();
+	// turn off lighting //
+    ofDisableLighting();
+    
+    ofPopMatrix();
+    
+    camera.end();
+    
+    
+    syphonOut.publishScreen();
+    
+    ofSetColor(255, 255, 255);
+    ofDrawBitmapString(ofToString(ofGetFrameRate()), 10, 10);
+    ofDrawBitmapString("AFR: " + ofToString(shards[0].size), 10, 50);
+    ofDrawBitmapString("LAS: " +  ofToString(shards[1].size), 10, 30);
+    ofDrawBitmapString("TOB: " +  ofToString(shards[1].color.getHue()), 10, 70);
+    
+    
+    
+    
+    
+}
+
+//--------------------------------------------------------------
+void testApp::keyPressed(int key){
+    switch (key) {
+        case 'q':
+            for(int i = 0; i < shards.size(); i++){
+                vector<ofVec3f> * verts;
+                verts = &shards[i].baseMesh.getVertices();
+                
+                int vertnum = shards[i].baseMesh.getNumVertices();
+                
+                for(int v=0; v < vertnum; v++) {
+                    
+                    ofVec3f basevert = shards[i].baseMesh.getVertex(v);
+                    
+                    ofVec3f vert = shards[i].mesh.getVertex(v);
+                    
+                    vert.x = ofRandom(basevert.x, basevert.x+400)-200;
+                    vert.y = ofRandom(basevert.y, basevert.y+400)-200;
+                    vert.z = ofRandom(basevert.z, basevert.z+400)-200;
+                    
+                    vert.set(vert);
+                    shards[i].baseMesh.setVertex(v, vert);
+                    shards[i].baseMesh.draw();
+                }
+                
+                ofPopMatrix();
+            }
+            
+        default:
+            break;
+    }
+}
+
+//--------------------------------------------------------------
+void testApp::keyReleased(int key){
+    
+}
+
+//--------------------------------------------------------------
+void testApp::mouseMoved(int x, int y ){
+    
+}
+
+//--------------------------------------------------------------
+void testApp::mouseDragged(int x, int y, int button){
+    
+}
+
+//--------------------------------------------------------------
+void testApp::mousePressed(int x, int y, int button){
+    
+}
+
+//--------------------------------------------------------------
+void testApp::mouseReleased(int x, int y, int button){
+    
+}
+
+//--------------------------------------------------------------
+void testApp::windowResized(int w, int h){
+    
+}
+
+//--------------------------------------------------------------
+void testApp::gotMessage(ofMessage msg){
+    
+}
+
+//--------------------------------------------------------------
+void testApp::dragEvent(ofDragInfo dragInfo){
+    
+}
