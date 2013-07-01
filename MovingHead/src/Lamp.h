@@ -17,17 +17,19 @@ public:
     ofVec3f position;
     ofVec3f dest;
     
-    int dmxPanMin;
-    int dmxPanMax;
+    float dmxPanMin;
+    float dmxPanMax;
     
-    int dmxTiltMin;
-    int dmxTiltMax;
+    float dmxTiltMin;
+    float dmxTiltMax;
     
     float panMin;
     float panMax;
 
     float tiltMin;
     float tiltMax;
+    
+    float dim;
     
     ofVec3f rotation;
     
@@ -48,6 +50,8 @@ public:
 
     float tilt;
     float pan;
+    
+    float coldCountdown;
 };
 
 
