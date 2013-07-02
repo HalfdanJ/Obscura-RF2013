@@ -46,6 +46,7 @@
 		04CA7B401753E82E00B224D8 /* ofxXmlSettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04CA7B3B1753E82E00B224D8 /* ofxXmlSettings.cpp */; };
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
 		DD7BE8AC1780D80900F04F23 /* LampWalker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DD7BE8AA1780D80900F04F23 /* LampWalker.cpp */; };
+		DD81641C17820BFB006B6A3E /* Triangles.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DD81641A17820BFB006B6A3E /* Triangles.cpp */; };
 		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
 		E45BE97B0E8CC7DD009D7055 /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9710E8CC7DD009D7055 /* AGL.framework */; };
 		E45BE97C0E8CC7DD009D7055 /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9720E8CC7DD009D7055 /* ApplicationServices.framework */; };
@@ -318,6 +319,8 @@
 		DD7BE8AA1780D80900F04F23 /* LampWalker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LampWalker.cpp; sourceTree = "<group>"; };
 		DD7BE8AB1780D80900F04F23 /* LampWalker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LampWalker.h; sourceTree = "<group>"; };
 		DD7BE8AD1780D8E900F04F23 /* mapping.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mapping.h; sourceTree = "<group>"; };
+		DD81641A17820BFB006B6A3E /* Triangles.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Triangles.cpp; sourceTree = "<group>"; };
+		DD81641B17820BFB006B6A3E /* Triangles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Triangles.h; sourceTree = "<group>"; };
 		E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openFrameworksLib.xcodeproj; path = ../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E45BE9710E8CC7DD009D7055 /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
 		E45BE9720E8CC7DD009D7055 /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = /System/Library/Frameworks/ApplicationServices.framework; sourceTree = "<absolute>"; };
@@ -573,6 +576,8 @@
 				DD7BE8AB1780D80900F04F23 /* LampWalker.h */,
 				DD7BE8AA1780D80900F04F23 /* LampWalker.cpp */,
 				0438DB901781E2C2003833F8 /* ContentScene.h */,
+				DD81641A17820BFB006B6A3E /* Triangles.cpp */,
+				DD81641B17820BFB006B6A3E /* Triangles.h */,
 			);
 			name = Scenes;
 			sourceTree = "<group>";
@@ -1217,6 +1222,7 @@
 				046C30A517805E7C009A2EE6 /* ofxSvg.cpp in Sources */,
 				DD7BE8AC1780D80900F04F23 /* LampWalker.cpp in Sources */,
 				0438DB941782D0E9003833F8 /* QuickTrail.cpp in Sources */,
+				DD81641C17820BFB006B6A3E /* Triangles.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,6 +9,7 @@
 
 #include "LampWalker.h"
 #include "QuickTrail.h"
+#include "Triangles.h"
 
 #include "ofxUI.h"
 
@@ -43,6 +44,7 @@ public:
     ofxOscSender oscSender;
 
     ofxSyphonServer syphonOut;
+    ofxSyphonClient syphonIn;
 
     void setGUI();
     ofxUICanvas *gui;
@@ -61,7 +63,8 @@ public:
     // Define all the scenes here
     LampWalker lampWalker;
     QuickTrail quickTrail;
-
+    Triangles triangles;
+    
     vector<ContentScene*> scenes;
-
+    
 };

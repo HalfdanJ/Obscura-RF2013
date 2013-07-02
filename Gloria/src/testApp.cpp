@@ -15,8 +15,11 @@ void testApp::setup() {
     syphonOut.setName("Gloria Generative");
     
     fboOut.allocate(OUTWIDTH, OUTHEIGHT);
-    
-    //fboOut.allocate(OUTWIDTH, OUTHEIGHT);
+
+    syphonIn.setApplicationName("QLab");
+    syphonIn.setServerName("qlab");
+    syphonIn.setup();
+
     ofEnableSmoothing();
     ofEnableAlphaBlending();
 
@@ -165,10 +168,18 @@ void testApp::setup() {
     quickTrail.mapping = &mapping;
     scenes.push_back(&quickTrail);
     
+    triangles.mapping = &mapping;
+    triangles.syphon = &syphonIn;
+    scenes.push_back(&triangles);
+    
     for(int i=0; i<scenes.size(); i++) {
         scenes[i]->setupScene(OUTWIDTH, OUTHEIGHT);
     }
-    
+        
+
+    //scenes.push_back(lampWalker);
+
+
 
 }
 
@@ -202,8 +213,6 @@ void testApp::update() {
         scenes[i]->updateScene();
     }
 
-    
-
 }
 
 
@@ -226,8 +235,7 @@ void testApp::draw() {
     for(int i=0; i<scenes.size(); i++) {
         scenes[i]->drawScene();
         // TODO: Layer ordering
-    }
-        
+    }        
     
     fboOut.begin();
     
