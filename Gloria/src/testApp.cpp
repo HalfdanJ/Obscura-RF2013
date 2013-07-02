@@ -170,6 +170,7 @@ void testApp::setup() {
     
     triangles.mapping = &mapping;
     triangles.syphon = &syphonIn;
+    triangles.opacity = 100;
     scenes.push_back(&triangles);
     
     for(int i=0; i<scenes.size(); i++) {
@@ -259,10 +260,13 @@ void testApp::draw() {
     ofScale(0.4, 0.4);
     ofBackground(0);
     
+    
+    
+    
     ofSetColor(255,255,255,96);
     drawGrid();
-    ofSetColor(255,255,255,255);
     
+    ofSetColor(255,255,255,255);
     fboOut.draw(0, 0);
     
     ofPopMatrix();

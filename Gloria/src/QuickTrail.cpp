@@ -9,17 +9,13 @@
 #include "QuickTrail.h"
 
 void QuickTrail::setup(){
-    
     walkers.resize(1);
-    
     for(int i=0;i<walkers.size();i++) {
         walkers[i].corner = mapping->corners[0];
     }
-    
 }
 
 void QuickTrail::update(){
-    
 }
 
 void QuickTrail::draw(){;
@@ -49,5 +45,4 @@ void QuickTrail::draw(){;
         walkers[i].corner = nt->corners[(int)ofRandom(0,3)];
         
     }
-
 }
