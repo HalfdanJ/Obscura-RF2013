@@ -46,8 +46,8 @@ struct Corner {
 };
 
 
-struct InputTriangle {
-
+class InputTriangle {
+public:
     int index;
     void debugDraw();
     ofPoint centroid;
@@ -58,10 +58,27 @@ struct InputTriangle {
     ofMesh mesh;
 
     ofColor color;
+    
+    ofVec2f center(){
+        ofVec2f center = corners[0]->pos;
+        center += corners[1]->pos;
+        center += corners[2]->pos;
+        center /= 3;
+        return center;
+    }
+    
+    ~InputTriangle(){
+        cout<<"Delete input triangle"<<endl;
+        for(int i=0;i<3;i++){
+            delete corners[i];
+        }
+    }
+    
+    
 
 };
 
-class Mapping {
+class Mapping {	
 public:
     ofxSVG svg;
     vector<InputTriangle*> triangles;
