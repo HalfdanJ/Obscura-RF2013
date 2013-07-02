@@ -6,20 +6,20 @@
       parallelizeBuildables = "YES"
       buildImplicitDependencies = "YES">
       <BuildActionEntries>
-	 <BuildActionEntry
-	    buildForTesting = "YES"
-	    buildForRunning = "YES"
-	    buildForProfiling = "YES"
-	    buildForArchiving = "YES"
-	    buildForAnalyzing = "YES">
-	    <BuildableReference
-	       BuildableIdentifier = "primary"
-	       BlueprintIdentifier = "E4B69B5A0A3A1756003C02F2"
-	       BuildableName = "gloriamap.app"
-	       BlueprintName = "Gloria"
-	       ReferencedContainer = "container:Gloria.xcodeproj">
-	    </BuildableReference>
-	 </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "E4B69B5A0A3A1756003C02F2"
+               BuildableName = "Gloria.app"
+               BlueprintName = "Gloria"
+               ReferencedContainer = "container:Gloria.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -30,18 +30,18 @@
       <Testables>
       </Testables>
       <MacroExpansion>
-	 <BuildableReference
-	    BuildableIdentifier = "primary"
-	    BlueprintIdentifier = "E4B69B5A0A3A1756003C02F2"
-	    BuildableName = "gloriamap.app"
-	    BlueprintName = "Gloria"
-	    ReferencedContainer = "container:Gloria.xcodeproj">
-	 </BuildableReference>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "E4B69B5A0A3A1756003C02F2"
+            BuildableName = "Gloria.app"
+            BlueprintName = "Gloria"
+            ReferencedContainer = "container:Gloria.xcodeproj">
+         </BuildableReference>
       </MacroExpansion>
    </TestAction>
    <LaunchAction
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
-      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.GDB"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
       buildConfiguration = "Debug"
@@ -49,13 +49,13 @@
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES">
       <BuildableProductRunnable>
-	 <BuildableReference
-	    BuildableIdentifier = "primary"
-	    BlueprintIdentifier = "E4B69B5A0A3A1756003C02F2"
-	    BuildableName = "gloriamap.app"
-	    BlueprintName = "Gloria"
-	    ReferencedContainer = "container:Gloria.xcodeproj">
-	 </BuildableReference>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "E4B69B5A0A3A1756003C02F2"
+            BuildableName = "Gloria.app"
+            BlueprintName = "Gloria"
+            ReferencedContainer = "container:Gloria.xcodeproj">
+         </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
       </AdditionalOptions>
@@ -67,13 +67,13 @@
       buildConfiguration = "Debug"
       debugDocumentVersioning = "YES">
       <BuildableProductRunnable>
-	 <BuildableReference
-	    BuildableIdentifier = "primary"
-	    BlueprintIdentifier = "E4B69B5A0A3A1756003C02F2"
-	    BuildableName = "gloriamap.app"
-	    BlueprintName = "Gloria"
-	    ReferencedContainer = "container:Gloria.xcodeproj">
-	 </BuildableReference>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "E4B69B5A0A3A1756003C02F2"
+            BuildableName = "Gloria.app"
+            BlueprintName = "Gloria"
+            ReferencedContainer = "container:Gloria.xcodeproj">
+         </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction

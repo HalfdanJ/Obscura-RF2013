@@ -8,6 +8,7 @@
 #include "ContentScene.h"
 
 #include "LampWalker.h"
+#include "Triangles.h"
 
 #include "ofxUI.h"
 
@@ -51,6 +52,7 @@ public:
     ofxOscSender oscSender;
 
     ofxSyphonServer syphonOut;
+    ofxSyphonClient syphonIn;
 
     void setGUI();
     ofxUICanvas *gui;
@@ -72,6 +74,7 @@ public:
     LampWalker lampWalker;
 
     vector<ContentScene*> scene;
+    Triangles triangles;
 
 
 };

@@ -13,6 +13,9 @@ void testApp::setup() {
     ofSetWindowTitle("Obscure Glorious Control");
 
     syphonOut.setName("Gloria");
+    syphonIn.setApplicationName("QLab");
+    syphonIn.setServerName("qlab");
+    syphonIn.setup();
 
     //fboOut.allocate(OUTWIDTH, OUTHEIGHT);
     ofEnableSmoothing();
@@ -169,6 +172,11 @@ void testApp::setup() {
 
     lampWalker.mapping = &mapping;
     lampWalker.setup();
+    
+    triangles.mapping = &mapping;
+    triangles.syphon = &syphonIn;
+    triangles.setup();
+    
 
     //scenes.push_back(lampWalker);
 
@@ -202,6 +210,7 @@ void testApp::update() {
 
     // Scenes
     lampWalker.update();
+    triangles.update();
 
 }
 
@@ -263,8 +272,8 @@ void testApp::draw() {
 
 
 
-    lampWalker.draw();
-
+   // lampWalker.draw();
+    triangles.draw();
 
     // =================
     // Corner crawler tree
