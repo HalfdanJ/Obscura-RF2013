@@ -31,18 +31,16 @@ struct Corner {
 
     void addTriangleReference(InputTriangle* triangle) {
 
+        bool found = false;
+        for(int i=0;i<triangles.size();i++) {
+            if(triangle == triangles[i]) {
+            found = true;
+            }
+        }
 
-	bool found = false;
-	for(int i=0;i<triangles.size();i++) {
-	    if(triangle == triangles[i]) {
-		found = true;
-	    }
-	}
-
-	if(!found) {
-	    triangles.push_back(triangle);
-	}
-
+        if(!found) {
+            triangles.push_back(triangle);
+        }
 
     }
 };
