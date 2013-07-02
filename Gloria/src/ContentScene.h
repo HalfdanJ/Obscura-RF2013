@@ -6,6 +6,11 @@ class ContentScene {
     
 public:
     
+    string name = "unnamed scene";
+    string oscAddress = "/default";
+
+    // bool syphonDirect;
+
     ofFbo fbo;
     bool enabled = true;
     float opacity = 255;

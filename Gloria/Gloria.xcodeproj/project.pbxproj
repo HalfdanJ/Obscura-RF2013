@@ -575,7 +575,6 @@
 				0438DB931782D0E9003833F8 /* QuickTrail.cpp */,
 				DD7BE8AB1780D80900F04F23 /* LampWalker.h */,
 				DD7BE8AA1780D80900F04F23 /* LampWalker.cpp */,
-				0438DB901781E2C2003833F8 /* ContentScene.h */,
 				DD81641A17820BFB006B6A3E /* Triangles.cpp */,
 				DD81641B17820BFB006B6A3E /* Triangles.h */,
 			);
@@ -1081,6 +1080,7 @@
 			children = (
 				0438DB8F1781DD78003833F8 /* Scenes */,
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
+				0438DB901781E2C2003833F8 /* ContentScene.h */,
 				E4B69E1F0A3A1BDC003C02F2 /* testApp.h */,
 				E4B69E1E0A3A1BDC003C02F2 /* testApp.cpp */,
 				DD7BE8AD1780D8E900F04F23 /* mapping.h */,

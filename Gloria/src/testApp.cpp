@@ -152,9 +152,7 @@ void testApp::setup() {
 
     cout<<endl<<"Created: "<<mapping.triangles.size()<<" triangles with "<<mapping.corners.size()<<" unique corners"<<endl;
 
-    //setGUI();
-    //gui->setDrawBack(true);
-    //gui->loadSettings("GUI/guiSettings.xml");
+
 
 
     // effects scenes
@@ -176,9 +174,11 @@ void testApp::setup() {
     for(int i=0; i<scenes.size(); i++) {
         scenes[i]->setupScene(OUTWIDTH, OUTHEIGHT);
     }
-        
 
-    //scenes.push_back(lampWalker);
+
+    setGUI();
+    gui->setDrawBack(true);
+    gui->loadSettings("GUI/guiSettings.xml");
 
 
 
@@ -207,9 +207,7 @@ void testApp::update() {
     m2.addFloatArg(sin(ofGetElapsedTimeMillis()/4000.) * 2.); // z
     oscSender.sendMessage(m2);
 
-
     // Scenes
-    
     for(int i=0; i<scenes.size(); i++) {
         scenes[i]->updateScene();
     }
@@ -242,16 +240,11 @@ void testApp::draw() {
     
     ofClear(0, 0);
     
-    //glEnable(GL_BLEND);
-    //glBlendFunc(GL_ONE, GL_ONE);
-    
     for(int i=0; i<scenes.size(); i++) {
         ofSetColor(255,255,255,scenes[i]->opacity);
         scenes[i]->fbo.draw(0,0);
     }
-    
-    //glDisable(GL_BLEND);
-    
+
     fboOut.end();
     
     syphonOut.publishTexture(&fboOut.getTextureReference());
@@ -271,7 +264,7 @@ void testApp::draw() {
     
     ofPopMatrix();
 
-    ofDrawBitmapString(ofToString(ofGetFrameRate()), 20, 20);
+    ofDrawBitmapString("FPS: " + ofToString(ofGetFrameRate()), ofGetWidth()-200, 20);
 }
 
 
@@ -379,6 +372,21 @@ void testApp::setGUI()
     float length = 255-xInit;
 
     gui = new ofxUICanvas(0, 0, length+xInit, ofGetHeight());
+
+    for(int i=0; i<scenes.size(); i++) {
+
+	gui->addSpacer(length, 2);
+	gui->addWidgetDown(new ofxUILabel(scenes[i]->name, OFX_UI_FONT_SMALL));
+	gui->addWidgetDown(new ofxUILabel("OSC Address: " + scenes[i]->oscAddress, OFX_UI_FONT_SMALL));
+
+	gui->addWidgetDown(new ofxUISlider("Opacity", 0, 255, &scenes[i]->opacity, length, 10));
+	// label
+	// enabled
+	// opacity
+	// solo
+	// osc address
+
+    }
 
     ofAddListener(gui->newGUIEvent,this,&testApp::guiEvent);
 }
