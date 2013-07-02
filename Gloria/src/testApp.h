@@ -4,59 +4,32 @@
 
 #include "ofxSyphon.h"
 #include "ofxOsc.h"
-#include "ofxSvg.h"
 #include "ofxOpenCv.h"
+#include "ContentScene.h"
+
+#include "LampWalker.h"
+#include "QuickTrail.h"
+#include "Triangles.h"
 
 #include "ofxUI.h"
 
-#define PORT 9999
+#include "mapping.h"
+
+#define OSCPORT 9999
 #define OUTHEIGHT 1080
 #define OUTWIDTH 1920
 
-
-struct InputTriangle;
-
-struct Corner {
-    
-    vector<InputTriangle*> triangles;
-    
-    ofVec2f pos;
-    ofVec3f worldPos;
-};
-
-
-struct InputTriangle {
-    
-    int index;
-    void debugDraw();
-    ofPoint centroid;
-    ofPolyline polyline;
-    
-    Corner * corners[3];
-    
-    ofMesh mesh;
-    
-    ofColor color;
-
-};
-
-
-/*struct Walker {
-
-}*/
-
-
 class testApp : public ofBaseApp {
 public:
-    
+
     void setup();
     void update();
     void draw();
-    
     void debugDraw();
-    
+    void drawGrid();
+
     void exit();
-        
+
     void keyPressed  (int key);
     void keyReleased(int key);
     void mouseMoved(int x, int y );
@@ -66,41 +39,32 @@ public:
     void windowResized(int w, int h);
     void dragEvent(ofDragInfo dragInfo);
     void gotMessage(ofMessage msg);
-    
+
     ofxOscReceiver oscReceiver;
     ofxOscSender oscSender;
 
     ofxSyphonServer syphonOut;
-    
-    void setGUI(); 
+    ofxSyphonClient syphonIn;
+
+    void setGUI();
     ofxUICanvas *gui;
     void guiEvent(ofxUIEventArgs &e);
-    
+
     ofCamera cam;
     ofColor bg;
     ofFbo fboOut;
-    
-    ofImage image;
-    
-    vector<InputTriangle*> triangles;
-    vector<Corner*> corners;
-    
-    ofxCvColorImage			colorImg;
-    
-    ofxCvGrayscaleImage 	grayImage;
-    ofxCvGrayscaleImage 	grayBg;
-    ofxCvGrayscaleImage 	grayDiff;
-    
-    ofxCvContourFinder 	contourFinder;
-    
-    int 				threshold;
-    bool				bLearnBakground;
-    
-    
-    ofxSVG svg;
-    
-    // stuff for specifc scenes
+
+    Mapping mapping;
 
 
+    ofxXmlSettings XML;
+
+
+    // Define all the scenes here
+    LampWalker lampWalker;
+    QuickTrail quickTrail;
+    Triangles triangles;
+    
+    vector<ContentScene*> scenes;
     
 };

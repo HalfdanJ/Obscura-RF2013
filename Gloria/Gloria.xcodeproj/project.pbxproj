@@ -26,6 +26,7 @@
 		04286CA216CC643900056B61 /* ofxOscMessage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04286C9216CC643900056B61 /* ofxOscMessage.cpp */; };
 		04286CA316CC643900056B61 /* ofxOscReceiver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04286C9416CC643900056B61 /* ofxOscReceiver.cpp */; };
 		04286CA416CC643900056B61 /* ofxOscSender.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04286C9616CC643900056B61 /* ofxOscSender.cpp */; };
+		0438DB941782D0E9003833F8 /* QuickTrail.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0438DB931782D0E9003833F8 /* QuickTrail.cpp */; };
 		046C3082177ED4F6009A2EE6 /* opencv.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 046C306E177ED4F6009A2EE6 /* opencv.a */; };
 		046C3083177ED4F6009A2EE6 /* ofxCvColorImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 046C3071177ED4F6009A2EE6 /* ofxCvColorImage.cpp */; };
 		046C3084177ED4F6009A2EE6 /* ofxCvContourFinder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 046C3074177ED4F6009A2EE6 /* ofxCvContourFinder.cpp */; };
@@ -44,6 +45,8 @@
 		04CA7B3F1753E82E00B224D8 /* tinyxmlparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04CA7B391753E82E00B224D8 /* tinyxmlparser.cpp */; };
 		04CA7B401753E82E00B224D8 /* ofxXmlSettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04CA7B3B1753E82E00B224D8 /* ofxXmlSettings.cpp */; };
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
+		DD7BE8AC1780D80900F04F23 /* LampWalker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DD7BE8AA1780D80900F04F23 /* LampWalker.cpp */; };
+		DD81641C17820BFB006B6A3E /* Triangles.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DD81641A17820BFB006B6A3E /* Triangles.cpp */; };
 		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
 		E45BE97B0E8CC7DD009D7055 /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9710E8CC7DD009D7055 /* AGL.framework */; };
 		E45BE97C0E8CC7DD009D7055 /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9720E8CC7DD009D7055 /* ApplicationServices.framework */; };
@@ -145,6 +148,9 @@
 		04286C9516CC643900056B61 /* ofxOscReceiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxOscReceiver.h; sourceTree = "<group>"; };
 		04286C9616CC643900056B61 /* ofxOscSender.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxOscSender.cpp; sourceTree = "<group>"; };
 		04286C9716CC643900056B61 /* ofxOscSender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxOscSender.h; sourceTree = "<group>"; };
+		0438DB901781E2C2003833F8 /* ContentScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContentScene.h; sourceTree = "<group>"; };
+		0438DB921782D0D4003833F8 /* QuickTrail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuickTrail.h; sourceTree = "<group>"; };
+		0438DB931782D0E9003833F8 /* QuickTrail.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = QuickTrail.cpp; sourceTree = "<group>"; };
 		046C3007177ED4F6009A2EE6 /* install.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = install.xml; sourceTree = "<group>"; };
 		046C300C177ED4F6009A2EE6 /* cv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cv.h; sourceTree = "<group>"; };
 		046C300D177ED4F6009A2EE6 /* cv.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = cv.hpp; sourceTree = "<group>"; };
@@ -310,6 +316,11 @@
 		04F2E052174C253E00EB5833 /* ofxUIWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxUIWidget.h; sourceTree = "<group>"; };
 		04F2E053174C253E00EB5833 /* ofxUIWidgetWithLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxUIWidgetWithLabel.h; sourceTree = "<group>"; };
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
+		DD7BE8AA1780D80900F04F23 /* LampWalker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LampWalker.cpp; sourceTree = "<group>"; };
+		DD7BE8AB1780D80900F04F23 /* LampWalker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LampWalker.h; sourceTree = "<group>"; };
+		DD7BE8AD1780D8E900F04F23 /* mapping.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mapping.h; sourceTree = "<group>"; };
+		DD81641A17820BFB006B6A3E /* Triangles.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Triangles.cpp; sourceTree = "<group>"; };
+		DD81641B17820BFB006B6A3E /* Triangles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Triangles.h; sourceTree = "<group>"; };
 		E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openFrameworksLib.xcodeproj; path = ../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E45BE9710E8CC7DD009D7055 /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
 		E45BE9720E8CC7DD009D7055 /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = /System/Library/Frameworks/ApplicationServices.framework; sourceTree = "<absolute>"; };
@@ -320,7 +331,7 @@
 		E45BE9770E8CC7DD009D7055 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = /System/Library/Frameworks/CoreServices.framework; sourceTree = "<absolute>"; };
 		E45BE9790E8CC7DD009D7055 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
 		E45BE97A0E8CC7DD009D7055 /* QuickTime.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickTime.framework; path = /System/Library/Frameworks/QuickTime.framework; sourceTree = "<absolute>"; };
-		E4B69B5B0A3A1756003C02F2 /* gloriamapDebug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gloriamapDebug.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E4B69B5B0A3A1756003C02F2 /* GloriaDebug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GloriaDebug.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4B69E1D0A3A1BDC003C02F2 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = src/main.cpp; sourceTree = SOURCE_ROOT; };
 		E4B69E1E0A3A1BDC003C02F2 /* testApp.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = testApp.cpp; path = src/testApp.cpp; sourceTree = SOURCE_ROOT; };
 		E4B69E1F0A3A1BDC003C02F2 /* testApp.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = testApp.h; path = src/testApp.h; sourceTree = SOURCE_ROOT; };
@@ -555,6 +566,20 @@
 				04286C9716CC643900056B61 /* ofxOscSender.h */,
 			);
 			path = src;
+			sourceTree = "<group>";
+		};
+		0438DB8F1781DD78003833F8 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				0438DB921782D0D4003833F8 /* QuickTrail.h */,
+				0438DB931782D0E9003833F8 /* QuickTrail.cpp */,
+				DD7BE8AB1780D80900F04F23 /* LampWalker.h */,
+				DD7BE8AA1780D80900F04F23 /* LampWalker.cpp */,
+				0438DB901781E2C2003833F8 /* ContentScene.h */,
+				DD81641A17820BFB006B6A3E /* Triangles.cpp */,
+				DD81641B17820BFB006B6A3E /* Triangles.h */,
+			);
+			name = Scenes;
 			sourceTree = "<group>";
 		};
 		046C3006177ED4F6009A2EE6 /* ofxOpenCv */ = {
@@ -1047,16 +1072,18 @@
 				E4B69E1C0A3A1BDC003C02F2 /* src */,
 				E4EEC9E9138DF44700A80321 /* openFrameworks */,
 				E45BE5980E8CC70C009D7055 /* frameworks */,
-				E4B69B5B0A3A1756003C02F2 /* gloriamapDebug.app */,
+				E4B69B5B0A3A1756003C02F2 /* GloriaDebug.app */,
 			);
 			sourceTree = "<group>";
 		};
 		E4B69E1C0A3A1BDC003C02F2 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				0438DB8F1781DD78003833F8 /* Scenes */,
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
-				E4B69E1E0A3A1BDC003C02F2 /* testApp.cpp */,
 				E4B69E1F0A3A1BDC003C02F2 /* testApp.h */,
+				E4B69E1E0A3A1BDC003C02F2 /* testApp.cpp */,
+				DD7BE8AD1780D8E900F04F23 /* mapping.h */,
 				BB4B014C10F69532006C3DED /* addons */,
 			);
 			path = src;
@@ -1074,9 +1101,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		E4B69B5A0A3A1756003C02F2 /* gloriamap */ = {
+		E4B69B5A0A3A1756003C02F2 /* Gloria */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E4B69B5F0A3A1757003C02F2 /* Build configuration list for PBXNativeTarget "gloriamap" */;
+			buildConfigurationList = E4B69B5F0A3A1757003C02F2 /* Build configuration list for PBXNativeTarget "Gloria" */;
 			buildPhases = (
 				E4B69B580A3A1756003C02F2 /* Sources */,
 				E4B69B590A3A1756003C02F2 /* Frameworks */,
@@ -1088,9 +1115,9 @@
 			dependencies = (
 				E4EEB9AC138B136A00A80321 /* PBXTargetDependency */,
 			);
-			name = gloriamap;
+			name = Gloria;
 			productName = myOFApp;
-			productReference = E4B69B5B0A3A1756003C02F2 /* gloriamapDebug.app */;
+			productReference = E4B69B5B0A3A1756003C02F2 /* GloriaDebug.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -1101,7 +1128,7 @@
 			attributes = {
 				LastUpgradeCheck = 0460;
 			};
-			buildConfigurationList = E4B69B4D0A3A1720003C02F2 /* Build configuration list for PBXProject "gloriamap" */;
+			buildConfigurationList = E4B69B4D0A3A1720003C02F2 /* Build configuration list for PBXProject "Gloria" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -1122,7 +1149,7 @@
 			);
 			projectRoot = "";
 			targets = (
-				E4B69B5A0A3A1756003C02F2 /* gloriamap */,
+				E4B69B5A0A3A1756003C02F2 /* Gloria */,
 			);
 		};
 /* End PBXProject section */
@@ -1193,6 +1220,9 @@
 				046C30A317805E7C009A2EE6 /* svgtiny_gradient.cpp in Sources */,
 				046C30A417805E7C009A2EE6 /* svgtiny_list.cpp in Sources */,
 				046C30A517805E7C009A2EE6 /* ofxSvg.cpp in Sources */,
+				DD7BE8AC1780D80900F04F23 /* LampWalker.cpp in Sources */,
+				0438DB941782D0E9003833F8 /* QuickTrail.cpp in Sources */,
+				DD81641C17820BFB006B6A3E /* Triangles.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1371,7 +1401,7 @@
 					"\"$(SRCROOT)/../../../addons/ofxOpenCv/libs/opencv/lib/osx\"",
 				);
 				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../../addons/ofxFft/libs/fftw/lib/osx\"";
-				PRODUCT_NAME = gloriamapDebug;
+				PRODUCT_NAME = GloriaDebug;
 				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1467,7 +1497,7 @@
 					"\"$(SRCROOT)/../../../addons/ofxOpenCv/libs/opencv/lib/osx\"",
 				);
 				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../../addons/ofxFft/libs/fftw/lib/osx\"";
-				PRODUCT_NAME = gloriamap;
+				PRODUCT_NAME = Gloria;
 				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1476,7 +1506,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		E4B69B4D0A3A1720003C02F2 /* Build configuration list for PBXProject "gloriamap" */ = {
+		E4B69B4D0A3A1720003C02F2 /* Build configuration list for PBXProject "Gloria" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E4B69B4E0A3A1720003C02F2 /* Debug */,
@@ -1485,7 +1515,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E4B69B5F0A3A1757003C02F2 /* Build configuration list for PBXNativeTarget "gloriamap" */ = {
+		E4B69B5F0A3A1757003C02F2 /* Build configuration list for PBXNativeTarget "Gloria" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E4B69B600A3A1757003C02F2 /* Debug */,
