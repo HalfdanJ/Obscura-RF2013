@@ -26,6 +26,7 @@
 		04286CA216CC643900056B61 /* ofxOscMessage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04286C9216CC643900056B61 /* ofxOscMessage.cpp */; };
 		04286CA316CC643900056B61 /* ofxOscReceiver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04286C9416CC643900056B61 /* ofxOscReceiver.cpp */; };
 		04286CA416CC643900056B61 /* ofxOscSender.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04286C9616CC643900056B61 /* ofxOscSender.cpp */; };
+		0438DB941782D0E9003833F8 /* QuickTrail.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0438DB931782D0E9003833F8 /* QuickTrail.cpp */; };
 		046C3082177ED4F6009A2EE6 /* opencv.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 046C306E177ED4F6009A2EE6 /* opencv.a */; };
 		046C3083177ED4F6009A2EE6 /* ofxCvColorImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 046C3071177ED4F6009A2EE6 /* ofxCvColorImage.cpp */; };
 		046C3084177ED4F6009A2EE6 /* ofxCvContourFinder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 046C3074177ED4F6009A2EE6 /* ofxCvContourFinder.cpp */; };
@@ -147,6 +148,8 @@
 		04286C9616CC643900056B61 /* ofxOscSender.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxOscSender.cpp; sourceTree = "<group>"; };
 		04286C9716CC643900056B61 /* ofxOscSender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxOscSender.h; sourceTree = "<group>"; };
 		0438DB901781E2C2003833F8 /* ContentScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContentScene.h; sourceTree = "<group>"; };
+		0438DB921782D0D4003833F8 /* QuickTrail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuickTrail.h; sourceTree = "<group>"; };
+		0438DB931782D0E9003833F8 /* QuickTrail.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = QuickTrail.cpp; sourceTree = "<group>"; };
 		046C3007177ED4F6009A2EE6 /* install.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = install.xml; sourceTree = "<group>"; };
 		046C300C177ED4F6009A2EE6 /* cv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cv.h; sourceTree = "<group>"; };
 		046C300D177ED4F6009A2EE6 /* cv.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = cv.hpp; sourceTree = "<group>"; };
@@ -565,8 +568,10 @@
 		0438DB8F1781DD78003833F8 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				DD7BE8AA1780D80900F04F23 /* LampWalker.cpp */,
+				0438DB921782D0D4003833F8 /* QuickTrail.h */,
+				0438DB931782D0E9003833F8 /* QuickTrail.cpp */,
 				DD7BE8AB1780D80900F04F23 /* LampWalker.h */,
+				DD7BE8AA1780D80900F04F23 /* LampWalker.cpp */,
 				0438DB901781E2C2003833F8 /* ContentScene.h */,
 			);
 			name = Scenes;
@@ -1211,6 +1216,7 @@
 				046C30A417805E7C009A2EE6 /* svgtiny_list.cpp in Sources */,
 				046C30A517805E7C009A2EE6 /* ofxSvg.cpp in Sources */,
 				DD7BE8AC1780D80900F04F23 /* LampWalker.cpp in Sources */,
+				0438DB941782D0E9003833F8 /* QuickTrail.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

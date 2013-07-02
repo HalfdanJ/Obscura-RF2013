@@ -12,8 +12,10 @@ void testApp::setup() {
 
     ofSetWindowTitle("Obscure Glorious Control");
 
-    syphonOut.setName("Gloria");
-
+    syphonOut.setName("Gloria Generative");
+    
+    fboOut.allocate(OUTWIDTH, OUTHEIGHT);
+    
     //fboOut.allocate(OUTWIDTH, OUTHEIGHT);
     ofEnableSmoothing();
     ofEnableAlphaBlending();
@@ -152,27 +154,21 @@ void testApp::setup() {
     //gui->loadSettings("GUI/guiSettings.xml");
 
 
-
-
-
-
     // effects scenes
 
-    walkers.resize(1);
-
-    for(int i=0;i<walkers.size();i++) {
-	walkers[i].corner = mapping.corners[0];
-    }
-
-
-    //LampWalker * lampWalker = new LampWalker();
-
+ 
+    // Set up the scenes, all scenes is a subclass of SceneContent, don't call draw, setup and update directly it is taken care of thorugh the scene.
+    
     lampWalker.mapping = &mapping;
-    lampWalker.setup();
-
-    //scenes.push_back(lampWalker);
-
-
+    scenes.push_back(&lampWalker);
+    
+    quickTrail.mapping = &mapping;
+    scenes.push_back(&quickTrail);
+    
+    for(int i=0; i<scenes.size(); i++) {
+        scenes[i]->setupScene(OUTWIDTH, OUTHEIGHT);
+    }
+    
 
 }
 
@@ -201,91 +197,73 @@ void testApp::update() {
 
 
     // Scenes
-    lampWalker.update();
+    
+    for(int i=0; i<scenes.size(); i++) {
+        scenes[i]->updateScene();
+    }
+
+    
 
 }
 
 
 void testApp::draw() {
-
-    // Scenes
-
-
-
-    ofPushMatrix();
-    ofScale(0.4, 0.4);
     ofBackground(0);
-
-
+    
+    /* Move this to a scene
     ofSetLineWidth(2);
     // waves going across red
     for(int i =0; i<mapping.triangles.size();i++) {
-	ofSetColor( ofNoise(mapping.triangles[i]->centroid.y/600 - ofGetElapsedTimef()/2)*255, 100, 100);
-	mapping.triangles[i]->mesh.draw();
+        ofSetColor( ofNoise(mapping.triangles[i]->centroid.y/600 - ofGetElapsedTimef()/2)*255, 100, 100);
+        mapping.triangles[i]->mesh.draw();
 
-	ofSetColor( ofNoise(mapping.triangles[i]->centroid.x/600 - ofGetElapsedTimef()/2) *255, 90, 90 );
-	mapping.triangles[i]->mesh.drawWireframe();
+        ofSetColor( ofNoise(mapping.triangles[i]->centroid.x/600 - ofGetElapsedTimef()/2) *255, 90, 90 );
+        mapping.triangles[i]->mesh.drawWireframe();
     }
+    */
 
 
-    // =================
-    // Walker v1
-    // =================
-
-    for(int i=0;i<walkers.size();i++) {
-
-
-	walkers[i].points.push_back(walkers[i].corner->pos);
-
-	if(walkers[i].points.size() > 100) {
-	    walkers[i].points.erase(walkers[i].points.begin());
-	}
-
-	ofBeginShape();
-	ofNoFill();
-	ofSetLineWidth(4);
-
-	for(int p=0; p<walkers[i].points.size(); p++) {
-	    //ofCircle(walkers[i].points[p].x, walkers[i].points[p].y, 4);
-	    ofSetColor(255,255,255,ofMap(p,0,walkers[i].points.size(), 0, 200));
-	    ofCircle(walkers[i].points[p].x, walkers[i].points[p].y, 4);
-	    ofVertex(walkers[i].points[p].x,walkers[i].points[p].y);
-	}
-	ofEndShape();
-
-	InputTriangle * nt;
-	nt = walkers[i].corner->triangles[ofRandom(walkers[i].corner->triangles.size())];
-
-	walkers[i].corner = nt->corners[(int)ofRandom(0,3)];
-
-
+    for(int i=0; i<scenes.size(); i++) {
+        scenes[i]->drawScene();
+        // TODO: Layer ordering
     }
-
-
-
-    lampWalker.draw();
-
-
-    // =================
-    // Corner crawler tree
-    // =================
-    //  pick a triangle
-    //  pick a coner
-    //  pick another corner to move towards
-    //  when new corner reached expand across 2 lines
-
-    //debugDraw();
+        
+    
+    fboOut.begin();
+    
+    ofClear(0, 0);
+    
+    //glEnable(GL_BLEND);
+    //glBlendFunc(GL_ONE, GL_ONE);
+    
+    for(int i=0; i<scenes.size(); i++) {
+        ofSetColor(255,255,255,scenes[i]->opacity);
+        scenes[i]->fbo.draw(0,0);
+    }
+    
+    //glDisable(GL_BLEND);
+    
+    fboOut.end();
+    
+    syphonOut.publishTexture(&fboOut.getTextureReference());
+    
+    ofPushMatrix();
+    ofScale(0.4, 0.4);
+    ofBackground(0);
+    
+    ofSetColor(255,255,255,96);
+    drawGrid();
+    ofSetColor(255,255,255,255);
+    
+    fboOut.draw(0, 0);
+    
     ofPopMatrix();
 
     ofDrawBitmapString(ofToString(ofGetFrameRate()), 20, 20);
-
 }
 
 
-
 void InputTriangle::debugDraw() {
-
-
     ofFill();
     ofSetColor(255, 255, 255, 40);
     ofRect(polyline.getBoundingBox());
@@ -299,25 +277,29 @@ void InputTriangle::debugDraw() {
     polyline.draw();
 
     ofSetColor(255, 255, 255, 255);
-    ofDrawBitmapString(ofToString(index), polyline.getCentroid2D());
+    ofDrawBitmapString(ofToString(index), centroid);
 
     ofSetColor(255, 0, 0, 60);
     for(int i=0; i<polyline.getVertices().size(); i++) {
-	ofCircle(polyline.getVertices()[i].x, polyline.getVertices()[i].y, 20);
+        ofCircle(polyline.getVertices()[i].x, polyline.getVertices()[i].y, 20);
     }
-
-
 }
 
 
 //------------------------------------------------------------
 void testApp::debugDraw() {
-
     for(int i =0; i<mapping.triangles.size();i++) {
-	mapping.triangles[i]->debugDraw();
+        mapping.triangles[i]->debugDraw();
     }
-
 }
+
+void testApp::drawGrid() {
+    for(int i =0; i<mapping.triangles.size();i++) {
+        ofSetLineWidth(1);
+        mapping.triangles[i]->mesh.drawWireframe();
+    }
+}
+
 
 void testApp::guiEvent(ofxUIEventArgs &e)
 {
@@ -372,7 +354,6 @@ void testApp::dragEvent(ofDragInfo dragInfo){
 //--------------------------------------------------------------
 void testApp::exit()
 {
-
     //gui->saveSettings("GUI/guiSettings.xml");
     //delete gui;s
 

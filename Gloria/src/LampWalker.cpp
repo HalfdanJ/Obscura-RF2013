@@ -45,6 +45,6 @@ void LampWalker::draw(){;
 	ofVec2f interpolate = srcPt + (dstPt - srcPt) * pct;
 
 	ofSetColor(255, 0, 0);
+    ofFill();
 	ofCircle(interpolate.x, interpolate.y, 10);
-	fbo.end();
 }

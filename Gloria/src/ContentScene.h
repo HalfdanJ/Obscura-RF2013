@@ -7,8 +7,8 @@ class ContentScene {
 public:
 
     ofFbo fbo;
-    bool enabled;
-    float opacity;
+    bool enabled = true;
+    float opacity = 255;
 
     int width;
     int height;
@@ -24,21 +24,31 @@ public:
     virtual void exit(){}
 
     void setupScene(int width, int height) {
-	fbo.allocate(width, height);
+        fbo.allocate(width, height);
+        setup();
+        
     }
 
     void updateScene() {
-	if(enabled) {
-	    update();
-	}
+        if(enabled) {
+            update();
+        }
     }
 
     void drawScene() {
-	if(enabled) {
-	    fbo.begin();
-	    draw();
-	    fbo.end();
-	}
+        if(enabled) {
+            fbo.begin();
+            ofClear(0, 0);
+            
+            //glEnable(GL_BLEND);
+            //glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+            
+            draw();
+            
+            //glDisable(GL_BLEND);
+            
+            fbo.end();
+        }
     }
 
 };
