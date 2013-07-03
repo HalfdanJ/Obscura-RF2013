@@ -46,10 +46,6 @@ public:
     ofxSyphonServer syphonOut;
     ofxSyphonClient syphonIn;
 
-    void setGUI();
-    ofxUICanvas *gui;
-    void guiEvent(ofxUIEventArgs &e);
-
     ofCamera cam;
     ofColor bg;
     ofFbo fboOut;
@@ -57,12 +53,21 @@ public:
     Mapping mapping;
 
     ofxXmlSettings XML;
-
+    
+    // gui
+    void setGUI();
+    ofxUIScrollableCanvas *gui;
+    void guiEvent(ofxUIEventArgs &e);
+    
+    bool hideGUI;
+    
     // Define all the scenes here
     LampWalker lampWalker;
     QuickTrail quickTrail;
     Triangles triangles;
     
     vector<ContentScene*> scenes;
+    
+
     
 };
