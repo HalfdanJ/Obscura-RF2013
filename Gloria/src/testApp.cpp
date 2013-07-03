@@ -8,7 +8,7 @@ void testApp::setup() {
     
     //ofSetVerticalSync(true);
     ofSetLogLevel(OF_LOG_ERROR);
-    ofSetVerticalSync(true);
+    //ofSetVerticalSync(true);
     ofSetFrameRate(60);
         
     ofSetWindowTitle("Obscure Glorious Control");

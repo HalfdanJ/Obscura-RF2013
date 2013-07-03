@@ -8,7 +8,7 @@
 
 #include "Triangles.h"
 
-static float transitionTime = 8;
+static float transitionTime = 1;
 
 void Triangles::setup(){
     
@@ -26,14 +26,17 @@ void Triangles::setup(){
         }
         
         subTriangle->normal = ofVec3f(ofRandom(-1,1),ofRandom(-1,1),1).normalized();
+        subTriangle->parentTriangle = subTriangle;
         
         
         //   subTriangle->corners[0]->pos.x += 20;
         subTriangles[mapping->triangles[i]] =  subTriangle ;
         
-        for(int k=0;k<1;k++){
+        /*for(int k=0;k<1;k++){
             divide(subTriangle);
         }
+         */
+        
         
         //    cout<<"NUM "<<subTriangle->numTriangles()<<endl;
         
@@ -77,6 +80,7 @@ void Triangles::divide(SubTriangle * triangle){
             d.normalize();
             newTriangle->normal = ofVec3f(d.x,d.y,1).normalized();
             newTriangle->parentNormal = subTriangle->normal;
+            newTriangle->parentTriangle = subTriangle;
             
             subTriangle->subTriangles.push_back(newTriangle);
         }
@@ -94,6 +98,7 @@ void Triangles::divide(SubTriangle * triangle){
             d.normalize();
             newTriangle->normal = ofVec3f(d.x,d.y,1).normalized();
             newTriangle->parentNormal = subTriangle->normal;
+                       newTriangle->parentTriangle = subTriangle;
             
             subTriangle->subTriangles.push_back(newTriangle);
         }
@@ -110,6 +115,7 @@ void Triangles::divide(SubTriangle * triangle){
             ofVec2f d = (newP - newTriangle->corners[0]->pos) + (newP - newTriangle->corners[1]->pos);
             newTriangle->normal = ofVec3f(d.x,d.y,100).normalized();
             newTriangle->parentNormal = subTriangle->normal;
+                newTriangle->parentTriangle = subTriangle;
             
             subTriangle->subTriangles.push_back(newTriangle);
         }
@@ -139,11 +145,10 @@ void Triangles::collapse(SubTriangle * triangle){
                 triangle->subTriangles[i]->age -= 2 * 1.0/ofGetFrameRate();
             }
             
-            if(highestAge < triangle->age){
-                highestAge = triangle->age;
+            if(highestAge < triangle->subTriangles[i]->age){
+                highestAge = triangle->subTriangles[i]->age;
             }
         }
-        
         
         if(highestAge <= 0){
             for(int i=0;i<triangle->subTriangles.size();i++){
@@ -186,38 +191,45 @@ void Triangles::drawTriangle(SubTriangle * triangle){
             drawTriangle(triangle->subTriangles[j]);
         }
     } else {
-        ofVec2f center = triangle->center();
         
         glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
         
         
-        ofVec3f lightPos = ofVec3f(1500+1000*sin(ofGetElapsedTimeMillis()/5000.),200,-1000);
-        ofVec3f trianglePos = ofVec3f(triangle->center().x, triangle->center().y, 0);
-        ofVec3f lightDir = ( trianglePos- lightPos);
         
         
-        ofVec3f ambient = ofVec3f(0);
+        ofVec3f ambient = ofVec3f(10);
         
         float aaa = MIN(1,MAX(0,(transitionTime-triangle->age)/transitionTime));
-        //aaa = ease(aaa,0,1,1);
+    /*    if(aaa > 0)
+            cout<<aaa<<endl;*/
+      //  aaa = ease(aaa,0,1,1);
+        
+        
+        
+        ofVec2f center = (1-aaa)*triangle->center() + aaa* triangle->parentTriangle->center();
+
+        
+        ofVec3f lightPos = ofVec3f(3196+1500*sin(ofGetElapsedTimeMillis()/1000.),200,-3000);
+        ofVec3f trianglePos = ofVec3f(triangle->center().x, triangle->center().y, 0);
+        ofVec3f lightDir = ( trianglePos- lightPos);
+
         
         //float aaa =( sin(ofGetElapsedTimeMillis()/2000.)+1)*0.5;
         
-        ofVec3f normal = (1-aaa) * triangle->normal + (aaa)*triangle->parentNormal;
-        if(triangle->parentNormal.length() == 0){
-            normal = triangle->normal;
-        }
+        ofVec3f normal = (1-aaa) * triangle->normal + (aaa)*triangle->parentTriangle->normal;
+        
         
         normal.normalize();
         
         float angle = lightDir.angle(normal);
+        angle = MIN(80,angle);
         //if(angle < 90){
         //            cout<<angle<<endl;
         
         //          cout<<triangle->normal.x<<"  "<<triangle->normal.y<<"  "<<triangle->normal.z<<endl;
         
         float dist = lightDir.length();
-        float intensity = 10000000* 1.0/(4*PI*dist*dist);
+        float intensity = 100000000* 1.0/(4*PI*dist*dist);
         
         ofVec3f color = intensity*ofVec3f(255)*fabs(90-angle)/90.0;
         
@@ -276,8 +288,9 @@ void Triangles::draw(){
 void Triangles::update(){
     
     
-    center.x = 1200*(sin(ofGetElapsedTimeMillis()/5000.)+1);
-    divideRadius = 500*(cos(PI+ofGetElapsedTimeMillis()/2000.)+1);
+    center.x = 3196;
+    center.y = 1200;
+    divideRadius = 700*(cos(PI+ofGetElapsedTimeMillis()/2000.)+1);
     
     for(int i=0;i<mapping->triangles.size();i++){
         SubTriangle * triangle = subTriangles[mapping->triangles[i]];
@@ -286,10 +299,12 @@ void Triangles::update(){
         if(triangle->center().distance(center) < divideRadius){
             float a = (divideRadius - triangle->center().distance(center)) / divideRadius;
             if(triangle->numTriangles() < 9 && triangle->getLowestAge() > transitionTime){
+                cout<<"DIVIDE"<<endl;
                 divide(triangle);
             }
         } else {
             if(triangle->numTriangles() > 1){
+                cout<<"COLLAPSE"<<endl;
                 collapse(triangle);
             }
         }

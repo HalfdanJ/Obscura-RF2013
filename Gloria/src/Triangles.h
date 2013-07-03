@@ -20,12 +20,14 @@ public:
     float age;
     ofVec3f normal;
     ofVec3f parentNormal;
+    SubTriangle * parentTriangle;
     bool die;
     
     float ageDifference;
     
     SubTriangle(){
         ageDifference = ofRandom(0.9,1.0);
+        age = 0;
     }
     
     int numTriangles(){
