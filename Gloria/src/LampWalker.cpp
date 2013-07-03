@@ -9,6 +9,10 @@
 #include "LampWalker.h"
 
 void LampWalker::setup(){
+
+    name = "Lamp Walker";
+    oscAddress = "/lampwalker";
+
 }
 
 void LampWalker::update(){
@@ -45,6 +49,6 @@ void LampWalker::draw(){;
 	ofVec2f interpolate = srcPt + (dstPt - srcPt) * pct;
 
 	ofSetColor(255, 0, 0);
+    ofFill();
 	ofCircle(interpolate.x, interpolate.y, 10);
-	fbo.end();
 }

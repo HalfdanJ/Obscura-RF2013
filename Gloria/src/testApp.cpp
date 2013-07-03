@@ -12,12 +12,14 @@ void testApp::setup() {
 
     ofSetWindowTitle("Obscure Glorious Control");
 
-    syphonOut.setName("Gloria");
+    syphonOut.setName("Gloria Generative");
+    
+    fboOut.allocate(OUTWIDTH, OUTHEIGHT);
+
     syphonIn.setApplicationName("QLab");
     syphonIn.setServerName("qlab");
     syphonIn.setup();
 
-    //fboOut.allocate(OUTWIDTH, OUTHEIGHT);
     ofEnableSmoothing();
     ofEnableAlphaBlending();
 
@@ -29,17 +31,17 @@ void testApp::setup() {
 
     if(worldPointTags > 0){
 
-	for(int i = 0; i < worldPointTags; i++){
+        for(int i = 0; i < worldPointTags; i++){
 
-	    int x = XML.getValue("PT:X", 0, i);
-	    int y = XML.getValue("PT:Y", 0, i);
-	    int z = XML.getValue("PT:Z", 0, i);
+            int x = XML.getValue("PT:X", 0, i);
+            int y = XML.getValue("PT:Y", 0, i);
+            int z = XML.getValue("PT:Z", 0, i);
 
-	    WorldPoint * wp = new WorldPoint();
-	    wp->pos.set(ofVec3f(x,y,z));
-	    mapping.worldPoints.push_back(wp);
+            WorldPoint * wp = new WorldPoint();
+            wp->pos.set(ofVec3f(x,y,z));
+            mapping.worldPoints.push_back(wp);
 
-	}
+        }
 
     }
 
@@ -150,35 +152,33 @@ void testApp::setup() {
 
     cout<<endl<<"Created: "<<mapping.triangles.size()<<" triangles with "<<mapping.corners.size()<<" unique corners"<<endl;
 
-    //setGUI();
-    //gui->setDrawBack(true);
-    //gui->loadSettings("GUI/guiSettings.xml");
-
-
-
 
 
 
     // effects scenes
 
-    walkers.resize(1);
-
-    for(int i=0;i<walkers.size();i++) {
-	walkers[i].corner = mapping.corners[0];
-    }
-
-
-    //LampWalker * lampWalker = new LampWalker();
-
+ 
+    // Set up the scenes, all scenes is a subclass of SceneContent, don't call draw, setup and update directly it is taken care of thorugh the scene.
+    
     lampWalker.mapping = &mapping;
-    lampWalker.setup();
+    scenes.push_back(&lampWalker);
+    
+    quickTrail.mapping = &mapping;
+    scenes.push_back(&quickTrail);
     
     triangles.mapping = &mapping;
     triangles.syphon = &syphonIn;
-    triangles.setup();
+    triangles.opacity = 100;
+    scenes.push_back(&triangles);
     
+    for(int i=0; i<scenes.size(); i++) {
+        scenes[i]->setupScene(OUTWIDTH, OUTHEIGHT);
+    }
 
-    //scenes.push_back(lampWalker);
+
+    setGUI();
+    gui->setDrawBack(true);
+    gui->loadSettings("GUI/guiSettings.xml");
 
 
 
@@ -207,94 +207,68 @@ void testApp::update() {
     m2.addFloatArg(sin(ofGetElapsedTimeMillis()/4000.) * 2.); // z
     oscSender.sendMessage(m2);
 
-
     // Scenes
-    lampWalker.update();
-    triangles.update();
+    for(int i=0; i<scenes.size(); i++) {
+        scenes[i]->updateScene();
+    }
 
 }
 
 
 void testApp::draw() {
-
-    // Scenes
-
-
-
-    ofPushMatrix();
-    ofScale(0.4, 0.4);
     ofBackground(0);
-
-
+    
+    /* Move this to a scene
     ofSetLineWidth(2);
     // waves going across red
     for(int i =0; i<mapping.triangles.size();i++) {
-	ofSetColor( ofNoise(mapping.triangles[i]->centroid.y/600 - ofGetElapsedTimef()/2)*255, 100, 100);
-	mapping.triangles[i]->mesh.draw();
+        ofSetColor( ofNoise(mapping.triangles[i]->centroid.y/600 - ofGetElapsedTimef()/2)*255, 100, 100);
+        mapping.triangles[i]->mesh.draw();
 
-	ofSetColor( ofNoise(mapping.triangles[i]->centroid.x/600 - ofGetElapsedTimef()/2) *255, 90, 90 );
-	mapping.triangles[i]->mesh.drawWireframe();
+        ofSetColor( ofNoise(mapping.triangles[i]->centroid.x/600 - ofGetElapsedTimef()/2) *255, 90, 90 );
+        mapping.triangles[i]->mesh.drawWireframe();
+    }
+    */
+
+
+    for(int i=0; i<scenes.size(); i++) {
+        scenes[i]->drawScene();
+        // TODO: Layer ordering
+    }        
+    
+    fboOut.begin();
+    
+    ofClear(0, 0);
+    
+    for(int i=0; i<scenes.size(); i++) {
+        ofSetColor(255,255,255,scenes[i]->opacity);
+        scenes[i]->fbo.draw(0,0);
     }
 
-
-    // =================
-    // Walker v1
-    // =================
-
-    for(int i=0;i<walkers.size();i++) {
-
-
-	walkers[i].points.push_back(walkers[i].corner->pos);
-
-	if(walkers[i].points.size() > 100) {
-	    walkers[i].points.erase(walkers[i].points.begin());
-	}
-
-	ofBeginShape();
-	ofNoFill();
-	ofSetLineWidth(4);
-
-	for(int p=0; p<walkers[i].points.size(); p++) {
-	    //ofCircle(walkers[i].points[p].x, walkers[i].points[p].y, 4);
-	    ofSetColor(255,255,255,ofMap(p,0,walkers[i].points.size(), 0, 200));
-	    ofCircle(walkers[i].points[p].x, walkers[i].points[p].y, 4);
-	    ofVertex(walkers[i].points[p].x,walkers[i].points[p].y);
-	}
-	ofEndShape();
-
-	InputTriangle * nt;
-	nt = walkers[i].corner->triangles[ofRandom(walkers[i].corner->triangles.size())];
-
-	walkers[i].corner = nt->corners[(int)ofRandom(0,3)];
-
-
-    }
-
-
-
-   // lampWalker.draw();
-    triangles.draw();
-
-    // =================
-    // Corner crawler tree
-    // =================
-    //  pick a triangle
-    //  pick a coner
-    //  pick another corner to move towards
-    //  when new corner reached expand across 2 lines
-
-    //debugDraw();
+    fboOut.end();
+    
+    syphonOut.publishTexture(&fboOut.getTextureReference());
+    
+    ofPushMatrix();
+    ofScale(0.4, 0.4);
+    ofBackground(0);
+    
+    
+    
+    
+    ofSetColor(255,255,255,96);
+    drawGrid();
+    
+    ofSetColor(255,255,255,255);
+    fboOut.draw(0, 0);
+    
     ofPopMatrix();
 
-    ofDrawBitmapString(ofToString(ofGetFrameRate()), 20, 20);
-
+    ofDrawBitmapString("FPS: " + ofToString(ofGetFrameRate()), ofGetWidth()-200, 20);
 }
 
 
-
 void InputTriangle::debugDraw() {
-
-
     ofFill();
     ofSetColor(255, 255, 255, 40);
     ofRect(polyline.getBoundingBox());
@@ -308,25 +282,29 @@ void InputTriangle::debugDraw() {
     polyline.draw();
 
     ofSetColor(255, 255, 255, 255);
-    ofDrawBitmapString(ofToString(index), polyline.getCentroid2D());
+    ofDrawBitmapString(ofToString(index), centroid);
 
     ofSetColor(255, 0, 0, 60);
     for(int i=0; i<polyline.getVertices().size(); i++) {
-	ofCircle(polyline.getVertices()[i].x, polyline.getVertices()[i].y, 20);
+        ofCircle(polyline.getVertices()[i].x, polyline.getVertices()[i].y, 20);
     }
-
-
 }
 
 
 //------------------------------------------------------------
 void testApp::debugDraw() {
-
     for(int i =0; i<mapping.triangles.size();i++) {
-	mapping.triangles[i]->debugDraw();
+        mapping.triangles[i]->debugDraw();
     }
-
 }
+
+void testApp::drawGrid() {
+    for(int i =0; i<mapping.triangles.size();i++) {
+        ofSetLineWidth(1);
+        mapping.triangles[i]->mesh.drawWireframe();
+    }
+}
+
 
 void testApp::guiEvent(ofxUIEventArgs &e)
 {
@@ -381,9 +359,8 @@ void testApp::dragEvent(ofDragInfo dragInfo){
 //--------------------------------------------------------------
 void testApp::exit()
 {
-
-    //gui->saveSettings("GUI/guiSettings.xml");
-    //delete gui;s
+    gui->saveSettings("GUI/guiSettings.xml");
+    delete gui;
 
     XML.saveFile("calibration.xml");
 }
@@ -395,6 +372,21 @@ void testApp::setGUI()
     float length = 255-xInit;
 
     gui = new ofxUICanvas(0, 0, length+xInit, ofGetHeight());
+
+    for(int i=0; i<scenes.size(); i++) {
+
+	gui->addSpacer(length, 2);
+	gui->addWidgetDown(new ofxUILabel(scenes[i]->name, OFX_UI_FONT_SMALL));
+	gui->addWidgetDown(new ofxUILabel("OSC Address: " + scenes[i]->oscAddress, OFX_UI_FONT_SMALL));
+
+	gui->addWidgetDown(new ofxUISlider("Opacity", 0, 255, &scenes[i]->opacity, length, 10));
+	// label
+	// enabled
+	// opacity
+	// solo
+	// osc address
+
+    }
 
     ofAddListener(gui->newGUIEvent,this,&testApp::guiEvent);
 }

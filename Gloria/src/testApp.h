@@ -8,25 +8,16 @@
 #include "ContentScene.h"
 
 #include "LampWalker.h"
+#include "QuickTrail.h"
 #include "Triangles.h"
 
 #include "ofxUI.h"
 
 #include "mapping.h"
 
-#define PORT 9999
+#define OSCPORT 9999
 #define OUTHEIGHT 1080
 #define OUTWIDTH 1920
-
-
-struct Walker {
-    ofPolyline line;
-    vector<ofVec2f> points;
-
-    Corner * corner;
-
-};
-
 
 class testApp : public ofBaseApp {
 public:
@@ -35,6 +26,7 @@ public:
     void update();
     void draw();
     void debugDraw();
+    void drawGrid();
 
     void exit();
 
@@ -67,14 +59,12 @@ public:
 
     ofxXmlSettings XML;
 
-    // stuff for specifc scenes
 
-    vector<Walker> walkers;
-
+    // Define all the scenes here
     LampWalker lampWalker;
-
-    vector<ContentScene*> scene;
+    QuickTrail quickTrail;
     Triangles triangles;
-
-
+    
+    vector<ContentScene*> scenes;
+    
 };

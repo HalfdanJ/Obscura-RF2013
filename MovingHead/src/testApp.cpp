@@ -20,12 +20,12 @@ void testApp::setup(){
     TTF.loadFont("mono.ttf", 7);
     
     dmx.connect(0);
-    
+    dmx.setChannels(512);
     
     ofSetFrameRate(30);
     
     osc = new ofxOscReceiver();
-    osc->setup(6745);
+    osc->setup(6000);
     
 }
 
@@ -38,12 +38,44 @@ void testApp::update(){
         
         if(m.getAddress() == "/sharpy"){
             int lamp = m.getArgAsInt32(0);
-            cout<<lamp<<endl;
             ofVec3f p = ofVec3f(m.getArgAsFloat(1), m.getArgAsFloat(2), m.getArgAsFloat(3));
-            
-            if(lamps.size() > lamp){
-                lamps[lamp].pointAt(p);
+            if(lamp == 0){
+                for(int i=0;i<lamps.size();i++){
+                    lamps[i].pointAt(p);
+                }
             }
+            if(lamps.size() > lamp-1){
+                lamps[lamp-1].pointAt(p);
+            }
+        } else if(m.getAddress() == "/sharpy/x"){
+            int lamp = 0;
+            ofVec3f p = lamps[0].dest;
+            p.x = (m.getArgAsFloat(0)-0.5)*50;
+            if(lamp == 0){
+                for(int i=0;i<lamps.size();i++){
+                    lamps[i].pointAt(p);
+                }
+            }
+        } else if(m.getAddress() == "/sharpy/y"){
+            int lamp = 0;
+            ofVec3f p = lamps[0].dest;
+            p.y = ((m.getArgAsFloat(0))-0.5)*50;
+            if(lamp == 0){
+                for(int i=0;i<lamps.size();i++){
+                    lamps[i].pointAt(p);
+                }
+            }
+        } else if(m.getAddress() == "/sharpy/z"){
+            int lamp = 0;
+            ofVec3f p = lamps[0].dest;
+            p.z = (1-m.getArgAsFloat(0)-0.5)*30;
+            if(lamp == 0){
+                for(int i=0;i<lamps.size();i++){
+                    lamps[i].pointAt(p);
+                }
+            }
+        } else {
+            cout<<m.getAddress()<<endl;
         }
 
         
@@ -55,8 +87,12 @@ void testApp::update(){
     
     for(int i=0;i<lamps.size();i++){
         
-        float pan = lamps[i].getPan();
-        float tilt = lamps[i].getTilt();
+        if(lamps[i].coldCountdown > 0){
+            lamps[i].coldCountdown -= 1.0/ofGetFrameRate();
+        }
+        
+        float pan = ofClamp(lamps[i].getDmxPan(), 0, 255);
+        float tilt = ofClamp(lamps[i].getDmxTilt(),0,255);
         
         int majorPan = floor(pan);
         int majorTilt = floor(tilt);
@@ -64,12 +100,35 @@ void testApp::update(){
         int minorPan = (pan - majorPan)* 255 ;
         int minorTilt = (tilt - majorTilt)* 255 ;
 
-/*        dmx.setLevel(dmxAddress, majorPan);
-        dmx.setLevel(2, 255 - level);*/
+        dmx.setLevel(lamps[i].dmxAddress+lamps[i].dmxOffset, majorPan);
+        dmx.setLevel(lamps[i].dmxAddress+lamps[i].dmxOffset+1, minorPan);
+        
+        dmx.setLevel(lamps[i].dmxAddress+lamps[i].dmxOffset+2, majorTilt);
+        dmx.setLevel(lamps[i].dmxAddress+lamps[i].dmxOffset+3, minorTilt);
+        
+/*        dmx.setLevel(lamps[i].dmxAddress+lamps[i].dmxOffset+2, 128);
+        dmx.setLevel(lamps[i].dmxAddress+lamps[i].dmxOffset+3, 0);
+  */      
+        dmx.setLevel(lamps[i].dmxAddress+0, 0);
+        dmx.setLevel(lamps[i].dmxAddress+1, 0);
+        if(lamps[i].coldCountdown > 0){
+            dmx.setLevel(lamps[i].dmxAddress+2, 0);
+        } else {
+            dmx.setLevel(lamps[i].dmxAddress+2, lamps[i].dim);
+            
+        }
+        dmx.setLevel(lamps[i].dmxAddress+3, 0);
+        dmx.setLevel(lamps[i].dmxAddress+4, 0);
+        dmx.setLevel(lamps[i].dmxAddress+5, 0);
+        dmx.setLevel(lamps[i].dmxAddress+6, 0);
+        dmx.setLevel(lamps[i].dmxAddress+7, 0);
+        dmx.setLevel(lamps[i].dmxAddress+8, 0);
+        dmx.setLevel(lamps[i].dmxAddress+14, 0);//reset
+        dmx.setLevel(lamps[i].dmxAddress+15, 0);//lamp
         
     }
     
-      dmx.setLevel(10, 0);
+//      dmx.setLevel(13, 128+ sin(ofGetElapsedTimeMillis()/5000.)*128);
     dmx.update();
 
 }
@@ -97,12 +156,15 @@ void testApp::draw(){
     message  = "";
     for(int i=0;i<lamps.size();i++){
         ofPushMatrix();
+        glScaled(3,3,3);
+        
         
         ofSetColor(0, 255, 0);
         ofLine(lamps[i].position.x, lamps[i].position.y, lamps[i].position.z,
                lamps[i].dest.x, lamps[i].dest.y, lamps[i].dest.z);
         
         ofTranslate(lamps[i].position.x, lamps[i].position.y, lamps[i].position.z);
+
         ofRotate(-lamps[i].getPan()-90, 0, 1, 0);
         ofRotate(lamps[i].getTilt(), 1, 0, 0);
         
@@ -113,13 +175,13 @@ void testApp::draw(){
         
         ofSetColor(255, 0, 0,80);
         ofFill();
-        ofBox(5);
+        ofBox(1);
         
         
 
         ofNoFill();
         ofSetColor(255);
-        ofBox(5);
+        ofBox(1);
         
         
         ofPopMatrix();
@@ -154,14 +216,20 @@ void testApp::loadXml(){
     float dmxPanMin = XML.getAttribute("PANDMX", "min", 0.0);
     float dmxPanMax = XML.getAttribute("PANDMX", "max", 0.0);
 
-    float dmxTiltMin = XML.getAttribute("TILTDMX", "min", 0.0);
-    float dmxTiltMax = XML.getAttribute("TILTDMX", "max", 0.0);
 
     float panMin = XML.getAttribute("PAN", "min", 0.0);
     float panMax = XML.getAttribute("PAN", "max", 0.0);
     
+/*    float tiltRange = XML.getAttribute("TILT", "range", 0.0);
+    float tiltMin = -180-(tiltRange - 180)/2;
+    float tiltMax = (tiltRange - 180)/2;
+  */
+    
     float tiltMin = XML.getAttribute("TILT", "min", 0.0);
     float tiltMax = XML.getAttribute("TILT", "max", 0.0);
+    
+    float dim = XML.getAttribute("DIM", "value", 0.0);
+    float floor = XML.getAttribute("FLOOR", "value", 0.0);
 
     
 
@@ -171,12 +239,16 @@ void testApp::loadXml(){
     for(int i=0;i<numLamps ;i++){
         XML.pushTag("LAMP",i);
         
+        float dmxTiltMin = XML.getAttribute("TILTDMX", "min", 127.);
+        float dmxTiltMax = XML.getAttribute("TILTDMX", "max", 256.);
+
+        
         if(lamps.size() <= i){
             lamps.push_back(Lamp());
         } 
         
         lamps[i].position.x = XML.getAttribute("POSITION", "x", 0.0);
-        lamps[i].position.y = XML.getAttribute("POSITION", "y", 0.0);
+        lamps[i].position.y = XML.getAttribute("POSITION", "y", 0.0)-floor;
         lamps[i].position.z = XML.getAttribute("POSITION", "z", 0.0);
         
         lamps[i].dmxPanMin = dmxPanMin;
@@ -191,7 +263,16 @@ void testApp::loadXml(){
         lamps[i].tiltMin = tiltMin;
         lamps[i].tiltMax = tiltMax;
         
+        lamps[i].dim = dim;
+        
+        if(XML.getNumTags("ROTATION")){
+            lamps[i].rotation.x = XML.getAttribute("ROTATION", "x", 0.0);
+            lamps[i].rotation.y = XML.getAttribute("ROTATION", "y", 0.0);
+            lamps[i].rotation.z = XML.getAttribute("ROTATION", "z", 0.0);
+        }
+        
         lamps[i].dmxAddress = XML.getAttribute("DMX", "address", 1);
+        lamps[i].dmxOffset = XML.getAttribute("DMX", "offset", 1);
 
         
         XML.popTag();
@@ -200,6 +281,20 @@ void testApp::loadXml(){
     }
     XML.popTag();
     
+    
+    if (XML.getNumTags("LOCALDEST")) {
+        ofVec3f dir = ofVec3f(XML.getAttribute("LOCALDEST", "x", 0.0)
+                ,XML.getAttribute("LOCALDEST", "y", 0.0),
+                              XML.getAttribute("LOCALDEST", "z", 0.0));
+        
+        
+        for(int i=0;i<numLamps ;i++){
+            ofVec3f p = lamps[i].position + dir;
+
+            lamps[i].pointAt(p);
+        }
+    }
+
     
     if (XML.getNumTags("DEST")) {
         for(int i=0;i<numLamps ;i++){

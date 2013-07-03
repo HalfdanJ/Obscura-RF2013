@@ -1,23 +1,97 @@
 <PAN min=-270 max=270/>
-<TILT min=-180 max=0/>
+<!--<TILT min=-215 max=35/>-->
 
-<PANDMX min=0 max=255/>
-<TILTDMX min=0 max=255/>
-	
+<TILT min=-90 max=35/>
+
+<!--<TILT min=-180 max=0/>-->
+
+<PANDMX min=0 max=256/>
+<!--<TILTDMX min=37 max=220/>-->
+
+<DIM value=255/>
+<FLOOR value=0/>
+<!--<LOCALDEST x=-10 y=-10 z=0/>-->
+<!--<DEST x=0 y=0 z=-0/>-->
+<!--<ROT pan=90 tilt=-90/>-->
 
 <LAMPS>
-	<LAMP>
-		<POSITION x=10 y="10" z=0/>
-		<DMX address=100/>
+        <!-- new-->
+    <LAMP>
+		<POSITION x=-8.6 y=3.9 z=2.75/>
+        <ROTATION x=10 y=93 z=-2/>
+		<DMX address=41 offset=9/>
+        <TILTDMX min=128 max=256/>
 	</LAMP>
-	
+
+    <LAMP>
+		<POSITION x=-3.75 y=5.8 z=-4.1/>
+        <ROTATION x=1.9 y=91.5 z=-1/>
+		<DMX address=1 offset=9/>
+        <TILTDMX min=128.6 max=259/>
+	</LAMP>
+    
+    <!-- new-->
+    <LAMP>
+		<POSITION x=0.6 y=6.8 z=-3.6/>
+        <ROTATION x=-1.5 y=92 z=1/>
+		<DMX address=21 offset=9/>
+        <TILTDMX min=124.6 max=256/>
+	</LAMP>
+    
+    
 	<LAMP>
-		<POSITION x=-30 y="10" z=0/>
-		<DMX address=100/>
+		<POSITION x=-1.5 y=6.5 z=0.7/>
+        <ROTATION x=-0.5 y=89.9 z=-1/>
+		<DMX address=81 offset=9/>
+        <TILTDMX min=127.8 max=254/>
+	</LAMP>	
+    <LAMP>
+		<POSITION x=-2.8 y=6.2 z=5.4/>
+        <ROTATION x=0.3 y=89.9 z=1.4/>
+		<DMX address=121 offset=9/>
+        <TILTDMX min=127 max=256/>
+	</LAMP>
+    
+    <LAMP>
+		<POSITION x=-1.7 y=6.6 z=9.9/>
+        <ROTATION x=-2.5 y=88 z=3/>
+		<DMX address=161 offset=9/>
+        <TILTDMX min=124.3 max=256/>
+	</LAMP>
+    
+
+    <!-- new-->
+    <LAMP>
+		<POSITION x=4.7 y=5.4 z=0.8/>
+        <ROTATION x=-3.7 y=93 z=-0.8/>
+		<DMX address=101 offset=9/>
+        <TILTDMX min=128.0 max=256/>
+	</LAMP>
+   
+    <!-- new-->
+   <!-- <LAMP>
+		<POSITION x=-0.2 y=6.6 z=9.0/>
+        <ROTATION x=-0 y=90 z=0/>
+		<DMX address=141 offset=9/>
+        <TILTDMX min=124.3 max=256/>
+	</LAMP>-->
+    
+    
+    <LAMP>
+		<POSITION x=8.1 y=3.9 z=-0.8/>
+        <ROTATION x=-1 y=90 z=2/>
+		<DMX address=61 offset=9/>
+        <TILTDMX min=127.8 max=259/>
 	</LAMP>
 </LAMPS>
+<!--<ROT pan=90 tilt=-90/>-->
 
 
-<!--<DEST x=15 y=0 z=10/>-->
+<!---->
+<!--<ROT pan=187 tilt=-180/>
 
-<!--<ROT pan=30 tilt=-10/>-->
+-->
+<!--<ROT pan=90 tilt=-90/>-->
+
+<!--<ROT pan=-90 tilt=0/>-->
+<!--<ROT pan=-90 tilt=-0/>-->

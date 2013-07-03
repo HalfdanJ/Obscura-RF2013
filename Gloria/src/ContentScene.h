@@ -6,9 +6,14 @@ class ContentScene {
     
 public:
     
+    string name = "unnamed scene";
+    string oscAddress = "/default";
+
+    // bool syphonDirect;
+
     ofFbo fbo;
-    bool enabled;
-    float opacity;
+    bool enabled = true;
+    float opacity = 255;
     
     int width;
     int height;
@@ -25,6 +30,7 @@ public:
     
     void setupScene(int width, int height) {
         fbo.allocate(width, height);
+        setup();
     }
     
     void updateScene() {
@@ -36,7 +42,15 @@ public:
     void drawScene() {
         if(enabled) {
             fbo.begin();
+            ofClear(0, 0);
+            
+            //glEnable(GL_BLEND);
+            //glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+            
             draw();
+            
+            //glDisable(GL_BLEND);
+            
             fbo.end();
         }
     }
