@@ -53,7 +53,6 @@ void Triangles::setup(){
         sideScreensSpeed = 0.1;
         
         
-        transitionTime = 5;
     }
 }
 
@@ -71,9 +70,21 @@ void Triangles::parseOscMessage(ofxOscMessage *m){
     ContentScene::parseOscMessage(m);
     
     
+ 	vector<string> adrSplit = ofSplitString(m->getAddress(), "/");
+	string rest = ofSplitString(m->getAddress(), "/"+adrSplit[1])[1];
+	//cout<<adrSplit[1]<<"   "<<rest<<endl;
+    
+	if(adrSplit[1] == "scene"+ofToString(index) || "/"+adrSplit[1] == oscAddress) {
+        
+	    if( rest == "/SideScreens/x" ) {
+            sideScreens = m->getArgAsFloat(0);
+	    }
+        
+
+        
+    }
     
 }
-
 
 void Triangles::divide(SubTriangle * triangle){
     int size = triangle->subTriangles.size();
@@ -232,7 +243,7 @@ void Triangles::drawTriangle(SubTriangle * triangle){
         ofVec2f center = (1-aaa)*triangle->center() + aaa* triangle->parentTriangle->center();
 
         
-        ofVec3f lightPos = ofVec3f(3196+1500*sin(ofGetElapsedTimeMillis()/1000.),200,-3000);
+        ofVec3f lightPos = ofVec3f(3196+1500*sin(ofGetElapsedTimeMillis()/2000.),200,-3000);
         ofVec3f trianglePos = ofVec3f(triangle->center().x, triangle->center().y, 0);
         ofVec3f lightDir = ( trianglePos- lightPos);
 
@@ -273,7 +284,7 @@ void Triangles::drawTriangle(SubTriangle * triangle){
         
       
         //Tegn billede 1:1
-        if(sideScreensPct > 0.8){
+    /*    if(sideScreensPct > 0.8){
             float bbb = ease((sideScreensPct-0.8)/0.2, 0,1,1);
             
             ofSetColor(255,255,255,180*bbb);
@@ -283,8 +294,9 @@ void Triangles::drawTriangle(SubTriangle * triangle){
                 glVertex2d(triangle->corners[u]->pos.x, triangle->corners[u]->pos.y);
             }
             glEnd();
-            
+     
         }
+    */
         /*
         
         float bbb = ease(ofClamp((sideScreensPct-0.8)/0.2,0,1), 0,1,1);
@@ -329,17 +341,17 @@ void Triangles::drawTriangle(SubTriangle * triangle){
 void Triangles::draw(){
     
     ofSetColor(255,255,255);
-    syphon->bind();
+  //  syphon->bind();
     ofSetLineWidth(1);
     
     for(int i=0;i<mapping->triangles.size();i++){
-        if(subTriangles[mapping->triangles[i]]->numTriangles() > 1){
+        //if(subTriangles[mapping->triangles[i]]->numTriangles() > 1){
             drawTriangle(subTriangles[mapping->triangles[i]]);
-        }
+        //}
     }
     
     
-    syphon->unbind();
+ //   syphon->unbind();
     
     
     ofSetColor(255, 255, 255, 10);
@@ -348,11 +360,14 @@ void Triangles::draw(){
 }
 
 void Triangles::update(){
+    transitionTime = 1.5;
+
+    
     for(int i=0;i<mapping->triangles.size();i++){
         SubTriangle * triangle = subTriangles[mapping->triangles[i]];
         triangle->update();
     }
-    
+   /*
     if(sideScreens){
         transitionTime = 0.1/sideScreensSpeed*2;
         
@@ -369,49 +384,53 @@ void Triangles::update(){
         }
     }
     
-        
-        center.x = 3196;
-        center.y = 1200;
-        
-        float pct = ease(sideScreensPct*1.2,0,1,1);
-        divideRadius = 1500 + (3200-1500)*(1-pct);
-        
-        
-        for(int i=0;i<mapping->triangles.size();i++){
-            SubTriangle * triangle = subTriangles[mapping->triangles[i]];
-            triangle->update();
-            
-            if(triangle->center().distance(center) > divideRadius){
-                float a = (divideRadius - triangle->center().distance(center)) / divideRadius;
-                if(triangle->numTriangles() < 30 && triangle->getLowestAge() > transitionTime){
-                    if(sideScreensPct > 0 ){
-
-                    // cout<<"DIVIDE"<<endl;
-                    divide(triangle);
-                    }
-                }
-            } else {
-                if(triangle->numTriangles() > 1){
-                     cout<<"COLLAPSE"<<endl;
-                    collapse(triangle);
-                }
-            }
-        }
     
-    
-    
-/*
     center.x = 3196;
     center.y = 1200;
-    divideRadius = 700*(cos(PI+ofGetElapsedTimeMillis()/2000.)+1);
+    
+    float pct = ease(sideScreensPct*1.2,0,1,1);
+    divideRadius = 1500 + (3200-1500)*(1-pct);
+    
     
     for(int i=0;i<mapping->triangles.size();i++){
         SubTriangle * triangle = subTriangles[mapping->triangles[i]];
-        triangle->update();
+        
+        if(triangle->center().distance(center) > divideRadius){
+            float a = (divideRadius - triangle->center().distance(center)) / divideRadius;
+            if(triangle->numTriangles() < 30 && triangle->getLowestAge() > transitionTime){
+                if(sideScreensPct > 0 ){
+                    
+                     cout<<"DIVIDE"<<endl;
+                    divide(triangle);
+                }
+            }
+        } else {
+            if(triangle->numTriangles() > 1){
+                cout<<"COLLAPSE"<<endl;
+                collapse(triangle);
+            }
+        }
+    }
+    
+    */
+    
+
+    center.x = 3196;
+    center.y = 1200;
+    //divideRadius = 700*(cos(PI+ofGetElapsedTimeMillis()/2000.)+1);
+    if(speed == 1){
+        divideRadius = 1200*(cos(PI+ofGetElapsedTimeMillis()/3500./**(speed)*/)+0.9);
+    } else {
+        divideRadius = 2400*speed;
+    }
+
+    
+    for(int i=0;i<mapping->triangles.size();i++){
+        SubTriangle * triangle = subTriangles[mapping->triangles[i]];
         
         if(triangle->center().distance(center) < divideRadius){
             float a = (divideRadius - triangle->center().distance(center)) / divideRadius;
-            if(triangle->numTriangles() < 9 && triangle->getLowestAge() > transitionTime){
+            if(triangle->numTriangles() < 12 && triangle->getLowestAge() > transitionTime && speed){
                // cout<<"DIVIDE"<<endl;
                 divide(triangle);
             }
@@ -422,5 +441,5 @@ void Triangles::update(){
             }
         }
         
-    }*/
+    }
 }
