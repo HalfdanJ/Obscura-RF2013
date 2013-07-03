@@ -241,10 +241,12 @@ void Triangles::drawTriangle(SubTriangle * triangle){
          */
         glBegin(GL_TRIANGLES);
         for(int u=0;u<3;u++){
-            glTexCoord2d(center.x/3, 500-center.y/2);
+            glTexCoord2d(center.x, 500-center.y/2);
             glVertex2d(triangle->corners[u]->pos.x, triangle->corners[u]->pos.y);
         }
         glEnd();
+        
+        
         
         
         
@@ -268,7 +270,7 @@ void Triangles::drawTriangle(SubTriangle * triangle){
 void Triangles::draw(){
     
     ofSetColor(255,255,255);
-    // syphon->bind();
+     syphon->bind();
     
     ofSetLineWidth(1);
     
@@ -277,7 +279,7 @@ void Triangles::draw(){
     }
     
     
-    // syphon->unbind();
+     syphon->unbind();
     
     
     ofSetColor(255, 255, 255, 10);

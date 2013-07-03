@@ -15,8 +15,11 @@ void testApp::setup() {
     
     fboOut.allocate(OUTWIDTH, OUTHEIGHT);
     
-    syphonIn.setApplicationName("QLab");
-    syphonIn.setServerName("qlab");
+    syphonIn.setApplicationName("Millumin");
+    syphonIn.setServerName("");
+    
+/*    syphonIn.setApplicationName("Mopdul8");
+     syphonIn.setServerName("Main View");*/
     syphonIn.setup();
     
     ofEnableSmoothing();
@@ -272,6 +275,8 @@ void testApp::draw() {
     ofSetColor(255);
     ofDrawBitmapString("FPS: " + ofToString(ofGetFrameRate()), ofGetWidth()-200, 20);
     
+    
+    syphonIn.draw(0, 0, 1000, 500);
 }
 
 
