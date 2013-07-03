@@ -3,6 +3,7 @@
 #include "ofMain.h"
 #include "ofxOsc.h"
 #include "ofxUI.h"
+#include "mapping.h"
 
 class ContentScene {
     
@@ -13,6 +14,8 @@ public:
     string oscAddress = "/default";
 
     // bool syphonDirect;
+
+    Mapping * mapping;
 
     ofFbo fbo;
     bool enabled;

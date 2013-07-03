@@ -10,7 +10,8 @@
 #include "LampWalker.h"
 #include "QuickTrail.h"
 #include "Triangles.h"
-
+#include "GTess.h"
+#include "PerlinWaves.h"
 #include "ofxUI.h"
 
 #include "mapping.h"
@@ -67,6 +68,8 @@ public:
     LampWalker lampWalker;
     QuickTrail quickTrail;
     Triangles triangles;
+    GTess tesselator;
+    PerlinWaves perlinWaves;
     
     vector<ContentScene*> scenes;
     

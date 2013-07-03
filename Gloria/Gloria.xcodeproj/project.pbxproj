@@ -40,6 +40,8 @@
 		046C30A317805E7C009A2EE6 /* svgtiny_gradient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 046C309B17805E7C009A2EE6 /* svgtiny_gradient.cpp */; };
 		046C30A417805E7C009A2EE6 /* svgtiny_list.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 046C309D17805E7C009A2EE6 /* svgtiny_list.cpp */; };
 		046C30A517805E7C009A2EE6 /* ofxSvg.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 046C309F17805E7C009A2EE6 /* ofxSvg.cpp */; };
+		04C6D22A17847C8300AC12B9 /* GTess.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04C6D22917847C8300AC12B9 /* GTess.cpp */; };
+		04C6D22D17847D8900AC12B9 /* PerlinWaves.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04C6D22C17847D8900AC12B9 /* PerlinWaves.cpp */; };
 		04CA7B3D1753E82E00B224D8 /* tinyxml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04CA7B361753E82E00B224D8 /* tinyxml.cpp */; };
 		04CA7B3E1753E82E00B224D8 /* tinyxmlerror.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04CA7B381753E82E00B224D8 /* tinyxmlerror.cpp */; };
 		04CA7B3F1753E82E00B224D8 /* tinyxmlparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04CA7B391753E82E00B224D8 /* tinyxmlparser.cpp */; };
@@ -261,6 +263,10 @@
 		046C309D17805E7C009A2EE6 /* svgtiny_list.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = svgtiny_list.cpp; sourceTree = "<group>"; };
 		046C309F17805E7C009A2EE6 /* ofxSvg.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxSvg.cpp; sourceTree = "<group>"; };
 		046C30A017805E7C009A2EE6 /* ofxSvg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxSvg.h; sourceTree = "<group>"; };
+		04C6D22817847C7800AC12B9 /* GTess.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GTess.h; sourceTree = "<group>"; };
+		04C6D22917847C8300AC12B9 /* GTess.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GTess.cpp; sourceTree = "<group>"; };
+		04C6D22B17847D7F00AC12B9 /* PerlinWaves.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PerlinWaves.h; sourceTree = "<group>"; };
+		04C6D22C17847D8900AC12B9 /* PerlinWaves.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PerlinWaves.cpp; sourceTree = "<group>"; };
 		04CA7B361753E82E00B224D8 /* tinyxml.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxml.cpp; sourceTree = "<group>"; };
 		04CA7B371753E82E00B224D8 /* tinyxml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tinyxml.h; sourceTree = "<group>"; };
 		04CA7B381753E82E00B224D8 /* tinyxmlerror.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxmlerror.cpp; sourceTree = "<group>"; };
@@ -577,6 +583,10 @@
 				DD7BE8AA1780D80900F04F23 /* LampWalker.cpp */,
 				DD81641A17820BFB006B6A3E /* Triangles.cpp */,
 				DD81641B17820BFB006B6A3E /* Triangles.h */,
+				04C6D22817847C7800AC12B9 /* GTess.h */,
+				04C6D22917847C8300AC12B9 /* GTess.cpp */,
+				04C6D22B17847D7F00AC12B9 /* PerlinWaves.h */,
+				04C6D22C17847D8900AC12B9 /* PerlinWaves.cpp */,
 			);
 			name = Scenes;
 			sourceTree = "<group>";
@@ -1223,6 +1233,8 @@
 				DD7BE8AC1780D80900F04F23 /* LampWalker.cpp in Sources */,
 				0438DB941782D0E9003833F8 /* QuickTrail.cpp in Sources */,
 				DD81641C17820BFB006B6A3E /* Triangles.cpp in Sources */,
+				04C6D22A17847C8300AC12B9 /* GTess.cpp in Sources */,
+				04C6D22D17847D8900AC12B9 /* PerlinWaves.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
