@@ -10,6 +10,10 @@
 
 
 void Triangles::setup(){
+    
+    name = "Triangles";
+    oscAddress = "/triangles";
+    
     for(int i=0;i<mapping->triangles.size();i++){
         InputTriangle * triangle = mapping->triangles[i];
         

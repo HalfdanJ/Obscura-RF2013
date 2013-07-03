@@ -1,15 +1,45 @@
 <Widget>
     <Kind>4</Kind>
-    <Name>Opacity</Name>
-    <Value>255.000000000</Value>
+    <Name>opacityLamp Walker</Name>
+    <Value>0.315789461</Value>
 </Widget>
 <Widget>
     <Kind>4</Kind>
-    <Name>Opacity</Name>
-    <Value>255.000000000</Value>
+    <Name>speedLamp Walker</Name>
+    <Value>0.315789461</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>EnabledLamp Walker</Name>
+    <Value>1</Value>
 </Widget>
 <Widget>
     <Kind>4</Kind>
-    <Name>Opacity</Name>
-    <Value>100.000000000</Value>
+    <Name>opacityQuickTrail</Name>
+    <Value>0.404858291</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>speedQuickTrail</Name>
+    <Value>0.408906877</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>EnabledQuickTrail</Name>
+    <Value>1</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>opacityTriangles</Name>
+    <Value>0.514170051</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>speedTriangles</Name>
+    <Value>0.522267222</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>EnabledTriangles</Name>
+    <Value>1</Value>
 </Widget>

@@ -166,6 +166,7 @@ void testApp::setup() {
     
     for(int i=0; i<scenes.size(); i++) {
         scenes[i]->setupScene(OUTWIDTH, OUTHEIGHT);
+        scenes[i]->index = i;
     }
     
     
