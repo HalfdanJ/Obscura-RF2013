@@ -82,5 +82,16 @@ public:
     
     ofVec2f center;
     float divideRadius;
+    
+    
+    bool sideScreens;
+    float sideScreensSpeed;
+    float sideScreensPct;
+
+
+    float transitionTime;
+    
+    void setGui(ofxUICanvas *gui, float width);
+    void parseOscMessage(ofxOscMessage *m);
 };
 

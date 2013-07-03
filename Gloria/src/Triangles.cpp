@@ -8,7 +8,7 @@
 
 #include "Triangles.h"
 
-static float transitionTime = 1;
+
 
 void Triangles::setup(){
     
@@ -27,6 +27,7 @@ void Triangles::setup(){
         
         subTriangle->normal = ofVec3f(ofRandom(-1,1),ofRandom(-1,1),1).normalized();
         subTriangle->parentTriangle = subTriangle;
+        subTriangle->age = 1000;
         
         
         //   subTriangle->corners[0]->pos.x += 20;
@@ -47,9 +48,31 @@ void Triangles::setup(){
         
         center = ofVec2f(1500,500);
         divideRadius = 0;
+        
+        sideScreens = true;
+        sideScreensSpeed = 0.1;
+        
+        
+        transitionTime = 5;
     }
 }
 
+
+void Triangles::setGui(ofxUICanvas *gui, float width){
+    ContentScene::setGui(gui,width);
+    
+    gui->addToggle("SideScreens", &sideScreens);
+
+    
+    
+}
+
+void Triangles::parseOscMessage(ofxOscMessage *m){
+    ContentScene::parseOscMessage(m);
+    
+    
+    
+}
 
 
 void Triangles::divide(SubTriangle * triangle){
@@ -239,14 +262,52 @@ void Triangles::drawTriangle(SubTriangle * triangle){
          ofSetColor(ambient.x,ambient.y,ambient.z);
          }
          */
+       
+        //Tegn billede 1 pixel pr trekant
         glBegin(GL_TRIANGLES);
         for(int u=0;u<3;u++){
-            glTexCoord2d(center.x/3, 500-center.y/2);
+            glTexCoord2d(center.x/8, 500-center.y/8);
+            glVertex2d(triangle->corners[u]->pos.x, triangle->corners[u]->pos.y);
+        }
+        glEnd();
+        
+      
+        //Tegn billede 1:1
+        if(sideScreensPct > 0.8){
+            float bbb = ease((sideScreensPct-0.8)/0.2, 0,1,1);
+            
+            ofSetColor(255,255,255,180*bbb);
+            glBegin(GL_TRIANGLES);
+            for(int u=0;u<3;u++){
+                glTexCoord2d(triangle->corners[u]->pos.x/8, 500-triangle->corners[u]->pos.y/8);
+                glVertex2d(triangle->corners[u]->pos.x, triangle->corners[u]->pos.y);
+            }
+            glEnd();
+            
+        }
+        /*
+        
+        float bbb = ease(ofClamp((sideScreensPct-0.8)/0.2,0,1), 0,1,1);
+        bbb = ofClamp(bbb, 0, 1);
+        float bg =bbb;
+        ofSetColor(MAX(bbb*200, color.x), MAX(bbb*200, color.y), MAX(bbb*200, color.z));
+
+        glBegin(GL_TRIANGLES);
+        for(int u=0;u<3;u++){
+            
+            
+            
+            ofVec2f texCord = (1-bbb)*ofVec2f(center.x/8, 500-center.y/8) + bbb*ofVec2f(triangle->corners[u]->pos.x/8, 500-triangle->corners[u]->pos.y/8);
+            
+            
+            glTexCoord2d(texCord.x, texCord.y);
             glVertex2d(triangle->corners[u]->pos.x, triangle->corners[u]->pos.y);
         }
         glEnd();
         
         
+        
+        */
         
         
         /*glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
@@ -268,16 +329,17 @@ void Triangles::drawTriangle(SubTriangle * triangle){
 void Triangles::draw(){
     
     ofSetColor(255,255,255);
-    // syphon->bind();
-    
+    syphon->bind();
     ofSetLineWidth(1);
     
     for(int i=0;i<mapping->triangles.size();i++){
-        drawTriangle(subTriangles[mapping->triangles[i]]);
+        if(subTriangles[mapping->triangles[i]]->numTriangles() > 1){
+            drawTriangle(subTriangles[mapping->triangles[i]]);
+        }
     }
     
     
-    // syphon->unbind();
+    syphon->unbind();
     
     
     ofSetColor(255, 255, 255, 10);
@@ -286,8 +348,59 @@ void Triangles::draw(){
 }
 
 void Triangles::update(){
+    for(int i=0;i<mapping->triangles.size();i++){
+        SubTriangle * triangle = subTriangles[mapping->triangles[i]];
+        triangle->update();
+    }
+    
+    if(sideScreens){
+        transitionTime = 0.1/sideScreensSpeed*2;
+        
+        if(sideScreensPct < 1){
+            sideScreensPct += sideScreensSpeed * 1.0/ofGetFrameRate();
+        } else {
+            sideScreensPct = 1;
+        }
+    } else {
+        if(sideScreensPct > 0){
+            sideScreensPct -= sideScreensSpeed * 1.0/ofGetFrameRate();
+        } else {
+            sideScreensPct = 0;
+        }
+    }
+    
+        
+        center.x = 3196;
+        center.y = 1200;
+        
+        float pct = ease(sideScreensPct*1.2,0,1,1);
+        divideRadius = 1500 + (3200-1500)*(1-pct);
+        
+        
+        for(int i=0;i<mapping->triangles.size();i++){
+            SubTriangle * triangle = subTriangles[mapping->triangles[i]];
+            triangle->update();
+            
+            if(triangle->center().distance(center) > divideRadius){
+                float a = (divideRadius - triangle->center().distance(center)) / divideRadius;
+                if(triangle->numTriangles() < 30 && triangle->getLowestAge() > transitionTime){
+                    if(sideScreensPct > 0 ){
+
+                    // cout<<"DIVIDE"<<endl;
+                    divide(triangle);
+                    }
+                }
+            } else {
+                if(triangle->numTriangles() > 1){
+                     cout<<"COLLAPSE"<<endl;
+                    collapse(triangle);
+                }
+            }
+        }
     
     
+    
+/*
     center.x = 3196;
     center.y = 1200;
     divideRadius = 700*(cos(PI+ofGetElapsedTimeMillis()/2000.)+1);
@@ -299,15 +412,15 @@ void Triangles::update(){
         if(triangle->center().distance(center) < divideRadius){
             float a = (divideRadius - triangle->center().distance(center)) / divideRadius;
             if(triangle->numTriangles() < 9 && triangle->getLowestAge() > transitionTime){
-                cout<<"DIVIDE"<<endl;
+               // cout<<"DIVIDE"<<endl;
                 divide(triangle);
             }
         } else {
             if(triangle->numTriangles() > 1){
-                cout<<"COLLAPSE"<<endl;
+               // cout<<"COLLAPSE"<<endl;
                 collapse(triangle);
             }
         }
         
-    }
+    }*/
 }
