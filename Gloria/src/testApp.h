@@ -16,8 +16,9 @@
 #include "mapping.h"
 
 #define OSCPORT 9999
-#define OUTHEIGHT 1500
-#define OUTWIDTH 6000
+
+#define OUTWIDTH 6400
+#define OUTHEIGHT 1200
 
 class testApp : public ofBaseApp {
 public:
