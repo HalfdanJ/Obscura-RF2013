@@ -47,7 +47,7 @@ void testApp::setup() {
     // load the svg (transforms should be flattened before)
     // todo - try to load this data from xml files
     
-    mapping.svg.load("input09.svg");
+    mapping.svg.load("input1.svg");
     
     int numTriangles = 0;
     int maxTriangleSize = 1000000;
@@ -230,8 +230,17 @@ void testApp::draw() {
     ofClear(0, 0);
     
     // TODO: Layer ordering
+    
     for(int i=0; i<scenes.size(); i++) {
         ofSetColor(255,255,255,scenes[i]->opacity*255);
+        if(scenes[i]->solo) {
+            
+        }
+    }
+    
+    for(int i=0; i<scenes.size(); i++) {
+        ofSetColor(255,255,255,scenes[i]->opacity*255);
+        
         if(scenes[i]->enabled) {
             scenes[i]->fbo.draw(0,0);
         }
