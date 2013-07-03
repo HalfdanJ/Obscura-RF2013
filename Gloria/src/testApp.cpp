@@ -161,6 +161,12 @@ void testApp::setup() {
     triangles.syphon = &syphonIn;
     scenes.push_back(&triangles);
     
+    perlinWaves.mapping = &mapping;
+    scenes.push_back(&perlinWaves);
+
+    tesselator.mapping = &mapping;
+    scenes.push_back(&tesselator);
+
     for(int i=0; i<scenes.size(); i++) {
         scenes[i]->setupScene(OUTWIDTH, OUTHEIGHT, i);
     }
@@ -194,33 +200,17 @@ void testApp::update() {
 		// get the next message
 		ofxOscMessage m;
 		oscReceiver.getNextMessage(&m);
-                
-        for(int i=0; i<scenes.size();i++) {
-            scenes[i]->parseOscMessage(&m);
-        }
-        
-        /*
-        if(m.getAddress() == "/scale/x") {
-            masterScale = m.getArgAsFloat(0);
-        } else if(m.getAddress() == "/rotatex/x") {
-            rotationX = m.getArgAsFloat(0)*360;
-        } else if(m.getAddress() == "/rotatey/x") {
-            rotationY = m.getArgAsFloat(0)*360;
-        } else if(m.getAddress() == "/rotatez/x") {
-            rotationY = m.getArgAsFloat(0)*360;
-        } else if(m.getAddress() == "/RingArea/x") {
-            rotationX = m.getArgAsFloat(0)*360;
-        } else if(m.getAddress() == "/RingArea/y") {
-            rotationY = m.getArgAsFloat(0)*360;
-        }*/
-        
-        
+
+	//cout<<m.getAddress()<<endl;
+
+	for(int i=0; i<scenes.size();i++) {
+	    scenes[i]->parseOscMessage(&m);
+	}
     }
-    
-    
+
     // Scenes
     for(int i=0; i<scenes.size(); i++) {
-        scenes[i]->updateScene();
+	scenes[i]->updateScene();
     }
     
     
@@ -231,19 +221,6 @@ void testApp::update() {
 
 
 void testApp::draw() {
-    
-
-    /* Move this to a scene
-     ofSetLineWidth(2);
-     // waves going across red
-     for(int i =0; i<mapping.triangles.size();i++) {
-     ofSetColor( ofNoise(mapping.triangles[i]->centroid.y/600 - ofGetElapsedTimef()/2)*255, 100, 100);
-     mapping.triangles[i]->mesh.draw();
-     
-     ofSetColor( ofNoise(mapping.triangles[i]->centroid.x/600 - ofGetElapsedTimef()/2) *255, 90, 90 );
-     mapping.triangles[i]->mesh.drawWireframe();
-     }
-     */
     
     
     for(int i=0; i<scenes.size(); i++) {

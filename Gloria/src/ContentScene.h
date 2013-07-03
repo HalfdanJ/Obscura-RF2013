@@ -3,6 +3,7 @@
 #include "ofMain.h"
 #include "ofxOsc.h"
 #include "ofxUI.h"
+#include "mapping.h"
 
 class ContentScene {
     
@@ -13,6 +14,8 @@ public:
     string oscAddress = "/default";
 
     // bool syphonDirect;
+
+    Mapping * mapping;
 
     ofFbo fbo;
     bool enabled;
@@ -49,18 +52,31 @@ public:
         
     }
     
+    void checkMsg() {
+        
+    }
+
     virtual void parseOscMessage(ofxOscMessage * m){
         
-        if(m->getAddress() == oscAddress + "opacity/x" ) {
-            opacity =m->getArgAsFloat(0);
-        }
+	vector<string> adrSplit = ofSplitString(m->getAddress(), "/");
+	string rest = ofSplitString(m->getAddress(), "/"+adrSplit[1])[1];
+	//cout<<adrSplit[1]<<"   "<<rest<<endl;
         
-        if(m->getAddress() == oscAddress + "enabled/x" ) {
-            speed =m->getArgAsFloat(0);
-        }
-        
-        if(m->getAddress() == oscAddress + "speed/x" ) {
-            speed =m->getArgAsFloat(0);
+	if(adrSplit[1] == "scene"+ofToString(index) || "/"+adrSplit[1] == oscAddress) {
+
+	    if( rest == "/opacity/x" ) {
+		opacity = m->getArgAsFloat(0);
+	    }
+
+	    if(rest == "/enable/x" ) {
+		enabled = m->getArgAsInt32(0);
+	    }
+
+	    if(rest == "/speed/x" ) {
+		speed =m->getArgAsFloat(0);
+	    }
+
+
         }
         
     }
