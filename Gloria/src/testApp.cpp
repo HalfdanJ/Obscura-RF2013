@@ -195,10 +195,10 @@ void testApp::update() {
 		ofxOscMessage m;
 		oscReceiver.getNextMessage(&m);
 
-	cout<<m.getAddress()<<endl;
+	//cout<<m.getAddress()<<endl;
 
-        for(int i=0; i<scenes.size();i++) {
-            scenes[i]->parseOscMessage(&m);
+	for(int i=0; i<scenes.size();i++) {
+	    scenes[i]->parseOscMessage(&m);
         }
         
         /*
