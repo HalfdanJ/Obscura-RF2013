@@ -56,9 +56,7 @@ public:
 
     Mapping mapping;
 
-
     ofxXmlSettings XML;
-
 
     // Define all the scenes here
     LampWalker lampWalker;
