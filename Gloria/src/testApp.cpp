@@ -31,17 +31,17 @@ void testApp::setup() {
 
     if(worldPointTags > 0){
 
-	for(int i = 0; i < worldPointTags; i++){
+        for(int i = 0; i < worldPointTags; i++){
 
-	    int x = XML.getValue("PT:X", 0, i);
-	    int y = XML.getValue("PT:Y", 0, i);
-	    int z = XML.getValue("PT:Z", 0, i);
+            int x = XML.getValue("PT:X", 0, i);
+            int y = XML.getValue("PT:Y", 0, i);
+            int z = XML.getValue("PT:Z", 0, i);
 
-	    WorldPoint * wp = new WorldPoint();
-	    wp->pos.set(ofVec3f(x,y,z));
-	    mapping.worldPoints.push_back(wp);
+            WorldPoint * wp = new WorldPoint();
+            wp->pos.set(ofVec3f(x,y,z));
+            mapping.worldPoints.push_back(wp);
 
-	}
+        }
 
     }
 
@@ -359,8 +359,8 @@ void testApp::dragEvent(ofDragInfo dragInfo){
 //--------------------------------------------------------------
 void testApp::exit()
 {
-    //gui->saveSettings("GUI/guiSettings.xml");
-    //delete gui;s
+    gui->saveSettings("GUI/guiSettings.xml");
+    delete gui;
 
     XML.saveFile("calibration.xml");
 }
