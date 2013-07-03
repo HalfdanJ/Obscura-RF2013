@@ -12,6 +12,8 @@
 #include "Triangles.h"
 #include "GTess.h"
 #include "PerlinWaves.h"
+#include "TriMasker.h"
+
 #include "ofxUI.h"
 
 #include "mapping.h"
@@ -70,6 +72,7 @@ public:
     Triangles triangles;
     GTess tesselator;
     PerlinWaves perlinWaves;
+    TriMasker triMasker;
     
     vector<ContentScene*> scenes;
     
