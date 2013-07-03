@@ -9,6 +9,10 @@
 #include "QuickTrail.h"
 
 void QuickTrail::setup(){
+    
+    name = "QuickTrail";
+    oscAddress = "/quicktrail";
+    
     walkers.resize(1);
     for(int i=0;i<walkers.size();i++) {
         walkers[i].corner = mapping->corners[0];

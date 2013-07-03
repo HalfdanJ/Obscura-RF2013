@@ -8,15 +8,16 @@ class ContentScene {
     
 public:
     
-    string name = "unnamed scene";
+    int index;
+    string name;
     string oscAddress = "/default";
 
     // bool syphonDirect;
 
     ofFbo fbo;
-    bool enabled = true;
-    float opacity = 1;
-    float speed = 1;
+    bool enabled;
+    float opacity;
+    float speed;
     
     int width;
     int height;
@@ -30,11 +31,33 @@ public:
     virtual void update(){}
     virtual void draw(){}
     virtual void exit(){}
+        
+    virtual void setGui(ofxUICanvas * gui, float width){
+        
+        string i = "["+ ofToString(index) + "] ";
+        
+        gui->addWidgetDown(new ofxUILabel(name, OFX_UI_FONT_SMALL));
+        gui->addWidgetDown(new ofxUILabel("OSC Address: " + oscAddress, OFX_UI_FONT_SMALL));
+        
+        gui->addSpacer(width, 1);
+        gui->addSlider(i+"opacity", 0., 1., &opacity);
+        
+        gui->addSpacer(width, 1);
+        gui->addSlider(i+"speed", 0., 1., &speed);
+        
+        gui->addToggle(i+"Enabled", &enabled);
+        
+        
+    }
     
-    virtual void setGui(ofxUICanvas * gui){}
-    virtual void oscMessage(ofxOscMessage * m){}
+    virtual void oscMessage(ofxOscMessage * m){
+        
+    }
     
-    void setupScene(int width, int height) {
+    void setupScene(int width, int height, int i) {
+        index = i;
+        name = "Scene" + ofToString(i);
+        
         fbo.allocate(width, height);
         setup();
     }

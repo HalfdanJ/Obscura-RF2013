@@ -6,10 +6,11 @@ void testApp::setup() {
     oscSender.setup("HalfdanJ.local", 6745);
     oscReceiver.setup(OSCPORT);
     
-    //    ofSetVerticalSync(true);
+    //ofSetVerticalSync(true);
     ofSetLogLevel(OF_LOG_ERROR);
+    ofSetVerticalSync(true);
     ofSetFrameRate(60);
-    
+        
     ofSetWindowTitle("Obscure Glorious Control");
     
     syphonOut.setName("Gloria Generative");
@@ -48,7 +49,7 @@ void testApp::setup() {
     // load the svg (transforms should be flattened before)
     // todo - try to load this data from xml files
     
-    mapping.svg.load("input1.svg");
+    mapping.svg.load("input09.svg");
     
     int numTriangles = 0;
     int maxTriangleSize = 1000000;
@@ -164,15 +165,14 @@ void testApp::setup() {
     scenes.push_back(&triangles);
     
     for(int i=0; i<scenes.size(); i++) {
-        scenes[i]->setupScene(OUTWIDTH, OUTHEIGHT);
+        scenes[i]->setupScene(OUTWIDTH, OUTHEIGHT, i);
     }
     
     
     setGUI();
     gui->setDrawBack(true);
+    gui->setScrollAreaToScreenHeight();
     gui->loadSettings("GUI/guiSettings.xml");
-    
-    
     
 }
 
@@ -181,7 +181,7 @@ void testApp::update() {
     
     
     // send some fun stuff to the sharpy army
-    
+    /*
     ofxOscMessage m;
     
     m.setAddress("/sharpy");
@@ -197,7 +197,7 @@ void testApp::update() {
     m2.addFloatArg(sin(ofGetElapsedTimeMillis()/4500.) * 8.); // x
     m2.addFloatArg(0); // y
     m2.addFloatArg(sin(ofGetElapsedTimeMillis()/4000.) * 2.); // z
-    oscSender.sendMessage(m2);
+    oscSender.sendMessage(m2);*/
     
     // Scenes
     for(int i=0; i<scenes.size(); i++) {
@@ -208,8 +208,8 @@ void testApp::update() {
 
 
 void testApp::draw() {
-    ofBackground(0);
     
+
     /* Move this to a scene
      ofSetLineWidth(2);
      // waves going across red
@@ -225,7 +225,6 @@ void testApp::draw() {
     
     for(int i=0; i<scenes.size(); i++) {
         scenes[i]->drawScene();
-        
     }
     
     fboOut.begin();
@@ -235,7 +234,9 @@ void testApp::draw() {
     // TODO: Layer ordering
     for(int i=0; i<scenes.size(); i++) {
         ofSetColor(255,255,255,scenes[i]->opacity*255);
-        scenes[i]->fbo.draw(0,0);
+        if(scenes[i]->enabled) {
+            scenes[i]->fbo.draw(0,0);
+        }
     }
     
     fboOut.end();
@@ -243,25 +244,27 @@ void testApp::draw() {
     syphonOut.publishTexture(&fboOut.getTextureReference());
     
     ofPushMatrix();
-    ofScale(0.4, 0.4);
+    ofTranslate(300, 40);
+    
+    ofScale(0.2, 0.2);
     ofBackground(0);
     
     
-    
-    
-    ofSetColor(255,255,255,96);
-    drawGrid();
-    
     ofSetColor(255,255,255,255);
+    ofNoFill();
+    ofSetLineWidth(1);
+    ofRect(-1, -1, fboOut.getWidth()+2, fboOut.getHeight()+2);
     fboOut.draw(0, 0);
     
-    ofPopMatrix();
+    if(drawGuide) {
+        ofSetColor(255,255,255,96);
+        drawGrid();
+    }
     
+    ofPopMatrix();
     ofDrawBitmapString("FPS: " + ofToString(ofGetFrameRate()), ofGetWidth()-200, 20);
+    
 }
-
-
-
 
 
 //------------------------------------------------------------
@@ -279,9 +282,7 @@ void testApp::drawGrid() {
 }
 
 
-void testApp::guiEvent(ofxUIEventArgs &e)
-{
-}
+
 
 
 //--------------------------------------------------------------
@@ -338,26 +339,29 @@ void testApp::exit()
     XML.saveFile("calibration.xml");
 }
 
+void testApp::guiEvent(ofxUIEventArgs &e)
+{
+}
+
 void testApp::setGUI()
 {
     
-    ofSetColor(255);
-    float xInit = OFX_UI_GLOBAL_WIDGET_SPACING;
-    float length = 255-xInit;
+    float dim = 16;
+	float xInit = OFX_UI_GLOBAL_WIDGET_SPACING;
+    float width = 255-xInit;
+	hideGUI = false;
+
+    gui = new ofxUIScrollableCanvas(0, 0, width+xInit, ofGetHeight());
+    gui->setWidgetFontSize(OFX_UI_FONT_SMALL);
+    gui->setColorBack(ofColor(30, 30, 30,200));    
     
-    
-    
-    gui = new ofxUICanvas(0, 0, length+xInit, ofGetHeight());
+    gui->addToggle("Draw guide", &drawGuide);
     
     for(int i=0; i<scenes.size(); i++) {
         
-        gui->addSpacer(length, 2);
-        gui->addWidgetDown(new ofxUILabel(scenes[i]->name, OFX_UI_FONT_SMALL));
-        gui->addWidgetDown(new ofxUILabel("OSC Address: " + scenes[i]->oscAddress, OFX_UI_FONT_SMALL));
+        gui->addSpacer(width, 3)->setDrawOutline(true);
+        scenes[i]->setGui(gui, width);
         
-        gui->addWidgetDown(new ofxUISlider("Opacity", 0, 1, &scenes[i]->opacity, length, 10));
-        
-        gui->addWidgetDown(new ofxUISlider("Speed", 0, 1, &scenes[i]->speed, length, 10));
         
         // label
         // enabled

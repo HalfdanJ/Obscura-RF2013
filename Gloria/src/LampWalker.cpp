@@ -12,7 +12,6 @@ void LampWalker::setup(){
 
     name = "Lamp Walker";
     oscAddress = "/lampwalker";
-
 }
 
 void LampWalker::update(){
@@ -24,7 +23,6 @@ void LampWalker::update(){
     if(!dst){
 	dst = src->joinedCorners[ofRandom(src->joinedCorners.size())];
     }
-
 
     pct += 0.01;
     if(pct > 1){

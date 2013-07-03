@@ -16,8 +16,9 @@
 #include "mapping.h"
 
 #define OSCPORT 9999
-#define OUTHEIGHT 1080
-#define OUTWIDTH 1920
+
+#define OUTWIDTH 6400
+#define OUTHEIGHT 1200
 
 class testApp : public ofBaseApp {
 public:
@@ -46,10 +47,6 @@ public:
     ofxSyphonServer syphonOut;
     ofxSyphonClient syphonIn;
 
-    void setGUI();
-    ofxUICanvas *gui;
-    void guiEvent(ofxUIEventArgs &e);
-
     ofCamera cam;
     ofColor bg;
     ofFbo fboOut;
@@ -57,12 +54,22 @@ public:
     Mapping mapping;
 
     ofxXmlSettings XML;
-
+    
+    // gui
+    void setGUI();
+    ofxUIScrollableCanvas *gui;
+    void guiEvent(ofxUIEventArgs &e);
+    
+    bool hideGUI;
+    bool drawGuide;
+    
     // Define all the scenes here
     LampWalker lampWalker;
     QuickTrail quickTrail;
     Triangles triangles;
     
     vector<ContentScene*> scenes;
+    
+
     
 };

@@ -59,10 +59,6 @@ class Triangles : public ContentScene {
     
 public:
     
-    // all scenes must draw to an fbo called fbo
-    ofFbo fbo;
-    bool enabled;
-    
     void setup();
     void draw();
     
