@@ -166,11 +166,13 @@ void testApp::setup() {
 
     tesselator.mapping = &mapping;
     scenes.push_back(&tesselator);
+    
+    triMasker.mapping = &mapping;
+    scenes.push_back(&triMasker);
 
     for(int i=0; i<scenes.size(); i++) {
         scenes[i]->setupScene(OUTWIDTH, OUTHEIGHT, i);
     }
-    
     
     setGUI();
     gui->setDrawBack(true);
@@ -201,21 +203,17 @@ void testApp::update() {
 		ofxOscMessage m;
 		oscReceiver.getNextMessage(&m);
 
-	//cout<<m.getAddress()<<endl;
-
-	for(int i=0; i<scenes.size();i++) {
-	    scenes[i]->parseOscMessage(&m);
-	}
+        for(int i=0; i<scenes.size();i++) {
+            scenes[i]->parseOscMessage(&m);
+        }
     }
 
     // Scenes
     for(int i=0; i<scenes.size(); i++) {
-	scenes[i]->updateScene();
+        scenes[i]->updateScene();
     }
     
-    
     // OSC in listen
-    
     
 }
 
@@ -292,6 +290,9 @@ void testApp::setGUI()
 
     gui = new ofxUIScrollableCanvas(0, 0, width+xInit, ofGetHeight());
     
+    gui->setScrollAreaToScreenHeight();
+    gui->setScrollableDirections(false, true);
+    
     gui->setFont("GUI/Arial.ttf");
     gui->setWidgetFontSize(OFX_UI_FONT_SMALL);
     gui->setColorBack(ofColor(30, 30, 30,200));    
@@ -303,7 +304,6 @@ void testApp::setGUI()
         gui->addSpacer(width, 3)->setDrawOutline(true);
         scenes[i]->setGui(gui, width);
         
-        
         // label
         // enabled
         // opacity
@@ -311,6 +311,10 @@ void testApp::setGUI()
         // osc address
         
     }
+    
+
+    
+    gui->autoSizeToFitWidgets();
     
     ofAddListener(gui->newGUIEvent,this,&testApp::guiEvent);
 }

@@ -19,6 +19,7 @@ public:
 
     ofFbo fbo;
     bool enabled;
+    bool solo;
     float opacity;
     float speed;
     
@@ -49,6 +50,7 @@ public:
         gui->addSlider(i+"speed", 0., 1., &speed);
         
         gui->addToggle(i+"Enabled", &enabled);
+        gui->addToggle(i+"Solo", &solo);
         
     }
     
