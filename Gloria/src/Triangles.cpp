@@ -275,7 +275,6 @@ void Triangles::draw(){
 
 void Triangles::update(){
     
-    
     center.x = 1200*(sin(ofGetElapsedTimeMillis()/5000.)+1);
     divideRadius = 500*(cos(PI+ofGetElapsedTimeMillis()/2000.)+1);
     

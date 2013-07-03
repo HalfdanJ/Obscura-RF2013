@@ -6,9 +6,7 @@ void testApp::setup() {
     oscSender.setup("HalfdanJ.local", 6745);
     oscReceiver.setup(OSCPORT);
     
-    //ofSetVerticalSync(true);
     ofSetLogLevel(OF_LOG_ERROR);
-    ofSetVerticalSync(true);
     ofSetFrameRate(60);
         
     ofSetWindowTitle("Obscure Glorious Control");
@@ -203,6 +201,10 @@ void testApp::update() {
         scenes[i]->updateScene();
     }
     
+    
+    // OSC in listen
+    
+    
 }
 
 
@@ -351,6 +353,8 @@ void testApp::setGUI()
 	hideGUI = false;
 
     gui = new ofxUIScrollableCanvas(0, 0, width+xInit, ofGetHeight());
+    
+    gui->setFont("GUI/Arial.ttf");
     gui->setWidgetFontSize(OFX_UI_FONT_SMALL);
     gui->setColorBack(ofColor(30, 30, 30,200));    
     

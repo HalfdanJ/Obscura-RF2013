@@ -47,7 +47,6 @@ public:
         
         gui->addToggle(i+"Enabled", &enabled);
         
-        
     }
     
     virtual void oscMessage(ofxOscMessage * m){
