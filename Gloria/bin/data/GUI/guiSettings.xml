@@ -1,45 +1,50 @@
 <Widget>
-    <Kind>4</Kind>
-    <Name>opacityLamp Walker</Name>
-    <Value>0.315789461</Value>
-</Widget>
-<Widget>
-    <Kind>4</Kind>
-    <Name>speedLamp Walker</Name>
-    <Value>0.315789461</Value>
-</Widget>
-<Widget>
     <Kind>2</Kind>
-    <Name>EnabledLamp Walker</Name>
+    <Name>Draw guide</Name>
     <Value>1</Value>
 </Widget>
 <Widget>
     <Kind>4</Kind>
-    <Name>opacityQuickTrail</Name>
-    <Value>0.404858291</Value>
+    <Name>[0] opacity</Name>
+    <Value>1.000000000</Value>
 </Widget>
 <Widget>
     <Kind>4</Kind>
-    <Name>speedQuickTrail</Name>
-    <Value>0.408906877</Value>
+    <Name>[0] speed</Name>
+    <Value>1.000000000</Value>
 </Widget>
 <Widget>
     <Kind>2</Kind>
-    <Name>EnabledQuickTrail</Name>
+    <Name>[0] Enabled</Name>
     <Value>1</Value>
 </Widget>
 <Widget>
     <Kind>4</Kind>
-    <Name>opacityTriangles</Name>
-    <Value>0.514170051</Value>
+    <Name>[1] opacity</Name>
+    <Value>1.000000000</Value>
 </Widget>
 <Widget>
     <Kind>4</Kind>
-    <Name>speedTriangles</Name>
-    <Value>0.522267222</Value>
+    <Name>[1] speed</Name>
+    <Value>1.000000000</Value>
 </Widget>
 <Widget>
     <Kind>2</Kind>
-    <Name>EnabledTriangles</Name>
+    <Name>[1] Enabled</Name>
+    <Value>1</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>[2] opacity</Name>
+    <Value>1.000000000</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>[2] speed</Name>
+    <Value>1.000000000</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>[2] Enabled</Name>
     <Value>1</Value>
 </Widget>

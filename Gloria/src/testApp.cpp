@@ -49,7 +49,7 @@ void testApp::setup() {
     // load the svg (transforms should be flattened before)
     // todo - try to load this data from xml files
     
-    mapping.svg.load("input1.svg");
+    mapping.svg.load("input09.svg");
     
     int numTriangles = 0;
     int maxTriangleSize = 1000000;
@@ -246,19 +246,22 @@ void testApp::draw() {
     ofPushMatrix();
     ofTranslate(300, 40);
     
-    ofScale(0.3, 0.3);
+    ofScale(0.2, 0.2);
     ofBackground(0);
     
-    ofSetColor(255,255,255,96);
-    drawGrid();
     
     ofSetColor(255,255,255,255);
     ofNoFill();
+    ofSetLineWidth(1);
     ofRect(-1, -1, fboOut.getWidth()+2, fboOut.getHeight()+2);
     fboOut.draw(0, 0);
     
-    ofPopMatrix();
+    if(drawGuide) {
+        ofSetColor(255,255,255,96);
+        drawGrid();
+    }
     
+    ofPopMatrix();
     ofDrawBitmapString("FPS: " + ofToString(ofGetFrameRate()), ofGetWidth()-200, 20);
     
 }
@@ -351,6 +354,8 @@ void testApp::setGUI()
     gui = new ofxUIScrollableCanvas(0, 0, width+xInit, ofGetHeight());
     gui->setWidgetFontSize(OFX_UI_FONT_SMALL);
     gui->setColorBack(ofColor(30, 30, 30,200));    
+    
+    gui->addToggle("Draw guide", &drawGuide);
     
     for(int i=0; i<scenes.size(); i++) {
         

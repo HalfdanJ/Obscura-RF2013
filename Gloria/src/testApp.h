@@ -60,6 +60,7 @@ public:
     void guiEvent(ofxUIEventArgs &e);
     
     bool hideGUI;
+    bool drawGuide;
     
     // Define all the scenes here
     LampWalker lampWalker;
