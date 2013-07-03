@@ -20,6 +20,13 @@ public:
     float age;
     ofVec3f normal;
     ofVec3f parentNormal;
+    bool die;
+    
+    float ageDifference;
+    
+    SubTriangle(){
+        ageDifference = ofRandom(0.9,1.0);
+    }
     
     int numTriangles(){
         int ret = 1;
@@ -33,7 +40,17 @@ public:
         for(int i=0;i<subTriangles.size();i++){
             subTriangles[i]->update();
         }
-        age += 1.0/ofGetFrameRate();
+        age += ageDifference*1.0/ofGetFrameRate();
+    }
+    
+    float getLowestAge(){
+        float _age = age;
+        for(int i=0;i<subTriangles.size();i++){
+            if(_age > subTriangles[i]->getLowestAge()){
+                _age = subTriangles[i]->getLowestAge();
+            }
+        }
+        return _age;
     }
     
 };
