@@ -38,7 +38,6 @@ public:
         
         gui->addWidgetDown(new ofxUILabel(name, OFX_UI_FONT_SMALL));
         gui->addWidgetDown(new ofxUILabel("OSC Address: " + oscAddress, OFX_UI_FONT_SMALL));
-        gui->addSpacer(width, 1);
         
         gui->addSpacer(width, 1);
         gui->addSlider(i+"opacity", 0., 1., &opacity);
@@ -48,7 +47,6 @@ public:
         
         gui->addToggle(i+"Enabled", &enabled);
         
-        //gui->
         
     }
     

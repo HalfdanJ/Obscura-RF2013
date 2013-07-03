@@ -244,14 +244,17 @@ void testApp::draw() {
     syphonOut.publishTexture(&fboOut.getTextureReference());
     
     ofPushMatrix();
-    ofScale(0.4, 0.4);
-    ofBackground(0);
+    ofTranslate(300, 40);
     
+    ofScale(0.3, 0.3);
+    ofBackground(0);
     
     ofSetColor(255,255,255,96);
     drawGrid();
     
     ofSetColor(255,255,255,255);
+    ofNoFill();
+    ofRect(-1, -1, fboOut.getWidth()+2, fboOut.getHeight()+2);
     fboOut.draw(0, 0);
     
     ofPopMatrix();
@@ -346,14 +349,12 @@ void testApp::setGUI()
 	hideGUI = false;
 
     gui = new ofxUIScrollableCanvas(0, 0, width+xInit, ofGetHeight());
-    gui->setColorBack(ofColor(30, 30, 30,200));
-    //gui->setColorFill(ofColor(255,0,0));
-    
-    //gui->setFontSize(OFX_UI_FONT_SMALL, 16);
+    gui->setWidgetFontSize(OFX_UI_FONT_SMALL);
+    gui->setColorBack(ofColor(30, 30, 30,200));    
     
     for(int i=0; i<scenes.size(); i++) {
         
-        gui->addSpacer(width, 4);
+        gui->addSpacer(width, 3)->setDrawOutline(true);
         scenes[i]->setGui(gui, width);
         
         
