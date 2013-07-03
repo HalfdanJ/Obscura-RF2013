@@ -47,10 +47,21 @@ public:
         
         gui->addToggle(i+"Enabled", &enabled);
         
-        
     }
     
-    virtual void oscMessage(ofxOscMessage * m){
+    virtual void parseOscMessage(ofxOscMessage * m){
+        
+        if(m->getAddress() == oscAddress + "opacity/x" ) {
+            opacity =m->getArgAsFloat(0);
+        }
+        
+        if(m->getAddress() == oscAddress + "enabled/x" ) {
+            speed =m->getArgAsFloat(0);
+        }
+        
+        if(m->getAddress() == oscAddress + "speed/x" ) {
+            speed =m->getArgAsFloat(0);
+        }
         
     }
     

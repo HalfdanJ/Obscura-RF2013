@@ -6,9 +6,7 @@ void testApp::setup() {
     oscSender.setup("HalfdanJ.local", 6745);
     oscReceiver.setup(OSCPORT);
     
-    //ofSetVerticalSync(true);
     ofSetLogLevel(OF_LOG_ERROR);
-    //ofSetVerticalSync(true);
     ofSetFrameRate(60);
         
     ofSetWindowTitle("Obscure Glorious Control");
@@ -161,7 +159,6 @@ void testApp::setup() {
     
     triangles.mapping = &mapping;
     triangles.syphon = &syphonIn;
-    triangles.opacity = 100;
     scenes.push_back(&triangles);
     
     for(int i=0; i<scenes.size(); i++) {
@@ -189,20 +186,46 @@ void testApp::update() {
     m.addFloatArg(sin(ofGetElapsedTimeMillis()/4500.) * 8.); // x
     m.addFloatArg(0); // y
     m.addFloatArg(sin(ofGetElapsedTimeMillis()/4000.) * 2.); // z
-    oscSender.sendMessage(m);
+    oscSender.sendMessage(m);*/
     
-    ofxOscMessage m2;
-    m2.setAddress("/sharpy");
-    m2.addIntArg(1); // device number
-    m2.addFloatArg(sin(ofGetElapsedTimeMillis()/4500.) * 8.); // x
-    m2.addFloatArg(0); // y
-    m2.addFloatArg(sin(ofGetElapsedTimeMillis()/4000.) * 2.); // z
-    oscSender.sendMessage(m2);*/
+    
+    while(oscReceiver.hasWaitingMessages()){
+        
+		// get the next message
+		ofxOscMessage m;
+		oscReceiver.getNextMessage(&m);
+                
+        for(int i=0; i<scenes.size();i++) {
+            scenes[i]->parseOscMessage(&m);
+        }
+        
+        /*
+        if(m.getAddress() == "/scale/x") {
+            masterScale = m.getArgAsFloat(0);
+        } else if(m.getAddress() == "/rotatex/x") {
+            rotationX = m.getArgAsFloat(0)*360;
+        } else if(m.getAddress() == "/rotatey/x") {
+            rotationY = m.getArgAsFloat(0)*360;
+        } else if(m.getAddress() == "/rotatez/x") {
+            rotationY = m.getArgAsFloat(0)*360;
+        } else if(m.getAddress() == "/RingArea/x") {
+            rotationX = m.getArgAsFloat(0)*360;
+        } else if(m.getAddress() == "/RingArea/y") {
+            rotationY = m.getArgAsFloat(0)*360;
+        }*/
+        
+        
+    }
+    
     
     // Scenes
     for(int i=0; i<scenes.size(); i++) {
         scenes[i]->updateScene();
     }
+    
+    
+    // OSC in listen
+    
     
 }
 
@@ -249,7 +272,6 @@ void testApp::draw() {
     ofScale(0.2, 0.2);
     ofBackground(0);
     
-    
     ofSetColor(255,255,255,255);
     ofNoFill();
     ofSetLineWidth(1);
@@ -262,6 +284,8 @@ void testApp::draw() {
     }
     
     ofPopMatrix();
+    
+    ofSetColor(255);
     ofDrawBitmapString("FPS: " + ofToString(ofGetFrameRate()), ofGetWidth()-200, 20);
     
 }
@@ -281,8 +305,60 @@ void testApp::drawGrid() {
     }
 }
 
+void testApp::setGUI()
+{
+    
+    float dim = 16;
+	float xInit = OFX_UI_GLOBAL_WIDGET_SPACING;
+    float width = 255-xInit;
+	hideGUI = false;
 
+    gui = new ofxUIScrollableCanvas(0, 0, width+xInit, ofGetHeight());
+    
+    gui->setFont("GUI/Arial.ttf");
+    gui->setWidgetFontSize(OFX_UI_FONT_SMALL);
+    gui->setColorBack(ofColor(30, 30, 30,200));    
+    
+    gui->addToggle("Draw guide", &drawGuide);
+    
+    for(int i=0; i<scenes.size(); i++) {
+        
+        gui->addSpacer(width, 3)->setDrawOutline(true);
+        scenes[i]->setGui(gui, width);
+        
+        
+        // label
+        // enabled
+        // opacity
+        // solo
+        // osc address
+        
+    }
+    
+    ofAddListener(gui->newGUIEvent,this,&testApp::guiEvent);
+}
 
+void InputTriangle::debugDraw() {
+    ofFill();
+    ofSetColor(255, 255, 255, 40);
+    ofRect(polyline.getBoundingBox());
+    
+    //path.draw();
+    //vector<ofPolyline>& lines = path.getOutline();
+    //for(int j=0;j<(int)lines.size();j++){
+    
+    ofFill();
+    ofSetColor(255,255,255,200);
+    polyline.draw();
+    
+    ofSetColor(255, 255, 255, 255);
+    ofDrawBitmapString(ofToString(index), centroid);
+    
+    ofSetColor(255, 0, 0, 60);
+    for(int i=0; i<polyline.getVertices().size(); i++) {
+        ofCircle(polyline.getVertices()[i].x, polyline.getVertices()[i].y, 20);
+    }
+}
 
 
 //--------------------------------------------------------------
@@ -341,57 +417,4 @@ void testApp::exit()
 
 void testApp::guiEvent(ofxUIEventArgs &e)
 {
-}
-
-void testApp::setGUI()
-{
-    
-    float dim = 16;
-	float xInit = OFX_UI_GLOBAL_WIDGET_SPACING;
-    float width = 255-xInit;
-	hideGUI = false;
-
-    gui = new ofxUIScrollableCanvas(0, 0, width+xInit, ofGetHeight());
-    gui->setWidgetFontSize(OFX_UI_FONT_SMALL);
-    gui->setColorBack(ofColor(30, 30, 30,200));    
-    
-    gui->addToggle("Draw guide", &drawGuide);
-    
-    for(int i=0; i<scenes.size(); i++) {
-        
-        gui->addSpacer(width, 3)->setDrawOutline(true);
-        scenes[i]->setGui(gui, width);
-        
-        
-        // label
-        // enabled
-        // opacity
-        // solo
-        // osc address
-        
-    }
-    
-    ofAddListener(gui->newGUIEvent,this,&testApp::guiEvent);
-}
-
-void InputTriangle::debugDraw() {
-    ofFill();
-    ofSetColor(255, 255, 255, 40);
-    ofRect(polyline.getBoundingBox());
-    
-    //path.draw();
-    //vector<ofPolyline>& lines = path.getOutline();
-    //for(int j=0;j<(int)lines.size();j++){
-    
-    ofFill();
-    ofSetColor(255,255,255,200);
-    polyline.draw();
-    
-    ofSetColor(255, 255, 255, 255);
-    ofDrawBitmapString(ofToString(index), centroid);
-    
-    ofSetColor(255, 0, 0, 60);
-    for(int i=0; i<polyline.getVertices().size(); i++) {
-        ofCircle(polyline.getVertices()[i].x, polyline.getVertices()[i].y, 20);
-    }
 }
