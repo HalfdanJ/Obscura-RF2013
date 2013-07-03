@@ -9,7 +9,7 @@ class ContentScene {
 public:
     
     int index;
-    string name = "unnamed scene";
+    string name;
     string oscAddress = "/default";
 
     // bool syphonDirect;
@@ -34,17 +34,19 @@ public:
         
     virtual void setGui(ofxUICanvas * gui, float width){
         
+        string i = "["+ ofToString(index) + "] ";
+        
         gui->addWidgetDown(new ofxUILabel(name, OFX_UI_FONT_SMALL));
         gui->addWidgetDown(new ofxUILabel("OSC Address: " + oscAddress, OFX_UI_FONT_SMALL));
         gui->addSpacer(width, 1);
         
         gui->addSpacer(width, 1);
-        gui->addSlider("opacity"+name, 0., 1., &opacity);
+        gui->addSlider(i+"opacity", 0., 1., &opacity);
         
         gui->addSpacer(width, 1);
-        gui->addSlider("speed"+name, 0., 1., &speed);
+        gui->addSlider(i+"speed", 0., 1., &speed);
         
-        gui->addToggle("Enabled"+name, &enabled);
+        gui->addToggle(i+"Enabled", &enabled);
         
         //gui->
         
@@ -54,7 +56,10 @@ public:
         
     }
     
-    void setupScene(int width, int height) {
+    void setupScene(int width, int height, int i) {
+        index = i;
+        name = "Scene" + ofToString(i);
+        
         fbo.allocate(width, height);
         setup();
     }

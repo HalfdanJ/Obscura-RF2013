@@ -165,8 +165,7 @@ void testApp::setup() {
     scenes.push_back(&triangles);
     
     for(int i=0; i<scenes.size(); i++) {
-        scenes[i]->setupScene(OUTWIDTH, OUTHEIGHT);
-        scenes[i]->index = i;
+        scenes[i]->setupScene(OUTWIDTH, OUTHEIGHT, i);
     }
     
     
