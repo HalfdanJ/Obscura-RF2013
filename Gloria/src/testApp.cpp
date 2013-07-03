@@ -161,7 +161,6 @@ void testApp::setup() {
     
     triangles.mapping = &mapping;
     triangles.syphon = &syphonIn;
-    triangles.opacity = 100;
     scenes.push_back(&triangles);
     
     for(int i=0; i<scenes.size(); i++) {
