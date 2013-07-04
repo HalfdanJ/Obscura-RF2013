@@ -13,7 +13,7 @@
 #include "mapping.h"
 
 
-class TriMasker : public ContentScene {
+class TriBlobs : public ContentScene {
     
 public:
     
