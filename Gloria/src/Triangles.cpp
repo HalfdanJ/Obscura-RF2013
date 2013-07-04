@@ -61,6 +61,18 @@ void Triangles::setGui(ofxUICanvas *gui, float width){
     ContentScene::setGui(gui,width);
     
     gui->addToggle("SideScreens", &sideScreens);
+    gui->addSlider("SyphonOpacity", 0,1, &syphonOpacity);
+    gui->addSlider("DivideCount", 0,5, &divideCount);
+    gui->addSlider("DivideRadius", 0,2400, &divideRadius);
+    gui->addToggle("DivideInvert", &divideInvert);
+    gui->addSlider("TransitionTime", 0,10, &transitionTime);
+
+    
+    gui->addSlider("Light", 0,1, &light);
+    gui->addSlider("LightSpeed", 0,1, &lightSpeed);
+
+    
+
 
     
     
@@ -75,7 +87,6 @@ void Triangles::parseOscMessage(ofxOscMessage *m){
 	//cout<<adrSplit[1]<<"   "<<rest<<endl;
     
 	if(adrSplit[1] == "scene"+ofToString(index) || "/"+adrSplit[1] == oscAddress) {
-        
 	    if( rest == "/SideScreens/x" ) {
             sideScreens = m->getArgAsFloat(0);
 	    }
@@ -86,74 +97,76 @@ void Triangles::parseOscMessage(ofxOscMessage *m){
     
 }
 
-void Triangles::divide(SubTriangle * triangle){
+void Triangles::divide(SubTriangle * triangle, int levels){
     int size = triangle->subTriangles.size();
-    if(size > 0){
-        for(int i=0;i<size;i++){
-            divide(triangle->subTriangles[i]);
-        }
-    } else {
-        SubTriangle * subTriangle = triangle;
-        
-        ofVec2f center = subTriangle->center();
-        ofVec2f dir = center - subTriangle->corners[0]->pos;
-        
-        ofVec2f newP = dir * ofRandom(0.5,1.5) + subTriangle->corners[0]->pos;
-        
-        {
-            SubTriangle * newTriangle = new SubTriangle();
-            newTriangle->corners[0] = new Corner();
-            newTriangle->corners[1] = new Corner();
-            newTriangle->corners[2] = new Corner();
+    if(levels > 0){
+        if(size > 0){
+            for(int i=0;i<size;i++){
+                divide(triangle->subTriangles[i], levels-1);
+            }
+        } else {
+            SubTriangle * subTriangle = triangle;
             
-            newTriangle->corners[0]->pos = subTriangle->corners[1]->pos;
-            newTriangle->corners[1]->pos = subTriangle->corners[0]->pos;
-            newTriangle->corners[2]->pos = newP;
+            ofVec2f center = subTriangle->center();
+            ofVec2f dir = center - subTriangle->corners[0]->pos;
             
-            ofVec2f d = (newP - newTriangle->corners[0]->pos) + (newP - newTriangle->corners[1]->pos);
-            d.normalize();
-            newTriangle->normal = ofVec3f(d.x,d.y,1).normalized();
-            newTriangle->parentNormal = subTriangle->normal;
-            newTriangle->parentTriangle = subTriangle;
+            ofVec2f newP = dir * ofRandom(0.5,1.5) + subTriangle->corners[0]->pos;
             
-            subTriangle->subTriangles.push_back(newTriangle);
-        }
-        {
-            SubTriangle * newTriangle = new SubTriangle();
-            newTriangle->corners[0] = new Corner();
-            newTriangle->corners[1] = new Corner();
-            newTriangle->corners[2] = new Corner();
-            
-            newTriangle->corners[0]->pos = subTriangle->corners[2]->pos;
-            newTriangle->corners[1]->pos = subTriangle->corners[0]->pos;
-            newTriangle->corners[2]->pos = newP;
-            
-            ofVec2f d = (newP - newTriangle->corners[0]->pos) + (newP - newTriangle->corners[1]->pos);
-            d.normalize();
-            newTriangle->normal = ofVec3f(d.x,d.y,1).normalized();
-            newTriangle->parentNormal = subTriangle->normal;
-                       newTriangle->parentTriangle = subTriangle;
-            
-            subTriangle->subTriangles.push_back(newTriangle);
-        }
-        {
-            SubTriangle * newTriangle = new SubTriangle();
-            newTriangle->corners[0] = new Corner();
-            newTriangle->corners[1] = new Corner();
-            newTriangle->corners[2] = new Corner();
-            
-            newTriangle->corners[0]->pos = subTriangle->corners[2]->pos;
-            newTriangle->corners[1]->pos = subTriangle->corners[1]->pos;
-            newTriangle->corners[2]->pos = newP;
-            
-            ofVec2f d = (newP - newTriangle->corners[0]->pos) + (newP - newTriangle->corners[1]->pos);
-            newTriangle->normal = ofVec3f(d.x,d.y,100).normalized();
-            newTriangle->parentNormal = subTriangle->normal;
+            {
+                SubTriangle * newTriangle = new SubTriangle();
+                newTriangle->corners[0] = new Corner();
+                newTriangle->corners[1] = new Corner();
+                newTriangle->corners[2] = new Corner();
+                
+                newTriangle->corners[0]->pos = subTriangle->corners[1]->pos;
+                newTriangle->corners[1]->pos = subTriangle->corners[0]->pos;
+                newTriangle->corners[2]->pos = newP;
+                
+                ofVec2f d = (newP - newTriangle->corners[0]->pos) + (newP - newTriangle->corners[1]->pos);
+                d.normalize();
+                newTriangle->normal = ofVec3f(d.x,d.y,1).normalized();
+                newTriangle->parentNormal = subTriangle->normal;
                 newTriangle->parentTriangle = subTriangle;
+                
+                subTriangle->subTriangles.push_back(newTriangle);
+            }
+            {
+                SubTriangle * newTriangle = new SubTriangle();
+                newTriangle->corners[0] = new Corner();
+                newTriangle->corners[1] = new Corner();
+                newTriangle->corners[2] = new Corner();
+                
+                newTriangle->corners[0]->pos = subTriangle->corners[2]->pos;
+                newTriangle->corners[1]->pos = subTriangle->corners[0]->pos;
+                newTriangle->corners[2]->pos = newP;
+                
+                ofVec2f d = (newP - newTriangle->corners[0]->pos) + (newP - newTriangle->corners[1]->pos);
+                d.normalize();
+                newTriangle->normal = ofVec3f(d.x,d.y,1).normalized();
+                newTriangle->parentNormal = subTriangle->normal;
+                newTriangle->parentTriangle = subTriangle;
+                
+                subTriangle->subTriangles.push_back(newTriangle);
+            }
+            {
+                SubTriangle * newTriangle = new SubTriangle();
+                newTriangle->corners[0] = new Corner();
+                newTriangle->corners[1] = new Corner();
+                newTriangle->corners[2] = new Corner();
+                
+                newTriangle->corners[0]->pos = subTriangle->corners[2]->pos;
+                newTriangle->corners[1]->pos = subTriangle->corners[1]->pos;
+                newTriangle->corners[2]->pos = newP;
+                
+                ofVec2f d = (newP - newTriangle->corners[0]->pos) + (newP - newTriangle->corners[1]->pos);
+                newTriangle->normal = ofVec3f(d.x,d.y,100).normalized();
+                newTriangle->parentNormal = subTriangle->normal;
+                newTriangle->parentTriangle = subTriangle;
+                
+                subTriangle->subTriangles.push_back(newTriangle);
+            }
             
-            subTriangle->subTriangles.push_back(newTriangle);
         }
-        
     }
     
 }
@@ -162,13 +175,13 @@ void Triangles::collapse(SubTriangle * triangle){
     int subsubtriangles = -1;
     for(int i=0;i<triangle->subTriangles.size();i++){
         if(triangle->subTriangles[i]->subTriangles.size()){
+            collapse(triangle->subTriangles[i]);
             subsubtriangles = i;
-            break;
+      //      break;
         }
     }
     
     if(subsubtriangles != -1){
-        collapse(triangle->subTriangles[subsubtriangles]);
     } else {
         float highestAge = 0;
         for(int i=0;i<triangle->subTriangles.size();i++){
@@ -176,7 +189,7 @@ void Triangles::collapse(SubTriangle * triangle){
                 triangle->subTriangles[i]->age = transitionTime;
             }
             if(triangle->subTriangles[i]->age > 0){
-                triangle->subTriangles[i]->age -= 2 * 1.0/ofGetFrameRate();
+                triangle->subTriangles[i]->age -= triangle->ageDifference* 2 * 1.0/ofGetFrameRate();
             }
             
             if(highestAge < triangle->subTriangles[i]->age){
@@ -219,10 +232,10 @@ float ease(float t, float b, float c, float d) {
 	return -c/2 * (t*(t-2) - 1) + b;
 };
 
-void Triangles::drawTriangle(SubTriangle * triangle){
+void Triangles::drawTriangle(SubTriangle * triangle, float opacity){
     if(triangle->subTriangles.size() > 0){
         for(int j=0;j<triangle->subTriangles.size();j++){
-            drawTriangle(triangle->subTriangles[j]);
+            drawTriangle(triangle->subTriangles[j], opacity);
         }
     } else {
         
@@ -233,6 +246,7 @@ void Triangles::drawTriangle(SubTriangle * triangle){
         
         ofVec3f ambient = ofVec3f(10);
         
+        
         float aaa = MIN(1,MAX(0,(transitionTime-triangle->age)/transitionTime));
     /*    if(aaa > 0)
             cout<<aaa<<endl;*/
@@ -242,8 +256,8 @@ void Triangles::drawTriangle(SubTriangle * triangle){
         
         ofVec2f center = (1-aaa)*triangle->center() + aaa* triangle->parentTriangle->center();
 
-        
-        ofVec3f lightPos = ofVec3f(3196+1500*sin(ofGetElapsedTimeMillis()/2000.),200,-3000);
+        _lightPhase += lightSpeed * .001/ofGetFrameRate();
+        ofVec3f lightPos = ofVec3f(3196+1500*sin(_lightPhase),200,-3000);
         ofVec3f trianglePos = ofVec3f(triangle->center().x, triangle->center().y, 0);
         ofVec3f lightDir = ( trianglePos- lightPos);
 
@@ -265,9 +279,12 @@ void Triangles::drawTriangle(SubTriangle * triangle){
         float dist = lightDir.length();
         float intensity = 100000000* 1.0/(4*PI*dist*dist);
         
+        angle *= light;
+        
         ofVec3f color = intensity*ofVec3f(255)*fabs(90-angle)/90.0;
         
-        ofSetColor(MAX(ambient.x, color.x), MAX(ambient.y, color.y), MAX(ambient.z, color.z));
+        
+        ofSetColor(MAX(ambient.x, color.x), MAX(ambient.y, color.y), MAX(ambient.z, color.z), 255*opacity);
         
         /*   } else {
          ofSetColor(ambient.x,ambient.y,ambient.z);
@@ -346,27 +363,19 @@ void Triangles::draw(){
     
     
     
-     syphon->bind();
-    
-    ofSetLineWidth(1);
-    
     for(int i=0;i<mapping->triangles.size();i++){
-        //if(subTriangles[mapping->triangles[i]]->numTriangles() > 1){
-            drawTriangle(subTriangles[mapping->triangles[i]]);
-        //}
+        drawTriangle(subTriangles[mapping->triangles[i]],1);
     }
     
-    
-     syphon->unbind();
-    
-    
-    ofSetColor(255, 255, 255, 10);
-    ofCircle(center.x, center.y, divideRadius);
-    
+    syphon->bind();
+    for(int i=0;i<mapping->triangles.size();i++){
+        drawTriangle(subTriangles[mapping->triangles[i]],syphonOpacity);
+    }
+    syphon->unbind();   
 }
 
 void Triangles::update(){
-    transitionTime = 1.5;
+    //transitionTime = 1.5;
 
     
     for(int i=0;i<mapping->triangles.size();i++){
@@ -425,20 +434,20 @@ void Triangles::update(){
     center.y = 1200;
     //divideRadius = 700*(cos(PI+ofGetElapsedTimeMillis()/2000.)+1);
     if(speed == 1){
-        divideRadius = 1200*(cos(PI+ofGetElapsedTimeMillis()/3500./**(speed)*/)+0.9);
+//        divideRadius = 1200*(cos(PI+ofGetElapsedTimeMillis()/3500./**(speed)*/)+0.9);
     } else {
-        divideRadius = 2400*speed;
+  //      divideRadius = 2400*speed;
     }
 
     
     for(int i=0;i<mapping->triangles.size();i++){
         SubTriangle * triangle = subTriangles[mapping->triangles[i]];
         
-        if(triangle->center().distance(center) < divideRadius){
+        if(triangle->getLevels() < divideCount && ((triangle->center().distance(center) < divideRadius && !divideInvert) || (triangle->center().distance(center) > divideRadius && divideInvert))){
             float a = (divideRadius - triangle->center().distance(center)) / divideRadius;
-            if(triangle->numTriangles() < 12 && triangle->getLowestAge() > transitionTime && speed){
+            if(triangle->getLowestAge() > transitionTime){
                // cout<<"DIVIDE"<<endl;
-                divide(triangle);
+                divide(triangle, divideCount);
             }
         } else {
             if(triangle->numTriangles() > 1){

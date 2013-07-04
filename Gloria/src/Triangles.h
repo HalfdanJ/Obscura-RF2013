@@ -26,7 +26,7 @@ public:
     float ageDifference;
     
     SubTriangle(){
-        ageDifference = ofRandom(0.9,1.0);
+        ageDifference = ofRandom(0.5,1.0);
         age = 0;
     }
     
@@ -55,6 +55,16 @@ public:
         return _age;
     }
     
+    int getLevels(){
+        int ret = 1;
+        for(int i=0;i<subTriangles.size();i++){
+            if(ret < 1+subTriangles[i]->getLevels()){
+                ret = 1+subTriangles[i]->getLevels();
+            }
+        }
+        return ret;
+    }
+    
 };
 
 class Triangles : public ContentScene {
@@ -74,24 +84,37 @@ public:
     
     map<InputTriangle*, SubTriangle* > subTriangles;
     
-    void divide(SubTriangle * triangle);
+    void divide(SubTriangle * triangle, int levels);
     
     void collapse(SubTriangle * triangle);
     
-    void drawTriangle(SubTriangle * triangle);
+    void drawTriangle(SubTriangle * triangle, float opacity);
     
     ofVec2f center;
-    float divideRadius;
     
     
     bool sideScreens;
     float sideScreensSpeed;
     float sideScreensPct;
+    
+    float syphonOpacity;
 
 
     float transitionTime;
+    float divideCount;
+    float divideRadius;
+    bool divideInvert;
+    
+    float light;
+    float lightSpeed;
+    
     
     void setGui(ofxUICanvas *gui, float width);
     void parseOscMessage(ofxOscMessage *m);
+    
+    
+private:
+    
+    float _lightPhase;
 };
 
