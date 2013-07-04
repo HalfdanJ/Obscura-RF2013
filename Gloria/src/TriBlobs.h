@@ -29,6 +29,8 @@ public:
     
     float smoothness;
     float spikeyness;
+    
+    bool animate;
     //float fillgradient; - maybe new scene - mask scene
     
 };

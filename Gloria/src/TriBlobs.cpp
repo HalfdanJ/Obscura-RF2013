@@ -43,19 +43,13 @@ void TriBlobs::parseOscMessage(ofxOscMessage *m){
 	string rest = ofSplitString(m->getAddress(), "/"+adrSplit[1])[1];
     
 	if(adrSplit[1] == "scene"+ofToString(index) || "/"+adrSplit[1] == oscAddress) {
+    
         
-	   /* if( rest == "/crazyspeed/x" ) {
-            crazySpeed = m->getArgAsInt32(0);
-            
-	    } else if( rest == "/reverse/x" ) {
-            reverse = m->getArgAsInt32(0);
-            
-	    } else if( rest == "/scatter/x" ) {
-            xScatter = m->getArgAsFloat(0);
-            
-	    } else if( rest == "/scatter/y" ) {
-            yScatter = m->getArgAsFloat(0);
-	    }*/
+        if(rest == "/smoothness/x" ) {
+            smoothness = m->getArgAsFloat(0);
+	    } else if(rest == "/smoothness/x" ) {
+            smoothness = m->getArgAsFloat(0);
+	    }
         
     }
 }
@@ -76,6 +70,9 @@ void TriBlobs::setGui(ofxUICanvas *gui, float width){
     gui->addSlider(i+"speed", minSpeed, maxSpeed, &speed);
     
     gui->addSlider(i+"smoothness", 0, 30, &smoothness);
+    
+    gui->addToggle(i+"animate", &animate);
+    
     /*gui->addSlider(i+"Y Speed", minSpeed, maxSpeed, &ySpeed);
     
     

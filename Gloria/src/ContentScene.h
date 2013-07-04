@@ -70,17 +70,12 @@ public:
 	if(adrSplit[1] == "scene"+ofToString(index) || "/"+adrSplit[1] == oscAddress) {
 
 	    if( rest == "/opacity/x" ) {
-		opacity = m->getArgAsFloat(0);
-	    }
-
-	    if(rest == "/enable/x" ) {
-		enabled = m->getArgAsInt32(0);
-	    }
-
-	    if(rest == "/speed/x" ) {
-		speed =m->getArgAsFloat(0);
-	    }
-
+            opacity = m->getArgAsFloat(0);
+	    } else if(rest == "/enable/x" ) {
+            enabled = m->getArgAsInt32(0);
+	    } else if(rest == "/speed/x" ) {
+            speed =m->getArgAsFloat(0);
+	    } 
 
         }
         

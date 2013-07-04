@@ -159,8 +159,7 @@ void testApp::setup() {
     //lampWalker.mapping = &mapping;
     //scenes.push_back(&lampWalker);
     
-    quickTrail.mapping = &mapping;
-    scenes.push_back(&quickTrail);
+
     
     triangles.mapping = &mapping;
     triangles.syphon = &syphonIn;
@@ -177,6 +176,9 @@ void testApp::setup() {
     
     //hardNoise.mapping = &mapping;
     //scenes.push_back(&hardNoise);
+    
+    quickTrail.mapping = &mapping;
+    scenes.push_back(&quickTrail);
     
     for(int i=0; i<scenes.size(); i++) {
         scenes[i]->setupScene(OUTWIDTH, OUTHEIGHT, i);

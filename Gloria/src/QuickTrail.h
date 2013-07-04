@@ -19,7 +19,6 @@ struct Walker {
     Corner * corner;
 };
 
-
 class QuickTrail : public ContentScene {
 
 public:
@@ -31,5 +30,8 @@ public:
     
     Mapping * mapping;
     vector<Walker> walkers;
+    
+    int numtrails = 3;
+    int length;
     
 };
