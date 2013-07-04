@@ -3,7 +3,7 @@
 
 void testApp::setup() {
     
-    oscSender.setup("HalfdanJ.local", 6745);
+    //oscSender.setup("HalfdanJ.local", 6745);
     oscReceiver.setup(OSCPORT);
     
     ofSetLogLevel(OF_LOG_NOTICE);
@@ -225,6 +225,8 @@ void testApp::update() {
 		// get the next message
 		ofxOscMessage m;
 		oscReceiver.getNextMessage(&m);
+
+	//cout<<m.getAddress()<<endl;
 
         for(int i=0; i<scenes.size();i++) {
             scenes[i]->parseOscMessage(&m);
