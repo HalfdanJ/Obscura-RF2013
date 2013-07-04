@@ -164,8 +164,8 @@ void testApp::setup() {
     
     // Set up the scenes, all scenes is a subclass of SceneContent, don't call draw, setup and update directly it is taken care of thorugh the scene.
     
-    lampWalker.mapping = &mapping;
-    scenes.push_back(&lampWalker);
+    //lampWalker.mapping = &mapping;
+    //scenes.push_back(&lampWalker);
     
     quickTrail.mapping = &mapping;
     scenes.push_back(&quickTrail);
@@ -177,14 +177,14 @@ void testApp::setup() {
     perlinWaves.mapping = &mapping;
     scenes.push_back(&perlinWaves);
 
-    tesselator.mapping = &mapping;
-    scenes.push_back(&tesselator);
+    //tesselator.mapping = &mapping;
+    //scenes.push_back(&tesselator);
     
     triBlobs.mapping = &mapping;
     scenes.push_back(&triBlobs);
     
-    hardNoise.mapping = &mapping;
-    scenes.push_back(&hardNoise);
+    //hardNoise.mapping = &mapping;
+    //scenes.push_back(&hardNoise);
     
     for(int i=0; i<scenes.size(); i++) {
         scenes[i]->setupScene(OUTWIDTH, OUTHEIGHT, i);
@@ -294,6 +294,18 @@ void testApp::draw() {
         ofSetColor(255,255,255,96);
         drawGrid();
     }
+
+    ofPopMatrix();
+    
+    ofPushMatrix();
+    ofTranslate(300, 320);
+    
+    if(directory.isValidServer(syphonIn.getApplicationName(), syphonIn.getServerName())){
+        
+        ofRect(-1, -1, 260* syphonIn.getWidth()/syphonIn.getHeight()+2, 260+2);
+        syphonIn.draw(0, 0, 260* syphonIn.getWidth()/syphonIn.getHeight(), 260);
+        ofDrawBitmapString("Syphon input - (Press space to shuffle)", 10,18);
+    }
     
     ofPopMatrix();
     
@@ -303,9 +315,7 @@ void testApp::draw() {
     ofDrawBitmapString("FPS: " + ofToString(ofGetFrameRate()), ofGetWidth()-200, 20);
     
     
-    if(directory.isValidServer(syphonIn.getApplicationName(), syphonIn.getServerName())){
-        syphonIn.draw(350, 300, 300* syphonIn.getWidth()/syphonIn.getHeight(), 300);
-    }
+
 }
 
 

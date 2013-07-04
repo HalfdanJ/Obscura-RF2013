@@ -119,11 +119,6 @@ void Triangles::parseOscMessage(ofxOscMessage *m){
             directTextureOpacity = m->getArgAsFloat(0);
 	    }
         
-              
-        
-
-        
-        
     }
     
 }
