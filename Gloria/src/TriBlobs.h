@@ -24,7 +24,11 @@ public:
     
     Mapping * mapping;
     
+    void parseOscMessage(ofxOscMessage * m);
+    void setGui(ofxUICanvas * gui, float width);
     
-    
+    float smoothness;
+    float spikeyness;
+    //float fillgradient; - maybe new scene - mask scene
     
 };

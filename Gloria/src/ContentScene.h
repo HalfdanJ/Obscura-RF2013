@@ -14,7 +14,7 @@ public:
     string oscAddress = "/default";
     
     float minSpeed = 0;
-    float maxSpeed = 100;
+    float maxSpeed = 1;
     
     // bool syphonDirect;
 

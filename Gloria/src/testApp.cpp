@@ -292,6 +292,8 @@ void testApp::draw() {
     
     if(directory.isValidServer(syphonIn.getApplicationName(), syphonIn.getServerName())){
         
+        ofSetColor(255);
+        ofSetLineWidth(1);
         ofRect(-1, -1, 260* syphonIn.getWidth()/syphonIn.getHeight()+2, 260+2);
         syphonIn.draw(0, 0, 260* syphonIn.getWidth()/syphonIn.getHeight(), 260);
         
