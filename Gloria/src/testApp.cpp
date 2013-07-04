@@ -180,8 +180,8 @@ void testApp::setup() {
     tesselator.mapping = &mapping;
     scenes.push_back(&tesselator);
     
-    triMasker.mapping = &mapping;
-    scenes.push_back(&triMasker);
+    triBlobs.mapping = &mapping;
+    scenes.push_back(&triBlobs);
 
     for(int i=0; i<scenes.size(); i++) {
         scenes[i]->setupScene(OUTWIDTH, OUTHEIGHT, i);

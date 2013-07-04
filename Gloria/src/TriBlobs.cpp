@@ -6,20 +6,20 @@
 //
 //
 
-#include "TriMasker.h"
+#include "TriBlobs.h"
 
-void TriMasker::setup(){
+void TriBlobs::setup(){
     
-    name = "Triangle Masker";
-    oscAddress = "/trimask";
-    
-}
-
-void TriMasker::update(){
+    name = "Triangle Blobs";
+    oscAddress = "/triblobs";
     
 }
 
-void TriMasker::draw(){;
+void TriBlobs::update(){
+    
+}
+
+void TriBlobs::draw(){;
     
     float speedV = ofMap(speed, 0, 1, -2, 2);
     
