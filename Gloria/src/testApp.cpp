@@ -24,13 +24,9 @@ void testApp::setup() {
      syphonIn.setServerName("Main View");*/
     syphonIn.setup();
     
-
-    
 	directory.setup();
     ofAddListener(directory.events.directoryUpdated,this,&testApp::directoryUpdated);
     dirIdx = -1;
-
-
     
     ofEnableSmoothing();
     ofEnableAlphaBlending();
@@ -44,7 +40,6 @@ void testApp::setup() {
     if(worldPointTags > 0){
         
         for(int i = 0; i < worldPointTags; i++){
-            
             int x = XML.getValue("PT:X", 0, i);
             int y = XML.getValue("PT:Y", 0, i);
             int z = XML.getValue("PT:Z", 0, i);
@@ -52,7 +47,6 @@ void testApp::setup() {
             WorldPoint * wp = new WorldPoint();
             wp->pos.set(ofVec3f(x,y,z));
             mapping.worldPoints.push_back(wp);
-            
         }
         
     }
@@ -156,8 +150,6 @@ void testApp::setup() {
         }
     }
     
-    
-    
     cout<<endl<<"Created: "<<mapping.triangles.size()<<" triangles with "<<mapping.corners.size()<<" unique corners"<<endl;
     
     // effects scenes
@@ -194,9 +186,7 @@ void testApp::setup() {
     gui->setDrawBack(true);
     gui->setScrollAreaToScreenHeight();
     gui->loadSettings("GUI/guiSettings.xml");
-    
 }
-
 
 void testApp::directoryUpdated(ofxSyphonServerDirectoryEventArgs &arg)
 {

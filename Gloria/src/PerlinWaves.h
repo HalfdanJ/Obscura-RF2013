@@ -22,5 +22,11 @@ public:
     void update();
 
     Mapping * mapping;
-
+    
+    void parseOscMessage(ofxOscMessage * m);
+    
+    float frequency;
+    float lineWidth;
+    // direction
+    
 };
