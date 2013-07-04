@@ -12,38 +12,73 @@ void PerlinWaves::setup(){
 
     name = "PerlinWaves";
     oscAddress = "/plw";
+    
+    minSpeed = 0;
+    maxSpeed = 20;
 
 }
 
 void PerlinWaves::update(){
+    
+
+    
+
+    
+    if(crazySpeed) {
+        _ySpeed = ySpeed*4;
+        _xSpeed = xSpeed*4;
+    } else {
+        _ySpeed = ySpeed;
+        _xSpeed = xSpeed;
+    }
+    
+    
+    if(reverse) {
+        _ySpeed = ySpeed *-1;
+        _xSpeed = xSpeed *-1;
+    }
 
 }
 
 void PerlinWaves::draw(){;
-
-    float speedV = ofMap(speed, 0, 1, -2, 40);
     
+    glEnable(GL_LINES);
      ofSetLineWidth(4);
      // waves going across red
+    
+    
+    //y[1] = 60*3 +ofNoise(t*freq.getValue())*yFactor.getValue();
+    //y[2] = 60*4 +ofSignedNoise(t*freq.getValue())*yFactor.getValue();
+    
+    float t = ofGetElapsedTimef();
+    //float val = ofNoise((mapping->triangles[i]->centroid.x/fbo.getWidth() - t)*speed*100)*255; // 255 is amplitude
+    
+
+    
+    //float x = abs(ofNoise(t*frequency)*fbo.getWidth());
+    //float y = ofNoise(t*frequency)*fbo.getHeight();
+    
      for(int i =0; i<mapping->triangles.size();i++) {
-        
+
+       /* float delta = x - mapping->triangles[i]->centroid.x;
+        //float opacity = ofMap(delta, 0, fbo.getWidth(), 0, 255);
          
-         //y[1] = 60*3+ofNoise(t*freq.getValue())*yFactor.getValue();
-         //y[2] = 60*4+ofSignedNoise(t*freq.getValue())*yFactor.getValue();
+         if(delta < fbo.getWidth()/5) {
+             ofSetColor( 255, 255, 255, 255);
+         } else {
+             ofSetColor( 255, 255, 255, delta/5);
+         }
+        */
+         
+         ofSetColor( 255, 255, 255, ofNoise(mapping->triangles[i]->centroid.y/yScatter - ofGetElapsedTimef() * _xSpeed) *255 );
+         mapping->triangles[i]->mesh.drawWireframe();
          
          
-         
-     ofSetColor( 255, 255, 255, ofNoise(mapping->triangles[i]->centroid.y/600 - ofGetElapsedTimef()/2)*255);
-     
+         ofSetColor( 255, 255, 255, ofNoise(mapping->triangles[i]->centroid.x/xScatter - ofGetElapsedTimef()*_ySpeed) *255 );
          
          mapping->triangles[i]->mesh.draw();
          
-         
-
-     ofSetColor( 255, 255, 255, ofNoise(mapping->triangles[i]->centroid.x/600 - ofGetElapsedTimef()/speed) *255 );
-     mapping->triangles[i]->mesh.drawWireframe();
      }
-
 }
 
 void PerlinWaves::parseOscMessage(ofxOscMessage *m){
@@ -54,36 +89,45 @@ void PerlinWaves::parseOscMessage(ofxOscMessage *m){
     
 	if(adrSplit[1] == "scene"+ofToString(index) || "/"+adrSplit[1] == oscAddress) {
         
-	    if( rest == "/frequency/x" ) {
-            frequency = m->getArgAsFloat(0);
-	    }/* else if( rest == "/frequency/x" ) {
-            frequency = m->getArgAsFloat(0);
-	    }*/
+	    if( rest == "/crazyspeed/x" ) {
+            crazySpeed = m->getArgAsInt32(0);
+            
+	    } else if( rest == "/reverse/x" ) {
+            reverse = m->getArgAsInt32(0);
+            
+	    } else if( rest == "/scatter/x" ) {
+            xScatter = m->getArgAsFloat(0);
+            
+	    } else if( rest == "/scatter/y" ) {
+            yScatter = m->getArgAsFloat(0);
+	    }
 
-        
-        
     }
 }
 
-void PerlinWaves::setGui(ofxUICanvas *gui, float width){
-    ContentScene::setGui(gui,width);
+void PerlinWaves::setGui(ofxUICanvas *gui, float width){    
+    string i = "["+ ofToString(index) + "] ";
     
-    gui->addSlider("Frequency", 0, 1, &frequency);
+    gui->addWidgetDown(new ofxUILabel(name, OFX_UI_FONT_SMALL));
+    gui->addWidgetDown(new ofxUILabel("OSC Address: " + oscAddress, OFX_UI_FONT_SMALL));
     
-    /*
-    gui->addSlider("SyphonOpacity", 0,1, &syphonOpacity);
-    gui->addSlider("DivideCount", 1,6, &divideCount);
-    gui->addSlider("DivideRadius", 0,2400, &divideRadius);
-    gui->addToggle("DivideInvert", &divideInvert);
-    gui->addSlider("TransitionTime", 0,10, &transitionTime);
+    gui->addSpacer(width, 1);
+    gui->addToggle(i+"Enabled", &enabled);
+    gui->addSlider(i+"opacity", 0., 1., &opacity);
+    
+    gui->addSpacer(width, 1);
+    
+    gui->addSlider(i+"X Speed", minSpeed, maxSpeed, &xSpeed);
+    gui->addSlider(i+"Y Speed", minSpeed, maxSpeed, &ySpeed);
     
     
-    gui->addSlider("Light", 0,1, &light);
-    gui->addSlider("LightSpeed", 0,1, &lightSpeed);
+    gui->addSlider(i+"X Scatter", 0, 6000, &xScatter);
+    gui->addSlider(i+"Y Scatter", 0, 6000, &yScatter);
     
-    gui->addSlider("Direct Opactiry", 0,1, &directTextureOpacity);
-    */
+    gui->addToggle(i+"Reverse", &reverse);
+    gui->addToggle(i+"Crazy speed", &crazySpeed);
     
+
     
     
 }

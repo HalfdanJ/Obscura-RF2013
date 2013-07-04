@@ -12,7 +12,10 @@ public:
     int index;
     string name;
     string oscAddress = "/default";
-
+    
+    float minSpeed = 0;
+    float maxSpeed = 100;
+    
     // bool syphonDirect;
 
     Mapping * mapping;
@@ -47,10 +50,10 @@ public:
         gui->addSlider(i+"opacity", 0., 1., &opacity);
         
         gui->addSpacer(width, 1);
-        gui->addSlider(i+"speed", 0., 1., &speed);
+        gui->addSlider(i+"speed", minSpeed, maxSpeed, &speed);
         
         gui->addToggle(i+"Enabled", &enabled);
-        gui->addToggle(i+"Solo", &solo);
+        //gui->addToggle(i+"Solo", &solo);
         
     }
     

@@ -11,11 +11,10 @@
 #include "ContentScene.h"
 #include "mapping.h"
 
-
 class PerlinWaves : public ContentScene {
 
 public:
-
+    
     void setup();
     void draw();
     void debugDraw();
@@ -27,9 +26,18 @@ public:
     void setGui(ofxUICanvas * gui, float width);
     
     float frequency;
-    float lineWidth;
+    //float lineWidth;
+    bool crazySpeed;
+    bool reverse;
     
     
-    // direction
+    float xScatter;
+    float yScatter;
+    
+    float xSpeed;
+    float ySpeed;
+    
+    float _xSpeed;
+    float _ySpeed;
     
 };
