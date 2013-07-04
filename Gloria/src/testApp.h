@@ -49,6 +49,11 @@ public:
 
     ofxSyphonServer syphonOut;
     ofxSyphonClient syphonIn;
+    
+    ofxSyphonServerDirectory directory;
+    void directoryUpdated(ofxSyphonServerDirectoryEventArgs &arg);
+    int dirIdx;
+
 
     ofCamera cam;
     ofColor bg;

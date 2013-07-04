@@ -6,7 +6,7 @@ void testApp::setup() {
     oscSender.setup("HalfdanJ.local", 6745);
     oscReceiver.setup(OSCPORT);
     
-    ofSetLogLevel(OF_LOG_ERROR);
+    ofSetLogLevel(OF_LOG_NOTICE);
     ofSetFrameRate(60);
         
     ofSetWindowTitle("Obscure Glorious Control");
@@ -15,9 +15,17 @@ void testApp::setup() {
     
     fboOut.allocate(OUTWIDTH, OUTHEIGHT);
     
-    syphonIn.setApplicationName("QLab");
-    syphonIn.setServerName("qlab");
+//    syphonIn.setApplicationName("QLab");
+ //   syphonIn.setServerName("qlab");
     syphonIn.setup();
+    
+
+    
+	directory.setup();
+    ofAddListener(directory.events.directoryUpdated,this,&testApp::directoryUpdated);
+    dirIdx = -1;
+
+
     
     ofEnableSmoothing();
     ofEnableAlphaBlending();
@@ -181,6 +189,16 @@ void testApp::setup() {
     
 }
 
+
+void testApp::directoryUpdated(ofxSyphonServerDirectoryEventArgs &arg)
+{
+    for( auto& server : arg.directory->getServerList() ){ //new c++ auto keyword
+        ofLogNotice("ofxSyphonServerDirectory Updated:: ")<<" Server Name: "<<server.serverName <<" | App Name: "<<server.appName;
+    }
+    dirIdx = 0;
+}
+
+
 //--------------------------------------------------------------
 void testApp::update() {
     
@@ -269,8 +287,15 @@ void testApp::draw() {
     
     ofPopMatrix();
     
+    
+    
     ofSetColor(255);
     ofDrawBitmapString("FPS: " + ofToString(ofGetFrameRate()), ofGetWidth()-200, 20);
+    
+    
+    if(directory.isValidServer(syphonIn.getApplicationName(), syphonIn.getServerName())){
+        syphonIn.draw(350, 300, 300* syphonIn.getWidth()/syphonIn.getHeight(), 300);
+    }
     
 }
 
@@ -353,7 +378,16 @@ void InputTriangle::debugDraw() {
 
 //--------------------------------------------------------------
 void testApp::keyPressed(int key){
+    dirIdx++;
+    if(dirIdx > directory.size() - 1)
+        dirIdx = 0;
     
+    if(directory.isValidIndex(dirIdx)){
+        syphonIn.setServerName(directory.getServerList()[dirIdx].serverName);
+        syphonIn.setApplicationName(directory.getServerList()[dirIdx].appName);
+    }
+    
+
 }
 
 //--------------------------------------------------------------
