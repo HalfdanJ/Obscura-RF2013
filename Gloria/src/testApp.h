@@ -18,6 +18,7 @@
 #include "GTess.h"
 #include "PerlinWaves.h"
 #include "TriBlobs.h"
+#include "HardNoise.h"
 
 #include "ofxUI.h"
 
@@ -81,6 +82,7 @@ public:
     GTess tesselator;
     PerlinWaves perlinWaves;
     TriBlobs triBlobs;
+    HardNoise hardNoise;
     
     vector<ContentScene*> scenes;
     

@@ -115,7 +115,7 @@ void Triangles::parseOscMessage(ofxOscMessage *m){
         if( rest == "/lightspeed/x" ) {
             lightSpeed = m->getArgAsFloat(0);
 	    }
-        if( rest == "/directopactiry/x" ) {
+        if( rest == "/directopacity/x" ) {
             directTextureOpacity = m->getArgAsFloat(0);
 	    }
         

@@ -49,6 +49,7 @@
 		04D09F231785893300627C4F /* ofxSyphonServerDirectory.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04D09F161785893300627C4F /* ofxSyphonServerDirectory.mm */; };
 		04D09F2A1785899C00627C4F /* Syphon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04D09F081785893300627C4F /* Syphon.framework */; };
 		04D09F2B178589A300627C4F /* Syphon.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 04D09F081785893300627C4F /* Syphon.framework */; };
+		04D09F2F17859C8D00627C4F /* HardNoise.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04D09F2E17859C8D00627C4F /* HardNoise.cpp */; };
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
 		DD7BE8AC1780D80900F04F23 /* LampWalker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DD7BE8AA1780D80900F04F23 /* LampWalker.cpp */; };
 		DD81641C17820BFB006B6A3E /* Triangles.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DD81641A17820BFB006B6A3E /* Triangles.cpp */; };
@@ -283,6 +284,8 @@
 		04D09F141785893300627C4F /* ofxSyphonServer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ofxSyphonServer.mm; sourceTree = "<group>"; };
 		04D09F151785893300627C4F /* ofxSyphonServerDirectory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxSyphonServerDirectory.h; sourceTree = "<group>"; };
 		04D09F161785893300627C4F /* ofxSyphonServerDirectory.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ofxSyphonServerDirectory.mm; sourceTree = "<group>"; };
+		04D09F2D17859C8000627C4F /* HardNoise.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HardNoise.h; sourceTree = "<group>"; };
+		04D09F2E17859C8D00627C4F /* HardNoise.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HardNoise.cpp; sourceTree = "<group>"; };
 		04F2DDE1174C253500EB5833 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		04F2E024174C253E00EB5833 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		04F2E026174C253E00EB5833 /* ofxUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxUI.h; sourceTree = "<group>"; };
@@ -533,6 +536,8 @@
 				04C6D22C17847D8900AC12B9 /* PerlinWaves.cpp */,
 				04C6D2321784A1E600AC12B9 /* TriBlobs.h */,
 				04C6D2331784A1F400AC12B9 /* TriBlobs.cpp */,
+				04D09F2D17859C8000627C4F /* HardNoise.h */,
+				04D09F2E17859C8D00627C4F /* HardNoise.cpp */,
 			);
 			name = Scenes;
 			sourceTree = "<group>";
@@ -1255,6 +1260,7 @@
 				04D09F211785893300627C4F /* ofxSyphonClient.mm in Sources */,
 				04D09F221785893300627C4F /* ofxSyphonServer.mm in Sources */,
 				04D09F231785893300627C4F /* ofxSyphonServerDirectory.mm in Sources */,
+				04D09F2F17859C8D00627C4F /* HardNoise.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

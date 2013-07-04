@@ -182,7 +182,10 @@ void testApp::setup() {
     
     triBlobs.mapping = &mapping;
     scenes.push_back(&triBlobs);
-
+    
+    hardNoise.mapping = &mapping;
+    scenes.push_back(&hardNoise);
+    
     for(int i=0; i<scenes.size(); i++) {
         scenes[i]->setupScene(OUTWIDTH, OUTHEIGHT, i);
     }
