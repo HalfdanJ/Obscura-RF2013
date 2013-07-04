@@ -24,9 +24,12 @@ public:
     Mapping * mapping;
     
     void parseOscMessage(ofxOscMessage * m);
+    void setGui(ofxUICanvas * gui, float width);
     
     float frequency;
     float lineWidth;
+    
+    
     // direction
     
 };

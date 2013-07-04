@@ -294,7 +294,9 @@ void testApp::draw() {
         
         ofRect(-1, -1, 260* syphonIn.getWidth()/syphonIn.getHeight()+2, 260+2);
         syphonIn.draw(0, 0, 260* syphonIn.getWidth()/syphonIn.getHeight(), 260);
+        
         ofDrawBitmapString("Syphon input - (Press space to shuffle)", 10,18);
+        ofDrawBitmapString(syphonIn.getApplicationName(), 10,34);
     }
     
     ofPopMatrix();

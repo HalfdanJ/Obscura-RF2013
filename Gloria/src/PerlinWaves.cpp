@@ -63,5 +63,27 @@ void PerlinWaves::parseOscMessage(ofxOscMessage *m){
         
         
     }
+}
+
+void PerlinWaves::setGui(ofxUICanvas *gui, float width){
+    ContentScene::setGui(gui,width);
+    
+    gui->addSlider("Frequency", 0, 1, &frequency);
+    
+    /*
+    gui->addSlider("SyphonOpacity", 0,1, &syphonOpacity);
+    gui->addSlider("DivideCount", 1,6, &divideCount);
+    gui->addSlider("DivideRadius", 0,2400, &divideRadius);
+    gui->addToggle("DivideInvert", &divideInvert);
+    gui->addSlider("TransitionTime", 0,10, &transitionTime);
+    
+    
+    gui->addSlider("Light", 0,1, &light);
+    gui->addSlider("LightSpeed", 0,1, &lightSpeed);
+    
+    gui->addSlider("Direct Opactiry", 0,1, &directTextureOpacity);
+    */
+    
+    
     
 }
