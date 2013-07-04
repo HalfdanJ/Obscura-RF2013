@@ -90,10 +90,38 @@ void Triangles::parseOscMessage(ofxOscMessage *m){
 	//cout<<adrSplit[1]<<"   "<<rest<<endl;
     
 	if(adrSplit[1] == "scene"+ofToString(index) || "/"+adrSplit[1] == oscAddress) {
-	    if( rest == "/SideScreens/x" ) {
+	    if( rest == "/sidescreens/x" ) {
             sideScreens = m->getArgAsFloat(0);
 	    }
+        if( rest == "/syphonopacity/x" ) {
+            syphonOpacity = m->getArgAsFloat(0);
+	    }
+        if( rest == "/dividecount/x" ) {
+            divideCount = m->getArgAsFloat(0) * 6;
+	    }
+        if( rest == "/divideradius/x" ) {
+            divideRadius = m->getArgAsFloat(0) * 2400;
+	    }
+        if( rest == "/divideinvert/x" ) {
+            divideInvert = m->getArgAsFloat(0);
+	    }
+        if( rest == "/transitiontime/x" ) {
+            transitionTime = m->getArgAsFloat(0);
+	    }
+        if( rest == "/light/x" ) {
+            light = m->getArgAsFloat(0);
+	    }
         
+        if( rest == "/lightspeed/x" ) {
+            lightSpeed = m->getArgAsFloat(0);
+	    }
+        if( rest == "/directopactiry/x" ) {
+            directTextureOpacity = m->getArgAsFloat(0);
+	    }
+        
+              
+        
+
         
         
     }
