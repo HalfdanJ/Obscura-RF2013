@@ -106,7 +106,7 @@ void Triangles::parseOscMessage(ofxOscMessage *m){
             divideInvert = m->getArgAsFloat(0);
 	    }
         if( rest == "/transitiontime/x" ) {
-            transitionTime = m->getArgAsFloat(0);
+            transitionTime = m->getArgAsFloat(0)*5;
 	    }
         if( rest == "/light/x" ) {
             light = m->getArgAsFloat(0);
