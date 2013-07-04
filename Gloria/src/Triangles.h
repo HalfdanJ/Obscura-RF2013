@@ -57,7 +57,7 @@ public:
     
     int getLevels(){
         int ret = 1;
-        for(int i=0;i<subTriangles.size();i++){
+        for(int i=subTriangles.size()-1;i>=0;i--){
             if(ret < 1+subTriangles[i]->getLevels()){
                 ret = 1+subTriangles[i]->getLevels();
             }
@@ -98,7 +98,7 @@ public:
     float sideScreensPct;
     
     float syphonOpacity;
-
+    float directTextureOpacity;
 
     float transitionTime;
     float divideCount;

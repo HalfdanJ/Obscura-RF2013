@@ -68,7 +68,6 @@ public:
     }
     
     ~InputTriangle(){
-        cout<<"Delete input triangle"<<endl;
         for(int i=0;i<3;i++){
             delete corners[i];
         }

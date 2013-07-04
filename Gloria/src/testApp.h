@@ -1,5 +1,10 @@
 #pragma once
 
+
+#define OUTWIDTH 5900
+#define OUTHEIGHT 1200
+
+
 #include "ofMain.h"
 
 #include "ofxSyphon.h"
@@ -20,8 +25,6 @@
 
 #define OSCPORT 9999
 
-#define OUTWIDTH 5900
-#define OUTHEIGHT 1200
 
 class testApp : public ofBaseApp {
 public:
