@@ -322,6 +322,8 @@ void Triangles::drawTriangle(SubTriangle * triangle){
         */
         
         
+        
+        
         /*glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
          ofSetColor(0, 0, 0, 50);
          glBegin(GL_TRIANGLES);
@@ -341,7 +343,11 @@ void Triangles::drawTriangle(SubTriangle * triangle){
 void Triangles::draw(){
     
     ofSetColor(255,255,255);
-  //  syphon->bind();
+    
+    
+    
+     syphon->bind();
+    
     ofSetLineWidth(1);
     
     for(int i=0;i<mapping->triangles.size();i++){
@@ -351,7 +357,7 @@ void Triangles::draw(){
     }
     
     
- //   syphon->unbind();
+     syphon->unbind();
     
     
     ofSetColor(255, 255, 255, 10);

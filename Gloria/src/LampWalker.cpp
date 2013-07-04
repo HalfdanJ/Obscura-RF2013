@@ -18,11 +18,11 @@ void LampWalker::setup(){
 void LampWalker::update(){
 
     if(!src){
-	src = mapping->corners[ofRandom(mapping->corners.size())];
+        src = mapping->corners[ofRandom(mapping->corners.size())];
     }
 
     if(!dst){
-	dst = src->joinedCorners[ofRandom(src->joinedCorners.size())];
+        dst = src->joinedCorners[ofRandom(src->joinedCorners.size())];
     }
 
 
@@ -37,7 +37,6 @@ void LampWalker::update(){
 	    dst = src->joinedCorners[i];
 	   // cout<<dst<<"  "<<src<<endl;
 	}
-
     }
 
 }

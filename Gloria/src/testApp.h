@@ -20,7 +20,7 @@
 
 #define OSCPORT 9999
 
-#define OUTWIDTH 6400
+#define OUTWIDTH 5900
 #define OUTHEIGHT 1200
 
 class testApp : public ofBaseApp {

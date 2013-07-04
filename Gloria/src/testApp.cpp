@@ -17,6 +17,11 @@ void testApp::setup() {
     
 //    syphonIn.setApplicationName("QLab");
  //   syphonIn.setServerName("qlab");
+    syphonIn.setApplicationName("Millumin");
+    syphonIn.setServerName("");
+    
+/*    syphonIn.setApplicationName("Mopdul8");
+     syphonIn.setServerName("Main View");*/
     syphonIn.setup();
     
 
@@ -296,7 +301,6 @@ void testApp::draw() {
     if(directory.isValidServer(syphonIn.getApplicationName(), syphonIn.getServerName())){
         syphonIn.draw(350, 300, 300* syphonIn.getWidth()/syphonIn.getHeight(), 300);
     }
-    
 }
 
 
