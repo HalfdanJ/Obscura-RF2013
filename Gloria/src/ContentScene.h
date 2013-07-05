@@ -70,15 +70,15 @@ public:
 	string rest = ofSplitString(m->getAddress(), "/"+adrSplit[1])[1];
 	//cout<<adrSplit[1]<<"   "<<rest<<endl;
         
-	if(adrSplit[1] == "scene"+ofToString(index) || "/"+adrSplit[1] == oscAddress) {
+        if(adrSplit[1] == "scene"+ofToString(index) || "/"+adrSplit[1] == oscAddress) {
 
-	    if( rest == "/opacity/x" ) {
-            opacity = m->getArgAsFloat(0);
-	    } else if(rest == "/enable/x" ) {
-            enabled = m->getArgAsInt32(0);
-	    } else if(rest == "/speed/x" ) {
-            speed =m->getArgAsFloat(0);
-	    } 
+            if( rest == "/opacity/x" ) {
+                opacity = m->getArgAsFloat(0);
+            } else if(rest == "/enable/x" ) {
+                enabled = m->getArgAsInt32(0);
+            } else if(rest == "/speed/x" ) {
+                speed =m->getArgAsFloat(0);
+            } 
 
         }
         
