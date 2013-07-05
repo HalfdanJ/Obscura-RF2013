@@ -74,6 +74,10 @@ void Triangles::setGui(ofxUICanvas *gui, float width){
     gui->addSlider("LightSpeed", 0,1, &lightSpeed);
     
     gui->addSlider("Direct Opactiry", 0,1, &directTextureOpacity);
+
+    gui->addSlider("ColorR", 0,1, &colorR);
+    gui->addSlider("ColorG", 0,1, &colorG);
+    gui->addSlider("ColorB", 0,1, &colorB);
     
     
     
@@ -117,6 +121,15 @@ void Triangles::parseOscMessage(ofxOscMessage *m){
 	    }
         if( rest == "/directopacity/x" ) {
             directTextureOpacity = m->getArgAsFloat(0);
+	    }
+        if( rest == "/triangleColorR/x" ) {
+            colorR = m->getArgAsFloat(0);
+	    }
+        if( rest == "/triangleColorG/x" ) {
+            colorG = m->getArgAsFloat(0);
+	    }
+        if( rest == "/triangleColorB/x" ) {
+            colorB = m->getArgAsFloat(0);
 	    }
         
     }
@@ -312,7 +325,7 @@ void Triangles::drawTriangle(SubTriangle * triangle, float opacity){
         
         angle *= light;
         
-        ofVec3f color = intensity*ofVec3f(255)*fabs(90-angle)/90.0;
+        ofVec3f color = intensity*ofVec3f(colorR*255,colorG*255,colorB*255)*fabs(90-angle)/90.0;
         
         
         ofSetColor(MAX(ambient.x, color.x), MAX(ambient.y, color.y), MAX(ambient.z, color.z), 255*opacity);

@@ -108,6 +108,8 @@ public:
     float light;
     float lightSpeed;
     
+    float colorR, colorG, colorB;
+    
     
     void setGui(ofxUICanvas *gui, float width);
     void parseOscMessage(ofxOscMessage *m);
