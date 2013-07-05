@@ -56,18 +56,10 @@ void TriBlobs::parseOscMessage(ofxOscMessage *m){
 
 void TriBlobs::setGui(ofxUICanvas *gui, float width){
     
+    ContentScene::setGui(gui, width);
+    
     string i = "["+ ofToString(index) + "] ";
     
-    gui->addWidgetDown(new ofxUILabel(name, OFX_UI_FONT_SMALL));
-    gui->addWidgetDown(new ofxUILabel("OSC Address: " + oscAddress, OFX_UI_FONT_SMALL));
-    
-    gui->addSpacer(width, 1);
-    gui->addToggle(i+"Enabled", &enabled);
-    gui->addSlider(i+"opacity", 0., 1., &opacity);
-    
-    gui->addSpacer(width, 1);
-    
-    gui->addSlider(i+"speed", minSpeed, maxSpeed, &speed);
     
     gui->addSlider(i+"smoothness", 0, 30, &smoothness);
     
