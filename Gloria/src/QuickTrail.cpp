@@ -50,7 +50,10 @@ void QuickTrail::update(){
 }
 
 void QuickTrail::draw(){;
-    
+
+
+
+
     ofSetLineWidth(10);
 
     float interval = maxSpeed - speed;
@@ -60,8 +63,8 @@ void QuickTrail::draw(){;
 	for(int i=0;i<walkers.size() && i <numtrails;i++) {
 
 	for(int p=1; p<walkers[i].corners.size() && p<length; p++) {
-            
-	    ofSetColor(255,255,255,p/length*255);
+
+	    ofSetColor(255,255,255,(p/length*255));
 
 	    if(p > length-1) {
 
@@ -71,7 +74,7 @@ void QuickTrail::draw(){;
 
 		ofVec2f interpolate = srcPt + (dstPt - srcPt) * pct;
 
-		ofLine(dstPt, interpolate);
+		ofLine(interpolate, dstPt);
 		ofCircle(interpolate.x, interpolate.y, 10);
 		//ofVertex(walkers[i].points[p].x,w alkers[i].points[p].y);
 
