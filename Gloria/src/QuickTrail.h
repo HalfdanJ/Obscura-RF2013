@@ -12,14 +12,12 @@
 #include "ContentScene.h"
 #include "mapping.h"
 
-
 struct Walker {
     ofPolyline line;
     //vector<ofVec2f> points;
     vector<Corner*> corners;
 
     Corner * dst;
-
 };
 
 class QuickTrail : public ContentScene {
@@ -32,13 +30,14 @@ public:
     void update();
     
     
-    
     Mapping * mapping;
     vector<Walker> walkers;
     
     float numtrails = 3;
     float length;
     int long lastadded;
+    
+    float circleRadius;
     
     bool random;
     bool clear;

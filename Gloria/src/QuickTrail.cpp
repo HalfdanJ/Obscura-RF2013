@@ -78,32 +78,32 @@ void QuickTrail::draw(){;
 
     float pct = ofClamp((ofGetElapsedTimeMillis() - lastadded) / (interval * 1.), 0,1);
 
-	for(int i=0;i<walkers.size() && i <numtrails;i++) {
+        for(int i=0;i<walkers.size() && i <numtrails;i++) {
 
         
-	for(int p=1; p<walkers[i].corners.size() && p<length; p++) {
-        
-	    ofSetColor(255,255,255,(p/length*255));
+            for(int p=1; p<walkers[i].corners.size() && p<length; p++) {
+                
+                ofSetColor(255,255,255,(p/length*255));
 
-	    if(p > length-1) {
+                if(p > length-1) {
 
 
-		ofVec2f srcPt =walkers[i].corners[p-1]->pos;
-		ofVec2f dstPt =walkers[i].corners[p]->pos;
+                    ofVec2f srcPt =walkers[i].corners[p-1]->pos;
+                    ofVec2f dstPt =walkers[i].corners[p]->pos;
 
-		ofVec2f interpolate = srcPt + (dstPt - srcPt) * pct;
+                    ofVec2f interpolate = srcPt + (dstPt - srcPt) * pct;
 
-		ofLine(interpolate, dstPt);
-		ofCircle(interpolate.x, interpolate.y, 40);
-		//ofVertex(walkers[i].points[p].x,w alkers[i].points[p].y);
+                    ofLine(interpolate, dstPt);
+                    ofCircle(interpolate.x, interpolate.y, circleRadius);
+                    //ofVertex(walkers[i].points[p].x,w alkers[i].points[p].y);
 
-	    } else {
+                } else {
 
-		ofCircle(walkers[i].corners[p]->pos.x, walkers[i].corners[p]->pos.y, 10+(p/length*30));
+                    ofCircle(walkers[i].corners[p]->pos.x, walkers[i].corners[p]->pos.y, (p/length*circleRadius));
 
-		ofLine(walkers[i].corners[p]->pos.x, walkers[i].corners[p]->pos.y, walkers[i].corners[p-1]->pos.x, walkers[i].corners[p-1]->pos.y);
+                    ofLine(walkers[i].corners[p]->pos.x, walkers[i].corners[p]->pos.y, walkers[i].corners[p-1]->pos.x, walkers[i].corners[p-1]->pos.y);
 
-	    }
+            }
         }
     }
 }
@@ -125,6 +125,8 @@ void QuickTrail::parseOscMessage(ofxOscMessage *m){
             random = m->getArgAsInt32(0);
         } else if(rest == "/clear/x") {
             clear = m->getArgAsInt32(0);
+        } else if(rest == "/circleRadius/x") {
+            clear = m->getArgAsInt32(0);
         }
         
     }
@@ -142,6 +144,8 @@ void QuickTrail::setGui(ofxUICanvas *gui, float width){
     gui->addToggle(i+"Random", &random);
     
     gui->addButton(i+"Clear", &clear);
+    
+    gui->addSlider(i+"Circle Radius", 0, 200, &circleRadius);
     
     /*gui->addSlider(i+"Y Speed", minSpeed, maxSpeed, &ySpeed);
      
