@@ -46,10 +46,8 @@ void TriBlobs::parseOscMessage(ofxOscMessage *m){
     
         
         if(rest == "/smoothness/x" ) {
-            smoothness = m->getArgAsFloat(0);
-	    } else if(rest == "/smoothness/x" ) {
-            smoothness = m->getArgAsFloat(0);
-	    }
+            smoothness = m->getArgAsInt32(0);
+	    } 
         
     }
 }

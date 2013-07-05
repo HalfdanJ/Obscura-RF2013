@@ -53,3 +53,19 @@ void QuickTrail::draw(){;
         }
     }
 }
+
+/*void TriBlobs::parseOscMessage(ofxOscMessage *m){
+    ContentScene::parseOscMessage(m);
+    
+ 	vector<string> adrSplit = ofSplitString(m->getAddress(), "/");
+	string rest = ofSplitString(m->getAddress(), "/"+adrSplit[1])[1];
+    
+	if(adrSplit[1] == "scene"+ofToString(index) || "/"+adrSplit[1] == oscAddress) {
+        
+        
+        if(rest == "/smoothness/x" ) {
+            smoothness = m->getArgAsInt32(0);
+	    }
+        
+    }
+}*/
