@@ -31,12 +31,18 @@ public:
     void debugDraw();
     void update();
     
+    
+    
     Mapping * mapping;
     vector<Walker> walkers;
     
     float numtrails = 3;
     float length;
     int long lastadded;
+    
+    bool random;
+    bool clear;
+    
     
     void parseOscMessage(ofxOscMessage * m);
     void setGui(ofxUICanvas * gui, float width);
