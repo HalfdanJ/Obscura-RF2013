@@ -14,16 +14,16 @@ void QuickTrail::setup(){
     oscAddress = "/quicktrail";
     
     minSpeed = 0;
-    maxSpeed = 4000;
+    maxSpeed = 300;
 
-    walkers.resize(8);
+    walkers.resize(4);
 
     lastadded = ofGetElapsedTimeMillis();
 }
 
 void QuickTrail::update(){
 
-    float interval = maxSpeed - speed;
+    float interval = speed;
     
     
 
@@ -136,8 +136,8 @@ void QuickTrail::setGui(ofxUICanvas *gui, float width){
     
     string i = "["+ ofToString(index) + "] ";
      
-    gui->addSlider(i+"length", 0, 60, &length);
-    gui->addSlider(i+"trails", 0, 8, &numtrails);
+    gui->addSlider(i+"length", 0, 20, &length);
+    gui->addSlider(i+"trails", 0, 4, &numtrails);
     
     gui->addToggle(i+"Random", &random);
     
