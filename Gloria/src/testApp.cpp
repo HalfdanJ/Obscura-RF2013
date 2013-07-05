@@ -11,7 +11,7 @@ void testApp::setup() {
         
     ofSetWindowTitle("Obscure Glorious Control");
     
-    syphonOut.setName("Gloria Generative");
+    syphonOut.setName("Gloria Main");
     
     fboOut.allocate(OUTWIDTH, OUTHEIGHT);
     
