@@ -34,4 +34,14 @@ public:
     int numtrails = 3;
     int length;
     
+    Corner * dst;
+    Corner * src;
+    Corner * lastSrc;
+    
+    float pct;
+    
+    void parseOscMessage(ofxOscMessage * m);
+    void setGui(ofxUICanvas * gui, float width);
+    
+    
 };

@@ -30,7 +30,7 @@ void QuickTrail::draw(){;
             
             walkers[i].points.push_back(walkers[i].corner->pos);
         
-        if(walkers[i].points.size() > 40) {
+        if(walkers[i].points.size() > length) {
             walkers[i].points.erase(walkers[i].points.begin());
         }
         
@@ -52,4 +52,44 @@ void QuickTrail::draw(){;
      
         }
     }
+}
+
+
+void QuickTrail::parseOscMessage(ofxOscMessage *m){
+    ContentScene::parseOscMessage(m);
+    
+ 	vector<string> adrSplit = ofSplitString(m->getAddress(), "/");
+	string rest = ofSplitString(m->getAddress(), "/"+adrSplit[1])[1];
+    
+	if(adrSplit[1] == "scene"+ofToString(index) || "/"+adrSplit[1] == oscAddress) {
+        
+        
+        if(rest == "/length/x" ) {
+            length = m->getArgAsInt32(0);
+	    }
+        
+    }
+}
+
+void QuickTrail::setGui(ofxUICanvas *gui, float width){
+    
+    ContentScene::setGui(gui, width);
+    
+    string i = "["+ ofToString(index) + "] ";
+     
+    //gui->addSlider(i+"length", 0, 8, &length);
+    //gui->addSlider(i+"length", 0, 8, &num);
+    
+    /*gui->addSlider(i+"Y Speed", minSpeed, maxSpeed, &ySpeed);
+     
+     
+     gui->addSlider(i+"X Scatter", 0, 6000, &xScatter);
+     gui->addSlider(i+"Y Scatter", 0, 6000, &yScatter);
+     
+     gui->addToggle(i+"Reverse", &reverse);
+     gui->addToggle(i+"Crazy speed", &crazySpeed);
+     */
+    
+    
+    
 }

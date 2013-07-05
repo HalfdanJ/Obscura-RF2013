@@ -11,8 +11,7 @@ void testApp::setup() {
         
     ofSetWindowTitle("Obscure Glorious Control");
     
-    syphonOut.setName("Gloria Generative");
-    
+    syphonOut.setName("Gloria Main");
     fboOut.allocate(OUTWIDTH, OUTHEIGHT);
     
 //    syphonIn.setApplicationName("QLab");
@@ -156,10 +155,8 @@ void testApp::setup() {
     
     // Set up the scenes, all scenes is a subclass of SceneContent, don't call draw, setup and update directly it is taken care of thorugh the scene.
     
-    //lampWalker.mapping = &mapping;
-    //scenes.push_back(&lampWalker);
-    
-
+    lampWalker.mapping = &mapping;
+    scenes.push_back(&lampWalker);
     
     triangles.mapping = &mapping;
     triangles.syphon = &syphonIn;
@@ -248,15 +245,6 @@ void testApp::draw() {
     fboOut.begin();
     
     ofClear(0, 0);
-    
-    // TODO: Layer ordering
-    
-    for(int i=0; i<scenes.size(); i++) {
-        ofSetColor(255,255,255,scenes[i]->opacity*255);
-        if(scenes[i]->solo) {
-            
-        }
-    }
     
     for(int i=0; i<scenes.size(); i++) {
         ofSetColor(255,255,255,scenes[i]->opacity*255);

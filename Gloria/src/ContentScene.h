@@ -4,6 +4,7 @@
 #include "ofxOsc.h"
 #include "ofxUI.h"
 #include "mapping.h"
+#include "ofxSyphon.h"
 
 class ContentScene {
     
@@ -22,9 +23,11 @@ public:
 
     ofFbo fbo;
     bool enabled;
-    bool solo;
+    bool solo = true;
     float opacity;
     float speed;
+    
+    ofxSyphonServer syphonOut;
     
     int width;
     int height;
@@ -53,7 +56,7 @@ public:
         gui->addSlider(i+"speed", minSpeed, maxSpeed, &speed);
         
         gui->addToggle(i+"Enabled", &enabled);
-        //gui->addToggle(i+"Solo", &solo);
+        gui->addToggle(i+"Solo", &solo);
         
     }
     
@@ -67,15 +70,15 @@ public:
 	string rest = ofSplitString(m->getAddress(), "/"+adrSplit[1])[1];
 	//cout<<adrSplit[1]<<"   "<<rest<<endl;
         
-	if(adrSplit[1] == "scene"+ofToString(index) || "/"+adrSplit[1] == oscAddress) {
+        if(adrSplit[1] == "scene"+ofToString(index) || "/"+adrSplit[1] == oscAddress) {
 
-	    if( rest == "/opacity/x" ) {
-            opacity = m->getArgAsFloat(0);
-	    } else if(rest == "/enable/x" ) {
-            enabled = m->getArgAsInt32(0);
-	    } else if(rest == "/speed/x" ) {
-            speed =m->getArgAsFloat(0);
-	    } 
+            if( rest == "/opacity/x" ) {
+                opacity = m->getArgAsFloat(0);
+            } else if(rest == "/enable/x" ) {
+                enabled = m->getArgAsInt32(0);
+            } else if(rest == "/speed/x" ) {
+                speed =m->getArgAsFloat(0);
+            } 
 
         }
         
@@ -84,9 +87,10 @@ public:
     void setupScene(int width, int height, int i) {
         index = i;
         name = "Scene" + ofToString(i);
-        
         fbo.allocate(width, height);
         setup();
+        syphonOut.setName(name);
+        
     }
     
     void updateScene() {
@@ -102,12 +106,15 @@ public:
             
             //glEnable(GL_BLEND);
             //glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
-            
             draw();
             
             //glDisable(GL_BLEND);
             
             fbo.end();
+        }
+        
+        if (solo) {
+            syphonOut.publishTexture(&fbo.getTextureReference());
         }
     }
     
