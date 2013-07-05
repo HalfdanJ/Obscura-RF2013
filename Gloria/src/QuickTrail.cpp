@@ -76,7 +76,7 @@ void QuickTrail::draw(){;
     ofNoFill();
     float interval = maxSpeed - speed;
 
-    float pct = (ofGetElapsedTimeMillis() - lastadded) / (interval * 1.);
+    float pct = ofClamp((ofGetElapsedTimeMillis() - lastadded) / (interval * 1.), 0,1);
 
 	for(int i=0;i<walkers.size() && i <numtrails;i++) {
 
