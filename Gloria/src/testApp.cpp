@@ -249,15 +249,6 @@ void testApp::draw() {
     
     ofClear(0, 0);
     
-    // TODO: Layer ordering
-    
-    for(int i=0; i<scenes.size(); i++) {
-        ofSetColor(255,255,255,scenes[i]->opacity*255);
-        if(scenes[i]->solo) {
-            
-        }
-    }
-    
     for(int i=0; i<scenes.size(); i++) {
         ofSetColor(255,255,255,scenes[i]->opacity*255);
         

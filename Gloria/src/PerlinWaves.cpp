@@ -118,6 +118,7 @@ void PerlinWaves::setGui(ofxUICanvas *gui, float width){
     
     gui->addSpacer(width, 1);
     gui->addToggle(i+"Enabled", &enabled);
+    gui->addToggle(i+"Solo", &solo);
     gui->addSlider(i+"opacity", 0., 1., &opacity);
     
     gui->addSpacer(width, 1);
