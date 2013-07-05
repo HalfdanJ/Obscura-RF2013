@@ -13,43 +13,75 @@ void QuickTrail::setup(){
     name = "QuickTrail";
     oscAddress = "/quicktrail";
     
+    minSpeed = 0;
+    maxSpeed = 4000;
+
     walkers.resize(8);
     for(int i=0;i<walkers.size();i++) {
-        walkers[i].corner = mapping->corners[0];
+	walkers[i].dst = mapping->corners[ofRandom(mapping->corners.size())];
+	walkers[i].corners.push_back(mapping->corners[ofRandom(mapping->corners.size())]);
     }
+
+    lastadded = ofGetElapsedTimeMillis();
 }
 
 void QuickTrail::update(){
+
+    float interval = maxSpeed - speed;
+
+    for(int i=0;i<walkers.size() && i<numtrails; i++) {
+	if(i<numtrails) {
+
+	    if(walkers[i].corners.size() < 69) {
+		walkers[i].dst = walkers[i].dst->joinedCorners[ofRandom(walkers[i].dst->joinedCorners.size())];
+		walkers[i].corners.push_back(walkers[i].dst);
+
+		lastadded = ofGetElapsedTimeMillis();
+	    } else {
+
+		if(ofGetElapsedTimeMillis() - lastadded > interval ) {
+
+		    walkers[i].corners.erase(walkers[i].corners.begin());
+
+		}
+	    }
+	}
+    }
 }
 
 void QuickTrail::draw(){;
     
-	for(int i=0;i<walkers.size();i++) {
-        
-        if(i<numtrails) {
+    ofSetLineWidth(10);
+
+    float interval = maxSpeed - speed;
+
+    float pct = (ofGetElapsedTimeMillis() - lastadded) / (interval * 1.);
+
+	for(int i=0;i<walkers.size() && i <numtrails;i++) {
+
+	for(int p=1; p<walkers[i].corners.size() && p<length; p++) {
             
-            walkers[i].points.push_back(walkers[i].corner->pos);
-        
-        if(walkers[i].points.size() > length) {
-            walkers[i].points.erase(walkers[i].points.begin());
-        }
-        
-        ofBeginShape();
-        ofNoFill();
-        ofSetLineWidth(4);
-        
-        for(int p=0; p<walkers[i].points.size(); p++) {
-            ofSetColor(255,100,100,250);
-            ofCircle(walkers[i].points[p].x, walkers[i].points[p].y, 4);
-            ofVertex(walkers[i].points[p].x,walkers[i].points[p].y);
-        }
-        ofEndShape();
-        
-        InputTriangle * nt;
-        nt = walkers[i].corner->triangles[ofRandom(walkers[i].corner->triangles.size())];
-        
-        walkers[i].corner = nt->corners[(int)ofRandom(0,3)];
-     
+	    ofSetColor(255,255,255,p/length*255);
+
+	    if(p > length-1) {
+
+
+		ofVec2f srcPt =walkers[i].corners[p-1]->pos;
+		ofVec2f dstPt =walkers[i].corners[p]->pos;
+
+		ofVec2f interpolate = srcPt + (dstPt - srcPt) * pct;
+
+		ofLine(dstPt, interpolate);
+		ofCircle(interpolate.x, interpolate.y, 10);
+		//ofVertex(walkers[i].points[p].x,w alkers[i].points[p].y);
+
+	    } else {
+
+		ofCircle(walkers[i].corners[p]->pos.x, walkers[i].corners[p]->pos.y, 10);
+
+		ofLine(walkers[i].corners[p]->pos.x, walkers[i].corners[p]->pos.y, walkers[i].corners[p-1]->pos.x, walkers[i].corners[p-1]->pos.y);
+
+	    }
         }
     }
 }
@@ -63,9 +95,10 @@ void QuickTrail::parseOscMessage(ofxOscMessage *m){
     
 	if(adrSplit[1] == "scene"+ofToString(index) || "/"+adrSplit[1] == oscAddress) {
         
-        
         if(rest == "/length/x" ) {
             length = m->getArgAsInt32(0);
+	    } else if(rest == "/numtrails/x" ) {
+	    numtrails = m->getArgAsInt32(0);
 	    }
         
     }
@@ -77,8 +110,8 @@ void QuickTrail::setGui(ofxUICanvas *gui, float width){
     
     string i = "["+ ofToString(index) + "] ";
      
-    //gui->addSlider(i+"length", 0, 8, &length);
-    //gui->addSlider(i+"length", 0, 8, &num);
+    gui->addSlider(i+"length", 0, 60, &length);
+    gui->addSlider(i+"trails", 0, 8, &numtrails);
     
     /*gui->addSlider(i+"Y Speed", minSpeed, maxSpeed, &ySpeed);
      

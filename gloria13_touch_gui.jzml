@@ -172,7 +172,7 @@
 <VARIABLE name="speed=1" send="0" osc_target="0" osc_trigger="1" osc_message="/Opacity14/speed" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 </WINDOW>
 </WINDOW>
-<WINDOW class="JAZZINTERFACE" text="Millumin" x="0" y="0" width="1024" height="724" id="5" state="1" group="0" font="tahoma,11,0" >
+<WINDOW class="JAZZINTERFACE" text="Millumin" x="0" y="0" width="1024" height="724" id="5" state="0" group="0" font="tahoma,11,0" >
 <WINDOW class="Fader" text="Layer1" x="17" y="14" width="104" height="694" state="1" group="0" font="tahoma,10,0" send="1" osc_target="-2" midi_target="-2" kbmouse_target="-2" capture="1" color="1596013" cursor="0" grid="0" grid_steps="1" label="1" physic="1" precision="3" unit="" value="1" zoom="0.000000">
 <PARAM name="x=" value="1.000000" send="29" osc_target="1" osc_trigger="1" osc_message="/millumin/layer/opacity/1" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" osc_scale="0.000000,100.000000" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 <PARAM name="z=" value="0.000000" send="17" osc_target="0" osc_trigger="1" osc_message="/Layer1/z" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" osc_scale="0.000000,1.000000" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
@@ -304,7 +304,7 @@
 <VARIABLE name="light=+2" send="0" osc_target="0" osc_trigger="1" osc_message="/Enabled7/light" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 </WINDOW>
 </WINDOW>
-<WINDOW class="JAZZINTERFACE" text="QuickTrail" x="0" y="0" width="1024" height="724" id="7" state="0" group="0" font="tahoma,11,0" >
+<WINDOW class="JAZZINTERFACE" text="QuickTrail" x="0" y="0" width="1024" height="724" id="7" state="1" group="0" font="tahoma,11,0" >
 <WINDOW class="Text" text="Text7" x="21" y="10" width="154" height="30" id="5" state="241" group="0" font="tahoma,10,0" send="1" osc_target="-2" midi_target="-2" kbmouse_target="-2" color="8355711" content="QuickTrail">
 <VARIABLE name="light=0" send="0" osc_target="0" osc_trigger="1" osc_message="/Text7/light" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 </WINDOW>
@@ -328,15 +328,15 @@
 <VARIABLE name="friction=0.9" send="0" osc_target="0" osc_trigger="1" osc_message="/Speed3/friction" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 <VARIABLE name="speed=1" send="0" osc_target="0" osc_trigger="1" osc_message="/Speed3/speed" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 </WINDOW>
-<WINDOW class="Fader" text="Length" x="229" y="106" width="97" height="595" id="10" state="1" group="0" font="tahoma,10,0" send="1" osc_target="-2" midi_target="-2" kbmouse_target="-2" capture="1" color="1596013" cursor="0" grid="0" grid_steps="1" label="1" physic="1" precision="3" unit="" value="1" zoom="1.000000">
-<PARAM name="x=" value="0.561024" send="29" osc_target="0" osc_trigger="1" osc_message="/quicktrai/length/x" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" osc_scale="0.000000,400.000000" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
+<WINDOW class="Fader" text="Length" x="229" y="106" width="97" height="595" id="10" state="1" group="0" font="tahoma,10,0" send="1" osc_target="-2" midi_target="-2" kbmouse_target="-2" capture="1" color="1596013" cursor="0" grid="0" grid_steps="1" label="1" physic="1" precision="0" unit="" value="1" zoom="1.000000">
+<PARAM name="x=" value="0.561024" send="29" osc_target="0" osc_trigger="1" osc_message="/quicktrai/length/x" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" osc_scale="0.000000,60.000000" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 <PARAM name="z=" value="0.000000" send="17" osc_target="0" osc_trigger="1" osc_message="/Length/z" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" osc_scale="0.000000,1.000000" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 <VARIABLE name="value=x" send="0" osc_target="0" osc_trigger="1" osc_message="/Length/value" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 <VARIABLE name="attraction=1" send="0" osc_target="0" osc_trigger="1" osc_message="/Length/attraction" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 <VARIABLE name="friction=0.9" send="0" osc_target="0" osc_trigger="1" osc_message="/Length/friction" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 <VARIABLE name="speed=1" send="0" osc_target="0" osc_trigger="1" osc_message="/Length/speed" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 </WINDOW>
-<WINDOW class="Fader" text="Numtrails" x="351" y="106" width="119" height="595" id="11" state="1" group="0" font="tahoma,10,0" send="1" osc_target="-2" midi_target="-2" kbmouse_target="-2" capture="1" color="1596013" cursor="0" grid="0" grid_steps="1" label="1" physic="1" precision="3" unit="" value="1" zoom="1.000000">
+<WINDOW class="Fader" text="Numtrails" x="351" y="106" width="119" height="595" id="11" state="1" group="0" font="tahoma,10,0" send="1" osc_target="-2" midi_target="-2" kbmouse_target="-2" capture="1" color="1596013" cursor="0" grid="0" grid_steps="1" label="1" physic="1" precision="0" unit="" value="1" zoom="1.000000">
 <PARAM name="x=" value="1.000000" send="29" osc_target="0" osc_trigger="1" osc_message="/quicktrai/numtrails/x" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" osc_scale="0.000000,8.000000" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 <PARAM name="z=" value="0.000000" send="17" osc_target="0" osc_trigger="1" osc_message="/Numtrails/z" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" osc_scale="0.000000,1.000000" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 <VARIABLE name="value=x" send="0" osc_target="0" osc_trigger="1" osc_message="/Numtrails/value" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>

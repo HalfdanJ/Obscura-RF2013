@@ -15,8 +15,11 @@
 
 struct Walker {
     ofPolyline line;
-    vector<ofVec2f> points;
-    Corner * corner;
+    //vector<ofVec2f> points;
+    vector<Corner*> corners;
+
+    Corner * dst;
+
 };
 
 class QuickTrail : public ContentScene {
@@ -31,14 +34,9 @@ public:
     Mapping * mapping;
     vector<Walker> walkers;
     
-    int numtrails = 3;
-    int length;
-    
-    Corner * dst;
-    Corner * src;
-    Corner * lastSrc;
-    
-    float pct;
+    float numtrails = 3;
+    float length;
+    int long lastadded;
     
     void parseOscMessage(ofxOscMessage * m);
     void setGui(ofxUICanvas * gui, float width);
