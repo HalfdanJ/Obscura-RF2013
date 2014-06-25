@@ -17,16 +17,12 @@ void QuickTrail::setup(){
     maxSpeed = 300;
 
     walkers.resize(4);
-
     lastadded = ofGetElapsedTimeMillis();
 }
 
 void QuickTrail::update(){
 
     float interval = speed;
-    
-    
-
     
     for(int i=0;i<walkers.size();i++) {
         
@@ -125,7 +121,7 @@ void QuickTrail::parseOscMessage(ofxOscMessage *m){
             random = m->getArgAsInt32(0);
         } else if(rest == "/clear/x") {
             clear = m->getArgAsInt32(0);
-        } else if(rest == "/circleRadius/x") {
+        } else if(rest == "/circleradius/x") {
             clear = m->getArgAsInt32(0);
         }
         

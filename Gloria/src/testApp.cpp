@@ -19,13 +19,13 @@ void testApp::setup() {
     syphonIn.setApplicationName("Millumin");
     syphonIn.setServerName("");
     
-/*    syphonIn.setApplicationName("Mopdul8");
+/*    syphonIn.setApplicationName("Modul8");
      syphonIn.setServerName("Main View");*/
     syphonIn.setup();
     
-	directory.setup();
-    ofAddListener(directory.events.directoryUpdated,this,&testApp::directoryUpdated);
-    dirIdx = -1;
+	//directory.setup();
+    //ofAddListener(directory.events.directoryUpdated,this,&testApp::directoryUpdated);
+    //dirIdx = -1;
     
     ofEnableSmoothing();
     ofEnableAlphaBlending();
@@ -189,10 +189,10 @@ void testApp::setup() {
 
 void testApp::directoryUpdated(ofxSyphonServerDirectoryEventArgs &arg)
 {
-    for( auto& server : arg.directory->getServerList() ){ //new c++ auto keyword
-        ofLogNotice("ofxSyphonServerDirectory Updated:: ")<<" Server Name: "<<server.serverName <<" | App Name: "<<server.appName;
-    }
-    dirIdx = 0;
+    //for( auto& server : arg.directory->getServerList() ){ //new c++ auto keyword
+    //    ofLogNotice("ofxSyphonServerDirectory Updated:: ")<<" Server Name: "<<server.serverName <<" | App Name: "<<server.appName;
+    //}
+    //dirIdx = 0;
 }
 
 
@@ -280,7 +280,7 @@ void testApp::draw() {
     ofPushMatrix();
     ofTranslate(300, 320);
     
-    if(directory.isValidServer(syphonIn.getApplicationName(), syphonIn.getServerName())){
+    /*if(directory.isValidServer(syphonIn.getApplicationName(), syphonIn.getServerName())){
         
         ofSetColor(255);
         ofSetLineWidth(1);
@@ -289,7 +289,7 @@ void testApp::draw() {
         
         ofDrawBitmapString("Syphon input - (Press space to shuffle)", 10,18);
         ofDrawBitmapString(syphonIn.getApplicationName(), 10,34);
-    }
+    }*/
     
     ofPopMatrix();
     
@@ -297,8 +297,6 @@ void testApp::draw() {
     
     ofSetColor(255);
     ofDrawBitmapString("FPS: " + ofToString(ofGetFrameRate()), ofGetWidth()-200, 20);
-    
-    
 
 }
 
@@ -349,7 +347,6 @@ void testApp::setGUI()
         
     }
     
-
     
     gui->autoSizeToFitWidgets();
     
