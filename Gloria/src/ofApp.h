@@ -27,7 +27,7 @@
 #define OSCPORT 9999
 
 
-class testApp : public ofBaseApp {
+class ofApp : public ofBaseApp {
 public:
 
     void setup();
@@ -55,7 +55,9 @@ public:
     ofxSyphonClient syphonIn;
     
     ofxSyphonServerDirectory directory;
-    void directoryUpdated(ofxSyphonServerDirectoryEventArgs &arg);
+    void serverAnnounced(ofxSyphonServerDirectoryEventArgs &arg);
+    void serverUpdated(ofxSyphonServerDirectoryEventArgs &args);
+    void serverRetired(ofxSyphonServerDirectoryEventArgs &arg);
     int dirIdx;
 
 

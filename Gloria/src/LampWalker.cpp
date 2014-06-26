@@ -9,14 +9,11 @@
 #include "LampWalker.h"
 
 void LampWalker::setup(){
-
     name = "Lamp Walker";
     oscAddress = "/lampwalker";
-
 }
 
 void LampWalker::update(){
-
     if(!src){
         src = mapping->corners[ofRandom(mapping->corners.size())];
     }
@@ -24,7 +21,6 @@ void LampWalker::update(){
     if(!dst){
         dst = src->joinedCorners[ofRandom(src->joinedCorners.size())];
     }
-
 
     pct += 0.01;
     if(pct > 1){

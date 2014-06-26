@@ -1,7 +1,7 @@
-#include "testApp.h"
+#include "ofApp.h"
 
 
-void testApp::setup() {
+void ofApp::setup() {
     
     //oscSender.setup("HalfdanJ.local", 6745);
     oscReceiver.setup(OSCPORT);
@@ -14,18 +14,15 @@ void testApp::setup() {
     syphonOut.setName("Gloria Main");
     fboOut.allocate(OUTWIDTH, OUTHEIGHT);
     
-//    syphonIn.setApplicationName("QLab");
- //   syphonIn.setServerName("qlab");
     syphonIn.setApplicationName("Millumin");
     syphonIn.setServerName("");
-    
-/*    syphonIn.setApplicationName("Modul8");
-     syphonIn.setServerName("Main View");*/
     syphonIn.setup();
     
-	//directory.setup();
-    //ofAddListener(directory.events.directoryUpdated,this,&testApp::directoryUpdated);
-    //dirIdx = -1;
+    //register for our directory's callbacks
+    ofAddListener(directory.events.serverAnnounced, this, &ofApp::serverAnnounced);
+    ofAddListener(directory.events.serverUpdated, this, &ofApp::serverUpdated);
+    ofAddListener(directory.events.serverRetired, this, &ofApp::serverRetired);
+    dirIdx = -1;
     
     ofEnableSmoothing();
     ofEnableAlphaBlending();
@@ -75,8 +72,7 @@ void testApp::setup() {
                 triangle->polyline = lines[j];
                 triangle->centroid = lines[j].getCentroid2D();
                 
-                cout<<"Creating triangle..."<<endl;
-                
+                //cout<<"Creating triangle..."<<endl;
                 
                 // For each of 3 vertices in triangle create a corner pointer
                 for(int vi=0; vi<3; vi++) {
@@ -90,7 +86,7 @@ void testApp::setup() {
                         for(int cti = 0; cti < 3; cti++) {
                             
                             if (vert.distance(mapping.triangles[ti]->corners[cti]->pos) < cornerThreshold) {
-                                cout<<"Setting corner: "<<vert.x<<", "<<vert.y<<endl;
+                                //cout<<"Setting corner: "<<vert.x<<", "<<vert.y<<endl;
                                 triangle->corners[vi] = mapping.triangles[ti]->corners[cti];
                                 
                                 triangle->corners[vi]->addTriangleReference(triangle);
@@ -101,7 +97,7 @@ void testApp::setup() {
                     }
                     
                     if(!set) {
-                        cout<<"Creating corner: "<<vert.x<<", "<<vert.y<<endl;
+                        //cout<<"Creating corner: "<<vert.x<<", "<<vert.y<<endl;
                         
                         triangle->corners[vi] = new Corner;
                         triangle->corners[vi]->pos = vert;
@@ -138,7 +134,7 @@ void testApp::setup() {
                     for(int k=0;k<mapping.corners[i]->joinedCorners.size();k++){
                         if(mapping.corners[i]->joinedCorners[k] == mapping.corners[i]->triangles[u]->corners[j]){
                             alreadyAdded = true;
-                            cout<<"Already added"<<endl;
+                            //cout<<"Already added"<<endl;
                         }
                     }
                     if(!alreadyAdded){
@@ -187,17 +183,35 @@ void testApp::setup() {
     gui->loadSettings("GUI/guiSettings.xml");
 }
 
-void testApp::directoryUpdated(ofxSyphonServerDirectoryEventArgs &arg)
+
+void ofApp::serverAnnounced(ofxSyphonServerDirectoryEventArgs &arg)
 {
-    //for( auto& server : arg.directory->getServerList() ){ //new c++ auto keyword
-    //    ofLogNotice("ofxSyphonServerDirectory Updated:: ")<<" Server Name: "<<server.serverName <<" | App Name: "<<server.appName;
-    //}
-    //dirIdx = 0;
+    
+    for( auto& dir : arg.servers ){
+        ofLogNotice("ofxSyphonServerDirectory Server Announced")<<" Server Name: "<<dir.serverName <<" | App Name: "<<dir.appName;
+    }
+    dirIdx = 0;
+}
+
+void ofApp::serverUpdated(ofxSyphonServerDirectoryEventArgs &arg)
+{
+    for( auto& dir : arg.servers ){
+        ofLogNotice("ofxSyphonServerDirectory Server Updated")<<" Server Name: "<<dir.serverName <<" | App Name: "<<dir.appName;
+    }
+    dirIdx = 0;
+}
+
+void ofApp::serverRetired(ofxSyphonServerDirectoryEventArgs &arg)
+{
+    for( auto& dir : arg.servers ){
+        ofLogNotice("ofxSyphonServerDirectory Server Retired")<<" Server Name: "<<dir.serverName <<" | App Name: "<<dir.appName;
+    }
+    dirIdx = 0;
 }
 
 
 //--------------------------------------------------------------
-void testApp::update() {
+void ofApp::update() {
     
     
     // send some fun stuff to the sharpy army
@@ -235,8 +249,7 @@ void testApp::update() {
 }
 
 
-void testApp::draw() {
-    
+void ofApp::draw() {
     
     for(int i=0; i<scenes.size(); i++) {
         scenes[i]->drawScene();
@@ -280,16 +293,17 @@ void testApp::draw() {
     ofPushMatrix();
     ofTranslate(300, 320);
     
-    /*if(directory.isValidServer(syphonIn.getApplicationName(), syphonIn.getServerName())){
+    
+    if(syphonIn.isSetup()){
         
         ofSetColor(255);
         ofSetLineWidth(1);
         ofRect(-1, -1, 260* syphonIn.getWidth()/syphonIn.getHeight()+2, 260+2);
         syphonIn.draw(0, 0, 260* syphonIn.getWidth()/syphonIn.getHeight(), 260);
         
-        ofDrawBitmapString("Syphon input - (Press space to shuffle)", 10,18);
+        ofDrawBitmapString("Syphon input - (Press 'i' to change)", 10,18);
         ofDrawBitmapString(syphonIn.getApplicationName(), 10,34);
-    }*/
+    }
     
     ofPopMatrix();
     
@@ -302,20 +316,20 @@ void testApp::draw() {
 
 
 //------------------------------------------------------------
-void testApp::debugDraw() {
+void ofApp::debugDraw() {
     for(int i =0; i<mapping.triangles.size();i++) {
         mapping.triangles[i]->debugDraw();
     }
 }
 
-void testApp::drawGrid() {
+void ofApp::drawGrid() {
     for(int i =0; i<mapping.triangles.size();i++) {
         ofSetLineWidth(1);
         mapping.triangles[i]->mesh.drawWireframe();
     }
 }
 
-void testApp::setGUI()
+void ofApp::setGUI()
 {
     
     float dim = 16;
@@ -350,7 +364,7 @@ void testApp::setGUI()
     
     gui->autoSizeToFitWidgets();
     
-    ofAddListener(gui->newGUIEvent,this,&testApp::guiEvent);
+    ofAddListener(gui->newGUIEvent,this,&ofApp::guiEvent);
 }
 
 void InputTriangle::debugDraw() {
@@ -377,61 +391,63 @@ void InputTriangle::debugDraw() {
 
 
 //--------------------------------------------------------------
-void testApp::keyPressed(int key){
-    dirIdx++;
-    if(dirIdx > directory.size() - 1)
-        dirIdx = 0;
+void ofApp::keyPressed(int key){
     
-    if(directory.isValidIndex(dirIdx)){
-        syphonIn.setServerName(directory.getServerList()[dirIdx].serverName);
-        syphonIn.setApplicationName(directory.getServerList()[dirIdx].appName);
+    if(key == 'i') {
+        dirIdx++;
+        if(dirIdx > directory.size() - 1)
+        dirIdx = 0;
+        
+        if(directory.isValidIndex(dirIdx)){
+            syphonIn.setServerName(directory.getServerList()[dirIdx].serverName);
+            syphonIn.setApplicationName(directory.getServerList()[dirIdx].appName);
+        }
     }
     
-
 }
 
 //--------------------------------------------------------------
-void testApp::keyReleased(int key){
+void ofApp::keyReleased(int key){
     
 }
 
 //--------------------------------------------------------------
-void testApp::mouseMoved(int x, int y ){
+void ofApp::mouseMoved(int x, int y ){
     
 }
 
 //--------------------------------------------------------------
-void testApp::mouseDragged(int x, int y, int button){
+void ofApp::mouseDragged(int x, int y, int button){
     
 }
 
 //--------------------------------------------------------------
-void testApp::mousePressed(int x, int y, int button){
+void ofApp::mousePressed(int x, int y, int button){
     
 }
 
 //--------------------------------------------------------------
-void testApp::mouseReleased(int x, int y, int button){
+void ofApp::mouseReleased(int x, int y, int button){
     
 }
 
 //--------------------------------------------------------------
-void testApp::windowResized(int w, int h){
+void ofApp::windowResized(int w, int h){
     
 }
 
 //--------------------------------------------------------------
-void testApp::gotMessage(ofMessage msg){
+void ofApp::gotMessage(ofMessage msg){
     
 }
 
 //--------------------------------------------------------------
-void testApp::dragEvent(ofDragInfo dragInfo){
+void ofApp::dragEvent(ofDragInfo dragInfo){
     
 }
 
 //--------------------------------------------------------------
-void testApp::exit()
+void ofApp::exit()
 {
     gui->saveSettings("GUI/guiSettings.xml");
     delete gui;
@@ -439,6 +455,6 @@ void testApp::exit()
     XML.saveFile("calibration.xml");
 }
 
-void testApp::guiEvent(ofxUIEventArgs &e)
+void ofApp::guiEvent(ofxUIEventArgs &e)
 {
 }
