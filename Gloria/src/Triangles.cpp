@@ -334,8 +334,8 @@ void Triangles::drawTriangle(SubTriangle * triangle, float opacity){
         //        glBegin(GL_TRIANGLES);
         for(int u=0;u<3;u++){
             
-            glTexCoord2d(syphon->getWidth()* center.x/OUTWIDTH
-                         , syphon->getHeight()*(OUTHEIGHT-center.y)/OUTHEIGHT);
+            glTexCoord2d(syphonIn->getWidth()* center.x/OUTWIDTH
+                         , syphonIn->getHeight()*(OUTHEIGHT-center.y)/OUTHEIGHT);
             glVertex2d(triangle->corners[u]->pos.x, triangle->corners[u]->pos.y);
         }
         //   glEnd();
@@ -349,8 +349,8 @@ void Triangles::drawTriangle(SubTriangle * triangle, float opacity){
             ofSetColor(255,255,255,255*bbb);
             //   glBegin(GL_TRIANGLES);
             for(int u=0;u<3;u++){
-                glTexCoord2d(syphon->getWidth()* triangle->corners[u]->pos.x/OUTWIDTH
-                             ,syphon->getHeight()*(OUTHEIGHT-triangle->corners[u]->pos.y)/OUTHEIGHT);
+                glTexCoord2d(syphonIn->getWidth()* triangle->corners[u]->pos.x/OUTWIDTH
+                             ,syphonIn->getHeight()*(OUTHEIGHT-triangle->corners[u]->pos.y)/OUTHEIGHT);
                 
                 glVertex2d(triangle->corners[u]->pos.x, triangle->corners[u]->pos.y);
             }
@@ -413,14 +413,14 @@ void Triangles::draw(){
     
     
     if(syphonOpacity){
-        syphon->bind();
+        syphonIn->bind();
         glBegin(GL_TRIANGLES);
         for(int i=0;i<mapping->triangles.size();i++){
             drawTriangle(subTriangles[mapping->triangles[i]],syphonOpacity);
         }
         
         glEnd();
-        syphon->unbind();
+        syphonIn->unbind();
     }
 }
 

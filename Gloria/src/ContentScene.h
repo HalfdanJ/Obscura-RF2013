@@ -17,8 +17,9 @@ public:
     float minSpeed = 0;
     float maxSpeed = 1;
     
-
     Mapping * mapping;
+    ofxSyphonClient * syphonIn;
+    
     ofFbo fbo;
     bool enabled;
     bool solo = true;
@@ -82,16 +83,19 @@ public:
         
     }
     
-    void setupScene(int width, int height, int i) {
-        index = i;
-        name = "Scene" + ofToString(i);
+    void setupScene(int _width, int _height, int _i) {
+        index = _i;
+        name = "Scene" + ofToString(_i);
         
         ofFbo::Settings settings;
         
-        settings.height = height;
-        settings.width = width;
+        height = _height;
+        width = _width;
+        
+        settings.height = _height;
+        settings.width = _width;
         settings.numSamples = 8;
-        settings.useDepth = true;
+        settings.useDepth = false;
         //settings.colorFormats = GL_RGBA;
         
         fbo.allocate(settings);
@@ -110,6 +114,9 @@ public:
     
     void drawScene() {
         if(enabled) {
+            ofPushMatrix();
+            glPushMatrix();
+            
             fbo.begin();
             ofClear(0, 0);
             
@@ -120,6 +127,9 @@ public:
             //glDisable(GL_BLEND);
             
             fbo.end();
+            
+            ofPopMatrix();
+            glPopMatrix();
         }
         
         if (solo) {

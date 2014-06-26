@@ -8,6 +8,7 @@ void ofApp::setup() {
     
     ofSetLogLevel(OF_LOG_NOTICE);
     ofSetFrameRate(60);
+    ofSetVerticalSync(true);
         
     ofSetWindowTitle("Obscure Glorious Control");
     
@@ -26,6 +27,7 @@ void ofApp::setup() {
     
     ofEnableSmoothing();
     ofEnableAlphaBlending();
+    ofEnableDepthTest();
     
     // load the worldpoints
     
@@ -42,7 +44,7 @@ void ofApp::setup() {
             
             WorldPoint * wp = new WorldPoint();
             wp->pos.set(ofVec3f(x,y,z));
-            mapping.worldPoints.push_back(wp);
+            mapping->worldPoints.push_back(wp);
         }
         
     }
@@ -50,14 +52,16 @@ void ofApp::setup() {
     // load the svg (transforms should be flattened before)
     // todo - try to load this data from xml files
     
-    mapping.svg.load("input1.svg");
+    mapping = new Mapping();
+    
+    mapping->svg.load("input1.svg");
     
     int numTriangles = 0;
     int maxTriangleSize = 1000000;
     float cornerThreshold = 20;
     
-    for (int i = 0; i < mapping.svg.getNumPath(); i++){
-		ofPath p = mapping.svg.getPathAt(i);
+    for (int i = 0; i < mapping->svg.getNumPath(); i++){
+		ofPath p = mapping->svg.getPathAt(i);
 		// svg defaults to non zero winding which doesn't look so good as contours
 		//p.setPolyWindingMode(OF_POLY_WINDING_ODD);
 		vector<ofPolyline>& lines = p.getOutline();
@@ -81,13 +85,13 @@ void ofApp::setup() {
                     ofVec2f vert = triangle->polyline.getVertices()[vi];
                     
                     // Loop through all corners in all triangels and set a pointer if the corner already exists
-                    for(int ti=0; ti<mapping.triangles.size(); ti++) {
+                    for(int ti=0; ti<mapping->triangles.size(); ti++) {
                         
                         for(int cti = 0; cti < 3; cti++) {
                             
-                            if (vert.distance(mapping.triangles[ti]->corners[cti]->pos) < cornerThreshold) {
+                            if (vert.distance(mapping->triangles[ti]->corners[cti]->pos) < cornerThreshold) {
                                 //cout<<"Setting corner: "<<vert.x<<", "<<vert.y<<endl;
-                                triangle->corners[vi] = mapping.triangles[ti]->corners[cti];
+                                triangle->corners[vi] = mapping->triangles[ti]->corners[cti];
                                 
                                 triangle->corners[vi]->addTriangleReference(triangle);
                                 
@@ -102,7 +106,7 @@ void ofApp::setup() {
                         triangle->corners[vi] = new Corner;
                         triangle->corners[vi]->pos = vert;
                         
-                        mapping.corners.push_back(triangle->corners[vi]);
+                        mapping->corners.push_back(triangle->corners[vi]);
                         
                         triangle->corners[vi]->addTriangleReference(triangle);
                     }
@@ -117,7 +121,7 @@ void ofApp::setup() {
                 }
                 triangle->mesh.addTriangle(0, 1, 2);
                 
-                mapping.triangles.push_back(triangle);
+                mapping->triangles.push_back(triangle);
                 numTriangles += 1;
                 
             }
@@ -125,55 +129,64 @@ void ofApp::setup() {
 	}
     
     
-    for(int i=0;i<mapping.corners.size();i++){
-        cout<<mapping.corners[i]->pos.x<<endl;
-        for(int u=0 ; u<mapping.corners[i]->triangles.size() ; u++){
+    for(int i=0;i<mapping->corners.size();i++){
+        cout<<mapping->corners[i]->pos.x<<endl;
+        for(int u=0 ; u<mapping->corners[i]->triangles.size() ; u++){
             for(int j=0;j<3;j++){
-                if(mapping.corners[i]->triangles[u]->corners[j] != mapping.corners[i]){
+                if(mapping->corners[i]->triangles[u]->corners[j] != mapping->corners[i]){
                     bool alreadyAdded = false;
-                    for(int k=0;k<mapping.corners[i]->joinedCorners.size();k++){
-                        if(mapping.corners[i]->joinedCorners[k] == mapping.corners[i]->triangles[u]->corners[j]){
+                    for(int k=0;k<mapping->corners[i]->joinedCorners.size();k++){
+                        if(mapping->corners[i]->joinedCorners[k] == mapping->corners[i]->triangles[u]->corners[j]){
                             alreadyAdded = true;
                             //cout<<"Already added"<<endl;
                         }
                     }
                     if(!alreadyAdded){
-                        mapping.corners[i]->joinedCorners.push_back(mapping.corners[i]->triangles[u]->corners[j]);
+                        mapping->corners[i]->joinedCorners.push_back(mapping->corners[i]->triangles[u]->corners[j]);
                     }
                 }
             }
         }
     }
     
-    cout<<endl<<"Created: "<<mapping.triangles.size()<<" triangles with "<<mapping.corners.size()<<" unique corners"<<endl;
+    cout<<endl<<"Created: "<<mapping->triangles.size()<<" triangles with "<<mapping->corners.size()<<" unique corners"<<endl;
     
     // effects scenes
     
     // Set up the scenes, all scenes is a subclass of SceneContent, don't call draw, setup and update directly it is taken care of thorugh the scene.
     
-    lampWalker.mapping = &mapping;
-    scenes.push_back(&lampWalker);
+    //triangles.mapping = &mapping;
+    //triangles.syphon = &syphonIn;
+    //scenes.push_back(&triangles);
     
-    triangles.mapping = &mapping;
-    triangles.syphon = &syphonIn;
-    scenes.push_back(&triangles);
-    
-    perlinWaves.mapping = &mapping;
-    scenes.push_back(&perlinWaves);
+    perlinWaves = new PerlinWaves();
+    scenes.push_back(perlinWaves);
 
     //tesselator.mapping = &mapping;
     //scenes.push_back(&tesselator);
     
-    triBlobs.mapping = &mapping;
-    scenes.push_back(&triBlobs);
+    //triBlobs.mapping = &mapping;
+    //scenes.push_back(&triBlobs);
     
     //hardNoise.mapping = &mapping;
     //scenes.push_back(&hardNoise);
     
-    quickTrail.mapping = &mapping;
-    scenes.push_back(&quickTrail);
+    //quickTrail.mapping = &mapping;
+    //scenes.push_back(&quickTrail);
+    
+    ofFbo::Settings fboSettings;
+    fboSettings.height = OUTHEIGHT;
+    fboSettings.width = OUTWIDTH;
+    fboSettings.numSamples = 8;
+    fboSettings.useDepth = false;
+    fboSettings.textureTarget = GL_TEXTURE_RECTANGLE_ARB;
+    
+    fboOut.allocate(fboSettings);
+
+    
     
     for(int i=0; i<scenes.size(); i++) {
+        scenes[i]->mapping = mapping;
         scenes[i]->setupScene(OUTWIDTH, OUTHEIGHT, i);
     }
     
@@ -251,9 +264,11 @@ void ofApp::update() {
 
 void ofApp::draw() {
     
+    
     for(int i=0; i<scenes.size(); i++) {
         scenes[i]->drawScene();
     }
+    
     
     fboOut.begin();
     
@@ -266,7 +281,6 @@ void ofApp::draw() {
             scenes[i]->fbo.draw(0,0);
         }
     }
-    
     fboOut.end();
     
     syphonOut.publishTexture(&fboOut.getTextureReference());
@@ -307,8 +321,6 @@ void ofApp::draw() {
     
     ofPopMatrix();
     
-    
-    
     ofSetColor(255);
     ofDrawBitmapString("FPS: " + ofToString(ofGetFrameRate()), ofGetWidth()-200, 20);
 
@@ -317,15 +329,15 @@ void ofApp::draw() {
 
 //------------------------------------------------------------
 void ofApp::debugDraw() {
-    for(int i =0; i<mapping.triangles.size();i++) {
-        mapping.triangles[i]->debugDraw();
+    for(int i =0; i<mapping->triangles.size();i++) {
+        mapping->triangles[i]->debugDraw();
     }
 }
 
 void ofApp::drawGrid() {
-    for(int i =0; i<mapping.triangles.size();i++) {
+    for(int i =0; i<mapping->triangles.size();i++) {
         ofSetLineWidth(1);
-        mapping.triangles[i]->mesh.drawWireframe();
+        mapping->triangles[i]->mesh.drawWireframe();
     }
 }
 

@@ -20,10 +20,6 @@ void PerlinWaves::setup(){
 
 void PerlinWaves::update(){
     
-
-    
-
-    
     if(crazySpeed) {
         _ySpeed = ySpeed*4;
         _xSpeed = xSpeed*4;
@@ -42,8 +38,6 @@ void PerlinWaves::update(){
 
 void PerlinWaves::draw(){;
     
-    glEnable(GL_LINES);
-     ofSetLineWidth(4);
      // waves going across red
     
     

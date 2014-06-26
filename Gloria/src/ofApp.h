@@ -3,15 +3,13 @@
 
 #define OUTWIDTH 5900
 #define OUTHEIGHT 1200
+#define OSCPORT 9999
 
 
 #include "ofMain.h"
-
 #include "ofxSyphon.h"
 #include "ofxOsc.h"
-#include "ofxOpenCv.h"
 #include "ContentScene.h"
-
 #include "LampWalker.h"
 #include "QuickTrail.h"
 #include "Triangles.h"
@@ -19,12 +17,9 @@
 #include "PerlinWaves.h"
 #include "TriBlobs.h"
 #include "HardNoise.h"
-
 #include "ofxUI.h"
-
 #include "mapping.h"
 
-#define OSCPORT 9999
 
 
 class ofApp : public ofBaseApp {
@@ -60,13 +55,9 @@ public:
     void serverRetired(ofxSyphonServerDirectoryEventArgs &arg);
     int dirIdx;
 
-
-    ofCamera cam;
     ofColor bg;
     ofFbo fboOut;
-
-    Mapping mapping;
-
+    Mapping * mapping;
     ofxXmlSettings XML;
     
     // gui
@@ -78,20 +69,15 @@ public:
     bool drawGuide;
     
     // Define all the scenes here
-    LampWalker lampWalker;
-    QuickTrail quickTrail;
-    Triangles triangles;
-    GTess tesselator;
-    PerlinWaves perlinWaves;
-    TriBlobs triBlobs;
-    HardNoise hardNoise;
+    //LampWalker * lampWalker;
+    //QuickTrail * quickTrail;
+    //Triangles * triangles;
+    //GTess * tesselator;
+    PerlinWaves * perlinWaves;
+    //TriBlobs * triBlobs;
+    //HardNoise * hardNoise;
     
     vector<ContentScene*> scenes;
     
-    
-
-    
-    
-
     
 };

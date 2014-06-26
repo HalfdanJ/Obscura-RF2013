@@ -10,9 +10,6 @@
 
 #include "ofMain.h"
 #include "ContentScene.h"
-#include "mapping.h"
-#include "ofxSyphon.h"
-
 
 class SubTriangle : public InputTriangle{
 public:
@@ -79,8 +76,7 @@ public:
     void update();    
     float pct;
     
-    Mapping * mapping;
-    ofxSyphonClient * syphon;
+
     
     map<InputTriangle*, SubTriangle* > subTriangles;
     
@@ -91,7 +87,6 @@ public:
     void drawTriangle(SubTriangle * triangle, float opacity);
     
     ofVec2f center;
-    
     
     bool sideScreens;
     float sideScreensSpeed;

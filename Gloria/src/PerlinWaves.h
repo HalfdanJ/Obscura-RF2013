@@ -19,8 +19,6 @@ public:
     void draw();
     void debugDraw();
     void update();
-
-    Mapping * mapping;
     
     void parseOscMessage(ofxOscMessage * m);
     void setGui(ofxUICanvas * gui, float width);

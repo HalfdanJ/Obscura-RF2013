@@ -83,6 +83,7 @@
 		046C30A317805E7C009A2EE6 /* svgtiny_gradient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 046C309B17805E7C009A2EE6 /* svgtiny_gradient.cpp */; };
 		046C30A417805E7C009A2EE6 /* svgtiny_list.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 046C309D17805E7C009A2EE6 /* svgtiny_list.cpp */; };
 		046C30A517805E7C009A2EE6 /* ofxSvg.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 046C309F17805E7C009A2EE6 /* ofxSvg.cpp */; };
+		04A0E2AC195CB4A60004D93F /* Syphon.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0425D7F0195ABA57003086AC /* Syphon.framework */; };
 		04C6D22A17847C8300AC12B9 /* GTess.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04C6D22917847C8300AC12B9 /* GTess.cpp */; };
 		04C6D22D17847D8900AC12B9 /* PerlinWaves.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04C6D22C17847D8900AC12B9 /* PerlinWaves.cpp */; };
 		04C6D2341784A1F400AC12B9 /* TriBlobs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04C6D2331784A1F400AC12B9 /* TriBlobs.cpp */; };
@@ -140,6 +141,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */,
+				04A0E2AC195CB4A60004D93F /* Syphon.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
