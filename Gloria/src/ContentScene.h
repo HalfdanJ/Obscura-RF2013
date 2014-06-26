@@ -17,10 +17,8 @@ public:
     float minSpeed = 0;
     float maxSpeed = 1;
     
-    // bool syphonDirect;
 
     Mapping * mapping;
-
     ofFbo fbo;
     bool enabled;
     bool solo = true;
@@ -87,9 +85,20 @@ public:
     void setupScene(int width, int height, int i) {
         index = i;
         name = "Scene" + ofToString(i);
-        fbo.allocate(width, height);
+        
+        ofFbo::Settings settings;
+        
+        settings.height = height;
+        settings.width = width;
+        settings.numSamples = 8;
+        settings.useDepth = true;
+        //settings.colorFormats = GL_RGBA;
+        
+        fbo.allocate(settings);
+        
         setup();
         syphonOut.setName(name);
+
         
     }
     
