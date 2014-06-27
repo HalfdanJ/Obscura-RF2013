@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ofMain.h"
+#include "Defines.h"
 #include "ofxOsc.h"
 #include "ofxUI.h"
 #include "mapping.h"
@@ -10,15 +11,21 @@ class ContentScene {
     
 public:
     
+    ContentScene(){}
+    virtual ~ContentScene(){};
+    
+    Mapping * mapping;
+    ofxSyphonClient * syphonIn;
+    ofxUICanvas* gui;
+    ofxSyphonServer syphonOut;
+    
     int index;
     string name;
     string oscAddress = "/default";
     
     float minSpeed = 0;
     float maxSpeed = 1;
-    
-    Mapping * mapping;
-    ofxSyphonClient * syphonIn;
+    int long time = 0;
     
     ofFbo fbo;
     bool enabled;
@@ -26,115 +33,25 @@ public:
     float opacity;
     float speed;
     
-    ofxSyphonServer syphonOut;
-    
     int width;
     int height;
+    int numSamples = 4;
     
-    ContentScene() {
-    }
+    virtual void init();
+    virtual void setup();
+    virtual void update();
+    virtual void draw();
+    virtual void exit();
+    virtual void setGui();
     
-    virtual ~ContentScene(){}
+    void guiEvent(ofxUIEventArgs &e);
+    void setSceneGui();
+    void addSlider();
+    void checkMsg();
+    virtual void parseOscMessage(ofxOscMessage * m);
+    void setupScene(int _width, int _height, int _i);
+    void updateScene();
+    void drawScene();
     
-    virtual void setup(){}
-    virtual void update(){}
-    virtual void draw(){}
-    virtual void exit(){}
-        
-    virtual void setGui(ofxUICanvas * gui, float width){
-        
-        string i = "["+ ofToString(index) + "] ";
-        
-        gui->addWidgetDown(new ofxUILabel(name, OFX_UI_FONT_SMALL));
-        gui->addWidgetDown(new ofxUILabel("OSC Address: " + oscAddress, OFX_UI_FONT_SMALL));
-        
-        gui->addSpacer(width, 1);
-        gui->addSlider(i+"opacity", 0., 1., &opacity);
-        
-        gui->addSpacer(width, 1);
-        gui->addSlider(i+"speed", minSpeed, maxSpeed, &speed);
-        
-        gui->addToggle(i+"Enabled", &enabled);
-        gui->addToggle(i+"Solo", &solo);
-        
-    }
-    
-    void checkMsg() {
-        
-    }
-
-    virtual void parseOscMessage(ofxOscMessage * m){
-        
-	vector<string> adrSplit = ofSplitString(m->getAddress(), "/");
-	string rest = ofSplitString(m->getAddress(), "/"+adrSplit[1])[1];
-	//cout<<adrSplit[1]<<"   "<<rest<<endl;
-        
-        if(adrSplit[1] == "scene"+ofToString(index) || "/"+adrSplit[1] == oscAddress) {
-
-            if( rest == "/opacity/x" ) {
-                opacity = m->getArgAsFloat(0);
-            } else if(rest == "/enable/x" ) {
-                enabled = m->getArgAsInt32(0);
-            } else if(rest == "/speed/x" ) {
-                speed =m->getArgAsFloat(0);
-            } 
-
-        }
-        
-    }
-    
-    void setupScene(int _width, int _height, int _i) {
-        index = _i;
-        name = "Scene" + ofToString(_i);
-        
-        ofFbo::Settings settings;
-        
-        height = _height;
-        width = _width;
-        
-        settings.height = _height;
-        settings.width = _width;
-        settings.numSamples = 8;
-        settings.useDepth = false;
-        //settings.colorFormats = GL_RGBA;
-        
-        fbo.allocate(settings);
-        
-        setup();
-        syphonOut.setName(name);
-
-        
-    }
-    
-    void updateScene() {
-        if(enabled) {
-            update();
-        }
-    }
-    
-    void drawScene() {
-        if(enabled) {
-            ofPushMatrix();
-            glPushMatrix();
-            
-            fbo.begin();
-            ofClear(0, 0);
-            
-            //glEnable(GL_BLEND);
-            //glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
-            draw();
-            
-            //glDisable(GL_BLEND);
-            
-            fbo.end();
-            
-            ofPopMatrix();
-            glPopMatrix();
-        }
-        
-        if (solo) {
-            syphonOut.publishTexture(&fbo.getTextureReference());
-        }
-    }
     
 };

@@ -1,12 +1,8 @@
 #pragma once
 
 
-#define OUTWIDTH 5900
-#define OUTHEIGHT 1200
-#define OSCPORT 9999
-
-
 #include "ofMain.h"
+#include "Defines.h"
 #include "ofxSyphon.h"
 #include "ofxOsc.h"
 #include "ContentScene.h"
@@ -20,8 +16,6 @@
 #include "ofxUI.h"
 #include "mapping.h"
 
-
-
 class ofApp : public ofBaseApp {
 public:
 
@@ -30,7 +24,6 @@ public:
     void draw();
     void debugDraw();
     void drawGrid();
-
     void exit();
 
     void keyPressed  (int key);
@@ -45,7 +38,6 @@ public:
 
     ofxOscReceiver oscReceiver;
     ofxOscSender oscSender;
-
     ofxSyphonServer syphonOut;
     ofxSyphonClient syphonIn;
     
@@ -62,7 +54,8 @@ public:
     
     // gui
     void setGUI();
-    ofxUIScrollableCanvas *gui;
+    ofxUITabBar *guiTabBar;
+    vector<ofxUICanvas *> guis;
     void guiEvent(ofxUIEventArgs &e);
     
     bool hideGUI;
@@ -78,6 +71,5 @@ public:
     //HardNoise * hardNoise;
     
     vector<ContentScene*> scenes;
-    
     
 };

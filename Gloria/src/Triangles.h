@@ -106,7 +106,7 @@ public:
     float colorR, colorG, colorB;
     
     
-    void setGui(ofxUICanvas *gui, float width);
+    void setGui();
     void parseOscMessage(ofxOscMessage *m);
     
     

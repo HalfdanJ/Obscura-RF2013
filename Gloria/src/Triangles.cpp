@@ -59,8 +59,7 @@ void Triangles::setup(){
 }
 
 
-void Triangles::setGui(ofxUICanvas *gui, float width){
-    ContentScene::setGui(gui,width);
+void Triangles::setGui(){
     
     gui->addToggle("SideScreens", &sideScreens);
     gui->addSlider("SyphonOpacity", 0,1, &syphonOpacity);

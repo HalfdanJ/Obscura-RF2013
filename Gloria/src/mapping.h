@@ -6,8 +6,7 @@
 //
 //
 
-#ifndef gloriamap_mapping_h
-#define gloriamap_mapping_h
+#pragma once
 
 #include "ofMain.h"
 #include "ofxSvg.h"
@@ -82,10 +81,7 @@ public:
     ofxSVG svg;
     vector<InputTriangle*> triangles;
     vector<Corner*> corners;
-
     vector<WorldPoint*> worldPoints;
 
 };
 
-
-#endif

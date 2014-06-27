@@ -52,9 +52,9 @@ void TriBlobs::parseOscMessage(ofxOscMessage *m){
     }
 }
 
-void TriBlobs::setGui(ofxUICanvas *gui, float width){
+void TriBlobs::setGui(){
     
-    ContentScene::setGui(gui, width);
+    //ContentScene::setGui(gui, width);
     
     string i = "["+ ofToString(index) + "] ";
     
@@ -64,7 +64,6 @@ void TriBlobs::setGui(ofxUICanvas *gui, float width){
     gui->addToggle(i+"animate", &animate);
     
     /*gui->addSlider(i+"Y Speed", minSpeed, maxSpeed, &ySpeed);
-    
     
     gui->addSlider(i+"X Scatter", 0, 6000, &xScatter);
     gui->addSlider(i+"Y Scatter", 0, 6000, &yScatter);

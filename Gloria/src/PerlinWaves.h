@@ -21,7 +21,7 @@ public:
     void update();
     
     void parseOscMessage(ofxOscMessage * m);
-    void setGui(ofxUICanvas * gui, float width);
+    void setGui();
     
     float frequency;
     //float lineWidth;

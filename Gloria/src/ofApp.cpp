@@ -1,10 +1,9 @@
 #include "ofApp.h"
 
-
 void ofApp::setup() {
     
     //oscSender.setup("HalfdanJ.local", 6745);
-    oscReceiver.setup(OSCPORT);
+    oscReceiver.setup(OSCRECEIVEPORT);
     
     ofSetLogLevel(OF_LOG_NOTICE);
     ofSetFrameRate(60);
@@ -179,21 +178,20 @@ void ofApp::setup() {
     fboSettings.width = OUTWIDTH;
     fboSettings.numSamples = 8;
     fboSettings.useDepth = false;
-    fboSettings.textureTarget = GL_TEXTURE_RECTANGLE_ARB;
+    //fboSettings.textureTarget = GL_TEXTURE_RECTANGLE_ARB;
     
     fboOut.allocate(fboSettings);
 
-    
-    
     for(int i=0; i<scenes.size(); i++) {
         scenes[i]->mapping = mapping;
         scenes[i]->setupScene(OUTWIDTH, OUTHEIGHT, i);
     }
     
     setGUI();
-    gui->setDrawBack(true);
-    gui->setScrollAreaToScreenHeight();
-    gui->loadSettings("GUI/guiSettings.xml");
+    guiTabBar->setDrawBack(true);
+    //guiTabBar->setScrollAreaToScreenHeight();
+    
+    guiTabBar->loadSettings("GUI/guiSettings.xml", "ui-");
 }
 
 
@@ -283,8 +281,6 @@ void ofApp::draw() {
     }
     fboOut.end();
     
-    syphonOut.publishTexture(&fboOut.getTextureReference());
-    
     ofPushMatrix();
     ofTranslate(300, 40);
     
@@ -323,6 +319,8 @@ void ofApp::draw() {
     
     ofSetColor(255);
     ofDrawBitmapString("FPS: " + ofToString(ofGetFrameRate()), ofGetWidth()-200, 20);
+    
+    syphonOut.publishTexture(&fboOut.getTextureReference());
 
 }
 
@@ -348,35 +346,25 @@ void ofApp::setGUI()
 	float xInit = OFX_UI_GLOBAL_WIDGET_SPACING;
     float width = 255-xInit;
 	hideGUI = false;
-
-    gui = new ofxUIScrollableCanvas(0, 0, width+xInit, ofGetHeight());
     
-    gui->setScrollAreaToScreenHeight();
-    gui->setScrollableDirections(false, true);
+    guiTabBar = new ofxUITabBar();
     
-    gui->setFont("GUI/Arial.ttf");
-    gui->setWidgetFontSize(OFX_UI_FONT_SMALL);
-    gui->setColorBack(ofColor(30, 30, 30,200));    
+    guiTabBar->setFont("GUI/Arial.ttf");
+    guiTabBar->setWidgetFontSize(OFX_UI_FONT_SMALL);
+    guiTabBar->setColorBack(ofColor(30, 30, 30,200));
     
-    gui->addToggle("Draw guide", &drawGuide);
+    guiTabBar->addToggle("Draw guide", &drawGuide);
     
     for(int i=0; i<scenes.size(); i++) {
-        
-        gui->addSpacer(width, 3)->setDrawOutline(true);
-        scenes[i]->setGui(gui, width);
-        
-        // label
-        // enabled
-        // opacity
-        // solo
-        // osc address
-        
+        scenes[i]->setSceneGui();
+        guiTabBar->addCanvas(scenes[i]->gui);
+        guis.push_back(scenes[i]->gui);
     }
     
     
-    gui->autoSizeToFitWidgets();
+    guiTabBar->autoSizeToFitWidgets();
     
-    ofAddListener(gui->newGUIEvent,this,&ofApp::guiEvent);
+    ofAddListener(guiTabBar->newGUIEvent,this,&ofApp::guiEvent);
 }
 
 void InputTriangle::debugDraw() {
@@ -461,8 +449,8 @@ void ofApp::dragEvent(ofDragInfo dragInfo){
 //--------------------------------------------------------------
 void ofApp::exit()
 {
-    gui->saveSettings("GUI/guiSettings.xml");
-    delete gui;
+    guiTabBar->saveSettings("GUI/guiSettings.xml", "ui-");
+    delete guiTabBar;
     
     XML.saveFile("calibration.xml");
 }

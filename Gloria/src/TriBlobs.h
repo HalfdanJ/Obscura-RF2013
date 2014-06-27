@@ -21,11 +21,9 @@ public:
     void draw();
     void debugDraw();
     void update();
-    
-    Mapping * mapping;
+    void setGui();
     
     void parseOscMessage(ofxOscMessage * m);
-    void setGui(ofxUICanvas * gui, float width);
     
     float smoothness;
     float spikeyness;

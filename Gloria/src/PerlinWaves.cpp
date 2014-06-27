@@ -104,22 +104,11 @@ void PerlinWaves::parseOscMessage(ofxOscMessage *m){
     }
 }
 
-void PerlinWaves::setGui(ofxUICanvas *gui, float width){    
+void PerlinWaves::setGui(){
     string i = "["+ ofToString(index) + "] ";
-    
-    gui->addWidgetDown(new ofxUILabel(name, OFX_UI_FONT_SMALL));
-    gui->addWidgetDown(new ofxUILabel("OSC Address: " + oscAddress, OFX_UI_FONT_SMALL));
-    
-    gui->addSpacer(width, 1);
-    gui->addToggle(i+"Enabled", &enabled);
-    gui->addToggle(i+"Solo", &solo);
-    gui->addSlider(i+"opacity", 0., 1., &opacity);
-    
-    gui->addSpacer(width, 1);
     
     gui->addSlider(i+"X Speed", minSpeed, maxSpeed, &xSpeed);
     gui->addSlider(i+"Y Speed", minSpeed, maxSpeed, &ySpeed);
-    
     
     gui->addSlider(i+"X Scatter", 0, 6000, &xScatter);
     gui->addSlider(i+"Y Scatter", 0, 6000, &yScatter);

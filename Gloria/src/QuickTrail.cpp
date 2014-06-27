@@ -129,9 +129,7 @@ void QuickTrail::parseOscMessage(ofxOscMessage *m){
 }
 
 void QuickTrail::setGui(ofxUICanvas *gui, float width){
-    
-    ContentScene::setGui(gui, width);
-    
+        
     string i = "["+ ofToString(index) + "] ";
      
     gui->addSlider(i+"length", 0, 20, &length);
