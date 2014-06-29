@@ -144,11 +144,11 @@ void Triangles::divide(SubTriangle * triangle, int levels){
             }
         } else {
             SubTriangle * subTriangle = triangle;
+        
+            ofVec3f center = subTriangle->getCenter();
+            ofVec3f dir = center - subTriangle->corners[0]->pos;
             
-            ofVec2f center = subTriangle->center();
-            ofVec2f dir = center - subTriangle->corners[0]->pos;
-            
-            ofVec2f newP = dir * ofRandom(0.5,1.5) + subTriangle->corners[0]->pos;
+            ofVec3f newP = dir * ofRandom(0.5,1.5) + subTriangle->corners[0]->pos;
             
             {
                 SubTriangle * newTriangle = new SubTriangle();
@@ -292,10 +292,10 @@ void Triangles::drawTriangle(SubTriangle * triangle, float opacity){
         ofVec3f normal;
         
         if(aaa == 0){
-            center = triangle->center();
+            center = triangle->getCenter();
             normal = triangle->normal;
         } else {
-            center = (1-aaa)*triangle->center() + aaa* triangle->parentTriangle->center();
+            center = (1-aaa)*triangle->getCenter() + aaa* triangle->parentTriangle->getCenter();
             normal = (1-aaa) * triangle->normal + (aaa)*triangle->parentTriangle->normal;
         }
         
@@ -478,7 +478,6 @@ void Triangles::update(){
      
      */
     
-    
     center.x = 2996;
     center.y = 1200;
     
@@ -493,8 +492,8 @@ void Triangles::update(){
     for(int i=0;i<mapping->triangles.size();i++){
         SubTriangle * triangle = subTriangles[mapping->triangles[i]];
         
-        if(triangle->getLevels() < divideCount*triangle->ageDifference && ((triangle->center().distance(center) < divideRadius && !divideInvert) || (triangle->center().distance(center) > divideRadius && divideInvert))){
-            float a = (divideRadius - triangle->center().distance(center)) / divideRadius;
+        if(triangle->getLevels() < divideCount*triangle->ageDifference && ((triangle->getCenter().distance(center) < divideRadius && !divideInvert) || (triangle->getCenter().distance(center) > divideRadius && divideInvert))){
+            float a = (divideRadius - triangle->getCenter().distance(center)) / divideRadius;
             if(triangle->getLowestAge() > transitionTime){
                 // cout<<"DIVIDE"<<endl;
                 divide(triangle, divideCount*triangle->ageDifference);

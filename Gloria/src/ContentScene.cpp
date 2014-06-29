@@ -48,7 +48,7 @@ void ContentScene::setSceneGui(){
 
     
     string i = "["+ ofToString(index) + "] ";
-    gui->setName("GUI" + i);
+    gui->setName(name);
     
     gui->addWidgetDown(new ofxUILabel(name, OFX_UI_FONT_SMALL));
     gui->addWidgetDown(new ofxUILabel("OSC Address: " + oscAddress, OFX_UI_FONT_SMALL));
@@ -108,6 +108,7 @@ void ContentScene::updateScene() {
 void ContentScene::drawScene() {
     if(enabled) {
         ofPushMatrix();
+        ofPushStyle();
         glPushMatrix();
         
         fbo.begin();
@@ -122,6 +123,7 @@ void ContentScene::drawScene() {
         fbo.end();
         
         ofPopMatrix();
+        ofPopStyle();
         glPopMatrix();
     }
     

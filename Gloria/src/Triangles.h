@@ -70,13 +70,9 @@ public:
     
     void setup();
     void draw();
-    
     void debugDraw();
-    
     void update();    
     float pct;
-    
-
     
     map<InputTriangle*, SubTriangle* > subTriangles;
     

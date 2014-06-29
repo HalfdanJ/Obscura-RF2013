@@ -14,7 +14,7 @@
 #include "TriBlobs.h"
 #include "HardNoise.h"
 #include "ofxUI.h"
-#include "mapping.h"
+#include "Mapping.h"
 
 class ofApp : public ofBaseApp {
 public:
@@ -64,7 +64,7 @@ public:
     // Define all the scenes here
     //LampWalker * lampWalker;
     //QuickTrail * quickTrail;
-    //Triangles * triangles;
+    Triangles * triangles;
     //GTess * tesselator;
     PerlinWaves * perlinWaves;
     //TriBlobs * triBlobs;

@@ -85,6 +85,7 @@
 		046C30A517805E7C009A2EE6 /* ofxSvg.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 046C309F17805E7C009A2EE6 /* ofxSvg.cpp */; };
 		04A0E2AC195CB4A60004D93F /* Syphon.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0425D7F0195ABA57003086AC /* Syphon.framework */; };
 		04A0E2BC195DAC800004D93F /* ContentScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04A0E2BB195DAC800004D93F /* ContentScene.cpp */; };
+		04A0E2BE195DBA280004D93F /* Mapping.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04A0E2BD195DBA280004D93F /* Mapping.cpp */; };
 		04C6D22A17847C8300AC12B9 /* GTess.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04C6D22917847C8300AC12B9 /* GTess.cpp */; };
 		04C6D22D17847D8900AC12B9 /* PerlinWaves.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04C6D22C17847D8900AC12B9 /* PerlinWaves.cpp */; };
 		04C6D2341784A1F400AC12B9 /* TriBlobs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04C6D2331784A1F400AC12B9 /* TriBlobs.cpp */; };
@@ -405,6 +406,7 @@
 		046C30A017805E7C009A2EE6 /* ofxSvg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxSvg.h; sourceTree = "<group>"; };
 		04A0E2BA195DA7590004D93F /* Defines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Defines.h; sourceTree = "<group>"; };
 		04A0E2BB195DAC800004D93F /* ContentScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ContentScene.cpp; sourceTree = "<group>"; };
+		04A0E2BD195DBA280004D93F /* Mapping.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Mapping.cpp; sourceTree = "<group>"; };
 		04C6D22817847C7800AC12B9 /* GTess.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GTess.h; sourceTree = "<group>"; };
 		04C6D22917847C8300AC12B9 /* GTess.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GTess.cpp; sourceTree = "<group>"; };
 		04C6D22B17847D7F00AC12B9 /* PerlinWaves.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PerlinWaves.h; sourceTree = "<group>"; };
@@ -422,7 +424,7 @@
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
 		DD7BE8AA1780D80900F04F23 /* LampWalker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LampWalker.cpp; sourceTree = "<group>"; };
 		DD7BE8AB1780D80900F04F23 /* LampWalker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LampWalker.h; sourceTree = "<group>"; };
-		DD7BE8AD1780D8E900F04F23 /* mapping.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mapping.h; sourceTree = "<group>"; };
+		DD7BE8AD1780D8E900F04F23 /* Mapping.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Mapping.h; sourceTree = "<group>"; };
 		DD81641A17820BFB006B6A3E /* Triangles.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Triangles.cpp; sourceTree = "<group>"; };
 		DD81641B17820BFB006B6A3E /* Triangles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Triangles.h; sourceTree = "<group>"; };
 		E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openFrameworksLib.xcodeproj; path = ../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj; sourceTree = SOURCE_ROOT; };
@@ -1236,7 +1238,8 @@
 				04A0E2BB195DAC800004D93F /* ContentScene.cpp */,
 				E4B69E1F0A3A1BDC003C02F2 /* ofApp.h */,
 				E4B69E1E0A3A1BDC003C02F2 /* ofApp.cpp */,
-				DD7BE8AD1780D8E900F04F23 /* mapping.h */,
+				DD7BE8AD1780D8E900F04F23 /* Mapping.h */,
+				04A0E2BD195DBA280004D93F /* Mapping.cpp */,
 				BB4B014C10F69532006C3DED /* addons */,
 			);
 			path = src;
@@ -1386,6 +1389,7 @@
 				046C30A217805E7C009A2EE6 /* svgtiny.cpp in Sources */,
 				0425D7F6195ABA57003086AC /* ofxSyphonServerDirectory.mm in Sources */,
 				0425D872195ABAD5003086AC /* ofxUIRadio.cpp in Sources */,
+				04A0E2BE195DBA280004D93F /* Mapping.cpp in Sources */,
 				046C30A317805E7C009A2EE6 /* svgtiny_gradient.cpp in Sources */,
 				0425D7DD195AB9A3003086AC /* NetworkingUtils.cpp in Sources */,
 				0425D871195ABAD5003086AC /* ofxUINumberDialer.cpp in Sources */,
