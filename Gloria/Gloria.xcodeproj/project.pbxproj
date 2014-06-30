@@ -97,6 +97,7 @@
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
 		DD7BE8AC1780D80900F04F23 /* LampWalker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DD7BE8AA1780D80900F04F23 /* LampWalker.cpp */; };
 		DD81641C17820BFB006B6A3E /* Triangles.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DD81641A17820BFB006B6A3E /* Triangles.cpp */; };
+		DDB42D1519616CB000AAD4E6 /* 3DStage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DDB42D1319616CB000AAD4E6 /* 3DStage.cpp */; };
 		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
 		E45BE97B0E8CC7DD009D7055 /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9710E8CC7DD009D7055 /* AGL.framework */; };
 		E45BE97C0E8CC7DD009D7055 /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9720E8CC7DD009D7055 /* ApplicationServices.framework */; };
@@ -427,6 +428,8 @@
 		DD7BE8AD1780D8E900F04F23 /* Mapping.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Mapping.h; sourceTree = "<group>"; };
 		DD81641A17820BFB006B6A3E /* Triangles.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Triangles.cpp; sourceTree = "<group>"; };
 		DD81641B17820BFB006B6A3E /* Triangles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Triangles.h; sourceTree = "<group>"; };
+		DDB42D1319616CB000AAD4E6 /* 3DStage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = 3DStage.cpp; sourceTree = "<group>"; };
+		DDB42D1419616CB000AAD4E6 /* 3DStage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 3DStage.h; sourceTree = "<group>"; };
 		E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openFrameworksLib.xcodeproj; path = ../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E45BE9710E8CC7DD009D7055 /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
 		E45BE9720E8CC7DD009D7055 /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = /System/Library/Frameworks/ApplicationServices.framework; sourceTree = "<absolute>"; };
@@ -795,6 +798,8 @@
 				04D09F2D17859C8000627C4F /* HardNoise.h */,
 				04D09F2E17859C8D00627C4F /* HardNoise.cpp */,
 				04A0E2BA195DA7590004D93F /* Defines.h */,
+				DDB42D1319616CB000AAD4E6 /* 3DStage.cpp */,
+				DDB42D1419616CB000AAD4E6 /* 3DStage.h */,
 			);
 			name = Scenes;
 			sourceTree = "<group>";
@@ -1346,6 +1351,7 @@
 				0425D87A195ABAD5003086AC /* ofxUISpectrum.cpp in Sources */,
 				0425D883195ABAD5003086AC /* ofxUIWidget.cpp in Sources */,
 				0425D7DB195AB9A3003086AC /* ofxOscSender.cpp in Sources */,
+				DDB42D1519616CB000AAD4E6 /* 3DStage.cpp in Sources */,
 				0425D7DE195AB9A3003086AC /* UdpSocket.cpp in Sources */,
 				0425D86A195ABAD5003086AC /* ofxUILabel.cpp in Sources */,
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
