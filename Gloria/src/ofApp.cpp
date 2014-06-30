@@ -58,10 +58,6 @@ void ofApp::setup() {
     }
     
     setGUI();
-    guiTabBar->setDrawBack(true);
-    //guiTabBar->setScrollAreaToScreenHeight();
-    guiTabBar->setColorBack(ofColor(0,0,0,255));
-    guiTabBar->loadSettings("GUI/guiSettings.xml", "ui-");
 }
 
 
@@ -226,23 +222,36 @@ void ofApp::setGUI()
     mainGui = new ofxUICanvas();
     
     mainGui->setFont("GUI/Arial.ttf");
+    
+    mainGui->addLabel("Gloria");
+    
     mainGui->addToggle("Draw guide", &drawGuide);
+    mainGui->autoSizeToFitWidgets();
     ofAddListener(mainGui->newGUIEvent,this,&ofApp::guiEvent);
     
     
     guiTabBar->setFont("GUI/Arial.ttf");
     guiTabBar->setWidgetFontSize(OFX_UI_FONT_SMALL);
-    guiTabBar->setColorBack(ofColor(30, 30, 30,200));
-    
     
     for(int i=0; i<scenes.size(); i++) {
         scenes[i]->setSceneGui();
         guiTabBar->addCanvas(scenes[i]->gui);
+        scenes[i]->gui->setColorBack(ofColor(0,100 + 20*i,0,255));
         guis.push_back(scenes[i]->gui);
     }
     
     guiTabBar->autoSizeToFitWidgets();
     ofAddListener(guiTabBar->newGUIEvent,this,&ofApp::guiEvent);
+    
+    guiTabBar->setPosition(0, mainGui->getRect()->height+10);
+    //guiTabBar->setScrollAreaToScreenHeight();
+    
+    mainGui->setColorBack(ofColor(0,150,200,255));
+    guiTabBar->setColorBack(ofColor(0,100,0,255));
+    
+    mainGui->loadSettings("GUI/guiMainSettings.xml");
+    guiTabBar->loadSettings("GUI/guiSettings.xml", "ui-");
+    
 }
 
 
@@ -324,6 +333,7 @@ void ofApp::dragEvent(ofDragInfo dragInfo){
 //--------------------------------------------------------------
 void ofApp::exit()
 {
+    mainGui->saveSettings("GUI/guiMainSettings.xml");
     guiTabBar->saveSettings("GUI/guiSettings.xml", "ui-");
     mapping->save();
     
