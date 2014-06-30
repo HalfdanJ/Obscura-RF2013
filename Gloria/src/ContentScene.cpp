@@ -19,6 +19,9 @@ void ContentScene::draw() {
 void ContentScene::setGui() {
 }
 
+void ContentScene::parseOscMessage(ofxOscMessage *m) {
+}
+
 void ContentScene::setupScene(int _width, int _height, int _i) {
     index = _i;
     name = "Scene" + ofToString(_i);
@@ -52,12 +55,12 @@ void ContentScene::setSceneGui(){
     gui->addWidgetDown(new ofxUILabel("OSC Address: " + oscAddress, OFX_UI_FONT_SMALL));
     
     gui->addSpacer(GUIWIDTH, 1);
-    gui->addSlider(i+"opacity", 0., 1., &opacity);
+    gui->addSlider("/opacity/x", 0., 1., &opacity);
     
     gui->addSpacer(GUIWIDTH, 1);
     //gui->addSlider(i+"speed", minSpeed, maxSpeed, &speed);
-    gui->addToggle(i+"Enabled", &enabled);
-    gui->addToggle(i+"SyphonOut", &solo);
+    gui->addToggle("/enabled/x", &enabled);
+    gui->addToggle("/SyphonOut/x", &solo);
     
     setGui();
     gui->autoSizeToFitWidgets();
@@ -73,14 +76,31 @@ void ContentScene::guiEvent(ofxUIEventArgs &e)
     //cout << canvasParent << endl;
 }
 
-void ContentScene::parseOscMessage(ofxOscMessage * m){
+void ContentScene::parseSceneOscMessage(ofxOscMessage * m){
+
+    // you can change values of widgets in gui with osc just send to its name
     
 	vector<string> adrSplit = ofSplitString(m->getAddress(), "/");
 	string rest = ofSplitString(m->getAddress(), "/"+adrSplit[1])[1];
 	//cout<<adrSplit[1]<<"   "<<rest<<endl;
     
     if(adrSplit[1] == "scene"+ofToString(index) || "/"+adrSplit[1] == oscAddress) {
-        if( rest == "/opacity/x" ) {
+        
+        for(int i=0; i< gui->getWidgets().size(); i++ ) {
+        
+        ofxUIWidget * widget = gui->getWidgets()[i];
+        
+        if(widget->getName() == rest) {
+            if(widget->getKind() == OFX_UI_WIDGET_SLIDER_H) {
+                
+                    ofxUISlider *slider = (ofxUISlider *) widget;
+                    slider->setValue(m->getArgAsFloat(0));
+                
+                }
+            }
+        }
+    
+        /*if( rest == "/opacity/x" ) {
             opacity = m->getArgAsFloat(0);
         } else if(rest == "/enable/x" ) {
             enabled = m->getArgAsInt32(0);
