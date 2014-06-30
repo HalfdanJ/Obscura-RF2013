@@ -43,12 +43,13 @@ public:
     virtual void draw();
     virtual void exit();
     virtual void setGui();
+    virtual void parseOscMessage(ofxOscMessage * m);
     
     void guiEvent(ofxUIEventArgs &e);
     void setSceneGui();
     void addSlider();
     void checkMsg();
-    virtual void parseOscMessage(ofxOscMessage * m);
+    void parseSceneOscMessage(ofxOscMessage * m);
     void setupScene(int _width, int _height, int _i);
     void updateScene();
     void drawScene();
