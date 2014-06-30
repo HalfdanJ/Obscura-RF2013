@@ -82,8 +82,7 @@ void ContentScene::parseSceneOscMessage(ofxOscMessage * m){
     
 	vector<string> adrSplit = ofSplitString(m->getAddress(), "/");
 	string rest = ofSplitString(m->getAddress(), "/"+adrSplit[1])[1];
-	cout<<adrSplit[1]<<"   "<<rest<<endl;
-    
+	//cout<<adrSplit[1]<<"   "<<rest<<endl;
     
     if(adrSplit[1] == "scene"+ofToString(index) || "/"+adrSplit[1] == oscAddress) {
         
