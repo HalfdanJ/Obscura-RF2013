@@ -9,7 +9,7 @@ int main(){
     //ofSetupOpenGL(1600, 800, OF_WINDOW);
     
     ofAppGlutWindow window;
-	ofSetupOpenGL(&window, 1024,768, OF_WINDOW);			// <-------- setup the GL context
+	ofSetupOpenGL(&window, 1600,800, OF_WINDOW);			// <-------- setup the GL context
     
 	ofRunApp(new ofApp()); // start the app
 }
