@@ -23,10 +23,6 @@ public:
     string name;
     string oscAddress = "/default";
     
-    float minSpeed = 0;
-    float maxSpeed = 1;
-    int long time = 0;
-    
     ofFbo fbo;
     bool enabled;
     bool solo = true;

@@ -64,12 +64,10 @@ public:
     
     // Define all the scenes here
     //LampWalker * lampWalker;
-    //QuickTrail * quickTrail;
+    QuickTrail * quickTrail;
     Triangles * triangles;
-    //GTess * tesselator;
     PerlinWaves * perlinWaves;
-    //TriBlobs * triBlobs;
-    //HardNoise * hardNoise;
+
     
     vector<ContentScene*> scenes;
 };

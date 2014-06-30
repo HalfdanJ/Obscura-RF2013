@@ -60,7 +60,7 @@ void ContentScene::setSceneGui(){
     gui->addSpacer(GUIWIDTH, 1);
     //gui->addSlider(i+"speed", minSpeed, maxSpeed, &speed);
     gui->addToggle("/enabled/x", &enabled);
-    gui->addToggle("/SyphonOut/x", &solo);
+    gui->addToggle("/syphonout/x", &solo);
     
     setGui();
     gui->autoSizeToFitWidgets();
@@ -95,18 +95,9 @@ void ContentScene::parseSceneOscMessage(ofxOscMessage * m){
                 
                     ofxUISlider *slider = (ofxUISlider *) widget;
                     slider->setValue(m->getArgAsFloat(0));
-                
                 }
             }
         }
-    
-        /*if( rest == "/opacity/x" ) {
-            opacity = m->getArgAsFloat(0);
-        } else if(rest == "/enable/x" ) {
-            enabled = m->getArgAsInt32(0);
-        }/* else if(rest == "/speed/x" ) {
-            speed =m->getArgAsFloat(0);
-        }*/
     }
 }
 
@@ -114,8 +105,6 @@ void ContentScene::updateScene() {
     if(enabled) {
         update();
     }
-    
-    //time += speed;
 }
 
 void ContentScene::drawScene() {
@@ -144,6 +133,4 @@ void ContentScene::drawScene() {
 
 void ContentScene::exit() {
     delete gui;
-    delete syphonIn;
-    delete mapping;
 }

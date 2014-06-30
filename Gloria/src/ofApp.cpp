@@ -37,6 +37,9 @@ void ofApp::setup() {
     
     // Set up the scenes, all scenes is a subclass of SceneContent, don't call draw, setup and update directly it is taken care of thorugh the scene.
     
+    quickTrail = new QuickTrail;
+    scenes.push_back(quickTrail);
+    
     triangles = new Triangles;
     scenes.push_back(triangles);
     
@@ -345,7 +348,6 @@ void ofApp::exit()
     
     delete guiTabBar;
     delete mapping;
-    
 }
 
 void ofApp::guiEvent(ofxUIEventArgs &e)
