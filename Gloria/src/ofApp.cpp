@@ -154,7 +154,7 @@ void ofApp::draw() {
     ofSetColor(255,255,255,255);
     
     ofPushMatrix();{
-        ofTranslate(300, 40);
+        ofTranslate(380, 40);
         
         ofScale(0.2, 0.2);
         ofBackground(0);
@@ -175,7 +175,7 @@ void ofApp::draw() {
     }ofPopMatrix();
     
     ofPushMatrix();{
-        ofTranslate(300, 320);
+        ofTranslate(380, 320);
         
         if(syphonIn->isSetup()){
             

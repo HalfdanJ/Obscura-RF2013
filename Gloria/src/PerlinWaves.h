@@ -36,5 +36,4 @@ public:
     
     float _xSpeed;
     float _ySpeed;
-    
 };
