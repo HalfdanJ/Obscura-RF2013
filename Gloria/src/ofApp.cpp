@@ -8,7 +8,7 @@ void ofApp::setup() {
     ofSetLogLevel(OF_LOG_NOTICE);
     ofSetFrameRate(60);
     ofSetVerticalSync(true);
-        
+    glEnable(GL_LINES);
     ofSetWindowTitle("Obscure Glorius Control 2014");
     
     syphonOut.setName("Gloria Main");
@@ -124,7 +124,6 @@ void ofApp::update() {
     // Draw scene fbo's
     ofPushStyle();
     ofNoFill();
-    
     for(int i=0; i<scenes.size(); i++) {
         scenes[i]->drawScene();
     }
@@ -205,6 +204,7 @@ void ofApp::debugDraw() {
 }
 
 void ofApp::drawGrid() {
+    ofSetLineWidth(1);
     for(int i =0; i<mapping->triangles.size();i++) {
         mapping->triangles[i]->mesh.drawWireframe();
     }

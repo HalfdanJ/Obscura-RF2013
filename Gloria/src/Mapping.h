@@ -56,6 +56,7 @@ public:
     void save();
     void exit();
     void debugDraw();
+    void drawGuide();
     
     //InputTriangle * selectedTriangle;
     Corner * selectedCorner;

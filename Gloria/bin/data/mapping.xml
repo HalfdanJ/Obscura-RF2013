@@ -1,2145 +1,1790 @@
 <corners>
     <corner>
         <uid>0</uid>
-        <x>1415.078369141</x>
-        <y>583.222534180</y>
+        <x>0.000000000</x>
+        <y>0.000000000</y>
         <z>0.000000000</z>
         <inTriangles>
             <uid>0</uid>
-            <uid>1</uid>
-            <uid>2</uid>
-            <uid>5</uid>
-            <uid>14</uid>
-            <uid>15</uid>
-            <uid>16</uid>
         </inTriangles>
         <joinedCorners>
             <uid>1</uid>
             <uid>2</uid>
-            <uid>3</uid>
-            <uid>4</uid>
-            <uid>7</uid>
-            <uid>10</uid>
-            <uid>8</uid>
         </joinedCorners>
     </corner>
     <corner>
         <uid>1</uid>
-        <x>1071.921752930</x>
-        <y>347.018096924</y>
+        <x>124.999786377</x>
+        <y>124.999893188</y>
         <z>0.000000000</z>
         <inTriangles>
             <uid>0</uid>
-            <uid>1</uid>
-            <uid>127</uid>
         </inTriangles>
         <joinedCorners>
             <uid>0</uid>
             <uid>2</uid>
-            <uid>3</uid>
-            <uid>92</uid>
         </joinedCorners>
     </corner>
     <corner>
         <uid>2</uid>
-        <x>1357.289550781</x>
-        <y>351.070739746</y>
+        <x>0.000000000</x>
+        <y>0.000000000</y>
         <z>0.000000000</z>
         <inTriangles>
             <uid>0</uid>
-            <uid>5</uid>
         </inTriangles>
         <joinedCorners>
             <uid>0</uid>
             <uid>1</uid>
-            <uid>7</uid>
         </joinedCorners>
     </corner>
     <corner>
         <uid>3</uid>
-        <x>1061.314941406</x>
-        <y>543.689208984</y>
+        <x>3.884994507</x>
+        <y>1488.831176758</y>
         <z>0.000000000</z>
         <inTriangles>
             <uid>1</uid>
-            <uid>2</uid>
-            <uid>3</uid>
-            <uid>126</uid>
-            <uid>127</uid>
         </inTriangles>
         <joinedCorners>
-            <uid>1</uid>
-            <uid>0</uid>
             <uid>4</uid>
             <uid>5</uid>
-            <uid>92</uid>
         </joinedCorners>
     </corner>
     <corner>
         <uid>4</uid>
-        <x>1396.701049805</x>
-        <y>797.702026367</y>
+        <x>165.694213867</x>
+        <y>921.976684570</y>
         <z>0.000000000</z>
         <inTriangles>
+            <uid>1</uid>
             <uid>2</uid>
             <uid>3</uid>
-            <uid>4</uid>
-            <uid>6</uid>
-            <uid>16</uid>
         </inTriangles>
         <joinedCorners>
             <uid>3</uid>
-            <uid>0</uid>
             <uid>5</uid>
             <uid>6</uid>
-            <uid>8</uid>
+            <uid>7</uid>
         </joinedCorners>
     </corner>
     <corner>
         <uid>5</uid>
-        <x>1017.448974609</x>
-        <y>904.229003906</y>
+        <x>409.521789551</x>
+        <y>1462.488769531</y>
         <z>0.000000000</z>
         <inTriangles>
+            <uid>1</uid>
             <uid>3</uid>
             <uid>4</uid>
-            <uid>124</uid>
-            <uid>126</uid>
         </inTriangles>
         <joinedCorners>
             <uid>3</uid>
             <uid>4</uid>
-            <uid>6</uid>
-            <uid>91</uid>
-            <uid>92</uid>
+            <uid>7</uid>
+            <uid>8</uid>
         </joinedCorners>
     </corner>
     <corner>
         <uid>6</uid>
-        <x>1386.420043945</x>
-        <y>1012.374023438</y>
+        <x>717.673706055</x>
+        <y>636.683227539</y>
         <z>0.000000000</z>
         <inTriangles>
-            <uid>4</uid>
-            <uid>6</uid>
-            <uid>7</uid>
+            <uid>2</uid>
+            <uid>5</uid>
         </inTriangles>
         <joinedCorners>
-            <uid>5</uid>
             <uid>4</uid>
-            <uid>8</uid>
+            <uid>7</uid>
             <uid>9</uid>
         </joinedCorners>
     </corner>
     <corner>
         <uid>7</uid>
-        <x>1494.780273438</x>
-        <y>305.563995361</y>
+        <x>853.549743652</x>
+        <y>979.646667480</y>
         <z>0.000000000</z>
         <inTriangles>
+            <uid>2</uid>
+            <uid>3</uid>
+            <uid>4</uid>
             <uid>5</uid>
+            <uid>6</uid>
+            <uid>7</uid>
             <uid>8</uid>
-            <uid>14</uid>
         </inTriangles>
         <joinedCorners>
-            <uid>0</uid>
-            <uid>2</uid>
+            <uid>4</uid>
+            <uid>6</uid>
+            <uid>5</uid>
+            <uid>8</uid>
+            <uid>9</uid>
             <uid>10</uid>
-            <uid>11</uid>
         </joinedCorners>
     </corner>
     <corner>
         <uid>8</uid>
-        <x>1626.672973633</x>
-        <y>721.354003906</y>
+        <x>1104.730590820</x>
+        <y>1443.243774414</y>
         <z>0.000000000</z>
         <inTriangles>
-            <uid>6</uid>
+            <uid>4</uid>
             <uid>7</uid>
-            <uid>11</uid>
-            <uid>13</uid>
-            <uid>15</uid>
-            <uid>16</uid>
+            <uid>8</uid>
+            <uid>9</uid>
         </inTriangles>
         <joinedCorners>
-            <uid>6</uid>
-            <uid>4</uid>
-            <uid>9</uid>
-            <uid>14</uid>
+            <uid>5</uid>
+            <uid>7</uid>
             <uid>10</uid>
-            <uid>0</uid>
+            <uid>11</uid>
         </joinedCorners>
     </corner>
     <corner>
         <uid>9</uid>
-        <x>1689.614990234</x>
-        <y>1039.983032227</y>
+        <x>1236.524169922</x>
+        <y>542.404602051</y>
         <z>0.000000000</z>
         <inTriangles>
-            <uid>7</uid>
-            <uid>13</uid>
-            <uid>17</uid>
-            <uid>18</uid>
-            <uid>19</uid>
+            <uid>5</uid>
+            <uid>6</uid>
+            <uid>10</uid>
         </inTriangles>
         <joinedCorners>
             <uid>6</uid>
+            <uid>7</uid>
+            <uid>10</uid>
+            <uid>12</uid>
+        </joinedCorners>
+    </corner>
+    <corner>
+        <uid>10</uid>
+        <x>1455.146240234</x>
+        <y>973.444152832</y>
+        <z>0.000000000</z>
+        <inTriangles>
+            <uid>6</uid>
+            <uid>7</uid>
             <uid>8</uid>
+            <uid>9</uid>
+            <uid>10</uid>
+            <uid>11</uid>
+            <uid>12</uid>
+        </inTriangles>
+        <joinedCorners>
+            <uid>7</uid>
+            <uid>9</uid>
+            <uid>8</uid>
+            <uid>11</uid>
+            <uid>12</uid>
+            <uid>13</uid>
+        </joinedCorners>
+    </corner>
+    <corner>
+        <uid>11</uid>
+        <x>1704.773437500</x>
+        <y>1426.192504883</y>
+        <z>0.000000000</z>
+        <inTriangles>
+            <uid>9</uid>
+            <uid>12</uid>
+            <uid>13</uid>
+        </inTriangles>
+        <joinedCorners>
+            <uid>10</uid>
+            <uid>8</uid>
+            <uid>13</uid>
+            <uid>14</uid>
+        </joinedCorners>
+    </corner>
+    <corner>
+        <uid>12</uid>
+        <x>1811.549316406</x>
+        <y>580.789855957</y>
+        <z>0.000000000</z>
+        <inTriangles>
+            <uid>10</uid>
+            <uid>11</uid>
             <uid>14</uid>
             <uid>15</uid>
+        </inTriangles>
+        <joinedCorners>
+            <uid>10</uid>
+            <uid>9</uid>
+            <uid>13</uid>
+            <uid>15</uid>
+            <uid>16</uid>
+        </joinedCorners>
+    </corner>
+    <corner>
+        <uid>13</uid>
+        <x>2027.281494141</x>
+        <y>1002.904174805</y>
+        <z>0.000000000</z>
+        <inTriangles>
+            <uid>11</uid>
+            <uid>12</uid>
+            <uid>13</uid>
+            <uid>15</uid>
+            <uid>16</uid>
+            <uid>17</uid>
+        </inTriangles>
+        <joinedCorners>
+            <uid>12</uid>
+            <uid>10</uid>
+            <uid>11</uid>
+            <uid>14</uid>
             <uid>16</uid>
             <uid>17</uid>
         </joinedCorners>
     </corner>
     <corner>
-        <uid>10</uid>
-        <x>1643.204345703</x>
-        <y>481.412994385</y>
-        <z>0.000000000</z>
-        <inTriangles>
-            <uid>8</uid>
-            <uid>9</uid>
-            <uid>11</uid>
-            <uid>12</uid>
-            <uid>14</uid>
-            <uid>15</uid>
-        </inTriangles>
-        <joinedCorners>
-            <uid>7</uid>
-            <uid>11</uid>
-            <uid>12</uid>
-            <uid>14</uid>
-            <uid>8</uid>
-            <uid>0</uid>
-        </joinedCorners>
-    </corner>
-    <corner>
-        <uid>11</uid>
-        <x>1834.843994141</x>
-        <y>206.932006836</y>
-        <z>0.000000000</z>
-        <inTriangles>
-            <uid>8</uid>
-            <uid>9</uid>
-            <uid>10</uid>
-        </inTriangles>
-        <joinedCorners>
-            <uid>10</uid>
-            <uid>7</uid>
-            <uid>12</uid>
-            <uid>13</uid>
-        </joinedCorners>
-    </corner>
-    <corner>
-        <uid>12</uid>
-        <x>1965.359008789</x>
-        <y>457.375091553</y>
-        <z>0.000000000</z>
-        <inTriangles>
-            <uid>9</uid>
-            <uid>10</uid>
-            <uid>12</uid>
-            <uid>21</uid>
-            <uid>22</uid>
-            <uid>23</uid>
-        </inTriangles>
-        <joinedCorners>
-            <uid>10</uid>
-            <uid>11</uid>
-            <uid>13</uid>
-            <uid>14</uid>
-            <uid>18</uid>
-            <uid>19</uid>
-        </joinedCorners>
-    </corner>
-    <corner>
-        <uid>13</uid>
-        <x>2213.138916016</x>
-        <y>235.218704224</y>
-        <z>0.000000000</z>
-        <inTriangles>
-            <uid>10</uid>
-            <uid>23</uid>
-            <uid>24</uid>
-            <uid>25</uid>
-        </inTriangles>
-        <joinedCorners>
-            <uid>12</uid>
-            <uid>11</uid>
-            <uid>19</uid>
-            <uid>20</uid>
-            <uid>21</uid>
-        </joinedCorners>
-    </corner>
-    <corner>
         <uid>14</uid>
-        <x>1781.190307617</x>
-        <y>722.121093750</y>
+        <x>2227.291259766</x>
+        <y>1419.985107422</y>
         <z>0.000000000</z>
         <inTriangles>
-            <uid>11</uid>
-            <uid>12</uid>
             <uid>13</uid>
-            <uid>19</uid>
-            <uid>20</uid>
-            <uid>21</uid>
+            <uid>17</uid>
+            <uid>18</uid>
         </inTriangles>
         <joinedCorners>
-            <uid>8</uid>
-            <uid>10</uid>
-            <uid>12</uid>
-            <uid>9</uid>
+            <uid>11</uid>
+            <uid>13</uid>
             <uid>17</uid>
             <uid>18</uid>
         </joinedCorners>
     </corner>
     <corner>
         <uid>15</uid>
-        <x>1913.592041016</x>
-        <y>1181.042480469</y>
+        <x>2319.156005859</x>
+        <y>394.729675293</y>
         <z>0.000000000</z>
         <inTriangles>
-            <uid>17</uid>
-            <uid>18</uid>
-            <uid>42</uid>
-            <uid>43</uid>
+            <uid>14</uid>
+            <uid>19</uid>
         </inTriangles>
         <joinedCorners>
             <uid>16</uid>
-            <uid>9</uid>
-            <uid>17</uid>
-            <uid>38</uid>
-            <uid>39</uid>
+            <uid>12</uid>
+            <uid>19</uid>
         </joinedCorners>
     </corner>
     <corner>
         <uid>16</uid>
-        <x>1682.225830078</x>
-        <y>1194.144165039</y>
+        <x>2308.889648438</x>
+        <y>658.315734863</y>
         <z>0.000000000</z>
         <inTriangles>
-            <uid>17</uid>
+            <uid>14</uid>
+            <uid>15</uid>
+            <uid>16</uid>
+            <uid>19</uid>
+            <uid>20</uid>
+            <uid>21</uid>
         </inTriangles>
         <joinedCorners>
             <uid>15</uid>
-            <uid>9</uid>
+            <uid>12</uid>
+            <uid>13</uid>
+            <uid>17</uid>
+            <uid>19</uid>
+            <uid>20</uid>
         </joinedCorners>
     </corner>
     <corner>
         <uid>17</uid>
-        <x>1902.841552734</x>
-        <y>918.771972656</y>
+        <x>2484.583251953</x>
+        <y>1047.081542969</y>
         <z>0.000000000</z>
         <inTriangles>
+            <uid>16</uid>
+            <uid>17</uid>
             <uid>18</uid>
-            <uid>19</uid>
-            <uid>20</uid>
-            <uid>43</uid>
-            <uid>44</uid>
-            <uid>45</uid>
+            <uid>21</uid>
         </inTriangles>
         <joinedCorners>
-            <uid>15</uid>
-            <uid>9</uid>
+            <uid>16</uid>
+            <uid>13</uid>
             <uid>14</uid>
             <uid>18</uid>
-            <uid>38</uid>
-            <uid>40</uid>
+            <uid>20</uid>
         </joinedCorners>
     </corner>
     <corner>
         <uid>18</uid>
-        <x>2080.558105469</x>
-        <y>713.519287109</y>
+        <x>2698.927734375</x>
+        <y>1417.597045898</y>
         <z>0.000000000</z>
         <inTriangles>
-            <uid>20</uid>
-            <uid>21</uid>
-            <uid>22</uid>
-            <uid>45</uid>
-            <uid>46</uid>
-            <uid>47</uid>
+            <uid>18</uid>
         </inTriangles>
         <joinedCorners>
             <uid>17</uid>
             <uid>14</uid>
-            <uid>12</uid>
-            <uid>19</uid>
-            <uid>40</uid>
-            <uid>41</uid>
         </joinedCorners>
     </corner>
     <corner>
         <uid>19</uid>
-        <x>2188.949951172</x>
-        <y>446.642211914</y>
+        <x>2798.030273438</x>
+        <y>314.346008301</y>
         <z>0.000000000</z>
         <inTriangles>
+            <uid>19</uid>
+            <uid>20</uid>
             <uid>22</uid>
             <uid>23</uid>
             <uid>24</uid>
-            <uid>47</uid>
-            <uid>48</uid>
-            <uid>49</uid>
         </inTriangles>
         <joinedCorners>
-            <uid>18</uid>
-            <uid>12</uid>
-            <uid>13</uid>
+            <uid>15</uid>
+            <uid>16</uid>
             <uid>20</uid>
-            <uid>41</uid>
-            <uid>42</uid>
+            <uid>21</uid>
+            <uid>22</uid>
+            <uid>23</uid>
         </joinedCorners>
     </corner>
     <corner>
         <uid>20</uid>
-        <x>2441.878906250</x>
-        <y>322.558197021</y>
+        <x>2745.884277344</x>
+        <y>676.225708008</y>
         <z>0.000000000</z>
         <inTriangles>
-            <uid>24</uid>
-            <uid>25</uid>
-            <uid>26</uid>
-            <uid>49</uid>
-            <uid>50</uid>
-            <uid>51</uid>
-        </inTriangles>
-        <joinedCorners>
-            <uid>19</uid>
-            <uid>13</uid>
+            <uid>20</uid>
             <uid>21</uid>
             <uid>22</uid>
-            <uid>42</uid>
-            <uid>43</uid>
+        </inTriangles>
+        <joinedCorners>
+            <uid>16</uid>
+            <uid>19</uid>
+            <uid>17</uid>
+            <uid>21</uid>
         </joinedCorners>
     </corner>
     <corner>
         <uid>21</uid>
-        <x>2491.126953125</x>
-        <y>83.921997070</y>
+        <x>3150.659667969</x>
+        <y>672.643249512</y>
         <z>0.000000000</z>
         <inTriangles>
+            <uid>22</uid>
+            <uid>24</uid>
             <uid>25</uid>
-            <uid>26</uid>
-            <uid>27</uid>
         </inTriangles>
         <joinedCorners>
+            <uid>19</uid>
             <uid>20</uid>
-            <uid>13</uid>
-            <uid>22</uid>
             <uid>23</uid>
+            <uid>24</uid>
         </joinedCorners>
     </corner>
     <corner>
         <uid>22</uid>
-        <x>2694.819091797</x>
-        <y>254.459793091</y>
+        <x>3057.518066406</x>
+        <y>63.703689575</y>
         <z>0.000000000</z>
         <inTriangles>
+            <uid>23</uid>
             <uid>26</uid>
-            <uid>27</uid>
-            <uid>28</uid>
-            <uid>51</uid>
-            <uid>52</uid>
-            <uid>53</uid>
         </inTriangles>
         <joinedCorners>
-            <uid>20</uid>
-            <uid>21</uid>
+            <uid>19</uid>
             <uid>23</uid>
-            <uid>24</uid>
-            <uid>43</uid>
-            <uid>44</uid>
+            <uid>25</uid>
         </joinedCorners>
     </corner>
     <corner>
         <uid>23</uid>
-        <x>2798.177001953</x>
-        <y>10.562000275</y>
+        <x>3326.167968750</x>
+        <y>345.487304688</y>
         <z>0.000000000</z>
         <inTriangles>
+            <uid>23</uid>
+            <uid>24</uid>
+            <uid>25</uid>
+            <uid>26</uid>
             <uid>27</uid>
             <uid>28</uid>
-            <uid>29</uid>
         </inTriangles>
         <joinedCorners>
+            <uid>19</uid>
             <uid>22</uid>
             <uid>21</uid>
             <uid>24</uid>
             <uid>25</uid>
+            <uid>26</uid>
         </joinedCorners>
     </corner>
     <corner>
         <uid>24</uid>
-        <x>2950.181884766</x>
-        <y>186.610595703</y>
+        <x>3562.582519531</x>
+        <y>657.121093750</y>
         <z>0.000000000</z>
         <inTriangles>
+            <uid>25</uid>
             <uid>28</uid>
             <uid>29</uid>
-            <uid>30</uid>
-            <uid>53</uid>
-            <uid>54</uid>
-            <uid>55</uid>
         </inTriangles>
         <joinedCorners>
-            <uid>22</uid>
             <uid>23</uid>
-            <uid>25</uid>
+            <uid>21</uid>
             <uid>26</uid>
-            <uid>44</uid>
-            <uid>45</uid>
+            <uid>27</uid>
         </joinedCorners>
     </corner>
     <corner>
         <uid>25</uid>
-        <x>3111.920898438</x>
-        <y>14.400099754</y>
+        <x>3563.786376953</x>
+        <y>5.196243286</y>
         <z>0.000000000</z>
         <inTriangles>
-            <uid>29</uid>
-            <uid>30</uid>
-            <uid>31</uid>
-        </inTriangles>
-        <joinedCorners>
-            <uid>24</uid>
-            <uid>23</uid>
             <uid>26</uid>
             <uid>27</uid>
+            <uid>30</uid>
+        </inTriangles>
+        <joinedCorners>
+            <uid>22</uid>
+            <uid>23</uid>
+            <uid>26</uid>
+            <uid>28</uid>
         </joinedCorners>
     </corner>
     <corner>
         <uid>26</uid>
-        <x>3217.612060547</x>
-        <y>211.533798218</y>
+        <x>3801.387451172</x>
+        <y>344.292572021</y>
         <z>0.000000000</z>
         <inTriangles>
+            <uid>27</uid>
+            <uid>28</uid>
+            <uid>29</uid>
             <uid>30</uid>
             <uid>31</uid>
             <uid>32</uid>
-            <uid>55</uid>
-            <uid>56</uid>
-            <uid>57</uid>
         </inTriangles>
         <joinedCorners>
-            <uid>24</uid>
             <uid>25</uid>
+            <uid>23</uid>
+            <uid>24</uid>
             <uid>27</uid>
             <uid>28</uid>
-            <uid>45</uid>
-            <uid>46</uid>
+            <uid>29</uid>
         </joinedCorners>
     </corner>
     <corner>
         <uid>27</uid>
-        <x>3415.002929688</x>
-        <y>88.863098145</y>
+        <x>3973.316894531</x>
+        <y>671.448730469</y>
         <z>0.000000000</z>
         <inTriangles>
-            <uid>31</uid>
+            <uid>29</uid>
             <uid>32</uid>
-            <uid>33</uid>
+            <uid>80</uid>
         </inTriangles>
         <joinedCorners>
             <uid>26</uid>
-            <uid>25</uid>
-            <uid>28</uid>
+            <uid>24</uid>
             <uid>29</uid>
+            <uid>30</uid>
         </joinedCorners>
     </corner>
     <corner>
         <uid>28</uid>
-        <x>3480.986083984</x>
-        <y>300.047302246</y>
+        <x>4066.458007812</x>
+        <y>62.509574890</y>
         <z>0.000000000</z>
         <inTriangles>
-            <uid>32</uid>
-            <uid>33</uid>
-            <uid>34</uid>
-            <uid>57</uid>
-            <uid>58</uid>
-            <uid>59</uid>
+            <uid>30</uid>
+            <uid>31</uid>
         </inTriangles>
         <joinedCorners>
+            <uid>25</uid>
             <uid>26</uid>
-            <uid>27</uid>
             <uid>29</uid>
-            <uid>30</uid>
-            <uid>46</uid>
-            <uid>47</uid>
         </joinedCorners>
     </corner>
     <corner>
         <uid>29</uid>
-        <x>3682.697021484</x>
-        <y>257.879089355</y>
+        <x>4325.556152344</x>
+        <y>314.442871094</y>
         <z>0.000000000</z>
         <inTriangles>
-            <uid>33</uid>
-            <uid>34</uid>
-            <uid>35</uid>
-            <uid>107</uid>
+            <uid>31</uid>
+            <uid>32</uid>
+            <uid>80</uid>
+            <uid>81</uid>
+            <uid>82</uid>
         </inTriangles>
         <joinedCorners>
             <uid>28</uid>
+            <uid>26</uid>
             <uid>27</uid>
             <uid>30</uid>
+            <uid>80</uid>
             <uid>31</uid>
-            <uid>79</uid>
         </joinedCorners>
     </corner>
     <corner>
         <uid>30</uid>
-        <x>3659.955810547</x>
-        <y>501.244995117</y>
+        <x>4379.284179688</x>
+        <y>677.419799805</y>
         <z>0.000000000</z>
         <inTriangles>
-            <uid>34</uid>
-            <uid>35</uid>
-            <uid>36</uid>
-            <uid>59</uid>
-            <uid>60</uid>
-            <uid>61</uid>
+            <uid>33</uid>
+            <uid>80</uid>
+            <uid>82</uid>
         </inTriangles>
         <joinedCorners>
-            <uid>28</uid>
-            <uid>29</uid>
             <uid>31</uid>
             <uid>32</uid>
-            <uid>47</uid>
-            <uid>48</uid>
+            <uid>29</uid>
+            <uid>27</uid>
         </joinedCorners>
     </corner>
     <corner>
         <uid>31</uid>
-        <x>3913.210937500</x>
-        <y>480.443511963</y>
+        <x>4815.093261719</x>
+        <y>658.315673828</y>
         <z>0.000000000</z>
         <inTriangles>
-            <uid>35</uid>
-            <uid>36</uid>
-            <uid>37</uid>
-            <uid>107</uid>
-            <uid>108</uid>
-            <uid>112</uid>
+            <uid>33</uid>
+            <uid>34</uid>
+            <uid>81</uid>
+            <uid>82</uid>
+            <uid>83</uid>
+            <uid>84</uid>
         </inTriangles>
         <joinedCorners>
             <uid>30</uid>
-            <uid>29</uid>
             <uid>32</uid>
             <uid>33</uid>
-            <uid>79</uid>
+            <uid>34</uid>
+            <uid>29</uid>
             <uid>80</uid>
         </joinedCorners>
     </corner>
     <corner>
         <uid>32</uid>
-        <x>3786.536865234</x>
-        <y>742.232971191</y>
+        <x>4639.575195312</x>
+        <y>1047.560302734</y>
         <z>0.000000000</z>
         <inTriangles>
+            <uid>33</uid>
+            <uid>35</uid>
             <uid>36</uid>
-            <uid>37</uid>
-            <uid>38</uid>
-            <uid>61</uid>
-            <uid>62</uid>
-            <uid>63</uid>
+            <uid>84</uid>
         </inTriangles>
         <joinedCorners>
             <uid>30</uid>
             <uid>31</uid>
-            <uid>33</uid>
             <uid>34</uid>
-            <uid>48</uid>
-            <uid>49</uid>
+            <uid>35</uid>
+            <uid>36</uid>
         </joinedCorners>
     </corner>
     <corner>
         <uid>33</uid>
-        <x>4091.816894531</x>
-        <y>750.430480957</y>
+        <x>5312.988281250</x>
+        <y>578.316955566</y>
         <z>0.000000000</z>
         <inTriangles>
+            <uid>34</uid>
             <uid>37</uid>
             <uid>38</uid>
-            <uid>39</uid>
-            <uid>112</uid>
-            <uid>113</uid>
-            <uid>116</uid>
+            <uid>83</uid>
         </inTriangles>
         <joinedCorners>
-            <uid>32</uid>
             <uid>31</uid>
             <uid>34</uid>
-            <uid>35</uid>
+            <uid>37</uid>
+            <uid>38</uid>
             <uid>80</uid>
-            <uid>85</uid>
         </joinedCorners>
     </corner>
     <corner>
         <uid>34</uid>
-        <x>3966.999511719</x>
-        <y>939.301025391</y>
+        <x>5100.456542969</x>
+        <y>1002.187866211</y>
         <z>0.000000000</z>
         <inTriangles>
+            <uid>34</uid>
+            <uid>35</uid>
             <uid>38</uid>
             <uid>39</uid>
             <uid>40</uid>
-            <uid>63</uid>
-            <uid>64</uid>
-            <uid>65</uid>
+            <uid>84</uid>
         </inTriangles>
         <joinedCorners>
-            <uid>32</uid>
+            <uid>31</uid>
             <uid>33</uid>
+            <uid>32</uid>
             <uid>35</uid>
-            <uid>36</uid>
-            <uid>49</uid>
-            <uid>50</uid>
+            <uid>37</uid>
+            <uid>39</uid>
         </joinedCorners>
     </corner>
     <corner>
         <uid>35</uid>
-        <x>4180.604003906</x>
-        <y>1063.842041016</y>
+        <x>4897.474609375</x>
+        <y>1417.700073242</y>
         <z>0.000000000</z>
         <inTriangles>
-            <uid>39</uid>
+            <uid>35</uid>
+            <uid>36</uid>
             <uid>40</uid>
-            <uid>41</uid>
-            <uid>116</uid>
-            <uid>117</uid>
         </inTriangles>
         <joinedCorners>
+            <uid>32</uid>
             <uid>34</uid>
-            <uid>33</uid>
             <uid>36</uid>
-            <uid>37</uid>
-            <uid>85</uid>
-            <uid>88</uid>
+            <uid>39</uid>
         </joinedCorners>
     </corner>
     <corner>
         <uid>36</uid>
-        <x>3916.037109375</x>
-        <y>1175.300048828</y>
+        <x>4427.036132812</x>
+        <y>1416.508056641</y>
         <z>0.000000000</z>
         <inTriangles>
-            <uid>40</uid>
-            <uid>41</uid>
-            <uid>65</uid>
-            <uid>66</uid>
+            <uid>36</uid>
         </inTriangles>
         <joinedCorners>
-            <uid>34</uid>
+            <uid>32</uid>
             <uid>35</uid>
-            <uid>37</uid>
-            <uid>50</uid>
-            <uid>51</uid>
         </joinedCorners>
     </corner>
     <corner>
         <uid>37</uid>
-        <x>4147.669433594</x>
-        <y>1199.036010742</y>
+        <x>5669.989257812</x>
+        <y>973.531677246</y>
         <z>0.000000000</z>
         <inTriangles>
-            <uid>41</uid>
+            <uid>37</uid>
+            <uid>38</uid>
+            <uid>39</uid>
+            <uid>42</uid>
+            <uid>43</uid>
+            <uid>44</uid>
         </inTriangles>
         <joinedCorners>
-            <uid>36</uid>
-            <uid>35</uid>
+            <uid>33</uid>
+            <uid>38</uid>
+            <uid>34</uid>
+            <uid>39</uid>
+            <uid>40</uid>
+            <uid>42</uid>
         </joinedCorners>
     </corner>
     <corner>
         <uid>38</uid>
-        <x>2066.227783203</x>
-        <y>1057.390014648</y>
+        <x>5884.909667969</x>
+        <y>544.885803223</y>
         <z>0.000000000</z>
         <inTriangles>
+            <uid>37</uid>
+            <uid>41</uid>
             <uid>42</uid>
-            <uid>43</uid>
-            <uid>44</uid>
         </inTriangles>
         <joinedCorners>
-            <uid>39</uid>
-            <uid>15</uid>
-            <uid>17</uid>
+            <uid>37</uid>
+            <uid>33</uid>
             <uid>40</uid>
+            <uid>41</uid>
         </joinedCorners>
     </corner>
     <corner>
         <uid>39</uid>
-        <x>2078.681640625</x>
-        <y>1163.748046875</y>
+        <x>5421.643554688</x>
+        <y>1426.057495117</y>
         <z>0.000000000</z>
         <inTriangles>
-            <uid>42</uid>
+            <uid>39</uid>
+            <uid>40</uid>
+            <uid>44</uid>
         </inTriangles>
         <joinedCorners>
-            <uid>38</uid>
-            <uid>15</uid>
+            <uid>34</uid>
+            <uid>37</uid>
+            <uid>35</uid>
+            <uid>42</uid>
         </joinedCorners>
     </corner>
     <corner>
         <uid>40</uid>
-        <x>2201.504882812</x>
-        <y>884.129699707</y>
+        <x>6271.769531250</x>
+        <y>977.114135742</y>
         <z>0.000000000</z>
         <inTriangles>
-            <uid>44</uid>
+            <uid>41</uid>
+            <uid>42</uid>
+            <uid>43</uid>
             <uid>45</uid>
             <uid>46</uid>
-            <uid>68</uid>
+            <uid>47</uid>
         </inTriangles>
         <joinedCorners>
             <uid>38</uid>
-            <uid>17</uid>
-            <uid>18</uid>
             <uid>41</uid>
-            <uid>52</uid>
+            <uid>37</uid>
+            <uid>42</uid>
+            <uid>43</uid>
+            <uid>44</uid>
         </joinedCorners>
     </corner>
     <corner>
         <uid>41</uid>
-        <x>2290.809814453</x>
-        <y>683.574584961</y>
+        <x>6407.885253906</x>
+        <y>638.017578125</y>
         <z>0.000000000</z>
         <inTriangles>
-            <uid>46</uid>
-            <uid>47</uid>
-            <uid>48</uid>
-            <uid>68</uid>
-            <uid>69</uid>
+            <uid>41</uid>
+            <uid>45</uid>
         </inTriangles>
         <joinedCorners>
             <uid>40</uid>
-            <uid>18</uid>
-            <uid>19</uid>
-            <uid>42</uid>
-            <uid>52</uid>
+            <uid>38</uid>
+            <uid>43</uid>
         </joinedCorners>
     </corner>
     <corner>
         <uid>42</uid>
-        <x>2417.791992188</x>
-        <y>520.828613281</y>
+        <x>6021.034179688</x>
+        <y>1441.580078125</y>
         <z>0.000000000</z>
         <inTriangles>
-            <uid>48</uid>
-            <uid>49</uid>
-            <uid>50</uid>
-            <uid>69</uid>
-            <uid>70</uid>
-            <uid>71</uid>
+            <uid>43</uid>
+            <uid>44</uid>
+            <uid>47</uid>
         </inTriangles>
         <joinedCorners>
-            <uid>41</uid>
-            <uid>19</uid>
-            <uid>20</uid>
-            <uid>43</uid>
-            <uid>52</uid>
-            <uid>55</uid>
+            <uid>37</uid>
+            <uid>40</uid>
+            <uid>39</uid>
+            <uid>44</uid>
         </joinedCorners>
     </corner>
     <corner>
         <uid>43</uid>
-        <x>2631.650878906</x>
-        <y>441.743896484</y>
+        <x>6958.316406250</x>
+        <y>922.189147949</y>
         <z>0.000000000</z>
         <inTriangles>
-            <uid>50</uid>
-            <uid>51</uid>
-            <uid>52</uid>
-            <uid>71</uid>
-            <uid>72</uid>
-            <uid>73</uid>
+            <uid>45</uid>
+            <uid>46</uid>
+            <uid>48</uid>
         </inTriangles>
         <joinedCorners>
-            <uid>42</uid>
-            <uid>20</uid>
-            <uid>22</uid>
+            <uid>40</uid>
+            <uid>41</uid>
             <uid>44</uid>
-            <uid>55</uid>
-            <uid>56</uid>
+            <uid>45</uid>
         </joinedCorners>
     </corner>
     <corner>
         <uid>44</uid>
-        <x>2836.920898438</x>
-        <y>349.486816406</y>
+        <x>6714.741699219</x>
+        <y>1465.459960938</y>
         <z>0.000000000</z>
         <inTriangles>
-            <uid>52</uid>
-            <uid>53</uid>
-            <uid>54</uid>
-            <uid>73</uid>
-            <uid>74</uid>
-            <uid>75</uid>
+            <uid>46</uid>
+            <uid>47</uid>
+            <uid>48</uid>
         </inTriangles>
         <joinedCorners>
+            <uid>40</uid>
             <uid>43</uid>
-            <uid>22</uid>
-            <uid>24</uid>
+            <uid>42</uid>
             <uid>45</uid>
-            <uid>56</uid>
-            <uid>57</uid>
         </joinedCorners>
     </corner>
     <corner>
         <uid>45</uid>
-        <x>3057.034912109</x>
-        <y>383.109313965</y>
+        <x>7119.515625000</x>
+        <y>1486.954956055</y>
         <z>0.000000000</z>
         <inTriangles>
-            <uid>54</uid>
-            <uid>55</uid>
-            <uid>56</uid>
-            <uid>75</uid>
-            <uid>76</uid>
-            <uid>77</uid>
+            <uid>48</uid>
         </inTriangles>
         <joinedCorners>
             <uid>44</uid>
-            <uid>24</uid>
-            <uid>26</uid>
-            <uid>46</uid>
-            <uid>57</uid>
-            <uid>58</uid>
+            <uid>43</uid>
         </joinedCorners>
     </corner>
     <corner>
         <uid>46</uid>
-        <x>3251.411621094</x>
-        <y>468.403991699</y>
+        <x>2671.138916016</x>
+        <y>1042.007080078</y>
         <z>0.000000000</z>
         <inTriangles>
-            <uid>56</uid>
-            <uid>57</uid>
-            <uid>58</uid>
-            <uid>77</uid>
-            <uid>78</uid>
-            <uid>79</uid>
+            <uid>49</uid>
+            <uid>50</uid>
         </inTriangles>
         <joinedCorners>
-            <uid>45</uid>
-            <uid>26</uid>
-            <uid>28</uid>
             <uid>47</uid>
-            <uid>58</uid>
-            <uid>59</uid>
+            <uid>48</uid>
+            <uid>49</uid>
         </joinedCorners>
     </corner>
     <corner>
         <uid>47</uid>
-        <x>3452.249511719</x>
-        <y>539.283996582</y>
+        <x>2772.036865234</x>
+        <y>877.919494629</y>
         <z>0.000000000</z>
         <inTriangles>
-            <uid>58</uid>
-            <uid>59</uid>
-            <uid>60</uid>
-            <uid>79</uid>
-            <uid>80</uid>
-            <uid>81</uid>
+            <uid>49</uid>
+            <uid>54</uid>
+            <uid>55</uid>
         </inTriangles>
         <joinedCorners>
             <uid>46</uid>
-            <uid>28</uid>
-            <uid>30</uid>
             <uid>48</uid>
-            <uid>59</uid>
-            <uid>60</uid>
+            <uid>53</uid>
+            <uid>54</uid>
         </joinedCorners>
     </corner>
     <corner>
         <uid>48</uid>
-        <x>3633.939697266</x>
-        <y>676.916015625</y>
+        <x>2861.635498047</x>
+        <y>1042.450927734</y>
         <z>0.000000000</z>
         <inTriangles>
-            <uid>60</uid>
-            <uid>61</uid>
-            <uid>62</uid>
-            <uid>81</uid>
-            <uid>82</uid>
-            <uid>83</uid>
+            <uid>49</uid>
+            <uid>50</uid>
+            <uid>51</uid>
+            <uid>55</uid>
+            <uid>56</uid>
+            <uid>57</uid>
         </inTriangles>
         <joinedCorners>
+            <uid>46</uid>
             <uid>47</uid>
-            <uid>30</uid>
-            <uid>32</uid>
             <uid>49</uid>
-            <uid>60</uid>
-            <uid>61</uid>
-            <uid>62</uid>
+            <uid>50</uid>
+            <uid>54</uid>
+            <uid>55</uid>
         </joinedCorners>
     </corner>
     <corner>
         <uid>49</uid>
-        <x>3669.038818359</x>
-        <y>910.341979980</y>
+        <x>2760.242675781</x>
+        <y>1209.059326172</y>
         <z>0.000000000</z>
         <inTriangles>
-            <uid>62</uid>
-            <uid>63</uid>
-            <uid>64</uid>
-            <uid>83</uid>
-        </inTriangles>
-        <joinedCorners>
-            <uid>48</uid>
-            <uid>32</uid>
-            <uid>34</uid>
             <uid>50</uid>
-            <uid>62</uid>
-        </joinedCorners>
-    </corner>
-    <corner>
-        <uid>50</uid>
-        <x>3791.734375000</x>
-        <y>1067.903076172</y>
-        <z>0.000000000</z>
-        <inTriangles>
-            <uid>64</uid>
-            <uid>65</uid>
-            <uid>66</uid>
+            <uid>51</uid>
+            <uid>52</uid>
         </inTriangles>
         <joinedCorners>
-            <uid>49</uid>
-            <uid>34</uid>
-            <uid>36</uid>
+            <uid>46</uid>
+            <uid>48</uid>
+            <uid>50</uid>
             <uid>51</uid>
         </joinedCorners>
     </corner>
     <corner>
-        <uid>51</uid>
-        <x>3719.738769531</x>
-        <y>1155.823486328</y>
+        <uid>50</uid>
+        <x>2951.240722656</x>
+        <y>1209.502197266</y>
         <z>0.000000000</z>
         <inTriangles>
-            <uid>66</uid>
-        </inTriangles>
-        <joinedCorners>
-            <uid>36</uid>
-            <uid>50</uid>
-        </joinedCorners>
-    </corner>
-    <corner>
-        <uid>52</uid>
-        <x>2510.886962891</x>
-        <y>765.590209961</y>
-        <z>0.000000000</z>
-        <inTriangles>
-            <uid>67</uid>
-            <uid>68</uid>
-            <uid>69</uid>
-            <uid>70</uid>
-            <uid>88</uid>
-            <uid>89</uid>
-            <uid>90</uid>
-        </inTriangles>
-        <joinedCorners>
-            <uid>53</uid>
-            <uid>54</uid>
-            <uid>40</uid>
-            <uid>41</uid>
-            <uid>42</uid>
-            <uid>55</uid>
-            <uid>67</uid>
-            <uid>68</uid>
-        </joinedCorners>
-    </corner>
-    <corner>
-        <uid>53</uid>
-        <x>2369.682861328</x>
-        <y>864.184326172</y>
-        <z>0.000000000</z>
-        <inTriangles>
-            <uid>67</uid>
-            <uid>86</uid>
-            <uid>87</uid>
-            <uid>88</uid>
-        </inTriangles>
-        <joinedCorners>
-            <uid>52</uid>
-            <uid>54</uid>
-            <uid>66</uid>
-            <uid>65</uid>
-            <uid>67</uid>
-        </joinedCorners>
-    </corner>
-    <corner>
-        <uid>54</uid>
-        <x>2310.849853516</x>
-        <y>843.038513184</y>
-        <z>0.000000000</z>
-        <inTriangles>
-            <uid>67</uid>
-        </inTriangles>
-        <joinedCorners>
+            <uid>51</uid>
             <uid>52</uid>
             <uid>53</uid>
-        </joinedCorners>
-    </corner>
-    <corner>
-        <uid>55</uid>
-        <x>2652.201904297</x>
-        <y>689.731079102</y>
-        <z>0.000000000</z>
-        <inTriangles>
-            <uid>70</uid>
-            <uid>71</uid>
-            <uid>72</uid>
-            <uid>90</uid>
-            <uid>91</uid>
-            <uid>92</uid>
-        </inTriangles>
-        <joinedCorners>
-            <uid>52</uid>
-            <uid>42</uid>
-            <uid>43</uid>
-            <uid>56</uid>
-            <uid>68</uid>
-            <uid>69</uid>
-        </joinedCorners>
-    </corner>
-    <corner>
-        <uid>56</uid>
-        <x>2796.709960938</x>
-        <y>637.123901367</y>
-        <z>0.000000000</z>
-        <inTriangles>
-            <uid>72</uid>
-            <uid>73</uid>
-            <uid>74</uid>
-            <uid>92</uid>
-            <uid>93</uid>
-            <uid>94</uid>
-        </inTriangles>
-        <joinedCorners>
-            <uid>55</uid>
-            <uid>43</uid>
-            <uid>44</uid>
             <uid>57</uid>
-            <uid>69</uid>
-            <uid>70</uid>
-        </joinedCorners>
-    </corner>
-    <corner>
-        <uid>57</uid>
-        <x>2956.093505859</x>
-        <y>642.445983887</y>
-        <z>0.000000000</z>
-        <inTriangles>
-            <uid>74</uid>
-            <uid>75</uid>
-            <uid>76</uid>
-            <uid>94</uid>
-            <uid>95</uid>
-            <uid>96</uid>
-        </inTriangles>
-        <joinedCorners>
-            <uid>56</uid>
-            <uid>44</uid>
-            <uid>45</uid>
             <uid>58</uid>
-            <uid>70</uid>
-            <uid>71</uid>
-        </joinedCorners>
-    </corner>
-    <corner>
-        <uid>58</uid>
-        <x>3117.709228516</x>
-        <y>569.574279785</y>
-        <z>0.000000000</z>
-        <inTriangles>
-            <uid>76</uid>
-            <uid>77</uid>
-            <uid>78</uid>
-            <uid>96</uid>
-            <uid>97</uid>
-            <uid>98</uid>
-        </inTriangles>
-        <joinedCorners>
-            <uid>57</uid>
-            <uid>45</uid>
-            <uid>46</uid>
             <uid>59</uid>
-            <uid>71</uid>
-            <uid>72</uid>
-        </joinedCorners>
-    </corner>
-    <corner>
-        <uid>59</uid>
-        <x>3265.464355469</x>
-        <y>643.182495117</y>
-        <z>0.000000000</z>
-        <inTriangles>
-            <uid>78</uid>
-            <uid>79</uid>
-            <uid>80</uid>
-            <uid>98</uid>
-            <uid>99</uid>
-            <uid>100</uid>
-        </inTriangles>
-        <joinedCorners>
-            <uid>58</uid>
-            <uid>46</uid>
-            <uid>47</uid>
-            <uid>60</uid>
-            <uid>72</uid>
-            <uid>73</uid>
-        </joinedCorners>
-    </corner>
-    <corner>
-        <uid>60</uid>
-        <x>3363.572509766</x>
-        <y>767.041015625</y>
-        <z>0.000000000</z>
-        <inTriangles>
-            <uid>80</uid>
-            <uid>81</uid>
-            <uid>82</uid>
-            <uid>100</uid>
-            <uid>101</uid>
-            <uid>102</uid>
-        </inTriangles>
-        <joinedCorners>
-            <uid>59</uid>
-            <uid>47</uid>
-            <uid>48</uid>
-            <uid>61</uid>
-            <uid>73</uid>
-            <uid>74</uid>
-        </joinedCorners>
-    </corner>
-    <corner>
-        <uid>61</uid>
-        <x>3478.316894531</x>
-        <y>874.572998047</y>
-        <z>0.000000000</z>
-        <inTriangles>
-            <uid>82</uid>
-            <uid>102</uid>
-            <uid>103</uid>
-            <uid>104</uid>
-        </inTriangles>
-        <joinedCorners>
-            <uid>60</uid>
-            <uid>48</uid>
-            <uid>74</uid>
-            <uid>75</uid>
-            <uid>76</uid>
-        </joinedCorners>
-    </corner>
-    <corner>
-        <uid>62</uid>
-        <x>3536.825927734</x>
-        <y>798.964050293</y>
-        <z>0.000000000</z>
-        <inTriangles>
-            <uid>83</uid>
         </inTriangles>
         <joinedCorners>
             <uid>49</uid>
             <uid>48</uid>
+            <uid>51</uid>
+            <uid>52</uid>
+            <uid>55</uid>
+            <uid>56</uid>
+        </joinedCorners>
+    </corner>
+    <corner>
+        <uid>51</uid>
+        <x>2850.346679688</x>
+        <y>1378.126342773</y>
+        <z>0.000000000</z>
+        <inTriangles>
+            <uid>52</uid>
+            <uid>53</uid>
+        </inTriangles>
+        <joinedCorners>
+            <uid>49</uid>
+            <uid>50</uid>
+            <uid>52</uid>
+        </joinedCorners>
+    </corner>
+    <corner>
+        <uid>52</uid>
+        <x>3043.353271484</x>
+        <y>1377.057250977</y>
+        <z>0.000000000</z>
+        <inTriangles>
+            <uid>53</uid>
+            <uid>59</uid>
+            <uid>60</uid>
+        </inTriangles>
+        <joinedCorners>
+            <uid>51</uid>
+            <uid>50</uid>
+            <uid>56</uid>
+            <uid>57</uid>
+        </joinedCorners>
+    </corner>
+    <corner>
+        <uid>53</uid>
+        <x>2872.431152344</x>
+        <y>717.361145020</y>
+        <z>0.000000000</z>
+        <inTriangles>
+            <uid>54</uid>
+            <uid>61</uid>
+        </inTriangles>
+        <joinedCorners>
+            <uid>47</uid>
+            <uid>54</uid>
+            <uid>58</uid>
+        </joinedCorners>
+    </corner>
+    <corner>
+        <uid>54</uid>
+        <x>2962.029785156</x>
+        <y>877.354736328</y>
+        <z>0.000000000</z>
+        <inTriangles>
+            <uid>54</uid>
+            <uid>55</uid>
+            <uid>56</uid>
+            <uid>61</uid>
+            <uid>62</uid>
+            <uid>63</uid>
+        </inTriangles>
+        <joinedCorners>
+            <uid>47</uid>
+            <uid>53</uid>
+            <uid>48</uid>
+            <uid>55</uid>
+            <uid>58</uid>
+            <uid>59</uid>
+        </joinedCorners>
+    </corner>
+    <corner>
+        <uid>55</uid>
+        <x>3052.140380859</x>
+        <y>1042.894531250</y>
+        <z>0.000000000</z>
+        <inTriangles>
+            <uid>56</uid>
+            <uid>57</uid>
+            <uid>58</uid>
+            <uid>63</uid>
+            <uid>64</uid>
+            <uid>65</uid>
+        </inTriangles>
+        <joinedCorners>
+            <uid>48</uid>
+            <uid>54</uid>
+            <uid>50</uid>
+            <uid>56</uid>
+            <uid>59</uid>
+            <uid>60</uid>
+        </joinedCorners>
+    </corner>
+    <corner>
+        <uid>56</uid>
+        <x>3144.253417969</x>
+        <y>1209.442382812</y>
+        <z>0.000000000</z>
+        <inTriangles>
+            <uid>58</uid>
+            <uid>59</uid>
+            <uid>60</uid>
+            <uid>65</uid>
+        </inTriangles>
+        <joinedCorners>
+            <uid>50</uid>
+            <uid>55</uid>
+            <uid>52</uid>
+            <uid>57</uid>
+            <uid>60</uid>
+        </joinedCorners>
+    </corner>
+    <corner>
+        <uid>57</uid>
+        <x>3236.876708984</x>
+        <y>1377.504516602</y>
+        <z>0.000000000</z>
+        <inTriangles>
+            <uid>60</uid>
+            <uid>67</uid>
+            <uid>68</uid>
+        </inTriangles>
+        <joinedCorners>
+            <uid>52</uid>
+            <uid>56</uid>
+            <uid>61</uid>
+            <uid>63</uid>
+            <uid>64</uid>
+        </joinedCorners>
+    </corner>
+    <corner>
+        <uid>58</uid>
+        <x>3058.900146484</x>
+        <y>717.300292969</y>
+        <z>0.000000000</z>
+        <inTriangles>
+            <uid>61</uid>
+            <uid>62</uid>
+        </inTriangles>
+        <joinedCorners>
+            <uid>54</uid>
+            <uid>53</uid>
+            <uid>59</uid>
+        </joinedCorners>
+    </corner>
+    <corner>
+        <uid>59</uid>
+        <x>3149.946533203</x>
+        <y>878.527709961</y>
+        <z>0.000000000</z>
+        <inTriangles>
+            <uid>62</uid>
+            <uid>63</uid>
+            <uid>64</uid>
+            <uid>69</uid>
+            <uid>70</uid>
+            <uid>71</uid>
+        </inTriangles>
+        <joinedCorners>
+            <uid>54</uid>
+            <uid>58</uid>
+            <uid>55</uid>
+            <uid>60</uid>
+            <uid>65</uid>
+            <uid>66</uid>
+            <uid>67</uid>
+            <uid>62</uid>
+        </joinedCorners>
+    </corner>
+    <corner>
+        <uid>60</uid>
+        <x>3242.637939453</x>
+        <y>1043.337646484</y>
+        <z>0.000000000</z>
+        <inTriangles>
+            <uid>64</uid>
+            <uid>65</uid>
+        </inTriangles>
+        <joinedCorners>
+            <uid>55</uid>
+            <uid>59</uid>
+            <uid>56</uid>
+        </joinedCorners>
+    </corner>
+    <corner>
+        <uid>61</uid>
+        <x>3164.938720703</x>
+        <y>1207.934814453</y>
+        <z>0.000000000</z>
+        <inTriangles>
+            <uid>66</uid>
+            <uid>67</uid>
+        </inTriangles>
+        <joinedCorners>
+            <uid>62</uid>
+            <uid>63</uid>
+            <uid>57</uid>
+        </joinedCorners>
+    </corner>
+    <corner>
+        <uid>62</uid>
+        <x>3264.092529297</x>
+        <y>1041.326171875</y>
+        <z>0.000000000</z>
+        <inTriangles>
+            <uid>66</uid>
+            <uid>71</uid>
+            <uid>72</uid>
+            <uid>73</uid>
+        </inTriangles>
+        <joinedCorners>
+            <uid>61</uid>
+            <uid>63</uid>
+            <uid>59</uid>
+            <uid>67</uid>
+            <uid>68</uid>
         </joinedCorners>
     </corner>
     <corner>
         <uid>63</uid>
-        <x>2517.798095703</x>
-        <y>1133.750000000</y>
+        <x>3355.939453125</x>
+        <y>1208.378417969</y>
         <z>0.000000000</z>
         <inTriangles>
-            <uid>84</uid>
-            <uid>85</uid>
-            <uid>140</uid>
+            <uid>66</uid>
+            <uid>67</uid>
+            <uid>68</uid>
+            <uid>73</uid>
+            <uid>74</uid>
+            <uid>75</uid>
         </inTriangles>
         <joinedCorners>
+            <uid>61</uid>
+            <uid>62</uid>
+            <uid>57</uid>
             <uid>64</uid>
-            <uid>65</uid>
-            <uid>66</uid>
-            <uid>103</uid>
+            <uid>68</uid>
+            <uid>69</uid>
         </joinedCorners>
     </corner>
     <corner>
         <uid>64</uid>
-        <x>2320.641845703</x>
-        <y>1141.845336914</y>
+        <x>3451.426025391</x>
+        <y>1377.056762695</y>
         <z>0.000000000</z>
         <inTriangles>
-            <uid>84</uid>
+            <uid>68</uid>
+            <uid>75</uid>
+            <uid>85</uid>
         </inTriangles>
         <joinedCorners>
+            <uid>57</uid>
             <uid>63</uid>
-            <uid>65</uid>
+            <uid>69</uid>
+            <uid>81</uid>
+            <uid>71</uid>
         </joinedCorners>
     </corner>
     <corner>
         <uid>65</uid>
-        <x>2322.499755859</x>
-        <y>1025.544677734</y>
+        <x>3079.504882812</x>
+        <y>716.675354004</y>
         <z>0.000000000</z>
         <inTriangles>
-            <uid>84</uid>
-            <uid>85</uid>
-            <uid>86</uid>
+            <uid>69</uid>
         </inTriangles>
         <joinedCorners>
-            <uid>63</uid>
-            <uid>64</uid>
+            <uid>59</uid>
             <uid>66</uid>
-            <uid>53</uid>
         </joinedCorners>
     </corner>
     <corner>
         <uid>66</uid>
-        <x>2534.211181641</x>
-        <y>1005.443969727</y>
+        <x>3267.133300781</x>
+        <y>715.994873047</y>
         <z>0.000000000</z>
         <inTriangles>
-            <uid>85</uid>
-            <uid>86</uid>
-            <uid>87</uid>
-            <uid>139</uid>
-            <uid>140</uid>
-            <uid>145</uid>
+            <uid>69</uid>
+            <uid>70</uid>
+            <uid>76</uid>
         </inTriangles>
         <joinedCorners>
-            <uid>63</uid>
+            <uid>59</uid>
             <uid>65</uid>
-            <uid>53</uid>
             <uid>67</uid>
-            <uid>102</uid>
-            <uid>103</uid>
+            <uid>70</uid>
         </joinedCorners>
     </corner>
     <corner>
         <uid>67</uid>
-        <x>2621.279052734</x>
-        <y>943.988220215</y>
+        <x>3359.482910156</x>
+        <y>878.318969727</y>
         <z>0.000000000</z>
         <inTriangles>
-            <uid>87</uid>
-            <uid>88</uid>
-            <uid>89</uid>
-            <uid>138</uid>
-            <uid>139</uid>
-            <uid>144</uid>
+            <uid>70</uid>
+            <uid>71</uid>
+            <uid>72</uid>
+            <uid>76</uid>
         </inTriangles>
         <joinedCorners>
+            <uid>59</uid>
             <uid>66</uid>
-            <uid>53</uid>
-            <uid>52</uid>
+            <uid>62</uid>
             <uid>68</uid>
-            <uid>101</uid>
-            <uid>102</uid>
+            <uid>70</uid>
         </joinedCorners>
     </corner>
     <corner>
         <uid>68</uid>
-        <x>2672.778808594</x>
-        <y>832.995727539</y>
+        <x>3452.957763672</x>
+        <y>1042.892211914</y>
         <z>0.000000000</z>
         <inTriangles>
-            <uid>89</uid>
-            <uid>90</uid>
-            <uid>91</uid>
-            <uid>137</uid>
-            <uid>138</uid>
+            <uid>72</uid>
+            <uid>73</uid>
+            <uid>74</uid>
         </inTriangles>
         <joinedCorners>
+            <uid>62</uid>
             <uid>67</uid>
-            <uid>52</uid>
-            <uid>55</uid>
+            <uid>63</uid>
             <uid>69</uid>
-            <uid>101</uid>
         </joinedCorners>
     </corner>
     <corner>
         <uid>69</uid>
-        <x>2777.148681641</x>
-        <y>780.007629395</y>
+        <x>3548.175292969</x>
+        <y>1208.820556641</y>
         <z>0.000000000</z>
         <inTriangles>
-            <uid>91</uid>
-            <uid>92</uid>
-            <uid>93</uid>
-            <uid>137</uid>
-            <uid>143</uid>
+            <uid>74</uid>
+            <uid>75</uid>
         </inTriangles>
         <joinedCorners>
+            <uid>63</uid>
             <uid>68</uid>
-            <uid>55</uid>
-            <uid>56</uid>
-            <uid>70</uid>
-            <uid>101</uid>
+            <uid>64</uid>
         </joinedCorners>
     </corner>
     <corner>
         <uid>70</uid>
-        <x>2896.964599609</x>
-        <y>784.197204590</y>
+        <x>3456.224853516</x>
+        <y>716.824523926</y>
         <z>0.000000000</z>
         <inTriangles>
-            <uid>93</uid>
-            <uid>94</uid>
-            <uid>95</uid>
-            <uid>133</uid>
-            <uid>142</uid>
-            <uid>143</uid>
+            <uid>76</uid>
+            <uid>86</uid>
+            <uid>92</uid>
         </inTriangles>
         <joinedCorners>
-            <uid>69</uid>
-            <uid>56</uid>
-            <uid>57</uid>
-            <uid>71</uid>
-            <uid>97</uid>
-            <uid>101</uid>
+            <uid>67</uid>
+            <uid>66</uid>
+            <uid>82</uid>
+            <uid>83</uid>
+            <uid>86</uid>
         </joinedCorners>
     </corner>
     <corner>
         <uid>71</uid>
-        <x>3013.793945312</x>
-        <y>752.778686523</y>
+        <x>3663.891601562</x>
+        <y>1378.181274414</y>
         <z>0.000000000</z>
         <inTriangles>
-            <uid>95</uid>
-            <uid>96</uid>
-            <uid>97</uid>
-            <uid>133</uid>
-            <uid>148</uid>
-            <uid>156</uid>
+            <uid>77</uid>
+            <uid>85</uid>
+            <uid>91</uid>
         </inTriangles>
         <joinedCorners>
-            <uid>70</uid>
-            <uid>57</uid>
-            <uid>58</uid>
             <uid>72</uid>
-            <uid>97</uid>
-            <uid>98</uid>
+            <uid>73</uid>
+            <uid>64</uid>
+            <uid>81</uid>
         </joinedCorners>
     </corner>
     <corner>
         <uid>72</uid>
-        <x>3132.327636719</x>
-        <y>778.774780273</y>
+        <x>3760.636718750</x>
+        <y>1209.942016602</y>
         <z>0.000000000</z>
         <inTriangles>
+            <uid>77</uid>
+            <uid>90</uid>
+            <uid>91</uid>
+            <uid>96</uid>
             <uid>97</uid>
             <uid>98</uid>
-            <uid>99</uid>
-            <uid>134</uid>
-            <uid>156</uid>
         </inTriangles>
         <joinedCorners>
             <uid>71</uid>
-            <uid>58</uid>
-            <uid>59</uid>
             <uid>73</uid>
-            <uid>98</uid>
+            <uid>81</uid>
+            <uid>85</uid>
+            <uid>88</uid>
+            <uid>89</uid>
         </joinedCorners>
     </corner>
     <corner>
         <uid>73</uid>
-        <x>3221.166748047</x>
-        <y>815.646972656</y>
+        <x>3858.377197266</x>
+        <y>1377.498535156</y>
         <z>0.000000000</z>
         <inTriangles>
+            <uid>77</uid>
+            <uid>98</uid>
             <uid>99</uid>
-            <uid>100</uid>
-            <uid>101</uid>
-            <uid>134</uid>
-            <uid>149</uid>
         </inTriangles>
         <joinedCorners>
+            <uid>71</uid>
             <uid>72</uid>
-            <uid>59</uid>
-            <uid>60</uid>
-            <uid>74</uid>
-            <uid>98</uid>
+            <uid>89</uid>
+            <uid>90</uid>
         </joinedCorners>
     </corner>
     <corner>
         <uid>74</uid>
-        <x>3308.619873047</x>
-        <y>888.455078125</y>
+        <x>3972.947509766</x>
+        <y>1207.692016602</y>
         <z>0.000000000</z>
         <inTriangles>
-            <uid>101</uid>
-            <uid>102</uid>
-            <uid>103</uid>
-            <uid>135</uid>
-            <uid>147</uid>
-            <uid>149</uid>
+            <uid>78</uid>
+            <uid>104</uid>
+            <uid>105</uid>
         </inTriangles>
         <joinedCorners>
-            <uid>73</uid>
-            <uid>60</uid>
-            <uid>61</uid>
             <uid>75</uid>
-            <uid>99</uid>
-            <uid>98</uid>
+            <uid>76</uid>
+            <uid>94</uid>
+            <uid>90</uid>
         </joinedCorners>
     </corner>
     <corner>
         <uid>75</uid>
-        <x>3351.680908203</x>
-        <y>992.498107910</y>
+        <x>3874.355468750</x>
+        <y>1041.763793945</y>
         <z>0.000000000</z>
         <inTriangles>
+            <uid>78</uid>
             <uid>103</uid>
-            <uid>104</uid>
-            <uid>105</uid>
-            <uid>135</uid>
-            <uid>136</uid>
-            <uid>146</uid>
         </inTriangles>
         <joinedCorners>
             <uid>74</uid>
-            <uid>61</uid>
             <uid>76</uid>
-            <uid>77</uid>
-            <uid>99</uid>
-            <uid>100</uid>
+            <uid>93</uid>
         </joinedCorners>
     </corner>
     <corner>
         <uid>76</uid>
-        <x>3590.885009766</x>
-        <y>1005.357910156</y>
+        <x>4064.964355469</x>
+        <y>1041.312622070</y>
         <z>0.000000000</z>
         <inTriangles>
+            <uid>78</uid>
+            <uid>103</uid>
             <uid>104</uid>
-            <uid>105</uid>
-            <uid>106</uid>
+            <uid>109</uid>
+            <uid>110</uid>
+            <uid>111</uid>
         </inTriangles>
         <joinedCorners>
+            <uid>74</uid>
             <uid>75</uid>
-            <uid>61</uid>
+            <uid>93</uid>
+            <uid>94</uid>
+            <uid>97</uid>
             <uid>77</uid>
-            <uid>78</uid>
         </joinedCorners>
     </corner>
     <corner>
         <uid>77</uid>
-        <x>3338.148925781</x>
-        <y>1137.152343750</y>
+        <x>4256.075683594</x>
+        <y>1041.754272461</y>
         <z>0.000000000</z>
         <inTriangles>
-            <uid>105</uid>
-            <uid>106</uid>
-            <uid>136</uid>
-            <uid>141</uid>
+            <uid>79</uid>
+            <uid>110</uid>
+            <uid>111</uid>
+            <uid>112</uid>
+            <uid>116</uid>
+            <uid>117</uid>
         </inTriangles>
         <joinedCorners>
-            <uid>75</uid>
-            <uid>76</uid>
             <uid>78</uid>
-            <uid>100</uid>
-            <uid>104</uid>
+            <uid>79</uid>
+            <uid>76</uid>
+            <uid>97</uid>
+            <uid>94</uid>
+            <uid>98</uid>
         </joinedCorners>
     </corner>
     <corner>
         <uid>78</uid>
-        <x>3612.175537109</x>
-        <y>1148.462036133</y>
+        <x>4344.215820312</x>
+        <y>878.978881836</y>
         <z>0.000000000</z>
         <inTriangles>
-            <uid>106</uid>
+            <uid>79</uid>
+            <uid>115</uid>
+            <uid>116</uid>
         </inTriangles>
         <joinedCorners>
             <uid>77</uid>
-            <uid>76</uid>
+            <uid>79</uid>
+            <uid>97</uid>
+            <uid>99</uid>
         </joinedCorners>
     </corner>
     <corner>
         <uid>79</uid>
-        <x>3986.430908203</x>
-        <y>260.602508545</y>
+        <x>4444.436523438</x>
+        <y>1041.303100586</y>
         <z>0.000000000</z>
         <inTriangles>
-            <uid>107</uid>
-            <uid>108</uid>
-            <uid>109</uid>
+            <uid>79</uid>
+            <uid>117</uid>
         </inTriangles>
         <joinedCorners>
-            <uid>31</uid>
-            <uid>29</uid>
-            <uid>80</uid>
-            <uid>81</uid>
+            <uid>77</uid>
+            <uid>78</uid>
+            <uid>98</uid>
         </joinedCorners>
     </corner>
     <corner>
         <uid>80</uid>
-        <x>4269.012207031</x>
-        <y>527.607971191</y>
+        <x>4806.737792969</x>
+        <y>398.023010254</y>
         <z>0.000000000</z>
         <inTriangles>
-            <uid>108</uid>
-            <uid>109</uid>
-            <uid>112</uid>
-            <uid>113</uid>
-            <uid>120</uid>
-            <uid>121</uid>
+            <uid>81</uid>
+            <uid>83</uid>
         </inTriangles>
         <joinedCorners>
+            <uid>29</uid>
             <uid>31</uid>
-            <uid>79</uid>
-            <uid>81</uid>
             <uid>33</uid>
-            <uid>85</uid>
-            <uid>83</uid>
         </joinedCorners>
     </corner>
     <corner>
         <uid>81</uid>
-        <x>4350.833984375</x>
-        <y>365.598205566</y>
+        <x>3568.408447266</x>
+        <y>1209.500976562</y>
         <z>0.000000000</z>
         <inTriangles>
-            <uid>109</uid>
-            <uid>110</uid>
-            <uid>111</uid>
-            <uid>120</uid>
+            <uid>85</uid>
+            <uid>89</uid>
+            <uid>90</uid>
+            <uid>91</uid>
         </inTriangles>
         <joinedCorners>
-            <uid>80</uid>
-            <uid>79</uid>
-            <uid>82</uid>
-            <uid>83</uid>
+            <uid>64</uid>
+            <uid>71</uid>
             <uid>84</uid>
+            <uid>85</uid>
+            <uid>72</uid>
         </joinedCorners>
     </corner>
     <corner>
         <uid>82</uid>
-        <x>4731.678222656</x>
-        <y>548.105773926</y>
+        <x>3379.488525391</x>
+        <y>879.482788086</y>
         <z>0.000000000</z>
         <inTriangles>
-            <uid>110</uid>
-            <uid>111</uid>
-            <uid>114</uid>
-            <uid>115</uid>
-            <uid>128</uid>
-            <uid>132</uid>
-        </inTriangles>
-        <joinedCorners>
-            <uid>83</uid>
-            <uid>81</uid>
-            <uid>84</uid>
             <uid>86</uid>
             <uid>87</uid>
-            <uid>93</uid>
+        </inTriangles>
+        <joinedCorners>
+            <uid>70</uid>
+            <uid>83</uid>
+            <uid>84</uid>
         </joinedCorners>
     </corner>
     <corner>
         <uid>83</uid>
-        <x>4413.944335938</x>
-        <y>537.443725586</y>
+        <x>3569.051025391</x>
+        <y>878.802307129</y>
         <z>0.000000000</z>
         <inTriangles>
-            <uid>110</uid>
-            <uid>114</uid>
-            <uid>120</uid>
-            <uid>121</uid>
-            <uid>122</uid>
+            <uid>86</uid>
+            <uid>87</uid>
+            <uid>88</uid>
+            <uid>92</uid>
+            <uid>93</uid>
+            <uid>94</uid>
         </inTriangles>
         <joinedCorners>
             <uid>82</uid>
-            <uid>81</uid>
-            <uid>86</uid>
-            <uid>80</uid>
+            <uid>70</uid>
+            <uid>84</uid>
             <uid>85</uid>
+            <uid>86</uid>
+            <uid>87</uid>
         </joinedCorners>
     </corner>
     <corner>
         <uid>84</uid>
-        <x>4724.831054688</x>
-        <y>404.866088867</y>
+        <x>3473.345947266</x>
+        <y>1042.293457031</y>
         <z>0.000000000</z>
         <inTriangles>
-            <uid>111</uid>
-            <uid>128</uid>
+            <uid>87</uid>
+            <uid>88</uid>
+            <uid>89</uid>
         </inTriangles>
         <joinedCorners>
             <uid>82</uid>
+            <uid>83</uid>
+            <uid>85</uid>
             <uid>81</uid>
-            <uid>93</uid>
         </joinedCorners>
     </corner>
     <corner>
         <uid>85</uid>
-        <x>4290.851562500</x>
-        <y>747.356506348</y>
+        <x>3664.292724609</x>
+        <y>1042.734008789</y>
         <z>0.000000000</z>
         <inTriangles>
-            <uid>113</uid>
-            <uid>116</uid>
-            <uid>117</uid>
-            <uid>118</uid>
-            <uid>121</uid>
-            <uid>122</uid>
+            <uid>88</uid>
+            <uid>89</uid>
+            <uid>90</uid>
+            <uid>94</uid>
+            <uid>95</uid>
+            <uid>96</uid>
         </inTriangles>
         <joinedCorners>
-            <uid>33</uid>
-            <uid>80</uid>
-            <uid>35</uid>
-            <uid>88</uid>
-            <uid>86</uid>
+            <uid>84</uid>
             <uid>83</uid>
+            <uid>81</uid>
+            <uid>72</uid>
+            <uid>87</uid>
+            <uid>88</uid>
         </joinedCorners>
     </corner>
     <corner>
         <uid>86</uid>
-        <x>4487.975585938</x>
-        <y>848.043029785</y>
+        <x>3662.834716797</x>
+        <y>717.560913086</y>
         <z>0.000000000</z>
         <inTriangles>
-            <uid>114</uid>
-            <uid>115</uid>
-            <uid>118</uid>
-            <uid>119</uid>
-            <uid>122</uid>
+            <uid>92</uid>
+            <uid>93</uid>
+            <uid>100</uid>
         </inTriangles>
         <joinedCorners>
             <uid>83</uid>
-            <uid>82</uid>
+            <uid>70</uid>
             <uid>87</uid>
-            <uid>88</uid>
-            <uid>85</uid>
+            <uid>91</uid>
         </joinedCorners>
     </corner>
     <corner>
         <uid>87</uid>
-        <x>4849.115234375</x>
-        <y>892.609008789</y>
+        <x>3757.433105469</x>
+        <y>878.761108398</y>
         <z>0.000000000</z>
         <inTriangles>
-            <uid>115</uid>
-            <uid>119</uid>
-            <uid>130</uid>
-            <uid>132</uid>
+            <uid>93</uid>
+            <uid>94</uid>
+            <uid>95</uid>
+            <uid>100</uid>
+            <uid>101</uid>
+            <uid>102</uid>
         </inTriangles>
         <joinedCorners>
+            <uid>83</uid>
             <uid>86</uid>
-            <uid>82</uid>
+            <uid>85</uid>
             <uid>88</uid>
-            <uid>93</uid>
-            <uid>96</uid>
+            <uid>91</uid>
+            <uid>92</uid>
         </joinedCorners>
     </corner>
     <corner>
         <uid>88</uid>
-        <x>4525.863769531</x>
-        <y>1067.536010742</y>
+        <x>3853.782226562</x>
+        <y>1043.564331055</y>
         <z>0.000000000</z>
         <inTriangles>
-            <uid>117</uid>
-            <uid>118</uid>
-            <uid>119</uid>
+            <uid>95</uid>
+            <uid>96</uid>
+            <uid>97</uid>
+            <uid>102</uid>
         </inTriangles>
         <joinedCorners>
-            <uid>35</uid>
             <uid>85</uid>
-            <uid>86</uid>
             <uid>87</uid>
+            <uid>72</uid>
+            <uid>89</uid>
+            <uid>92</uid>
         </joinedCorners>
     </corner>
     <corner>
         <uid>89</uid>
-        <x>15.682999611</x>
-        <y>1049.352172852</y>
+        <x>3952.879882812</x>
+        <y>1210.385498047</y>
         <z>0.000000000</z>
         <inTriangles>
-            <uid>123</uid>
+            <uid>97</uid>
+            <uid>98</uid>
+            <uid>99</uid>
         </inTriangles>
         <joinedCorners>
+            <uid>72</uid>
+            <uid>88</uid>
+            <uid>73</uid>
             <uid>90</uid>
-            <uid>91</uid>
         </joinedCorners>
     </corner>
     <corner>
         <uid>90</uid>
-        <x>83.986000061</x>
-        <y>770.323974609</y>
+        <x>4053.093261719</x>
+        <y>1377.207641602</y>
         <z>0.000000000</z>
         <inTriangles>
-            <uid>123</uid>
-            <uid>125</uid>
+            <uid>99</uid>
+            <uid>105</uid>
+            <uid>106</uid>
         </inTriangles>
         <joinedCorners>
+            <uid>73</uid>
             <uid>89</uid>
-            <uid>91</uid>
-            <uid>92</uid>
+            <uid>74</uid>
+            <uid>94</uid>
+            <uid>95</uid>
         </joinedCorners>
     </corner>
     <corner>
         <uid>91</uid>
-        <x>580.122009277</x>
-        <y>1037.121459961</y>
+        <x>3850.583251953</x>
+        <y>716.878356934</y>
         <z>0.000000000</z>
         <inTriangles>
-            <uid>123</uid>
-            <uid>124</uid>
-            <uid>125</uid>
+            <uid>100</uid>
+            <uid>101</uid>
+            <uid>107</uid>
         </inTriangles>
         <joinedCorners>
-            <uid>89</uid>
-            <uid>90</uid>
+            <uid>87</uid>
+            <uid>86</uid>
             <uid>92</uid>
-            <uid>5</uid>
+            <uid>93</uid>
+            <uid>96</uid>
         </joinedCorners>
     </corner>
     <corner>
         <uid>92</uid>
-        <x>588.200988770</x>
-        <y>655.617004395</y>
+        <x>3945.182128906</x>
+        <y>878.077514648</y>
         <z>0.000000000</z>
         <inTriangles>
-            <uid>124</uid>
-            <uid>125</uid>
-            <uid>126</uid>
-            <uid>127</uid>
+            <uid>101</uid>
+            <uid>102</uid>
         </inTriangles>
         <joinedCorners>
+            <uid>87</uid>
             <uid>91</uid>
-            <uid>5</uid>
-            <uid>90</uid>
-            <uid>3</uid>
-            <uid>1</uid>
+            <uid>88</uid>
         </joinedCorners>
     </corner>
     <corner>
         <uid>93</uid>
-        <x>5186.824218750</x>
-        <y>552.512695312</y>
+        <x>3966.693359375</x>
+        <y>878.549987793</y>
         <z>0.000000000</z>
         <inTriangles>
-            <uid>128</uid>
-            <uid>129</uid>
-            <uid>130</uid>
-            <uid>131</uid>
-            <uid>132</uid>
+            <uid>103</uid>
+            <uid>107</uid>
+            <uid>108</uid>
+            <uid>109</uid>
         </inTriangles>
         <joinedCorners>
-            <uid>82</uid>
-            <uid>84</uid>
-            <uid>94</uid>
-            <uid>95</uid>
-            <uid>87</uid>
+            <uid>75</uid>
+            <uid>76</uid>
+            <uid>91</uid>
             <uid>96</uid>
+            <uid>97</uid>
         </joinedCorners>
     </corner>
     <corner>
         <uid>94</uid>
-        <x>5726.432128906</x>
-        <y>654.098327637</y>
+        <x>4165.178710938</x>
+        <y>1208.134277344</y>
         <z>0.000000000</z>
         <inTriangles>
-            <uid>129</uid>
+            <uid>104</uid>
+            <uid>105</uid>
+            <uid>106</uid>
+            <uid>111</uid>
+            <uid>112</uid>
+            <uid>113</uid>
         </inTriangles>
         <joinedCorners>
-            <uid>93</uid>
+            <uid>74</uid>
+            <uid>76</uid>
+            <uid>90</uid>
             <uid>95</uid>
+            <uid>77</uid>
+            <uid>98</uid>
         </joinedCorners>
     </corner>
     <corner>
         <uid>95</uid>
-        <x>5732.812011719</x>
-        <y>921.924011230</y>
+        <x>4266.521972656</x>
+        <y>1378.330200195</y>
         <z>0.000000000</z>
         <inTriangles>
-            <uid>129</uid>
-            <uid>131</uid>
+            <uid>106</uid>
+            <uid>113</uid>
         </inTriangles>
         <joinedCorners>
-            <uid>93</uid>
+            <uid>90</uid>
             <uid>94</uid>
-            <uid>96</uid>
+            <uid>98</uid>
         </joinedCorners>
     </corner>
     <corner>
         <uid>96</uid>
-        <x>5302.702148438</x>
-        <y>926.799987793</y>
+        <x>4057.184570312</x>
+        <y>716.554382324</y>
         <z>0.000000000</z>
         <inTriangles>
-            <uid>130</uid>
-            <uid>131</uid>
+            <uid>107</uid>
+            <uid>108</uid>
+            <uid>114</uid>
         </inTriangles>
         <joinedCorners>
-            <uid>87</uid>
             <uid>93</uid>
-            <uid>95</uid>
+            <uid>91</uid>
+            <uid>97</uid>
+            <uid>99</uid>
         </joinedCorners>
     </corner>
     <corner>
         <uid>97</uid>
-        <x>2976.414306641</x>
-        <y>889.043151855</y>
+        <x>4155.849609375</x>
+        <y>878.225036621</y>
         <z>0.000000000</z>
         <inTriangles>
-            <uid>133</uid>
-            <uid>142</uid>
-            <uid>148</uid>
-            <uid>159</uid>
-            <uid>163</uid>
-            <uid>164</uid>
+            <uid>108</uid>
+            <uid>109</uid>
+            <uid>110</uid>
+            <uid>114</uid>
+            <uid>115</uid>
+            <uid>116</uid>
         </inTriangles>
         <joinedCorners>
-            <uid>70</uid>
-            <uid>71</uid>
-            <uid>101</uid>
-            <uid>98</uid>
-            <uid>105</uid>
-            <uid>109</uid>
+            <uid>93</uid>
+            <uid>96</uid>
+            <uid>76</uid>
+            <uid>77</uid>
+            <uid>99</uid>
+            <uid>78</uid>
         </joinedCorners>
     </corner>
     <corner>
         <uid>98</uid>
-        <x>3108.720458984</x>
-        <y>919.102233887</y>
+        <x>4357.415527344</x>
+        <y>1209.700073242</y>
         <z>0.000000000</z>
         <inTriangles>
-            <uid>134</uid>
-            <uid>147</uid>
-            <uid>148</uid>
-            <uid>149</uid>
-            <uid>150</uid>
-            <uid>156</uid>
-            <uid>159</uid>
+            <uid>112</uid>
+            <uid>113</uid>
+            <uid>117</uid>
         </inTriangles>
         <joinedCorners>
-            <uid>72</uid>
-            <uid>73</uid>
-            <uid>99</uid>
-            <uid>74</uid>
-            <uid>97</uid>
-            <uid>71</uid>
-            <uid>105</uid>
+            <uid>94</uid>
+            <uid>77</uid>
+            <uid>95</uid>
+            <uid>79</uid>
         </joinedCorners>
     </corner>
     <corner>
         <uid>99</uid>
-        <x>3173.182373047</x>
-        <y>993.954650879</y>
+        <x>4245.303710938</x>
+        <y>716.744079590</y>
         <z>0.000000000</z>
         <inTriangles>
-            <uid>135</uid>
-            <uid>146</uid>
-            <uid>147</uid>
-            <uid>150</uid>
-            <uid>152</uid>
+            <uid>114</uid>
+            <uid>115</uid>
         </inTriangles>
         <joinedCorners>
-            <uid>74</uid>
-            <uid>75</uid>
-            <uid>100</uid>
-            <uid>98</uid>
-            <uid>105</uid>
-        </joinedCorners>
-    </corner>
-    <corner>
-        <uid>100</uid>
-        <x>3220.742431641</x>
-        <y>1060.299316406</y>
-        <z>0.000000000</z>
-        <inTriangles>
-            <uid>136</uid>
-            <uid>141</uid>
-            <uid>146</uid>
-            <uid>152</uid>
-            <uid>157</uid>
-        </inTriangles>
-        <joinedCorners>
-            <uid>75</uid>
-            <uid>77</uid>
-            <uid>104</uid>
-            <uid>99</uid>
-            <uid>105</uid>
-        </joinedCorners>
-    </corner>
-    <corner>
-        <uid>101</uid>
-        <x>2826.581787109</x>
-        <y>946.014465332</y>
-        <z>0.000000000</z>
-        <inTriangles>
-            <uid>137</uid>
-            <uid>138</uid>
-            <uid>142</uid>
-            <uid>143</uid>
-            <uid>144</uid>
-            <uid>158</uid>
-            <uid>162</uid>
-            <uid>163</uid>
-        </inTriangles>
-        <joinedCorners>
-            <uid>68</uid>
-            <uid>69</uid>
-            <uid>67</uid>
-            <uid>70</uid>
             <uid>97</uid>
-            <uid>102</uid>
-            <uid>107</uid>
-            <uid>109</uid>
-        </joinedCorners>
-    </corner>
-    <corner>
-        <uid>102</uid>
-        <x>2722.980224609</x>
-        <y>1057.576904297</y>
-        <z>0.000000000</z>
-        <inTriangles>
-            <uid>139</uid>
-            <uid>144</uid>
-            <uid>145</uid>
-            <uid>151</uid>
-            <uid>153</uid>
-            <uid>158</uid>
-        </inTriangles>
-        <joinedCorners>
-            <uid>66</uid>
-            <uid>67</uid>
-            <uid>101</uid>
-            <uid>103</uid>
-            <uid>106</uid>
-            <uid>107</uid>
-        </joinedCorners>
-    </corner>
-    <corner>
-        <uid>103</uid>
-        <x>2667.162597656</x>
-        <y>1132.540039062</y>
-        <z>0.000000000</z>
-        <inTriangles>
-            <uid>140</uid>
-            <uid>145</uid>
-            <uid>151</uid>
-        </inTriangles>
-        <joinedCorners>
-            <uid>63</uid>
-            <uid>66</uid>
-            <uid>102</uid>
-            <uid>106</uid>
-        </joinedCorners>
-    </corner>
-    <corner>
-        <uid>104</uid>
-        <x>3153.261474609</x>
-        <y>1130.231811523</y>
-        <z>0.000000000</z>
-        <inTriangles>
-            <uid>141</uid>
-            <uid>155</uid>
-            <uid>157</uid>
-        </inTriangles>
-        <joinedCorners>
-            <uid>77</uid>
-            <uid>100</uid>
-            <uid>108</uid>
-            <uid>105</uid>
-        </joinedCorners>
-    </corner>
-    <corner>
-        <uid>105</uid>
-        <x>3033.817138672</x>
-        <y>1037.724731445</y>
-        <z>0.000000000</z>
-        <inTriangles>
-            <uid>150</uid>
-            <uid>152</uid>
-            <uid>155</uid>
-            <uid>157</uid>
-            <uid>159</uid>
-            <uid>160</uid>
-            <uid>164</uid>
-        </inTriangles>
-        <joinedCorners>
-            <uid>98</uid>
-            <uid>99</uid>
-            <uid>100</uid>
-            <uid>108</uid>
-            <uid>104</uid>
-            <uid>97</uid>
-            <uid>109</uid>
-        </joinedCorners>
-    </corner>
-    <corner>
-        <uid>106</uid>
-        <x>2819.642822266</x>
-        <y>1129.677978516</y>
-        <z>0.000000000</z>
-        <inTriangles>
-            <uid>151</uid>
-            <uid>153</uid>
-            <uid>154</uid>
-        </inTriangles>
-        <joinedCorners>
-            <uid>102</uid>
-            <uid>103</uid>
-            <uid>107</uid>
-            <uid>108</uid>
-        </joinedCorners>
-    </corner>
-    <corner>
-        <uid>107</uid>
-        <x>2863.583251953</x>
-        <y>1052.890258789</y>
-        <z>0.000000000</z>
-        <inTriangles>
-            <uid>153</uid>
-            <uid>154</uid>
-            <uid>158</uid>
-            <uid>161</uid>
-            <uid>162</uid>
-        </inTriangles>
-        <joinedCorners>
-            <uid>102</uid>
-            <uid>106</uid>
-            <uid>108</uid>
-            <uid>101</uid>
-            <uid>109</uid>
-        </joinedCorners>
-    </corner>
-    <corner>
-        <uid>108</uid>
-        <x>2950.940917969</x>
-        <y>1127.230590820</y>
-        <z>0.000000000</z>
-        <inTriangles>
-            <uid>154</uid>
-            <uid>155</uid>
-            <uid>160</uid>
-            <uid>161</uid>
-        </inTriangles>
-        <joinedCorners>
-            <uid>106</uid>
-            <uid>107</uid>
-            <uid>105</uid>
-            <uid>104</uid>
-            <uid>109</uid>
-        </joinedCorners>
-    </corner>
-    <corner>
-        <uid>109</uid>
-        <x>2927.116455078</x>
-        <y>999.240539551</y>
-        <z>0.000000000</z>
-        <inTriangles>
-            <uid>160</uid>
-            <uid>161</uid>
-            <uid>162</uid>
-            <uid>163</uid>
-            <uid>164</uid>
-        </inTriangles>
-        <joinedCorners>
-            <uid>108</uid>
-            <uid>105</uid>
-            <uid>107</uid>
-            <uid>101</uid>
-            <uid>97</uid>
+            <uid>96</uid>
+            <uid>78</uid>
         </joinedCorners>
     </corner>
 </corners>
@@ -2497,146 +2142,5 @@
     </triangle>
     <triangle>
         <uid>117</uid>
-    </triangle>
-    <triangle>
-        <uid>118</uid>
-    </triangle>
-    <triangle>
-        <uid>119</uid>
-    </triangle>
-    <triangle>
-        <uid>120</uid>
-    </triangle>
-    <triangle>
-        <uid>121</uid>
-    </triangle>
-    <triangle>
-        <uid>122</uid>
-    </triangle>
-    <triangle>
-        <uid>123</uid>
-    </triangle>
-    <triangle>
-        <uid>124</uid>
-    </triangle>
-    <triangle>
-        <uid>125</uid>
-    </triangle>
-    <triangle>
-        <uid>126</uid>
-    </triangle>
-    <triangle>
-        <uid>127</uid>
-    </triangle>
-    <triangle>
-        <uid>128</uid>
-    </triangle>
-    <triangle>
-        <uid>129</uid>
-    </triangle>
-    <triangle>
-        <uid>130</uid>
-    </triangle>
-    <triangle>
-        <uid>131</uid>
-    </triangle>
-    <triangle>
-        <uid>132</uid>
-    </triangle>
-    <triangle>
-        <uid>133</uid>
-    </triangle>
-    <triangle>
-        <uid>134</uid>
-    </triangle>
-    <triangle>
-        <uid>135</uid>
-    </triangle>
-    <triangle>
-        <uid>136</uid>
-    </triangle>
-    <triangle>
-        <uid>137</uid>
-    </triangle>
-    <triangle>
-        <uid>138</uid>
-    </triangle>
-    <triangle>
-        <uid>139</uid>
-    </triangle>
-    <triangle>
-        <uid>140</uid>
-    </triangle>
-    <triangle>
-        <uid>141</uid>
-    </triangle>
-    <triangle>
-        <uid>142</uid>
-    </triangle>
-    <triangle>
-        <uid>143</uid>
-    </triangle>
-    <triangle>
-        <uid>144</uid>
-    </triangle>
-    <triangle>
-        <uid>145</uid>
-    </triangle>
-    <triangle>
-        <uid>146</uid>
-    </triangle>
-    <triangle>
-        <uid>147</uid>
-    </triangle>
-    <triangle>
-        <uid>148</uid>
-    </triangle>
-    <triangle>
-        <uid>149</uid>
-    </triangle>
-    <triangle>
-        <uid>150</uid>
-    </triangle>
-    <triangle>
-        <uid>151</uid>
-    </triangle>
-    <triangle>
-        <uid>152</uid>
-    </triangle>
-    <triangle>
-        <uid>153</uid>
-    </triangle>
-    <triangle>
-        <uid>154</uid>
-    </triangle>
-    <triangle>
-        <uid>155</uid>
-    </triangle>
-    <triangle>
-        <uid>156</uid>
-    </triangle>
-    <triangle>
-        <uid>157</uid>
-    </triangle>
-    <triangle>
-        <uid>158</uid>
-    </triangle>
-    <triangle>
-        <uid>159</uid>
-    </triangle>
-    <triangle>
-        <uid>160</uid>
-    </triangle>
-    <triangle>
-        <uid>161</uid>
-    </triangle>
-    <triangle>
-        <uid>162</uid>
-    </triangle>
-    <triangle>
-        <uid>163</uid>
-    </triangle>
-    <triangle>
-        <uid>164</uid>
     </triangle>
 </triangles>

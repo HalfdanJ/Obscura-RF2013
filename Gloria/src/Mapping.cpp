@@ -260,6 +260,9 @@ void Mapping::exit() {
     save();
 }
 
+void Mapping::drawGuide() {
+}
+
 void Mapping::debugDraw() {
     
     

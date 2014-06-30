@@ -9,7 +9,7 @@
 #pragma once
 
 //size of the output FBO's
-#define OUTWIDTH 5900
+#define OUTWIDTH 5700
 #define OUTHEIGHT 1200
 
 #define OSCRECEIVEPORT 9999
