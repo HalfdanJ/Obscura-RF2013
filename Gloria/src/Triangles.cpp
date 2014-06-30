@@ -11,7 +11,7 @@
 
 void Triangles::setGui(){
     gui->addSlider("SyphonOpacity", 0,1, &syphonOpacity);
-    gui->addSlider("DivideTriangleSize", 10000,6000, &divideTriangleSize);
+    gui->addSlider("DivideTriangleSize", 1000,60000, &divideTriangleSize);
     gui->addSlider("DivideRadius", 0,2400, &divideRadius);
     gui->addToggle("DivideInvert", &divideInvert);
     gui->addSlider("TransitionTime", 0,10, &transitionTime);
@@ -61,13 +61,11 @@ void Triangles::setup(){
 void Triangles::divide(SubTriangle * triangle, float sizeGoal){
     int size = triangle->subTriangles.size();
     if(sizeGoal > 0){
-        cout<<triangle->triangleSize()<<"  "<<sizeGoal<<endl;
         if(size > 0){
             for(int i=0;i<size;i++){
                 divide(triangle->subTriangles[i], sizeGoal);
             }
-        } else if(triangle->triangleSize() > sizeGoal){
-            cout<<"ASKDPO"<<endl;
+        } else if(triangle->triangleSize() / 3.0 > sizeGoal){
             SubTriangle * subTriangle = triangle;
         
             ofVec3f center = subTriangle->getCenter();
@@ -295,7 +293,7 @@ void Triangles::update(){
     for(int i=0;i<mapping->triangles.size();i++){
         SubTriangle * triangle = subTriangles[mapping->triangles[i]];
         
-        float sizeGoal = 100000;// divideTriangleSize;//*triangle->ageDifference;
+        float sizeGoal = divideTriangleSize;//*triangle->ageDifference;
         
         if(triangle->getSmallestSize() > sizeGoal
            && ((triangle->getCenter().distance(center) < divideRadius && !divideInvert) || (triangle->getCenter().distance(center) > divideRadius && divideInvert))){
