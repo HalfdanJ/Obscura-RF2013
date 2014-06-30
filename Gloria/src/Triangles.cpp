@@ -8,10 +8,6 @@
 
 #include "Triangles.h"
 
-#define OUTWIDTH 5900
-#define OUTHEIGHT 1200
-
-
 void Triangles::setup(){
     
     name = "Triangles";
@@ -477,6 +473,7 @@ void Triangles::update(){
      }
      
      */
+
     
     center.x = 2996;
     center.y = 1200;

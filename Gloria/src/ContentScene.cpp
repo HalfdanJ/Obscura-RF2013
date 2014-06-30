@@ -60,12 +60,10 @@ void ContentScene::setSceneGui(){
     gui->addToggle(i+"Solo", &solo);
     
     setGui();
-    
     gui->autoSizeToFitWidgets();
     
     ofAddListener(gui->newGUIEvent,this,&ContentScene::guiEvent);
 }
-
 
 void ContentScene::guiEvent(ofxUIEventArgs &e)
 {
@@ -115,7 +113,6 @@ void ContentScene::drawScene() {
         //glDisable(GL_BLEND);
         
         fbo.end();
-        
         ofPopStyle();
         ofPopMatrix();
     }

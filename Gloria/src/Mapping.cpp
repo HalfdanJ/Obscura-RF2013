@@ -69,6 +69,8 @@ void Mapping::load(string _xmlfile, string _svgfile) {
         settings.popTag();
     }
     
+    updateMeshes();
+    
     selectedCorner = corners[selectedCornerId];
 }
 
@@ -243,6 +245,17 @@ void Mapping::generate() {
     
 }
 
+
+void Mapping::updateMeshes() {
+
+    for(int i=0; i<triangles.size(); i++) {
+        for(int c=0; c<3; c++) {
+            triangles[i]->mesh.setVertex(c, triangles[i]->corners[c]->pos);
+        }
+    }
+
+}
+
 void Mapping::exit() {
     save();
 }
@@ -318,7 +331,6 @@ void Mapping::selectCornerAt(int _x, int _y, int r) {
     /*for(int i=0; i < corners.size(); i++) {
         if(corners[i]->pos.x - _x)
     }*/
-    
     
 }
 

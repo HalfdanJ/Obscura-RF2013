@@ -39,7 +39,7 @@ public:
     ofxOscReceiver oscReceiver;
     ofxOscSender oscSender;
     ofxSyphonServer syphonOut;
-    ofxSyphonClient syphonIn;
+    ofxSyphonClient * syphonIn;
     
     ofxSyphonServerDirectory directory;
     void serverAnnounced(ofxSyphonServerDirectoryEventArgs &arg);
@@ -55,6 +55,7 @@ public:
     // gui
     void setGUI();
     ofxUITabBar *guiTabBar;
+    ofxUICanvas *mainGui;
     vector<ofxUICanvas *> guis;
     void guiEvent(ofxUIEventArgs &e);
     
@@ -71,5 +72,4 @@ public:
     //HardNoise * hardNoise;
     
     vector<ContentScene*> scenes;
-    
 };

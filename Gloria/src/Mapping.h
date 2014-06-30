@@ -64,6 +64,7 @@ public:
     void nextCorner();
     void prevCorner();
     void selectCornerAt(int x, int y, int r);
+    void updateMeshes();
     
 protected:
     string svgFilename;

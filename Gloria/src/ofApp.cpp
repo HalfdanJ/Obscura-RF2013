@@ -14,9 +14,11 @@ void ofApp::setup() {
     syphonOut.setName("Gloria Main");
     fboOut.allocate(OUTWIDTH, OUTHEIGHT);
     
-    syphonIn.setApplicationName("Millumin");
-    syphonIn.setServerName("");
-    syphonIn.setup();
+    syphonIn = new ofxSyphonClient();
+    
+    syphonIn->setApplicationName("Millumin");
+    syphonIn->setServerName("");
+    syphonIn->setup();
     
     //register for our directory's callbacks
     ofAddListener(directory.events.serverAnnounced, this, &ofApp::serverAnnounced);
@@ -35,36 +37,23 @@ void ofApp::setup() {
     
     // Set up the scenes, all scenes is a subclass of SceneContent, don't call draw, setup and update directly it is taken care of thorugh the scene.
     
-    //triangles.mapping = &mapping;
-    //triangles.syphon = &syphonIn;
-    //scenes.push_back(&triangles);
+    triangles = new Triangles;
+    scenes.push_back(triangles);
     
     perlinWaves = new PerlinWaves();
     scenes.push_back(perlinWaves);
-
-    //tesselator.mapping = &mapping;
-    //scenes.push_back(&tesselator);
-    
-    //triBlobs.mapping = &mapping;
-    //scenes.push_back(&triBlobs);
-    
-    //hardNoise.mapping = &mapping;
-    //scenes.push_back(&hardNoise);
-    
-    //quickTrail.mapping = &mapping;
-    //scenes.push_back(&quickTrail);
     
     ofFbo::Settings fboSettings;
     fboSettings.height = OUTHEIGHT;
     fboSettings.width = OUTWIDTH;
-    fboSettings.numSamples = 8;
+    fboSettings.numSamples = 4;
     fboSettings.useDepth = false;
-    //fboSettings.textureTarget = GL_TEXTURE_RECTANGLE_ARB;
     
     fboOut.allocate(fboSettings);
 
     for(int i=0; i<scenes.size(); i++) {
         scenes[i]->mapping = mapping;
+        scenes[i]->syphonIn = syphonIn;
         scenes[i]->setupScene(OUTWIDTH, OUTHEIGHT, i);
     }
     
@@ -145,7 +134,6 @@ void ofApp::update() {
     }
     ofPopStyle();
     
-    
     ofPushStyle();{
         fboOut.begin();{
             ofClear(0, 0);
@@ -161,8 +149,6 @@ void ofApp::update() {
     } ofPopStyle();
     
     syphonOut.publishTexture(&fboOut.getTextureReference());
-
-    
 }
 
 
@@ -194,15 +180,15 @@ void ofApp::draw() {
     ofPushMatrix();{
         ofTranslate(300, 320);
         
-        if(syphonIn.isSetup()){
+        if(syphonIn->isSetup()){
             
             ofSetColor(255);
             ofSetLineWidth(1);
-            ofRect(-1, -1, 260* syphonIn.getWidth()/syphonIn.getHeight()+2, 260+2);
-            syphonIn.draw(0, 0, 260* syphonIn.getWidth()/syphonIn.getHeight(), 260);
+            ofRect(-1, -1, 260* syphonIn->getWidth()/syphonIn->getHeight()+2, 260+2);
+            syphonIn->draw(0, 0, 260* syphonIn->getWidth()/syphonIn->getHeight(), 260);
             
             ofDrawBitmapString("Syphon input - (Press 'i' to change)", 10,18);
-            ofDrawBitmapString(syphonIn.getApplicationName(), 10,34);
+            ofDrawBitmapString(syphonIn->getApplicationName(), 10,34);
         }
     }ofPopMatrix();
     
@@ -237,12 +223,17 @@ void ofApp::setGUI()
     hideGUI = false;
     
     guiTabBar = new ofxUITabBar();
+    mainGui = new ofxUICanvas();
+    
+    mainGui->setFont("GUI/Arial.ttf");
+    mainGui->addToggle("Draw guide", &drawGuide);
+    ofAddListener(mainGui->newGUIEvent,this,&ofApp::guiEvent);
+    
     
     guiTabBar->setFont("GUI/Arial.ttf");
     guiTabBar->setWidgetFontSize(OFX_UI_FONT_SMALL);
     guiTabBar->setColorBack(ofColor(30, 30, 30,200));
     
-    guiTabBar->addToggle("Draw guide", &drawGuide);
     
     for(int i=0; i<scenes.size(); i++) {
         scenes[i]->setSceneGui();
@@ -250,9 +241,7 @@ void ofApp::setGUI()
         guis.push_back(scenes[i]->gui);
     }
     
-    
     guiTabBar->autoSizeToFitWidgets();
-    
     ofAddListener(guiTabBar->newGUIEvent,this,&ofApp::guiEvent);
 }
 
@@ -266,8 +255,8 @@ void ofApp::keyPressed(int key){
         dirIdx = 0;
         
         if(directory.isValidIndex(dirIdx)){
-            syphonIn.setServerName(directory.getServerList()[dirIdx].serverName);
-            syphonIn.setApplicationName(directory.getServerList()[dirIdx].appName);
+            syphonIn->setServerName(directory.getServerList()[dirIdx].serverName);
+            syphonIn->setApplicationName(directory.getServerList()[dirIdx].appName);
         }
     }
     
@@ -279,15 +268,15 @@ void ofApp::keyPressed(int key){
         mapping->prevCorner();
     }
     
-    
-    
     if(mapping->selectedCorner) {
         if(key == OF_KEY_UP) {
             mapping->selectedCorner->pos.z += 1;
+            mapping->updateMeshes();
         }
     
         if(key == OF_KEY_DOWN) {
             mapping->selectedCorner->pos.z -= 1;
+            mapping->updateMeshes();
         }
     }
 }
