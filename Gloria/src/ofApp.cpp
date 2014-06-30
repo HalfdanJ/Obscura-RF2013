@@ -110,7 +110,7 @@ void ofApp::update() {
 	//cout<<m.getAddress()<<endl;
 
         for(int i=0; i<scenes.size();i++) {
-            scenes[i]->parseOscMessage(&m);
+            scenes[i]->parseSceneOscMessage(&m);
         }
     }
 
@@ -178,7 +178,6 @@ void ofApp::draw() {
         ofTranslate(380, 320);
         
         if(syphonIn->isSetup()){
-            
             ofSetColor(255);
             ofSetLineWidth(1);
             ofRect(-1, -1, 260* syphonIn->getWidth()/syphonIn->getHeight()+2, 260+2);
@@ -224,16 +223,22 @@ void ofApp::setGUI()
     mainGui = new ofxUICanvas();
     
     mainGui->setFont("GUI/Arial.ttf");
+    mainGui->setWidgetFontSize(OFX_UI_FONT_SMALL);
+    
+    guiTabBar->setFont("GUI/Arial.ttf");
+    guiTabBar->setWidgetFontSize(OFX_UI_FONT_SMALL);
     
     mainGui->addLabel("Gloria");
+    
+    mainGui->addLabel("OSC info");
+    mainGui->addLabel("In: " + ofToString(OSCRECEIVEPORT));
+    mainGui->addLabel("Out: " + string(OSCSENDHOST) + ":" + ofToString(OSCSENDPORT));
+
     
     mainGui->addToggle("Draw guide", &drawGuide);
     mainGui->autoSizeToFitWidgets();
     ofAddListener(mainGui->newGUIEvent,this,&ofApp::guiEvent);
     
-    
-    guiTabBar->setFont("GUI/Arial.ttf");
-    guiTabBar->setWidgetFontSize(OFX_UI_FONT_SMALL);
     
     for(int i=0; i<scenes.size(); i++) {
         scenes[i]->setSceneGui();
