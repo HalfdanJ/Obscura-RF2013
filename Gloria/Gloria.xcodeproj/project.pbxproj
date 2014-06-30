@@ -86,14 +86,11 @@
 		04A0E2AC195CB4A60004D93F /* Syphon.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0425D7F0195ABA57003086AC /* Syphon.framework */; };
 		04A0E2BC195DAC800004D93F /* ContentScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04A0E2BB195DAC800004D93F /* ContentScene.cpp */; };
 		04A0E2BE195DBA280004D93F /* Mapping.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04A0E2BD195DBA280004D93F /* Mapping.cpp */; };
-		04C6D22A17847C8300AC12B9 /* GTess.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04C6D22917847C8300AC12B9 /* GTess.cpp */; };
 		04C6D22D17847D8900AC12B9 /* PerlinWaves.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04C6D22C17847D8900AC12B9 /* PerlinWaves.cpp */; };
-		04C6D2341784A1F400AC12B9 /* TriBlobs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04C6D2331784A1F400AC12B9 /* TriBlobs.cpp */; };
 		04CA7B3D1753E82E00B224D8 /* tinyxml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04CA7B361753E82E00B224D8 /* tinyxml.cpp */; };
 		04CA7B3E1753E82E00B224D8 /* tinyxmlerror.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04CA7B381753E82E00B224D8 /* tinyxmlerror.cpp */; };
 		04CA7B3F1753E82E00B224D8 /* tinyxmlparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04CA7B391753E82E00B224D8 /* tinyxmlparser.cpp */; };
 		04CA7B401753E82E00B224D8 /* ofxXmlSettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04CA7B3B1753E82E00B224D8 /* ofxXmlSettings.cpp */; };
-		04D09F2F17859C8D00627C4F /* HardNoise.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04D09F2E17859C8D00627C4F /* HardNoise.cpp */; };
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
 		DD7BE8AC1780D80900F04F23 /* LampWalker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DD7BE8AA1780D80900F04F23 /* LampWalker.cpp */; };
 		DD81641C17820BFB006B6A3E /* Triangles.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DD81641A17820BFB006B6A3E /* Triangles.cpp */; };
@@ -408,20 +405,14 @@
 		04A0E2BA195DA7590004D93F /* Defines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Defines.h; sourceTree = "<group>"; };
 		04A0E2BB195DAC800004D93F /* ContentScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ContentScene.cpp; sourceTree = "<group>"; };
 		04A0E2BD195DBA280004D93F /* Mapping.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Mapping.cpp; sourceTree = "<group>"; };
-		04C6D22817847C7800AC12B9 /* GTess.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GTess.h; sourceTree = "<group>"; };
-		04C6D22917847C8300AC12B9 /* GTess.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GTess.cpp; sourceTree = "<group>"; };
 		04C6D22B17847D7F00AC12B9 /* PerlinWaves.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PerlinWaves.h; sourceTree = "<group>"; };
 		04C6D22C17847D8900AC12B9 /* PerlinWaves.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PerlinWaves.cpp; sourceTree = "<group>"; };
-		04C6D2321784A1E600AC12B9 /* TriBlobs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TriBlobs.h; sourceTree = "<group>"; };
-		04C6D2331784A1F400AC12B9 /* TriBlobs.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TriBlobs.cpp; sourceTree = "<group>"; };
 		04CA7B361753E82E00B224D8 /* tinyxml.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxml.cpp; sourceTree = "<group>"; };
 		04CA7B371753E82E00B224D8 /* tinyxml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tinyxml.h; sourceTree = "<group>"; };
 		04CA7B381753E82E00B224D8 /* tinyxmlerror.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxmlerror.cpp; sourceTree = "<group>"; };
 		04CA7B391753E82E00B224D8 /* tinyxmlparser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxmlparser.cpp; sourceTree = "<group>"; };
 		04CA7B3B1753E82E00B224D8 /* ofxXmlSettings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxXmlSettings.cpp; sourceTree = "<group>"; };
 		04CA7B3C1753E82E00B224D8 /* ofxXmlSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxXmlSettings.h; sourceTree = "<group>"; };
-		04D09F2D17859C8000627C4F /* HardNoise.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HardNoise.h; sourceTree = "<group>"; };
-		04D09F2E17859C8D00627C4F /* HardNoise.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HardNoise.cpp; sourceTree = "<group>"; };
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
 		DD7BE8AA1780D80900F04F23 /* LampWalker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LampWalker.cpp; sourceTree = "<group>"; };
 		DD7BE8AB1780D80900F04F23 /* LampWalker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LampWalker.h; sourceTree = "<group>"; };
@@ -789,14 +780,8 @@
 				DD7BE8AA1780D80900F04F23 /* LampWalker.cpp */,
 				DD81641A17820BFB006B6A3E /* Triangles.cpp */,
 				DD81641B17820BFB006B6A3E /* Triangles.h */,
-				04C6D22817847C7800AC12B9 /* GTess.h */,
-				04C6D22917847C8300AC12B9 /* GTess.cpp */,
 				04C6D22B17847D7F00AC12B9 /* PerlinWaves.h */,
 				04C6D22C17847D8900AC12B9 /* PerlinWaves.cpp */,
-				04C6D2321784A1E600AC12B9 /* TriBlobs.h */,
-				04C6D2331784A1F400AC12B9 /* TriBlobs.cpp */,
-				04D09F2D17859C8000627C4F /* HardNoise.h */,
-				04D09F2E17859C8D00627C4F /* HardNoise.cpp */,
 				04A0E2BA195DA7590004D93F /* Defines.h */,
 				DDB42D1319616CB000AAD4E6 /* 3DStage.cpp */,
 				DDB42D1419616CB000AAD4E6 /* 3DStage.h */,
@@ -1417,12 +1402,10 @@
 				0438DB941782D0E9003833F8 /* QuickTrail.cpp in Sources */,
 				0425D869195ABAD5003086AC /* ofxUIImageToggle.cpp in Sources */,
 				DD81641C17820BFB006B6A3E /* Triangles.cpp in Sources */,
-				04C6D22A17847C8300AC12B9 /* GTess.cpp in Sources */,
 				0425D874195ABAD5003086AC /* ofxUIRectangle.cpp in Sources */,
 				0425D860195ABAD5003086AC /* ofxUIDragableLabelButton.cpp in Sources */,
 				0425D875195ABAD5003086AC /* ofxUIRotarySlider.cpp in Sources */,
 				04C6D22D17847D8900AC12B9 /* PerlinWaves.cpp in Sources */,
-				04C6D2341784A1F400AC12B9 /* TriBlobs.cpp in Sources */,
 				0425D861195ABAD5003086AC /* ofxUIDropDownList.cpp in Sources */,
 				0425D7D8195AB9A3003086AC /* ofxOscMessage.cpp in Sources */,
 				0425D7E2195AB9A3003086AC /* OscTypes.cpp in Sources */,
@@ -1432,7 +1415,6 @@
 				0425D7DF195AB9A3003086AC /* OscOutboundPacketStream.cpp in Sources */,
 				0425D878195ABAD5003086AC /* ofxUISortableList.cpp in Sources */,
 				0425D7E1195AB9A3003086AC /* OscReceivedElements.cpp in Sources */,
-				04D09F2F17859C8D00627C4F /* HardNoise.cpp in Sources */,
 				0425D7F5195ABA57003086AC /* ofxSyphonServer.mm in Sources */,
 				0425D86D195ABAD5003086AC /* ofxUIMinimalSlider.cpp in Sources */,
 			);

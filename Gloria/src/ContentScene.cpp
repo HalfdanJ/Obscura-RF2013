@@ -55,9 +55,9 @@ void ContentScene::setSceneGui(){
     gui->addSlider(i+"opacity", 0., 1., &opacity);
     
     gui->addSpacer(GUIWIDTH, 1);
-    gui->addSlider(i+"speed", minSpeed, maxSpeed, &speed);
+    //gui->addSlider(i+"speed", minSpeed, maxSpeed, &speed);
     gui->addToggle(i+"Enabled", &enabled);
-    gui->addToggle(i+"Solo", &solo);
+    gui->addToggle(i+"SyphonOut", &solo);
     
     setGui();
     gui->autoSizeToFitWidgets();
@@ -84,9 +84,9 @@ void ContentScene::parseOscMessage(ofxOscMessage * m){
             opacity = m->getArgAsFloat(0);
         } else if(rest == "/enable/x" ) {
             enabled = m->getArgAsInt32(0);
-        } else if(rest == "/speed/x" ) {
+        }/* else if(rest == "/speed/x" ) {
             speed =m->getArgAsFloat(0);
-        }
+        }*/
     }
 }
 
@@ -95,7 +95,7 @@ void ContentScene::updateScene() {
         update();
     }
     
-    time += speed;
+    //time += speed;
 }
 
 void ContentScene::drawScene() {

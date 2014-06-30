@@ -33,7 +33,6 @@ public:
     ofPolyline polyline;
     
     Corner * corners[3];
-    //ofVec3f center;
     ofMesh mesh;
     ofColor color;
     
