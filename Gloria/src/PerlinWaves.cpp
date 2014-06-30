@@ -13,27 +13,13 @@ void PerlinWaves::setup(){
     name = "PerlinWaves";
     oscAddress = "/plw";
     
-    minSpeed = 0;
-    maxSpeed = 20;
-
+    xTime = 0;
+    yTime = 0;
 }
 
 void PerlinWaves::update(){
-    
-    if(crazySpeed) {
-        _ySpeed = ySpeed*4;
-        _xSpeed = xSpeed*4;
-    } else {
-        _ySpeed = ySpeed;
-        _xSpeed = xSpeed;
-    }
-    
-    
-    if(reverse) {
-        _ySpeed = ySpeed *-1;
-        _xSpeed = xSpeed *-1;
-    }
-
+    xTime += xSpeed;
+    yTime += ySpeed;
 }
 
 void PerlinWaves::draw(){;
@@ -53,22 +39,18 @@ void PerlinWaves::draw(){;
     //float y = ofNoise(t*frequency)*fbo.getHeight();
     
      for(int i =0; i<mapping->triangles.size();i++) {
-
-       /* float delta = x - mapping->triangles[i]->centroid.x;
-        //float opacity = ofMap(delta, 0, fbo.getWidth(), 0, 255);
          
-         if(delta < fbo.getWidth()/5) {
-             ofSetColor( 255, 255, 255, 255);
-         } else {
-             ofSetColor( 255, 255, 255, delta/5);
-         }
-        */
-         
-         ofSetColor( 255, 255, 255, ofNoise(mapping->triangles[i]->centroid.y/yScatter - ofGetElapsedTimef() * _xSpeed) *255 );
+         ofSetColor( 255, 255, 255,
+                    ofNoise( (yTime/10) - mapping->triangles[i]->centroid.y
+                            / ( yScatter*OUTHEIGHT) ) *255 );
+         ofSetLineWidth(2);
+         glEnable(GL_LINES);
          mapping->triangles[i]->mesh.drawWireframe();
          
          
-         ofSetColor( 255, 255, 255, ofNoise(mapping->triangles[i]->centroid.x/xScatter - ofGetElapsedTimef()*_ySpeed) *255 );
+         ofSetColor( 255, 255, 255,
+                    ofNoise( (xTime/10) - mapping->triangles[i]->centroid.x
+                            / ( xScatter*OUTWIDTH) ) *255 );
          
          mapping->triangles[i]->mesh.draw();
          
@@ -76,9 +58,8 @@ void PerlinWaves::draw(){;
 }
 
 void PerlinWaves::parseOscMessage(ofxOscMessage *m){
-    ContentScene::parseOscMessage(m);
     
- 	vector<string> adrSplit = ofSplitString(m->getAddress(), "/");
+ 	/*vector<string> adrSplit = ofSplitString(m->getAddress(), "/");
 	string rest = ofSplitString(m->getAddress(), "/"+adrSplit[1])[1];
     
 	if(adrSplit[1] == "scene"+ofToString(index) || "/"+adrSplit[1] == oscAddress) {
@@ -100,22 +81,18 @@ void PerlinWaves::parseOscMessage(ofxOscMessage *m){
 	    } else if( rest == "/speed/y" ) {
             ySpeed = m->getArgAsFloat(0);
 	    }
-    }
+    }*/
 }
 
 void PerlinWaves::setGui(){
-    string i = "["+ ofToString(index) + "] ";
     
-    gui->addSlider(i+"X Speed", minSpeed, maxSpeed, &xSpeed);
-    gui->addSlider(i+"Y Speed", minSpeed, maxSpeed, &ySpeed);
+    gui->addSlider("speed/x", -1, 1, &xSpeed);
+    gui->addSlider("speed/y", -1, 1, &ySpeed);
     
-    gui->addSlider(i+"X Scatter", 0, 6000, &xScatter);
-    gui->addSlider(i+"Y Scatter", 0, 6000, &yScatter);
+    gui->addSlider("scatter/x", 0, 1, &xScatter);
+    gui->addSlider("scatter/y", 0, 1, &yScatter);
     
-    gui->addToggle(i+"Reverse", &reverse);
-    gui->addToggle(i+"Crazy speed", &crazySpeed);
     
-
     
     
 }

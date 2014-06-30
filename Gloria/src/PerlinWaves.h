@@ -34,6 +34,7 @@ public:
     float xSpeed;
     float ySpeed;
     
-    float _xSpeed;
-    float _ySpeed;
+    float xTime;
+    float yTime;
+    
 };
