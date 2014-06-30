@@ -30,7 +30,7 @@ InputTriangle::~InputTriangle(){
 }
 
 ofVec3f InputTriangle::getCenter(){
-    ofVec2f center = corners[0]->pos;
+    ofVec3f center = corners[0]->pos;
     center += corners[1]->pos;
     center += corners[2]->pos;
     center /= 3;
