@@ -251,7 +251,6 @@ void ofApp::setGUI()
     
     mainGui->loadSettings("GUI/guiMainSettings.xml");
     guiTabBar->loadSettings("GUI/guiSettings.xml", "ui-");
-    
 }
 
 
