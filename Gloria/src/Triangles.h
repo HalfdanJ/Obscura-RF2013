@@ -10,13 +10,12 @@
 
 #include "ofMain.h"
 #include "ContentScene.h"
+#include "ofxAutoReloadedShader.h"
 
 class SubTriangle : public InputTriangle{
 public:
     vector<SubTriangle*> subTriangles;
     float age;
-    ofVec3f normal;
-    ofVec3f parentNormal;
     SubTriangle * parentTriangle;
     bool die;
     
@@ -25,6 +24,14 @@ public:
     SubTriangle(){
         ageDifference = ofRandom(0.5,1.0);
         age = 0;
+    }
+    
+    ofVec3f normal(){
+        ofVec3f n = (corners[1]->pos - corners[0]->pos).cross(( corners[2]->pos - corners[0]->pos )).normalized();
+        if(n.z < 0){
+            n *= -1.;
+        }
+        return  n;
     }
     
     int numTriangles(){
@@ -62,6 +69,26 @@ public:
         return ret;
     }
     
+    float triangleSize(){
+        float a = (corners[1]->pos - corners[0]->pos).length();
+        float b = (corners[2]->pos - corners[0]->pos).length();
+        float c = (corners[2]->pos - corners[1]->pos).length();
+        
+        float s = (a+b+c)/2.0;
+        return sqrt(s*(s-a)*(s-b)*(s-c));
+//       return  0.5 * (corners[1]->pos - corners[0]->pos).length() * (corners[2]->pos - corners[0]->pos).length();
+    }
+    
+    float getSmallestSize(){
+        float _size = triangleSize();
+        for(int i=0;i<subTriangles.size();i++){
+            if(_size > subTriangles[i]->triangleSize()){
+                _size = subTriangles[i]->triangleSize();
+            }
+        }
+        return _size;
+    }
+    
 };
 
 class Triangles : public ContentScene {
@@ -76,7 +103,7 @@ public:
     
     map<InputTriangle*, SubTriangle* > subTriangles;
     
-    void divide(SubTriangle * triangle, int levels);
+    void divide(SubTriangle * triangle, float sizeGoal);
     
     void collapse(SubTriangle * triangle);
     
@@ -84,23 +111,21 @@ public:
     
     ofVec2f center;
     
-    bool sideScreens;
-    float sideScreensSpeed;
-    float sideScreensPct;
-    
     float syphonOpacity;
     float directTextureOpacity;
 
     float transitionTime;
-    float divideCount;
+    float divideTriangleSize;
     float divideRadius;
     bool divideInvert;
     
     float light;
     float lightSpeed;
+    ofVec3f lightPos;
     
     float colorR, colorG, colorB;
     
+    ofxAutoReloadedShader debugShader;
     
     void setGui();
     void parseOscMessage(ofxOscMessage *m);

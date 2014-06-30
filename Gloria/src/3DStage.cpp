@@ -7,3 +7,18 @@
 //
 
 #include "3DStage.h"
+
+void ThreeDStage::setup(){
+    
+}
+
+void ThreeDStage::draw(){
+    
+}
+void ThreeDStage::debugDraw(){
+    
+}
+void ThreeDStage::update(){
+    
+}
+
