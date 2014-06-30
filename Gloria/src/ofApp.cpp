@@ -149,6 +149,7 @@ void ofApp::update() {
 
 void ofApp::draw() {
     
+    ofDisableDepthTest();
     ofBackground(0, 0, 0);
     ofSetColor(255,255,255,255);
     
@@ -161,6 +162,7 @@ void ofApp::draw() {
         ofSetColor(255,255,255,255);
         ofNoFill();
         ofSetLineWidth(1);
+        
         ofRect(-1, -1, fboOut.getWidth()+2, fboOut.getHeight()+2);
         fboOut.draw(0, 0);
         
