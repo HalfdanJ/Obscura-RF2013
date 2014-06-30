@@ -53,5 +53,4 @@ public:
     void updateScene();
     void drawScene();
     
-    
 };
