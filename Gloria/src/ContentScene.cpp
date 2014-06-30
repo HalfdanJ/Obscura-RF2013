@@ -109,7 +109,6 @@ void ContentScene::drawScene() {
     if(enabled) {
         ofPushMatrix();
         ofPushStyle();
-        glPushMatrix();
         
         fbo.begin();
         ofClear(0, 0, 0);
@@ -122,12 +121,11 @@ void ContentScene::drawScene() {
         
         fbo.end();
         
-        ofPopMatrix();
         ofPopStyle();
-        glPopMatrix();
+        ofPopMatrix();
     }
     
-    if (solo) {
+    if (solo && enabled) {
         syphonOut.publishTexture(&fbo.getTextureReference());
     }
 }

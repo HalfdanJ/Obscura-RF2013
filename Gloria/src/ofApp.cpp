@@ -136,6 +136,33 @@ void ofApp::update() {
     
     // OSC in listen
     
+    // Draw scene fbo's
+    ofPushStyle();
+    ofNoFill();
+    
+    for(int i=0; i<scenes.size(); i++) {
+        scenes[i]->drawScene();
+    }
+    ofPopStyle();
+    
+    
+    ofPushStyle();{
+        fboOut.begin();{
+            ofClear(0, 0);
+            
+            for(int i=0; i<scenes.size(); i++) {
+                ofSetColor(255,255,255,scenes[i]->opacity*255);
+                
+                if(scenes[i]->enabled) {
+                    scenes[i]->fbo.draw(0,0);
+                }
+            }
+        }fboOut.end();
+    } ofPopStyle();
+    
+    syphonOut.publishTexture(&fboOut.getTextureReference());
+
+    
 }
 
 
@@ -143,59 +170,42 @@ void ofApp::draw() {
     
     ofBackground(0, 0, 0);
     ofSetColor(255,255,255,255);
-    ofNoFill();
-
-    for(int i=0; i<scenes.size(); i++) {
-        scenes[i]->drawScene();
-    }
     
-    fboOut.begin();
-    ofClear(0, 0);
-    
-    for(int i=0; i<scenes.size(); i++) {
-        ofSetColor(255,255,255,scenes[i]->opacity*255);
+    ofPushMatrix();{
+        ofTranslate(300, 40);
         
-        if(scenes[i]->enabled) {
-            scenes[i]->fbo.draw(0,0);
-        }
-    }
-    fboOut.end();
-    
-    ofPushMatrix();
-    ofTranslate(300, 40);
-    
-    ofScale(0.2, 0.2);
-    ofBackground(0);
-    
-    ofSetColor(255,255,255,255);
-    ofNoFill();
-    ofSetLineWidth(1);
-    ofRect(-1, -1, fboOut.getWidth()+2, fboOut.getHeight()+2);
-    fboOut.draw(0, 0);
-    
-    if(drawGuide) {
-        //ofSetColor(255,255,255,96);
-        drawGrid();
-        debugDraw();
-    }
-
-    ofPopMatrix();
-    
-    ofPushMatrix();
-    ofTranslate(300, 320);
-    
-    if(syphonIn.isSetup()){
+        ofScale(0.2, 0.2);
+        ofBackground(0);
         
-        ofSetColor(255);
+        ofSetColor(255,255,255,255);
+        ofNoFill();
         ofSetLineWidth(1);
-        ofRect(-1, -1, 260* syphonIn.getWidth()/syphonIn.getHeight()+2, 260+2);
-        syphonIn.draw(0, 0, 260* syphonIn.getWidth()/syphonIn.getHeight(), 260);
+        ofRect(-1, -1, fboOut.getWidth()+2, fboOut.getHeight()+2);
+        fboOut.draw(0, 0);
         
-        ofDrawBitmapString("Syphon input - (Press 'i' to change)", 10,18);
-        ofDrawBitmapString(syphonIn.getApplicationName(), 10,34);
-    }
+        if(drawGuide) {
+            //ofSetColor(255,255,255,96);
+            drawGrid();
+            debugDraw();
+        }
+        
+    }ofPopMatrix();
     
-    ofPopMatrix();
+    ofPushMatrix();{
+        ofTranslate(300, 320);
+        
+        if(syphonIn.isSetup()){
+            
+            ofSetColor(255);
+            ofSetLineWidth(1);
+            ofRect(-1, -1, 260* syphonIn.getWidth()/syphonIn.getHeight()+2, 260+2);
+            syphonIn.draw(0, 0, 260* syphonIn.getWidth()/syphonIn.getHeight(), 260);
+            
+            ofDrawBitmapString("Syphon input - (Press 'i' to change)", 10,18);
+            ofDrawBitmapString(syphonIn.getApplicationName(), 10,34);
+        }
+    }ofPopMatrix();
+    
     
     ofSetColor(255);
     ofDrawBitmapString("FPS: " + ofToString(ofGetFrameRate()), ofGetWidth()-200, 20);
@@ -204,7 +214,6 @@ void ofApp::draw() {
         ofDrawBitmapString("Selected Corner: " + ofToString(mapping->selectedCorner->uid) + " pos: " + ofToString(mapping->selectedCorner->pos), ofGetWidth()-600, 20);
     }
     
-    syphonOut.publishTexture(&fboOut.getTextureReference());
 }
 
 
@@ -223,9 +232,9 @@ void ofApp::setGUI()
 {
     
     float dim = 16;
-	float xInit = OFX_UI_GLOBAL_WIDGET_SPACING;
+    float xInit = OFX_UI_GLOBAL_WIDGET_SPACING;
     float width = 255-xInit;
-	hideGUI = false;
+    hideGUI = false;
     
     guiTabBar = new ofxUITabBar();
     
