@@ -52,24 +52,26 @@ void Mapping::load(string _xmlfile, string _svgfile) {
     
     generate();
     
-    int numCornerTags = settings.getNumTags("corners:corner");
-    
-    if(numCornerTags > 0){
-        // populate depth on corners from xml
-        for(int i = 0; i < numCornerTags; i++){
-            
-            int uid = settings.getValue("corners:corner:uid", 0, i);
-            for(int c = 0; c< corners.size(); c++) {
-                if(corners[c]->uid == uid) {
-                    corners[c]->pos.z = settings.getValue("corners:corner:z", 0, i);
+    if(settings.tagExists("corners")){
+        settings.pushTag("corners");
+        int numCornerTags = settings.getNumTags("corner");
+        if(numCornerTags > 0){
+            // populate depth on corners from xml
+            for(int i = 0; i < numCornerTags; i++){
+                int uid = settings.getValue("corners:corner:uid", 0, i);
+                for(int c = 0; c< corners.size(); c++) {
+                    if(corners[c]->uid == uid) {
+                        corners[c]->pos.z = settings.getValue("corners:corner:z", 0, i);
+                    }
                 }
             }
         }
+        settings.popTag();
     }
     
+    updateMeshes();
     
     selectedCorner = corners[selectedCornerId];
-    
 }
 
 void Mapping::save() {
@@ -243,8 +245,22 @@ void Mapping::generate() {
     
 }
 
+
+void Mapping::updateMeshes() {
+
+    for(int i=0; i<triangles.size(); i++) {
+        for(int c=0; c<3; c++) {
+            triangles[i]->mesh.setVertex(c, triangles[i]->corners[c]->pos);
+        }
+    }
+
+}
+
 void Mapping::exit() {
     save();
+}
+
+void Mapping::drawGuide() {
 }
 
 void Mapping::debugDraw() {
@@ -318,7 +334,6 @@ void Mapping::selectCornerAt(int _x, int _y, int r) {
     /*for(int i=0; i < corners.size(); i++) {
         if(corners[i]->pos.x - _x)
     }*/
-    
     
 }
 

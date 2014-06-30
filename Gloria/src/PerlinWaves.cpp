@@ -100,7 +100,6 @@ void PerlinWaves::parseOscMessage(ofxOscMessage *m){
 	    } else if( rest == "/speed/y" ) {
             ySpeed = m->getArgAsFloat(0);
 	    }
-
     }
 }
 

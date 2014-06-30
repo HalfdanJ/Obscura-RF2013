@@ -56,6 +56,7 @@ public:
     void save();
     void exit();
     void debugDraw();
+    void drawGuide();
     
     //InputTriangle * selectedTriangle;
     Corner * selectedCorner;
@@ -64,6 +65,7 @@ public:
     void nextCorner();
     void prevCorner();
     void selectCornerAt(int x, int y, int r);
+    void updateMeshes();
     
 protected:
     string svgFilename;

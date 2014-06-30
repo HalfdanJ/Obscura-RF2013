@@ -8,7 +8,6 @@
 
 #include "ContentScene.h"
 
-
 void ContentScene::init() {
 }
 void ContentScene::setup(){
@@ -45,7 +44,6 @@ void ContentScene::setupScene(int _width, int _height, int _i) {
 void ContentScene::setSceneGui(){
     
     gui = new ofxUICanvas();
-
     
     string i = "["+ ofToString(index) + "] ";
     gui->setName(name);
@@ -62,19 +60,17 @@ void ContentScene::setSceneGui(){
     gui->addToggle(i+"Solo", &solo);
     
     setGui();
-    
     gui->autoSizeToFitWidgets();
     
     ofAddListener(gui->newGUIEvent,this,&ContentScene::guiEvent);
 }
-
 
 void ContentScene::guiEvent(ofxUIEventArgs &e)
 {
     string name = e.widget->getName();
     int kind = e.widget->getKind();
     string canvasParent = e.widget->getCanvasParent()->getName();
-    cout << canvasParent << endl;
+    //cout << canvasParent << endl;
 }
 
 void ContentScene::parseOscMessage(ofxOscMessage * m){
@@ -84,7 +80,6 @@ void ContentScene::parseOscMessage(ofxOscMessage * m){
 	//cout<<adrSplit[1]<<"   "<<rest<<endl;
     
     if(adrSplit[1] == "scene"+ofToString(index) || "/"+adrSplit[1] == oscAddress) {
-        
         if( rest == "/opacity/x" ) {
             opacity = m->getArgAsFloat(0);
         } else if(rest == "/enable/x" ) {
@@ -92,9 +87,7 @@ void ContentScene::parseOscMessage(ofxOscMessage * m){
         } else if(rest == "/speed/x" ) {
             speed =m->getArgAsFloat(0);
         }
-        
     }
-    
 }
 
 void ContentScene::updateScene() {
@@ -120,7 +113,6 @@ void ContentScene::drawScene() {
         //glDisable(GL_BLEND);
         
         fbo.end();
-        
         ofPopStyle();
         ofPopMatrix();
     }

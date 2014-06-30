@@ -28,7 +28,6 @@ public:
     bool crazySpeed;
     bool reverse;
     
-    
     float xScatter;
     float yScatter;
     

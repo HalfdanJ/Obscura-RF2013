@@ -8,15 +8,17 @@ void ofApp::setup() {
     ofSetLogLevel(OF_LOG_NOTICE);
     ofSetFrameRate(60);
     ofSetVerticalSync(true);
-        
+    glEnable(GL_LINES);
     ofSetWindowTitle("Obscure Glorius Control 2014");
     
     syphonOut.setName("Gloria Main");
     fboOut.allocate(OUTWIDTH, OUTHEIGHT);
     
-    syphonIn.setApplicationName("Millumin");
-    syphonIn.setServerName("");
-    syphonIn.setup();
+    syphonIn = new ofxSyphonClient();
+    
+    syphonIn->setApplicationName("Millumin");
+    syphonIn->setServerName("");
+    syphonIn->setup();
     
     //register for our directory's callbacks
     ofAddListener(directory.events.serverAnnounced, this, &ofApp::serverAnnounced);
@@ -35,44 +37,27 @@ void ofApp::setup() {
     
     // Set up the scenes, all scenes is a subclass of SceneContent, don't call draw, setup and update directly it is taken care of thorugh the scene.
     
-    //triangles.mapping = &mapping;
-    //triangles.syphon = &syphonIn;
-    //scenes.push_back(&triangles);
+    triangles = new Triangles;
+    scenes.push_back(triangles);
     
     perlinWaves = new PerlinWaves();
     scenes.push_back(perlinWaves);
-
-    //tesselator.mapping = &mapping;
-    //scenes.push_back(&tesselator);
-    
-    //triBlobs.mapping = &mapping;
-    //scenes.push_back(&triBlobs);
-    
-    //hardNoise.mapping = &mapping;
-    //scenes.push_back(&hardNoise);
-    
-    //quickTrail.mapping = &mapping;
-    //scenes.push_back(&quickTrail);
     
     ofFbo::Settings fboSettings;
     fboSettings.height = OUTHEIGHT;
     fboSettings.width = OUTWIDTH;
-    fboSettings.numSamples = 8;
+    fboSettings.numSamples = 4;
     fboSettings.useDepth = false;
-    //fboSettings.textureTarget = GL_TEXTURE_RECTANGLE_ARB;
     
     fboOut.allocate(fboSettings);
 
     for(int i=0; i<scenes.size(); i++) {
         scenes[i]->mapping = mapping;
+        scenes[i]->syphonIn = syphonIn;
         scenes[i]->setupScene(OUTWIDTH, OUTHEIGHT, i);
     }
     
     setGUI();
-    guiTabBar->setDrawBack(true);
-    //guiTabBar->setScrollAreaToScreenHeight();
-    guiTabBar->setColorBack(ofColor(0,0,0,255));
-    guiTabBar->loadSettings("GUI/guiSettings.xml", "ui-");
 }
 
 
@@ -139,12 +124,10 @@ void ofApp::update() {
     // Draw scene fbo's
     ofPushStyle();
     ofNoFill();
-    
     for(int i=0; i<scenes.size(); i++) {
         scenes[i]->drawScene();
     }
     ofPopStyle();
-    
     
     ofPushStyle();{
         fboOut.begin();{
@@ -161,8 +144,6 @@ void ofApp::update() {
     } ofPopStyle();
     
     syphonOut.publishTexture(&fboOut.getTextureReference());
-
-    
 }
 
 
@@ -194,15 +175,15 @@ void ofApp::draw() {
     ofPushMatrix();{
         ofTranslate(300, 320);
         
-        if(syphonIn.isSetup()){
+        if(syphonIn->isSetup()){
             
             ofSetColor(255);
             ofSetLineWidth(1);
-            ofRect(-1, -1, 260* syphonIn.getWidth()/syphonIn.getHeight()+2, 260+2);
-            syphonIn.draw(0, 0, 260* syphonIn.getWidth()/syphonIn.getHeight(), 260);
+            ofRect(-1, -1, 260* syphonIn->getWidth()/syphonIn->getHeight()+2, 260+2);
+            syphonIn->draw(0, 0, 260* syphonIn->getWidth()/syphonIn->getHeight(), 260);
             
             ofDrawBitmapString("Syphon input - (Press 'i' to change)", 10,18);
-            ofDrawBitmapString(syphonIn.getApplicationName(), 10,34);
+            ofDrawBitmapString(syphonIn->getApplicationName(), 10,34);
         }
     }ofPopMatrix();
     
@@ -223,6 +204,7 @@ void ofApp::debugDraw() {
 }
 
 void ofApp::drawGrid() {
+    ofSetLineWidth(1);
     for(int i =0; i<mapping->triangles.size();i++) {
         mapping->triangles[i]->mesh.drawWireframe();
     }
@@ -237,23 +219,38 @@ void ofApp::setGUI()
     hideGUI = false;
     
     guiTabBar = new ofxUITabBar();
+    mainGui = new ofxUICanvas();
+    
+    mainGui->setFont("GUI/Arial.ttf");
+    
+    mainGui->addLabel("Gloria");
+    
+    mainGui->addToggle("Draw guide", &drawGuide);
+    mainGui->autoSizeToFitWidgets();
+    ofAddListener(mainGui->newGUIEvent,this,&ofApp::guiEvent);
+    
     
     guiTabBar->setFont("GUI/Arial.ttf");
     guiTabBar->setWidgetFontSize(OFX_UI_FONT_SMALL);
-    guiTabBar->setColorBack(ofColor(30, 30, 30,200));
-    
-    guiTabBar->addToggle("Draw guide", &drawGuide);
     
     for(int i=0; i<scenes.size(); i++) {
         scenes[i]->setSceneGui();
         guiTabBar->addCanvas(scenes[i]->gui);
+        scenes[i]->gui->setColorBack(ofColor(0,100 + 20*i,0,255));
         guis.push_back(scenes[i]->gui);
     }
     
-    
     guiTabBar->autoSizeToFitWidgets();
-    
     ofAddListener(guiTabBar->newGUIEvent,this,&ofApp::guiEvent);
+    
+    guiTabBar->setPosition(0, mainGui->getRect()->height+10);
+    //guiTabBar->setScrollAreaToScreenHeight();
+    
+    mainGui->setColorBack(ofColor(0,150,200,255));
+    guiTabBar->setColorBack(ofColor(0,100,0,255));
+    
+    mainGui->loadSettings("GUI/guiMainSettings.xml");
+    guiTabBar->loadSettings("GUI/guiSettings.xml", "ui-");
 }
 
 
@@ -266,8 +263,8 @@ void ofApp::keyPressed(int key){
         dirIdx = 0;
         
         if(directory.isValidIndex(dirIdx)){
-            syphonIn.setServerName(directory.getServerList()[dirIdx].serverName);
-            syphonIn.setApplicationName(directory.getServerList()[dirIdx].appName);
+            syphonIn->setServerName(directory.getServerList()[dirIdx].serverName);
+            syphonIn->setApplicationName(directory.getServerList()[dirIdx].appName);
         }
     }
     
@@ -279,15 +276,15 @@ void ofApp::keyPressed(int key){
         mapping->prevCorner();
     }
     
-    
-    
     if(mapping->selectedCorner) {
         if(key == OF_KEY_UP) {
             mapping->selectedCorner->pos.z += 1;
+            mapping->updateMeshes();
         }
     
         if(key == OF_KEY_DOWN) {
             mapping->selectedCorner->pos.z -= 1;
+            mapping->updateMeshes();
         }
     }
 }
@@ -335,6 +332,7 @@ void ofApp::dragEvent(ofDragInfo dragInfo){
 //--------------------------------------------------------------
 void ofApp::exit()
 {
+    mainGui->saveSettings("GUI/guiMainSettings.xml");
     guiTabBar->saveSettings("GUI/guiSettings.xml", "ui-");
     mapping->save();
     
