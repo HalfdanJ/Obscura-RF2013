@@ -53,7 +53,7 @@ void Mapping::load(string _xmlfile, string _svgfile) {
     generate();
     
     int numCornerTags = settings.getNumTags("corners:corner");
-    
+    cout<<"numcornertags"<<numCornerTags<<endl;
     if(numCornerTags > 0){
         // populate depth on corners from xml
         for(int i = 0; i < numCornerTags; i++){
@@ -61,7 +61,9 @@ void Mapping::load(string _xmlfile, string _svgfile) {
             int uid = settings.getValue("corners:corner:uid", 0, i);
             for(int c = 0; c< corners.size(); c++) {
                 if(corners[c]->uid == uid) {
+                    cout<<"equals"<<endl;
                     corners[c]->pos.z = settings.getValue("corners:corner:z", 0, i);
+                    cout<<settings.getValue("corners:corner:z", 0, i)<<endl;
                 }
             }
         }
