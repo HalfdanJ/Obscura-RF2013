@@ -113,8 +113,8 @@ void ContentScene::drawScene() {
         ofPushStyle();
         
         fbo.begin();
-        ofClear(0, 0, 0);
-        ofClearAlpha();
+//        ofClear(0, 0, 0);
+//        ofClearAlpha();
         
         //glEnable(GL_BLEND);
         //glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
