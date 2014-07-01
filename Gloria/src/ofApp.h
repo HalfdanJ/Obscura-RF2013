@@ -9,12 +9,11 @@
 #include "LampWalker.h"
 #include "QuickTrail.h"
 #include "Triangles.h"
-#include "GTess.h"
 #include "PerlinWaves.h"
-#include "TriBlobs.h"
-#include "HardNoise.h"
+#include "Transformer.h"
 #include "ofxUI.h"
 #include "Mapping.h"
+
 
 class ofApp : public ofBaseApp {
 public:
@@ -64,6 +63,7 @@ public:
     
     // Define all the scenes here
     //LampWalker * lampWalker;
+    Transformer * transformer;
     QuickTrail * quickTrail;
     Triangles * triangles;
     PerlinWaves * perlinWaves;

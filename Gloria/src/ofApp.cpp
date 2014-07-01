@@ -20,6 +20,8 @@ void ofApp::setup() {
     syphonIn->setServerName("");
     syphonIn->setup();
     
+    directory.setup();
+    
     //register for our directory's callbacks
     ofAddListener(directory.events.serverAnnounced, this, &ofApp::serverAnnounced);
     ofAddListener(directory.events.serverUpdated, this, &ofApp::serverUpdated);
@@ -37,6 +39,9 @@ void ofApp::setup() {
     
     // Set up the scenes, all scenes is a subclass of SceneContent, don't call draw, setup and update directly it is taken care of thorugh the scene.
     
+    transformer = new Transformer();
+    scenes.push_back(transformer);
+
     quickTrail = new QuickTrail;
     scenes.push_back(quickTrail);
     
@@ -180,11 +185,19 @@ void ofApp::draw() {
     ofPushMatrix();{
         ofTranslate(380, 320);
         
+        
+        
         if(syphonIn->isSetup()){
+            
+            ofPushMatrix();
+            
+            ofScale(0.2, 0.2);
             ofSetColor(255);
             ofSetLineWidth(1);
-            ofRect(-1, -1, 260* syphonIn->getWidth()/syphonIn->getHeight()+2, 260+2);
-            syphonIn->draw(0, 0, 260* syphonIn->getWidth()/syphonIn->getHeight(), 260);
+            ofRect(-1, -1, syphonIn->getWidth()+2, syphonIn->getHeight()+2);
+            syphonIn->draw(0, 0, syphonIn->getWidth(), syphonIn->getHeight());
+            
+            ofPopMatrix();
             
             ofDrawBitmapString("Syphon input - (Press 'i' to change)", 10,18);
             ofDrawBitmapString(syphonIn->getApplicationName(), 10,34);
@@ -273,6 +286,7 @@ void ofApp::keyPressed(int key){
         dirIdx = 0;
         
         if(directory.isValidIndex(dirIdx)){
+            
             syphonIn->setServerName(directory.getServerList()[dirIdx].serverName);
             syphonIn->setApplicationName(directory.getServerList()[dirIdx].appName);
         }
