@@ -13,7 +13,7 @@
 #include "Transformer.h"
 #include "ofxUI.h"
 #include "Mapping.h"
-
+#include "Filter.h"
 
 class ofApp : public ofBaseApp {
 public:
@@ -60,14 +60,6 @@ public:
     
     bool hideGUI;
     bool drawGuide;
-    
-    // Define all the scenes here
-    //LampWalker * lampWalker;
-    Transformer * transformer;
-    QuickTrail * quickTrail;
-    Triangles * triangles;
-    PerlinWaves * perlinWaves;
-
     
     vector<ContentScene*> scenes;
 };

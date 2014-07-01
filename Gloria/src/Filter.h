@@ -10,12 +10,10 @@
 #include "ofMain.h"
 #include "ContentScene.h"
 #include "mapping.h"
-#include "ofxFlowTools.h"
-//#include "ofxFluid.h"
+#include "ofxFluid.h"
 
-using namespace flowTools;
 
-class Transformer : public ContentScene {
+class Filter : public ContentScene {
     
 public:
     
@@ -38,27 +36,18 @@ public:
     float	lastSyphonFrame = 0;
 	float   deltaTimeSyphonFrame = 0;
     
-    ftFluidSimulation	fluid;
-    
     float flowWidth;
     float flowHeight;
     float drawWidth;
     float drawHeight;
-    
-    bool showLogo;
-
-    ftOpticalFlow		opticalFlow;
-	ftVelocityMask		velocityMask;
-	ftParticleFlow		particleFlow;
-	
-	ftVelocityField		velocityField;
-	ftTemperatureField	temperatureField;
 
     ofFbo inputFbo;
     
-    // Camera
-	ofVideoGrabber		simpleCam;
-	bool				didCamUpdate;
-	ofFbo				cameraFbo;
+    ofFbo obstacles;
     
+    ofxFluid fluid;
+    
+    ofVec2f oldM;
+    bool    bPaint, bObstacle, bBounding, bClear, bUpdate;
+        
 };

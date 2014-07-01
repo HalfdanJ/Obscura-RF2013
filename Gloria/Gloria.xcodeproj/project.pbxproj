@@ -76,6 +76,8 @@
 		0425D882195ABAD5003086AC /* ofxUIWaveform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0425D851195ABAD5003086AC /* ofxUIWaveform.cpp */; };
 		0425D883195ABAD5003086AC /* ofxUIWidget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0425D853195ABAD5003086AC /* ofxUIWidget.cpp */; };
 		0425D884195ABAD5003086AC /* ofxUIWidgetWithLabel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0425D856195ABAD5003086AC /* ofxUIWidgetWithLabel.cpp */; };
+		043505041962D687006984A5 /* Filter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 043505021962D687006984A5 /* Filter.cpp */; };
+		0435057C1962D7CD006984A5 /* ofxFluid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0435057A1962D7CD006984A5 /* ofxFluid.cpp */; };
 		0438DB941782D0E9003833F8 /* QuickTrail.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0438DB931782D0E9003833F8 /* QuickTrail.cpp */; };
 		046C3082177ED4F6009A2EE6 /* opencv.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 046C306E177ED4F6009A2EE6 /* opencv.a */; };
 		046C3083177ED4F6009A2EE6 /* ofxCvColorImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 046C3071177ED4F6009A2EE6 /* ofxCvColorImage.cpp */; };
@@ -378,6 +380,10 @@
 		0425D856195ABAD5003086AC /* ofxUIWidgetWithLabel.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxUIWidgetWithLabel.cpp; sourceTree = "<group>"; };
 		0425D857195ABAD5003086AC /* ofxUIWidgetWithLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxUIWidgetWithLabel.h; sourceTree = "<group>"; };
 		0425D858195ABAD5003086AC /* ofxUIWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxUIWrapper.h; sourceTree = "<group>"; };
+		043505021962D687006984A5 /* Filter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Filter.cpp; sourceTree = "<group>"; };
+		043505031962D687006984A5 /* Filter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Filter.h; sourceTree = "<group>"; };
+		0435057A1962D7CD006984A5 /* ofxFluid.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxFluid.cpp; sourceTree = "<group>"; };
+		0435057B1962D7CD006984A5 /* ofxFluid.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxFluid.h; sourceTree = "<group>"; };
 		0438DB901781E2C2003833F8 /* ContentScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContentScene.h; sourceTree = "<group>"; };
 		0438DB921782D0D4003833F8 /* QuickTrail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuickTrail.h; sourceTree = "<group>"; };
 		0438DB931782D0E9003833F8 /* QuickTrail.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = QuickTrail.cpp; sourceTree = "<group>"; };
@@ -1070,9 +1076,29 @@
 			path = ../../../addons/ofxUI/src;
 			sourceTree = "<group>";
 		};
+		043505781962D7CD006984A5 /* ofxFluid */ = {
+			isa = PBXGroup;
+			children = (
+				043505791962D7CD006984A5 /* src */,
+			);
+			name = ofxFluid;
+			sourceTree = "<group>";
+		};
+		043505791962D7CD006984A5 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				0435057A1962D7CD006984A5 /* ofxFluid.cpp */,
+				0435057B1962D7CD006984A5 /* ofxFluid.h */,
+			);
+			name = src;
+			path = ../../../addons/ofxFluid/src;
+			sourceTree = "<group>";
+		};
 		0438DB8F1781DD78003833F8 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				043505021962D687006984A5 /* Filter.cpp */,
+				043505031962D687006984A5 /* Filter.h */,
 				0438DB921782D0D4003833F8 /* QuickTrail.h */,
 				0438DB931782D0E9003833F8 /* QuickTrail.cpp */,
 				DD7BE8AB1780D80900F04F23 /* LampWalker.h */,
@@ -1446,6 +1472,7 @@
 		BB4B014C10F69532006C3DED /* addons */ = {
 			isa = PBXGroup;
 			children = (
+				043505781962D7CD006984A5 /* ofxFluid */,
 				0423CC011961C0AC00ED8129 /* ofxFX */,
 				0423CBC31961BF9A00ED8129 /* ofxFlowTools */,
 				DD8E8DA11961978300A7F3E1 /* ofxAutoReloadedShader */,
@@ -1699,6 +1726,7 @@
 				0423CBFD1961BF9A00ED8129 /* ftFluidSimulation.cpp in Sources */,
 				046C3087177ED4F6009A2EE6 /* ofxCvHaarFinder.cpp in Sources */,
 				0425D881195ABAD5003086AC /* ofxUIValuePlotter.cpp in Sources */,
+				043505041962D687006984A5 /* Filter.cpp in Sources */,
 				046C3088177ED4F6009A2EE6 /* ofxCvImage.cpp in Sources */,
 				0425D85D195ABAD5003086AC /* ofxUIButton.cpp in Sources */,
 				0425D7D7195AB9A3003086AC /* ofxOscBundle.cpp in Sources */,
@@ -1751,6 +1779,7 @@
 				0425D7E0195AB9A3003086AC /* OscPrintReceivedElements.cpp in Sources */,
 				0425D7F4195ABA57003086AC /* ofxSyphonClient.mm in Sources */,
 				0425D7DF195AB9A3003086AC /* OscOutboundPacketStream.cpp in Sources */,
+				0435057C1962D7CD006984A5 /* ofxFluid.cpp in Sources */,
 				0425D878195ABAD5003086AC /* ofxUISortableList.cpp in Sources */,
 				0425D7E1195AB9A3003086AC /* OscReceivedElements.cpp in Sources */,
 				0425D7F5195ABA57003086AC /* ofxSyphonServer.mm in Sources */,

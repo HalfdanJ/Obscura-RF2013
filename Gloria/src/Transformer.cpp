@@ -13,30 +13,26 @@ void Transformer::setup(){
     name = "Transformer";
     oscAddress = "/plw";
     
-    drawWidth = OUTWIDTH/12;
-	drawHeight = OUTHEIGHT/12;
+    drawWidth = OUTWIDTH/2;
+	drawHeight = OUTHEIGHT/2;
 	// process all but the density on 16th resolution
-	flowWidth = drawWidth/6;
-	flowHeight = drawHeight/6;
+	flowWidth = drawWidth/4;
+	flowHeight = drawHeight/4;
 	
-    
     // Flow & Mask
 	opticalFlow.setup(flowWidth, flowHeight);
 	velocityMask.setup(drawWidth, drawHeight);
     
-    fluid.setup(flowWidth, flowHeight, drawWidth, drawHeight, false);
+    fluid.setup(flowWidth, flowHeight, drawWidth, drawHeight, true);
     // create a texture from our scene structure
     //fluid.addObstacle(<#ofTexture &_tex#>)
     
-    // Particles
-	particleFlow.setup(flowWidth, flowHeight, drawWidth, drawHeight);
-	
 	// Visualisation
-	displayScalar.allocate(flowWidth, flowHeight);
+	//displayScalar.allocate(flowWidth, flowHeight);
 	velocityField.allocate(flowWidth / 4, flowHeight / 4);
 	temperatureField.allocate(flowWidth / 4, flowHeight / 4);
     
-    inputFbo.allocate(drawWidth, drawHeight);
+    inputFbo.allocate(flowWidth, flowHeight);
     
     lastTime = ofGetElapsedTimef();
     
@@ -53,22 +49,39 @@ void Transformer::update(){
 }
 
 void Transformer::draw(){;
-    
+    ofClear(0);
     /*for(int i =0; i<mapping->triangles.size();i++) {
     }*/
     
-    inputFbo.begin();
+    /*inputFbo.begin();
     ofClear(0,0);
     syphonIn->draw(0,0,inputFbo.getWidth(),inputFbo.getHeight());
-    inputFbo.end();
-    
-    opticalFlow.setSource(inputFbo.getTextureReference());
-    opticalFlow.update(deltaTime);
-		
-    velocityMask.setDensity(inputFbo.getTextureReference());
-    velocityMask.setVelocity(opticalFlow.getOpticalFlow());
-    velocityMask.update();
+    inputFbo.end();*/
 	
+    
+   deltaTimeSyphonFrame = ofGetElapsedTimef() - lastSyphonFrame;
+    
+   if (deltaTimeSyphonFrame > 0.1) {
+       
+       lastSyphonFrame = ofGetElapsedTimef();
+       
+		ofPushStyle();
+		//ofEnableBlendMode(OF_BLENDMODE_DISABLED);
+		inputFbo.begin();
+
+        syphonIn->draw(0,0,inputFbo.getWidth(),inputFbo.getHeight());
+        
+		inputFbo.end();
+		ofPopStyle();
+		
+		opticalFlow.setSource(inputFbo.getTextureReference());
+		opticalFlow.update(deltaTime);
+		
+		velocityMask.setDensity(inputFbo.getTextureReference());
+		velocityMask.setVelocity(opticalFlow.getOpticalFlow());
+		velocityMask.update();
+	}
+    
 	fluid.addVelocity(opticalFlow.getOpticalFlowDecay());
 	fluid.addDensity(velocityMask.getColorMask());
 	fluid.addTemperature(velocityMask.getLuminanceMask());
@@ -77,28 +90,15 @@ void Transformer::draw(){;
     
     
     fluid.update();
-    if (particleFlow.isActive()) {
-		particleFlow.setSpeed(fluid.getSpeed());
-		particleFlow.setCellSize(fluid.getCellSize());
-		particleFlow.addFlowVelocity(opticalFlow.getOpticalFlow());
-		particleFlow.addFluidVelocity(fluid.getVelocity());
-		particleFlow.setObstacle(fluid.getObstacle());
-	}
-	particleFlow.update();
     
- 
-    ofClear(0,0);
+    
     
     ofPushStyle();
     fluid.draw(0, 0, OUTWIDTH, OUTHEIGHT);
-    if (particleFlow.isActive())
-        particleFlow.draw(0, 0, OUTWIDTH, OUTHEIGHT);
-    if (showLogo) {
-        ofEnableBlendMode(OF_BLENDMODE_SUBTRACT);
-        ofSetColor(255,255,255,255);
-        ////flowToolsLogoImage.draw(0, 0, OUTWIDTH, OUTHEIGHT);
-    }
+
     ofPopStyle();
+    
+    //cameraFbo.draw(0,0,OUTWIDTH, OUTHEIGHT);
 }
 
 void Transformer::parseOscMessage(ofxOscMessage *m){

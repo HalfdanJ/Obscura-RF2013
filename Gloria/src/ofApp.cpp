@@ -6,7 +6,7 @@ void ofApp::setup() {
     oscReceiver.setup(OSCRECEIVEPORT);
     
     ofSetLogLevel(OF_LOG_NOTICE);
-    ofSetFrameRate(60);
+    ofSetFrameRate(25);
     ofSetVerticalSync(true);
     glEnable(GL_LINES);
     ofSetWindowTitle("Obscure Glorius Control 2014");
@@ -39,17 +39,14 @@ void ofApp::setup() {
     
     // Set up the scenes, all scenes is a subclass of SceneContent, don't call draw, setup and update directly it is taken care of thorugh the scene.
     
-    transformer = new Transformer();
-    scenes.push_back(transformer);
+    scenes.push_back(new Filter());
+    
+    //transformer = new Transformer();
+    //scenes.push_back(transformer);
 
-    quickTrail = new QuickTrail;
-    scenes.push_back(quickTrail);
-    
-    triangles = new Triangles;
-    scenes.push_back(triangles);
-    
-    perlinWaves = new PerlinWaves();
-    scenes.push_back(perlinWaves);
+    scenes.push_back(new QuickTrail());
+    scenes.push_back(new Triangles());
+    scenes.push_back(new PerlinWaves());
     
     ofFbo::Settings fboSettings;
     fboSettings.height = OUTHEIGHT;
@@ -115,7 +112,7 @@ void ofApp::update() {
 		ofxOscMessage m;
 		oscReceiver.getNextMessage(&m);
 
-	//cout<<m.getAddress()<<endl;
+        //cout<<m.getAddress()<<endl;
 
         for(int i=0; i<scenes.size();i++) {
             scenes[i]->parseSceneOscMessage(&m);
@@ -128,6 +125,13 @@ void ofApp::update() {
     }
     
     // OSC in listen
+    
+
+}
+
+
+void ofApp::draw() {
+    
     
     // Draw scene fbo's
     ofPushStyle();
@@ -150,12 +154,6 @@ void ofApp::update() {
             }
         }fboOut.end();
     } ofPopStyle();
-    
-    syphonOut.publishTexture(&fboOut.getTextureReference());
-}
-
-
-void ofApp::draw() {
     
     ofDisableDepthTest();
     ofBackground(0, 0, 0);
@@ -185,8 +183,6 @@ void ofApp::draw() {
     ofPushMatrix();{
         ofTranslate(380, 320);
         
-        
-        
         if(syphonIn->isSetup()){
             
             ofPushMatrix();
@@ -211,6 +207,10 @@ void ofApp::draw() {
     if(mapping->selectedCorner) {
         ofDrawBitmapString("Selected Corner: " + ofToString(mapping->selectedCorner->uid) + " pos: " + ofToString(mapping->selectedCorner->pos), ofGetWidth()-600, 20);
     }
+    
+    
+    //syphonOut.publishTexture(&fboOut.getTextureReference());
+    
     
 }
 
