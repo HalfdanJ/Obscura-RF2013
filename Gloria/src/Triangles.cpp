@@ -33,14 +33,25 @@ void Triangles::setup(){
     name = "Triangles";
     oscAddress = "/triangles";
     
+    map<Corner*, Corner*> cornerRefs;
+    
     for(int i=0;i<mapping->triangles.size();i++){
         InputTriangle * triangle = mapping->triangles[i];
         
         SubTriangle * subTriangle =  new SubTriangle();
+        subTriangle->level = 0;
         
+        //Create a duplicate of the corners
         for(int j=0;j<3;j++){
-            subTriangle->corners[j] = new Corner();
-            subTriangle->corners[j]->pos = triangle->corners[j]->pos;
+            if(cornerRefs.find(triangle->corners[j]) != cornerRefs.end()){
+                subTriangle->corners[j] = cornerRefs[triangle->corners[j]];
+            } else {
+                subTriangle->corners[j] = new Corner();
+                subTriangle->corners[j]->pos = triangle->corners[j]->pos;
+                
+                cornerRefs[triangle->corners[j]] = subTriangle->corners[j];
+
+            }
         }
         
         subTriangle->parentTriangle = subTriangle;
@@ -52,6 +63,68 @@ void Triangles::setup(){
         divideRadius = 0;
     }
     
+    
+    //Duplicate the joined corners
+    for(int i=0;i<mapping->triangles.size();i++){
+        InputTriangle * triangle = mapping->triangles[i];
+        SubTriangle * subTriangle = subTriangles[triangle];
+        
+        for(int j=0;j<3;j++){
+            for(int k=0; k<triangle->corners[j]->joinedCorners.size(); k++){
+                Corner * c1 = triangle->corners[j]->joinedCorners[k];
+                Corner * c2 = cornerRefs[c1];
+                subTriangle->corners[j]->joinedCorners.push_back(c2);
+            }
+        }
+    }
+    
+    //Create division Corners
+    for(int i=0;i<mapping->triangles.size();i++){
+        InputTriangle * triangle = mapping->triangles[i];
+        SubTriangle * subTriangle = subTriangles[triangle];
+        
+        for(int j=0;j<3;j++){
+            subTriangle->corners[j]->createDivisionCorners();
+        }
+        
+    }
+    
+    //Divide
+    for(int i=0;i<mapping->triangles.size();i++){
+        InputTriangle * triangle = mapping->triangles[i];
+        SubTriangle * subTriangle = subTriangles[triangle];
+
+
+        subTriangle->divide();
+        
+    }
+    
+    
+    //
+    
+    for(int it=0;it<2;it++){
+        for(int i=0;i<mapping->triangles.size();i++){
+            InputTriangle * triangle = mapping->triangles[i];
+            SubTriangle * subTriangle = subTriangles[triangle];
+            vector<SubTriangle*> arr = subTriangle->getLowestLevelTriangles();
+            
+            for(int j=0;j<arr.size();j++){
+                SubTriangle * _subTriangle = arr[j];
+                
+                for(int k=0;k<3;k++){
+                    _subTriangle->corners[k]->createDivisionCorners();
+                }
+                
+                _subTriangle->divide();
+                
+                
+            }
+        }
+    }
+
+    
+
+
     debugShader.load("shaders/TrianglesDebug");
 }
 
@@ -59,76 +132,11 @@ void Triangles::setup(){
 
 
 void Triangles::divide(SubTriangle * triangle, float sizeGoal){
-    int size = triangle->subTriangles.size();
-    if(sizeGoal > 0){
-        if(size > 0){
-            for(int i=0;i<size;i++){
-                divide(triangle->subTriangles[i], sizeGoal);
-            }
-        } else if(triangle->triangleSize() / 3.0 > sizeGoal){
-            SubTriangle * subTriangle = triangle;
-        
-            ofVec3f center = subTriangle->getCenter();
-            ofVec3f dir = center - subTriangle->corners[0]->pos;
-            
-            ofVec3f newP = dir * ofRandom(0.5,1.5) + subTriangle->corners[0]->pos;
-            newP.z += ofRandom(-dir.length(), dir.length());
-
-            {
-                SubTriangle * newTriangle = new SubTriangle();
-                newTriangle->corners[0] = new Corner();
-                newTriangle->corners[1] = new Corner();
-                newTriangle->corners[2] = new Corner();
-                
-                newTriangle->corners[0]->pos = subTriangle->corners[1]->pos;
-                newTriangle->corners[1]->pos = subTriangle->corners[0]->pos;
-                newTriangle->corners[2]->pos = newP;
-                
-                ofVec2f d = (newP - newTriangle->corners[0]->pos) + (newP - newTriangle->corners[1]->pos);
-                d.normalize();
-                newTriangle->parentTriangle = subTriangle;
-                
-                subTriangle->subTriangles.push_back(newTriangle);
-            }
-            {
-                SubTriangle * newTriangle = new SubTriangle();
-                newTriangle->corners[0] = new Corner();
-                newTriangle->corners[1] = new Corner();
-                newTriangle->corners[2] = new Corner();
-                
-                newTriangle->corners[0]->pos = subTriangle->corners[2]->pos;
-                newTriangle->corners[1]->pos = subTriangle->corners[0]->pos;
-                newTriangle->corners[2]->pos = newP;
-                
-                ofVec2f d = (newP - newTriangle->corners[0]->pos) + (newP - newTriangle->corners[1]->pos);
-                d.normalize();
-                newTriangle->parentTriangle = subTriangle;
-                
-                subTriangle->subTriangles.push_back(newTriangle);
-            }
-            {
-                SubTriangle * newTriangle = new SubTriangle();
-                newTriangle->corners[0] = new Corner();
-                newTriangle->corners[1] = new Corner();
-                newTriangle->corners[2] = new Corner();
-                
-                newTriangle->corners[0]->pos = subTriangle->corners[2]->pos;
-                newTriangle->corners[1]->pos = subTriangle->corners[1]->pos;
-                newTriangle->corners[2]->pos = newP;
-                
-                ofVec2f d = (newP - newTriangle->corners[0]->pos) + (newP - newTriangle->corners[1]->pos);
-                newTriangle->parentTriangle = subTriangle;
-                
-                subTriangle->subTriangles.push_back(newTriangle);
-            }
-            
-        }
-    }
     
 }
 
 void Triangles::collapse(SubTriangle * triangle){
-    int subsubtriangles = -1;
+   /* int subsubtriangles = -1;
     for(int i=0;i<triangle->subTriangles.size();i++){
         if(triangle->subTriangles[i]->subTriangles.size()){
             collapse(triangle->subTriangles[i]);
@@ -162,7 +170,7 @@ void Triangles::collapse(SubTriangle * triangle){
             }
             triangle->subTriangles.clear();
         }
-    }
+    }*/
 }
 
 
@@ -173,6 +181,19 @@ float ease(float t, float b, float c, float d) {
 	return -c/2 * (t*(t-2) - 1) + b;
 };
 
+
+void Triangles::drawTriangleWireframe(SubTriangle * triangle){
+    if(triangle->subTriangles.size() > 0){
+        for(int j=0;j<triangle->subTriangles.size();j++){
+            drawTriangleWireframe(triangle->subTriangles[j]);
+        }
+    } else {
+        for(int u=0;u<3;u++){
+            glVertex3d(triangle->corners[u]->pos.x, triangle->corners[u]->pos.y, 0/*triangle->corners[u]->pos.z*/);
+        }
+
+    }
+}
 void Triangles::drawTriangle(SubTriangle * triangle, float opacity){
     if(triangle->subTriangles.size() > 0){
         for(int j=0;j<triangle->subTriangles.size();j++){
@@ -226,11 +247,11 @@ void Triangles::drawTriangle(SubTriangle * triangle, float opacity){
             
             glTexCoord2d(syphonIn->getWidth()* center.x/OUTWIDTH
                          , syphonIn->getHeight()*(OUTHEIGHT-center.y)/OUTHEIGHT);
-            glVertex3d(triangle->corners[u]->pos.x, triangle->corners[u]->pos.y, triangle->corners[u]->pos.z);
+            glVertex3d(triangle->corners[u]->pos.x, triangle->corners[u]->pos.y, triangle->corners[u]->pos.z*0.2);
         }
         
 
-        
+      //  cout<<triangle->corners[0]->joinedCorners.size()<<endl;
         
         //Tegn billede 1:1
         float bbb = directTextureOpacity;
@@ -274,6 +295,19 @@ void Triangles::draw(){
     }
     
     debugShader.end();
+    
+    ofNoFill();
+    
+    glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
+    glBegin(GL_TRIANGLES);
+    ofSetColor(255);
+    for(int i=0;i<mapping->triangles.size();i++){
+        drawTriangleWireframe(subTriangles[mapping->triangles[i]]);
+    }
+    glEnd();
+    glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
+    
+    ofFill();
 }
 
 void Triangles::update(){
