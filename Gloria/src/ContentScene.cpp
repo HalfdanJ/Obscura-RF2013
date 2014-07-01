@@ -39,6 +39,10 @@ void ContentScene::setupScene(int _width, int _height, int _i) {
     
     fbo.allocate(settings);
     
+    fbo.begin();
+    ofClear(0,0,0,0);
+    fbo.end();
+    
     setup();
     syphonOut.setName(name);
 }
@@ -111,25 +115,20 @@ void ContentScene::drawScene() {
     if(enabled) {
         ofPushMatrix();
         ofPushStyle();
-        
         fbo.begin();
-//        ofClear(0, 0, 0);
-//        ofClearAlpha();
-        
-        //glEnable(GL_BLEND);
-        //glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
         draw();
-        //glDisable(GL_BLEND);
-        
         fbo.end();
         ofPopStyle();
         ofPopMatrix();
     }
-    
-    if (solo && enabled) {
+}
+
+void ContentScene::publishSyphonTexture(bool _force) {
+    if ( (solo && enabled) || _force ) {
         syphonOut.publishTexture(&fbo.getTextureReference());
     }
 }
+
 
 void ContentScene::exit() {
     delete gui;

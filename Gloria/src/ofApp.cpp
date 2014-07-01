@@ -6,7 +6,7 @@ void ofApp::setup() {
     oscReceiver.setup(OSCRECEIVEPORT);
     
     ofSetLogLevel(OF_LOG_NOTICE);
-    ofSetFrameRate(25);
+    ofSetFrameRate(TARGET_FRAMERATE);
     ofSetVerticalSync(true);
     glEnable(GL_LINES);
     ofSetWindowTitle("Obscure Glorius Control 2014");
@@ -39,7 +39,7 @@ void ofApp::setup() {
     
     // Set up the scenes, all scenes is a subclass of SceneContent, don't call draw, setup and update directly it is taken care of thorugh the scene.
     
-    scenes.push_back(new Filter());
+    scenes.push_back(new FluidScene());
     
     //transformer = new Transformer();
     //scenes.push_back(transformer);
@@ -55,7 +55,13 @@ void ofApp::setup() {
     fboSettings.useDepth = false;
     
     fboOut.allocate(fboSettings);
-
+    
+    fboOut.begin();
+    ofBackground(0,0,0,255);
+    
+    fboOut.end();
+    
+    
     for(int i=0; i<scenes.size(); i++) {
         scenes[i]->mapping = mapping;
         scenes[i]->syphonIn = syphonIn;
@@ -113,7 +119,6 @@ void ofApp::update() {
 		oscReceiver.getNextMessage(&m);
 
         //cout<<m.getAddress()<<endl;
-
         for(int i=0; i<scenes.size();i++) {
             scenes[i]->parseSceneOscMessage(&m);
         }
@@ -209,8 +214,13 @@ void ofApp::draw() {
     }
     
     
-    //syphonOut.publishTexture(&fboOut.getTextureReference());
+    for(int i=0; i<scenes.size(); i++) {
+        if(scenes[i]->enabled) {
+            scenes[i]->publishSyphonTexture();
+        }
+    }
     
+    syphonOut.publishTexture(&fboOut.getTextureReference());
     
 }
 
@@ -275,7 +285,6 @@ void ofApp::setGUI()
     mainGui->loadSettings("GUI/guiMainSettings.xml");
     guiTabBar->loadSettings("GUI/guiSettings.xml", "ui-");
 }
-
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){

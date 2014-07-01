@@ -17,3 +17,5 @@
 #define OSCSENDHOST "127.0.0.1"
 
 #define GUIWIDTH 255
+
+#define TARGET_FRAMERATE 30
