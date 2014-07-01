@@ -10,10 +10,9 @@
 #include "QuickTrail.h"
 #include "Triangles.h"
 #include "PerlinWaves.h"
-#include "Transformer.h"
 #include "ofxUI.h"
 #include "Mapping.h"
-#include "Filter.h"
+#include "FluidScene.h"
 
 class ofApp : public ofBaseApp {
 public:

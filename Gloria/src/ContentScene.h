@@ -50,4 +50,6 @@ public:
     void updateScene();
     void drawScene();
     
+    void publishSyphonTexture(bool force=false);
+    
 };
