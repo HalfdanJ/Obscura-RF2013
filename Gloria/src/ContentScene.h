@@ -23,10 +23,6 @@ public:
     string name;
     string oscAddress = "/default";
     
-    float minSpeed = 0;
-    float maxSpeed = 1;
-    int long time = 0;
-    
     ofFbo fbo;
     bool enabled;
     bool solo = true;
@@ -53,5 +49,7 @@ public:
     void setupScene(int _width, int _height, int _i);
     void updateScene();
     void drawScene();
+    
+    void publishSyphonTexture(bool force=false);
     
 };

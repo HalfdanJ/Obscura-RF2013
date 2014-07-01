@@ -6,8 +6,7 @@
  *
  */
  
-#ifndef TESTAPP_H
-#define TESTAPP_H
+#pragma once
 
 #include "ofMain.h"
 #include "ofxOsc.h"
@@ -28,4 +27,3 @@ public:
     float circleSpeed;
 };
 
-#endif
