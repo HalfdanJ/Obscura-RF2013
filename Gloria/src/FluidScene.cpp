@@ -76,9 +76,11 @@ void FluidScene::setup(){
     fluid.setObstacles(obstacles);
     fluid.setUseObstacles(true);
     
+    //fluid.setPasses(8);
+
     // Adding constant forces
     //
-    fluid.addConstantForce(ofPoint(drawWidth*0.5,drawHeight*0.85), ofPoint(0,-2), ofFloatColor(0.1,0.2,0.5), 5.5f);
+    //fluid.addConstantForce(ofPoint(drawWidth*0.4,drawHeight*0.95), ofPoint(0,-2), ofFloatColor(1.0,0.1,0.0), 15.5f);
 }
 
 void FluidScene::update(){
@@ -90,7 +92,7 @@ void FluidScene::update(){
     ofPoint m = emitPos;
     ofPoint d = (m - oldM)*10.0;
     oldM = m;
-
+    
     fluid.addTemporalForce(m, d, ofFloatColor(1, 1, 1),16.0f);
     
     //fluid.addTemporalForce(m, d, ofFloatColor(1, 1, 1),16.0f);
@@ -112,9 +114,12 @@ void FluidScene::draw(){;
     fluid.draw(0,0,OUTWIDTH,OUTHEIGHT);
     //syphonIn->getTexture().draw(0,0,OUTWIDTH,OUTHEIGHT);
     
+    
+    
     if(drawObstacles) {
         ofSetColor(255,255,255,255);
         obstacles.draw(0,0,OUTWIDTH, OUTHEIGHT);
+        //fluid.drawVelocity();
     }
 }
 
@@ -126,8 +131,8 @@ void FluidScene::setGui(){
     gui->addSlider("/gravity/x", -1, 1, &gravityX);
     gui->addSlider("/gravity/y", -1, 1, &gravityY);
     
-    gui->addSlider("/emit/x", 0, drawWidth, &emitPos.x);
-    gui->addSlider("/emit/y", 0, drawHeight, &emitPos.y);
+    gui->addSlider("/emit/x", 10, drawWidth-10, &emitPos.x);
+    gui->addSlider("/emit/y", 10, drawHeight-10, &emitPos.y);
     
     gui->addToggle("/drawobstacles/x", &drawObstacles);
     drawObstacles = false;

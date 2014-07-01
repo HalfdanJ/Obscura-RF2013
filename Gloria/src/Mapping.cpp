@@ -52,6 +52,8 @@ void Mapping::load(string _xmlfile, string _svgfile) {
     
     generate();
     
+    generateMask();
+    
     if(settings.tagExists("corners")){
         settings.pushTag("corners");
         int numCornerTags = settings.getNumTags("corner");
@@ -305,10 +307,36 @@ void InputTriangle::debugDraw() {
     ofDrawBitmapString(ofToString(uid), centroid);
     
     ofSetColor(255, 0, 0, 60);
+    
     for(int i=0; i<polyline.getVertices().size(); i++) {
         ofCircle(polyline.getVertices()[i].x, polyline.getVertices()[i].y, 20);
     }
     
+}
+
+
+void Mapping::generateMask() {
+    
+    outputMask.allocate(OUTWIDTH, OUTHEIGHT);
+    
+    
+    outputMask.begin(); {
+        
+        ofClear(0,0,0,0);
+        ofFill();
+        ofSetColor(0,0,0,255);
+        for(int i=0; i< triangles.size(); i++) {
+            triangles[i]->mesh.draw();
+        }
+        
+    } outputMask.end();
+    
+}
+
+
+void Mapping::drawMask() {
+    // I guess we need to use a shader forr this - TODO
+    outputMask.draw(0,0,outputMask.getWidth(), outputMask.getHeight());
 }
 
 void Mapping::nextCorner() {
