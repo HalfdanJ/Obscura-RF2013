@@ -11,7 +11,7 @@
 
 void Triangles::setGui(){
     gui->addSlider("SyphonOpacity", 0,1, &syphonOpacity);
-    gui->addSlider("DivideTriangleSize", 1000,60000, &divideTriangleSize);
+    gui->addSlider("DivideTriangleSize", 0,5, &divideTriangleSize);
     gui->addSlider("DivideRadius", 0,2400, &divideRadius);
     gui->addToggle("DivideInvert", &divideInvert);
     gui->addSlider("TransitionTime", 0,10, &transitionTime);
@@ -260,7 +260,7 @@ void Triangles::drawTriangle(SubTriangle * triangle, float opacity){
 //            glTexCoord2d((float)triangle->corners[u]->pos.x, (float)triangle->corners[u]->pos.y);
   //          glTexCoord2d((float)center.x, (float)center.y);
             ofVec3f pos = triangle->getPos(u) ;
-            glVertex3d(pos.x, pos.y, pos.z);
+            glVertex3d(pos.x, pos.y, 0/*pos.z*/);
         }
         
 
@@ -298,6 +298,8 @@ void Triangles::draw(){
 
     debugShader.begin();
    // debugShader.setUniformTexture("depthTex", depthFbo.getTextureReference(), 1);
+    debugShader.setUniform1f("lightAmount", light);
+    debugShader.setUniform1f("textureAmount", syphonOpacity);
     syphonIn->bind();
     material.setShininess(15);
     
@@ -354,6 +356,7 @@ void Triangles::draw(){
 void Triangles::update(){
     for(int i=0;i<mapping->triangles.size();i++){
         SubTriangle * triangle = subTriangles[mapping->triangles[i]];
+        triangle->drawLevelGoal = divideTriangleSize;
         triangle->update();
     }
     
@@ -366,26 +369,7 @@ void Triangles::update(){
     
     pointLight.setPosition(lightPos);
     
-    for(int i=0;i<mapping->triangles.size();i++){
-        SubTriangle * triangle = subTriangles[mapping->triangles[i]];
-        
-        float sizeGoal = divideTriangleSize;//*triangle->ageDifference;
-        
-        if(triangle->getSmallestSize() > sizeGoal
-           && ((triangle->getCenter().distance(center) < divideRadius && !divideInvert) || (triangle->getCenter().distance(center) > divideRadius && divideInvert))){
-            float a = (divideRadius - triangle->getCenter().distance(center)) / divideRadius;
-            if(triangle->getLowestAge() > transitionTime){
-                divide(triangle, sizeGoal);
-//                cout<<"divide"<<endl;
-            }
-        } else {
-            if(triangle->numTriangles() > 1){
-                collapse(triangle);
-               // cout<<"Collapse"<<endl;
-            }
-        }
-        
-    }
+   
 }
 
 

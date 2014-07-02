@@ -1,10 +1,13 @@
 //uniform sampler2D bump_tex;
 uniform sampler2DRect tex0;
 
+uniform float lightAmount;
+uniform float textureAmount;
 
 varying vec4 ambientGlobal, eyeSpaceVertexPos;
 varying vec4 vertexPos;
 varying vec3 vertexNormal;
+
 
 int lightsNumber = 1;
 

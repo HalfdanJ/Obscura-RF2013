@@ -1,5 +1,8 @@
 uniform sampler2DRect tex0;
 
+uniform float lightAmount;
+uniform float textureAmount;
+
 varying vec4 ambientGlobal, eyeSpaceVertexPos;
 varying vec4 vertexPos;
 varying vec3 vertexNormal;
@@ -134,13 +137,13 @@ void main()
 {
 
     vec3 color = texture2DRect(tex0, gl_TexCoord[0].xy).rgb;
-    color = vec3(1.);
+    color =color*textureAmount + (1.-textureAmount) * vec3(1.);
  //   vec3 bump = texture2DRect(depthTex, gl_TexCoord[0].xy).rgb;
     
     vec3 n = (vertexNormal);
     n = normalize(n);
     
-    color *= 2.*calc_lighting_color(n).rgb;
+    color *= 2.*calc_lighting_color(n).rgb * lightAmount + (1. - lightAmount) ;
 
     gl_FragColor.rgb = color;
 	gl_FragColor.a = 1.0;
