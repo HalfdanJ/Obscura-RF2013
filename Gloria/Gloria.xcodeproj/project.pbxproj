@@ -119,6 +119,7 @@
 		E7F985F815E0DEA3003869B5 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7F985F515E0DE99003869B5 /* Accelerate.framework */; };
 		F228CDF019631AB600CE79FF /* CurlyFur.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F228CDEE19631AB600CE79FF /* CurlyFur.cpp */; };
 		F228CDF319631AC500CE79FF /* Particle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F228CDF119631AC500CE79FF /* Particle.cpp */; };
+		F2BF3F8C1964167D00D4B07B /* BasicParticles.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2BF3F8A1964167D00D4B07B /* BasicParticles.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -494,6 +495,8 @@
 		F228CDEF19631AB600CE79FF /* CurlyFur.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurlyFur.h; sourceTree = "<group>"; };
 		F228CDF119631AC500CE79FF /* Particle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Particle.cpp; sourceTree = "<group>"; };
 		F228CDF219631AC500CE79FF /* Particle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Particle.h; sourceTree = "<group>"; };
+		F2BF3F8A1964167D00D4B07B /* BasicParticles.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BasicParticles.cpp; sourceTree = "<group>"; };
+		F2BF3F8B1964167D00D4B07B /* BasicParticles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicParticles.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -937,6 +940,8 @@
 				DD81641B17820BFB006B6A3E /* Triangles.h */,
 				04C6D22B17847D7F00AC12B9 /* PerlinWaves.h */,
 				04C6D22C17847D8900AC12B9 /* PerlinWaves.cpp */,
+				F2BF3F8A1964167D00D4B07B /* BasicParticles.cpp */,
+				F2BF3F8B1964167D00D4B07B /* BasicParticles.h */,
 			);
 			name = Scenes;
 			sourceTree = "<group>";
@@ -1582,6 +1587,7 @@
 				0425D85A195ABAD5003086AC /* ofxUI2DPad.cpp in Sources */,
 				0425D880195ABAD5003086AC /* ofxUIToggleMatrix.cpp in Sources */,
 				0425D87E195ABAD5003086AC /* ofxUITextInput.cpp in Sources */,
+				F2BF3F8C1964167D00D4B07B /* BasicParticles.cpp in Sources */,
 				0425D86F195ABAD5003086AC /* ofxUIMultiImageButton.cpp in Sources */,
 				DD8E8DA51961978300A7F3E1 /* ofxAutoReloadedShader.cpp in Sources */,
 				0425D7F8195ABA57003086AC /* SyphonNameboundClient.m in Sources */,

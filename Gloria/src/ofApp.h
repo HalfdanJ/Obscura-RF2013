@@ -14,6 +14,7 @@
 #include "Mapping.h"
 #include "FluidScene.h"
 #include "CurlyFur.h"
+#include "BasicParticles.h"
 
 class ofApp : public ofBaseApp {
 public:
