@@ -18,6 +18,7 @@ void Particle::setup() {
 void Particle::draw() {
     int mapFactor = 20;
     ofSetColor(color,ofMap(age,0,mapFactor,255,0,true));
+    ofSetLineWidth(1);
     ofLine(oldpos,pos);
 }
 

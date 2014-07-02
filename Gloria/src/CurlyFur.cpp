@@ -11,18 +11,23 @@
 void CurlyFur::setup(){
     name = "CurlyFur";
     oscAddress = "/curly";
+
     
-    // vib
-    ofClearAlpha();
-    ofClear(0, 0, 0);
-//    ofSetBackgroundAuto(false);
-//    ofEnableAlphaBlending();
-//    ofBackground(0);
     initCam();
 
-    ofSetColor(0,0,0);
-    ofRect(0,0,OUTWIDTH,OUTHEIGHT);
+    /*
+    ofFbo::Settings fboSettings;
+    fboSettings.height = OUTHEIGHT/10.0;
+    fboSettings.width = OUTWIDTH/10.0;
+    fboSettings.numSamples = 4;
+    fboSettings.useDepth = false;
+    
+    myfbo.allocate(fboSettings);
+    */
+    
     //    cout << "width: " << OUTWIDTH << endl;
+    
+    myfbo.allocate(OUTWIDTH/10, OUTHEIGHT/10, GL_RGB);
 }
 
 void CurlyFur::update(){
@@ -65,39 +70,7 @@ void CurlyFur::initCam(){
 }
 
 void CurlyFur::draw(){;
-/*
-     // waves going across red
-    
-    
-    //y[1] = 60*3 +ofNoise(t*freq.getValue())*yFactor.getValue();
-    //y[2] = 60*4 +ofSignedNoise(t*freq.getValue())*yFactor.getValue();
-    
-    float t = ofGetElapsedTimef();
-    //float val = ofNoise((mapping->triangles[i]->centroid.x/fbo.getWidth() - t)*speed*100)*255; // 255 is amplitude
-    
-
-    
-    //float x = abs(ofNoise(t*frequency)*fbo.getWidth());
-    //float y = ofNoise(t*frequency)*fbo.getHeight();
-    
-     for(int i =0; i<mapping->triangles.size();i++) {
-         
-         ofSetColor( 255, 255, 255,
-                    ofNoise( (yTime/10) - mapping->triangles[i]->centroid.y
-                            / ( yScatter*OUTHEIGHT) ) *255 );
-         ofSetLineWidth(2);
-         glEnable(GL_LINES);
-         mapping->triangles[i]->mesh.drawWireframe();
-         
-         
-         ofSetColor( 255, 255, 255,
-                    ofNoise( (xTime/10) - mapping->triangles[i]->centroid.x
-                            / ( xScatter*OUTWIDTH) ) *255 );
-         
-         mapping->triangles[i]->mesh.draw();
-         
-     }
- */
+    ofEnableAlphaBlending();
     
     //Draw particles
     for (int i=0; i<particles.size(); i++) {
@@ -106,24 +79,37 @@ void CurlyFur::draw(){;
         p.draw();
     }
     
-    for (int i=0; i<500; i++) {
+    for (int i=0; i<50; i++) {
         createParticle();
     }
     
-    while (particles.size()>2000) {
+    while (particles.size()>1000) {
         particles.erase(particles.begin());
     }
     //}
     
     //Fade out the old stuff
-    ofSetColor(0,0,0,5);
-    ofRect(0,0,OUTWIDTH,OUTHEIGHT);
+    //ofSetColor(0,0,0,5);
+    //ofFill();
+    //ofRect(0,0,OUTWIDTH,OUTHEIGHT);
     
     //Cam debug view
     ofSetHexColor(0xffffff);
     vidGrabber.draw(20,20);
     
     ofSetColor(255,255,255,0);
+    
+    ofDisableAlphaBlending();
+    
+    //http://www.openframeworks.cc/documentation/gl/ofFbo.html
+    myfbo.begin();
+    ofSetColor(255,255,255);
+    ofFill();
+    ofRect(0,0,OUTWIDTH/10,OUTHEIGHT/10);
+    syphonIn->draw(0, 0, OUTWIDTH/10,OUTHEIGHT/10);
+    myfbo.end();
+    
+    myfbo.draw(0,0);
 }
 
 void CurlyFur::parseOscMessage(ofxOscMessage *m){
@@ -168,13 +154,32 @@ void CurlyFur::createParticle() {
     int camPosX, camPosY;
     float randomX = ofRandom(1.0);
     float randomY = ofRandom(1.0);
+    ofPixels pixels;
     Particle p;
     p.setup();
     //p.pos.set(ofRandomWidth(), ofRandomHeight());
-    p.pos.set(ofGetWidth() * randomX, ofGetHeight() * randomY);
+    p.pos.set(OUTWIDTH * randomX, OUTHEIGHT * randomY);
     camPosX = camWidth * randomX;
     camPosY = camHeight * randomY;
+    //Not working
+    //syphonIn->getTexture().readToPixels(pixels);
+    //p.color = pixels.getColor(p.pos.x,p.pos.y);
+    //cout << "width: " << pixels.getColor(p.pos.x,p.pos.y) << endl;
+    
+    //http://forum.openframeworks.cc/t/ofxsyphon-to-image/7791/3
+/*    myfbo.begin();
+    syphonIn->draw(0, 0, OUTWIDTH/10.0, OUTHEIGHT/10.0);
+    myfbo.end();
+    
+    myfbo.readToPixels(pixels);
+    p.color = pixels.getColor(p.pos.x/10,p.pos.y/10);
+    cout << "width: " << pixels.getColor(p.pos.x/10,p.pos.y/10) << endl;
+*/
+    
+    myfbo.readToPixels(pixels);
+    p.color = pixels.getColor(p.pos.x/10,p.pos.y/10);
+    
     //p.color = img.getColor(p.pos.x,p.pos.y);
-    p.color = vidGrabber.getPixelsRef().getColor(camPosX,camPosY);
+    //p.color = vidGrabber.getPixelsRef().getColor(camPosX,camPosY);
     particles.push_back(p);
 }

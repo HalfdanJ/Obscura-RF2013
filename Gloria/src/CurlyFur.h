@@ -35,4 +35,7 @@ public:
     int 				camWidth;
     int 				camHeight;
     
+    //misc
+    ofFbo myfbo;
+    
 };

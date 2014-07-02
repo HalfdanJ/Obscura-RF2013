@@ -13,6 +13,7 @@
 #include "ofxUI.h"
 #include "Mapping.h"
 #include "FluidScene.h"
+#include "CurlyFur.h"
 
 class ofApp : public ofBaseApp {
 public:
