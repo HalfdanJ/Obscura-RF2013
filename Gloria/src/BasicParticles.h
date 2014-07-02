@@ -20,14 +20,18 @@ public:
     void draw();
     void update();
     void SetVelocity(float baseVelocity);
+    void SetSize(float size);
     
     float baseVelocity;
     ofVec2f pos,vel,oldpos;
     float angle;
     ofColor color;
     int age;
+    float fadeWithAge;
     float radius;
 };
+
+/////////////////////////
 
 class BasicParticles : public ContentScene {
     
@@ -41,6 +45,8 @@ public:
     void setGui();
     
     void createParticle();
+    
+    bool trace;
         
     //Particles
     vector<BasicParticle> particles;
@@ -51,7 +57,9 @@ public:
     
     //particle
     float pspeed;
-    float density;
+    float psize;
+    float pFadeWithAge;
+    float pkill;
     float totalCount;
     float fade;
 };
