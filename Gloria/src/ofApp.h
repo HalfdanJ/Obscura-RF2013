@@ -9,12 +9,12 @@
 #include "LampWalker.h"
 #include "QuickTrail.h"
 #include "Triangles.h"
-#include "GTess.h"
 #include "PerlinWaves.h"
-#include "TriBlobs.h"
-#include "HardNoise.h"
 #include "ofxUI.h"
 #include "Mapping.h"
+#include "FluidScene.h"
+#include "CurlyFur.h"
+#include "BasicParticles.h"
 
 class ofApp : public ofBaseApp {
 public:
@@ -61,15 +61,14 @@ public:
     
     bool hideGUI;
     bool drawGuide;
-    
-    // Define all the scenes here
-    //LampWalker * lampWalker;
-    //QuickTrail * quickTrail;
-    Triangles * triangles;
-    //GTess * tesselator;
-    PerlinWaves * perlinWaves;
-    //TriBlobs * triBlobs;
-    //HardNoise * hardNoise;
+    bool drawSyponIn;
+    bool drawOutput;
+    bool outputCombined;
+    bool drawMask;
     
     vector<ContentScene*> scenes;
+    
+    
+    
+    
 };

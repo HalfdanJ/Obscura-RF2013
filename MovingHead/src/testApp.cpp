@@ -109,12 +109,12 @@ void testApp::update(){
 /*        dmx.setLevel(lamps[i].dmxAddress+lamps[i].dmxOffset+2, 128);
         dmx.setLevel(lamps[i].dmxAddress+lamps[i].dmxOffset+3, 0);
   */      
-        dmx.setLevel(lamps[i].dmxAddress+0, 0);
-        dmx.setLevel(lamps[i].dmxAddress+1, 0);
+        //dmx.setLevel(lamps[i].dmxAddress+0, 0);
+        //dmx.setLevel(lamps[i].dmxAddress+1, 0);
         if(lamps[i].coldCountdown > 0){
-            dmx.setLevel(lamps[i].dmxAddress+2, 0);
+            dmx.setLevel(lamps[i].dmxAddress+17, 0);
         } else {
-            dmx.setLevel(lamps[i].dmxAddress+2, lamps[i].dim);
+            dmx.setLevel(lamps[i].dmxAddress+17, lamps[i].dim);
             
         }
         dmx.setLevel(lamps[i].dmxAddress+3, 0);
@@ -123,9 +123,16 @@ void testApp::update(){
         dmx.setLevel(lamps[i].dmxAddress+6, 0);
         dmx.setLevel(lamps[i].dmxAddress+7, 0);
         dmx.setLevel(lamps[i].dmxAddress+8, 0);
-        dmx.setLevel(lamps[i].dmxAddress+14, 0);//reset
+//        dmx.setLevel(lamps[i].dmxAddress+14, 0);//reset
         dmx.setLevel(lamps[i].dmxAddress+15, 0);//lamp
         
+        dmx.setLevel(lamps[i].dmxAddress+16, 10);
+
+
+        //Gobo
+        dmx.setLevel(lamps[i].dmxAddress+9, 5);
+                dmx.setLevel(lamps[i].dmxAddress+14, 255);
+
     }
     
 //      dmx.setLevel(13, 128+ sin(ofGetElapsedTimeMillis()/5000.)*128);
@@ -215,7 +222,6 @@ void testApp::loadXml(){
     
     float dmxPanMin = XML.getAttribute("PANDMX", "min", 0.0);
     float dmxPanMax = XML.getAttribute("PANDMX", "max", 0.0);
-
 
     float panMin = XML.getAttribute("PAN", "min", 0.0);
     float panMax = XML.getAttribute("PAN", "max", 0.0);

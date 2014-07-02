@@ -6,7 +6,7 @@ void ofApp::setup() {
     oscReceiver.setup(OSCRECEIVEPORT);
     
     ofSetLogLevel(OF_LOG_NOTICE);
-    ofSetFrameRate(60);
+    ofSetFrameRate(TARGET_FRAMERATE);
     ofSetVerticalSync(true);
     glEnable(GL_LINES);
     ofSetWindowTitle("Obscure Glorius Control 2014");
@@ -19,6 +19,8 @@ void ofApp::setup() {
     syphonIn->setApplicationName("Millumin");
     syphonIn->setServerName("");
     syphonIn->setup();
+    
+    directory.setup();
     
     //register for our directory's callbacks
     ofAddListener(directory.events.serverAnnounced, this, &ofApp::serverAnnounced);
@@ -37,11 +39,16 @@ void ofApp::setup() {
     
     // Set up the scenes, all scenes is a subclass of SceneContent, don't call draw, setup and update directly it is taken care of thorugh the scene.
     
-    triangles = new Triangles;
-    scenes.push_back(triangles);
+    scenes.push_back(new FluidScene());
     
-    perlinWaves = new PerlinWaves();
-    scenes.push_back(perlinWaves);
+    //transformer = new Transformer();
+    //scenes.push_back(transformer);
+
+    scenes.push_back(new QuickTrail());
+    scenes.push_back(new Triangles());
+    scenes.push_back(new PerlinWaves());
+    scenes.push_back(new CurlyFur());
+    scenes.push_back(new BasicParticles());
     
     ofFbo::Settings fboSettings;
     fboSettings.height = OUTHEIGHT;
@@ -50,7 +57,14 @@ void ofApp::setup() {
     fboSettings.useDepth = false;
     
     fboOut.allocate(fboSettings);
-
+    
+    
+    fboOut.begin();
+    ofBackground(0,0,0,255);
+    
+    fboOut.end();
+    
+        
     for(int i=0; i<scenes.size(); i++) {
         scenes[i]->mapping = mapping;
         scenes[i]->syphonIn = syphonIn;
@@ -58,6 +72,8 @@ void ofApp::setup() {
     }
     
     setGUI();
+    
+
 }
 
 
@@ -107,8 +123,7 @@ void ofApp::update() {
 		ofxOscMessage m;
 		oscReceiver.getNextMessage(&m);
 
-	//cout<<m.getAddress()<<endl;
-
+        //cout<<m.getAddress()<<endl;
         for(int i=0; i<scenes.size();i++) {
             scenes[i]->parseSceneOscMessage(&m);
         }
@@ -121,6 +136,13 @@ void ofApp::update() {
     
     // OSC in listen
     
+
+}
+
+
+void ofApp::draw() {
+    
+    
     // Draw scene fbo's
     ofPushStyle();
     ofNoFill();
@@ -131,6 +153,7 @@ void ofApp::update() {
     
     ofPushStyle();{
         fboOut.begin();{
+            ofEnableAlphaBlending();
             ofClear(0, 0);
             
             for(int i=0; i<scenes.size(); i++) {
@@ -140,14 +163,13 @@ void ofApp::update() {
                     scenes[i]->fbo.draw(0,0);
                 }
             }
+            
+            //glBlendFunc(GL_FUNC_SUBTRACT​);
+            
+            if(drawMask) mapping->drawMask();
+            
         }fboOut.end();
     } ofPopStyle();
-    
-    syphonOut.publishTexture(&fboOut.getTextureReference());
-}
-
-
-void ofApp::draw() {
     
     ofDisableDepthTest();
     ofBackground(0, 0, 0);
@@ -178,10 +200,16 @@ void ofApp::draw() {
         ofTranslate(380, 320);
         
         if(syphonIn->isSetup()){
+            
+            ofPushMatrix();
+            
+            ofScale(0.2, 0.2);
             ofSetColor(255);
             ofSetLineWidth(1);
-            ofRect(-1, -1, 260* syphonIn->getWidth()/syphonIn->getHeight()+2, 260+2);
-            syphonIn->draw(0, 0, 260* syphonIn->getWidth()/syphonIn->getHeight(), 260);
+            ofRect(-1, -1, syphonIn->getWidth()+2, syphonIn->getHeight()+2);
+            syphonIn->draw(0, 0, syphonIn->getWidth(), syphonIn->getHeight());
+            
+            ofPopMatrix();
             
             ofDrawBitmapString("Syphon input - (Press 'i' to change)", 10,18);
             ofDrawBitmapString(syphonIn->getApplicationName(), 10,34);
@@ -195,6 +223,15 @@ void ofApp::draw() {
     if(mapping->selectedCorner) {
         ofDrawBitmapString("Selected Corner: " + ofToString(mapping->selectedCorner->uid) + " pos: " + ofToString(mapping->selectedCorner->pos), ofGetWidth()-600, 20);
     }
+    
+    
+    for(int i=0; i<scenes.size(); i++) {
+        if(scenes[i]->enabled) {
+            scenes[i]->publishSyphonTexture();
+        }
+    }
+    
+    syphonOut.publishTexture(&fboOut.getTextureReference());
     
 }
 
@@ -233,9 +270,9 @@ void ofApp::setGUI()
     mainGui->addLabel("OSC info");
     mainGui->addLabel("In: " + ofToString(OSCRECEIVEPORT));
     mainGui->addLabel("Out: " + string(OSCSENDHOST) + ":" + ofToString(OSCSENDPORT));
-
     
     mainGui->addToggle("Draw guide", &drawGuide);
+    mainGui->addToggle("Draw mask", &drawMask);
     mainGui->autoSizeToFitWidgets();
     ofAddListener(mainGui->newGUIEvent,this,&ofApp::guiEvent);
     
@@ -260,7 +297,6 @@ void ofApp::setGUI()
     guiTabBar->loadSettings("GUI/guiSettings.xml", "ui-");
 }
 
-
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
     
@@ -270,6 +306,7 @@ void ofApp::keyPressed(int key){
         dirIdx = 0;
         
         if(directory.isValidIndex(dirIdx)){
+            
             syphonIn->setServerName(directory.getServerList()[dirIdx].serverName);
             syphonIn->setApplicationName(directory.getServerList()[dirIdx].appName);
         }
@@ -345,7 +382,6 @@ void ofApp::exit()
     
     delete guiTabBar;
     delete mapping;
-    
 }
 
 void ofApp::guiEvent(ofxUIEventArgs &e)

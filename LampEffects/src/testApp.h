@@ -6,11 +6,12 @@
  *
  */
  
-#ifndef TESTAPP_H
-#define TESTAPP_H
+#pragma once
 
 #include "ofMain.h"
 #include "ofxOsc.h"
+
+#define numLamps 14
 
 class testApp : public ofBaseApp{
 public:
@@ -26,6 +27,12 @@ public:
     ofVec3f center;
     float circleRadius;
     float circleSpeed;
+    
+    int type = 2;
+    
+    vector<ofVec3f> lampPositions;
+    
+    float time;
+    
 };
 
-#endif

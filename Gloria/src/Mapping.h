@@ -9,8 +9,10 @@
 #pragma once
 
 #include "ofMain.h"
+#include "Defines.h"
 #include "ofxSvg.h"
 #include "ofxXmlSettings.h"
+#include "ofxOpenCv.h"
 
 struct InputTriangle;
 
@@ -96,6 +98,11 @@ public:
     void prevCorner();
     void selectCornerAt(int x, int y, int r);
     void updateMeshes();
+    
+    void drawMask();
+    void generateMask();
+    ofFbo outputMask;
+
     
 protected:
     string svgFilename;

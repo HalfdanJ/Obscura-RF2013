@@ -1,4 +1,4 @@
-//
+    //
 //  QuickTrail.h
 //  Gloria
 //
@@ -29,11 +29,9 @@ public:
     void debugDraw();
     void update();
     
-    
-    Mapping * mapping;
     vector<Walker> walkers;
     
-    float numtrails = 3;
+    int numtrails = 3;
     float length;
     int long lastadded;
     
@@ -42,9 +40,9 @@ public:
     bool random;
     bool clear;
     
-    
     void parseOscMessage(ofxOscMessage * m);
-    void setGui(ofxUICanvas * gui, float width);
+    void setGui();
     
-    
+    float time;
+    float interval = 1;
 };
