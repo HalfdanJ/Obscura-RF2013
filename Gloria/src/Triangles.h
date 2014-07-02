@@ -19,16 +19,22 @@ public:
     SubTriangle * parentTriangle;
     bool die;
     int level;
+    float drawLevel;
+    int drawLevelGoal;
     
     float ageDifference;
     
     SubTriangle(){
         ageDifference = ofRandom(0.5,1.0);
         age = 0;
+        
+        drawLevel = 0;
+        drawLevelGoal = 2;
     }
     
     ofVec3f normal(){
-        ofVec3f n = (corners[1]->pos - corners[0]->pos).cross(( corners[2]->pos - corners[0]->pos )).normalized();
+
+        ofVec3f n = (getPos(1) - getPos(0)).cross(( getPos(2) - getPos(0) )).normalized();
         if(n.z < 0){
             n *= -1.;
         }
@@ -44,10 +50,50 @@ public:
     }
     
     void update(){
-        for(int i=0;i<subTriangles.size();i++){
+        
+        if(level == 0){
+            drawLevel += (drawLevelGoal - drawLevel)*0.2 *1.0/ofGetFrameRate();
+        }
+        
+        for(int i=0;i<3;i++){
+            ofVec3f anchor;
+            if(corners[i]->anchor1){
+                anchor = corners[i]->anchor1->pos * corners[i]->anchorRatio;
+                anchor += corners[i]->anchor2->pos * (1-corners[i]->anchorRatio);
+                anchor *= ofVec3f(0,0,1);
+            }
+            ofVec3f p =corners[i]->origPos + anchor;
+            p.z += corners[i]->randomSeed.z  * 100;
+               corners[i]->pos = p;
+            
+            /*if(level <= drawLevel+1){
+                float f = MIN(1,MAX(0,drawLevel-level));
+                ofVec3f dest = (p + ofVec3f(0,0,100. * f * corners[i]->randomSeed.z ));
+                
+                corners[i]->pos += (dest - corners[i]->pos )*0.1;
+               // corners[i]->pos.z = ofRandom(-100,100);
+
+
+            } else {
+//                corners[i]->pos = p;
+            }*/
+            
+
+       //     corners[i]->pos = dest ;
+        }
+        
+        int c = subTriangles.size();
+        for(int i=0;i<c;i++){
+            subTriangles[i]->drawLevel = drawLevel;
             subTriangles[i]->update();
         }
         age += ageDifference*1.0/ofGetFrameRate();
+    }
+    
+    ofVec3f getPos(int i){
+        float f = MIN(1,MAX(0,drawLevel-level));
+        
+        return corners[i]->getPos(f);
     }
     
     float getLowestAge(){
@@ -105,96 +151,99 @@ public:
         return _size;
     }
     
-    void divide(){
-        //Division corners
-//        cout<<"Div "<<corners[1]<<"  "<<corners[2]<<"  "<<corners[1]->division[corners[2]]<<endl;
-        Corner * d1 = corners[0]->division[corners[1]];
-        Corner * d2 = corners[0]->division[corners[2]];
-        Corner * d3 = corners[1]->division[corners[2]];
+    void divide(float minSize, int _level){
         
+        if(triangleSize() > minSize){
+            //Division corners
 
-        //Z
-        d1->pos.z = ofRandom(-100,100);
-        d2->pos.z = ofRandom(-100,100);
-        d3->pos.z = ofRandom(-100,100);
-        
-        //Create the 4 new triangles
-        {
-            SubTriangle * newTriangle = new SubTriangle();
-            newTriangle->level = level+1;
-            newTriangle->corners[0] = corners[0];
-            newTriangle->corners[1] = corners[0]->division[corners[1]];
-            newTriangle->corners[2] = corners[0]->division[corners[2]];
-            
-            newTriangle->parentTriangle = this;
+            Corner * d1 = corners[0]->division[corners[1]];
+            Corner * d2 = corners[0]->division[corners[2]];
+            Corner * d3 = corners[1]->division[corners[2]];
             
             
-            
-            subTriangles.push_back(newTriangle);
-        }
-        
-        {
-            SubTriangle * newTriangle = new SubTriangle();
-            newTriangle->level = level+1;
-            newTriangle->corners[0] = corners[1];
-            newTriangle->corners[1] = corners[1]->division[corners[2]];
-            newTriangle->corners[2] = corners[1]->division[corners[0]];
-            
-            newTriangle->parentTriangle = this;
-            
-            
-            
-            subTriangles.push_back(newTriangle);
-        }
-        {
-            SubTriangle * newTriangle = new SubTriangle();
-            newTriangle->level = level+1;
-            newTriangle->corners[0] = corners[2];
-            newTriangle->corners[1] = corners[2]->division[corners[0]];
-            newTriangle->corners[2] = corners[2]->division[corners[1]];
-            
-            newTriangle->parentTriangle = this;
-            
-            
-            
-            subTriangles.push_back(newTriangle);
-        }
-        {
-            SubTriangle * newTriangle = new SubTriangle();
-            newTriangle->level = level+1;
-            newTriangle->corners[0] = corners[1]->division[corners[2]];
-            newTriangle->corners[1] = corners[0]->division[corners[1]];
-            newTriangle->corners[2] = corners[0]->division[corners[2]];
-            
-            newTriangle->parentTriangle = this;
-            
-            
-            
-            subTriangles.push_back(newTriangle);
-        }
-        
-        
-        //Update joined corners
-        for(int i=0;i<3;i++){
-            for(int j=0;j<2;j++){
-                corners[i]->joinedCorners.erase(std::remove(corners[i]->joinedCorners.begin(),
-                                                            corners[i]->joinedCorners.end(),
-                                                            corners[(int)ofWrap(j+i+1,0,3)]),
-                                                corners[i]->joinedCorners.end());
+            //Z
+            /* d1->pos.z += ofRandom(-6,6);
+             d2->pos.z += ofRandom(-6,6);
+             d3->pos.z += ofRandom(-6,6);
+             */
+            //Create the 4 new triangles
+            {
+                SubTriangle * newTriangle = new SubTriangle();
+                newTriangle->level = _level;
+                newTriangle->corners[0] = corners[0];
+                newTriangle->corners[1] = corners[0]->division[corners[1]];
+                newTriangle->corners[2] = corners[0]->division[corners[2]];
+                
+                newTriangle->parentTriangle = this;
+                
+                
+                
+                subTriangles.push_back(newTriangle);
             }
             
-            corners[i]->joinedCorners.push_back(corners[i]->division[corners[(int)ofWrap(i+1,0,3)]]);
-            corners[i]->joinedCorners.push_back(corners[i]->division[corners[(int)ofWrap(i+2,0,3)]]);
+            {
+                SubTriangle * newTriangle = new SubTriangle();
+                newTriangle->level = _level;
+                newTriangle->corners[0] = corners[1];
+                newTriangle->corners[1] = corners[1]->division[corners[2]];
+                newTriangle->corners[2] = corners[1]->division[corners[0]];
+                
+                newTriangle->parentTriangle = this;
+                
+                
+                
+                subTriangles.push_back(newTriangle);
+            }
+            {
+                SubTriangle * newTriangle = new SubTriangle();
+                newTriangle->level = _level;
+                newTriangle->corners[0] = corners[2];
+                newTriangle->corners[1] = corners[2]->division[corners[0]];
+                newTriangle->corners[2] = corners[2]->division[corners[1]];
+                
+                newTriangle->parentTriangle = this;
+                
+                
+                
+                subTriangles.push_back(newTriangle);
+            }
+            {
+                SubTriangle * newTriangle = new SubTriangle();
+                newTriangle->level = _level;
+                newTriangle->corners[0] = corners[1]->division[corners[2]];
+                newTriangle->corners[1] = corners[0]->division[corners[1]];
+                newTriangle->corners[2] = corners[0]->division[corners[2]];
+                
+                newTriangle->parentTriangle = this;
+                
+                
+                
+                subTriangles.push_back(newTriangle);
+            }
+            
+            
+            //Update joined corners
+            for(int i=0;i<3;i++){
+                for(int j=0;j<2;j++){
+                    corners[i]->joinedCorners.erase(std::remove(corners[i]->joinedCorners.begin(),
+                                                                corners[i]->joinedCorners.end(),
+                                                                corners[(int)ofWrap(j+i+1,0,3)]),
+                                                    corners[i]->joinedCorners.end());
+                }
+                
+                corners[i]->joinedCorners.push_back(corners[i]->division[corners[(int)ofWrap(i+1,0,3)]]);
+                corners[i]->joinedCorners.push_back(corners[i]->division[corners[(int)ofWrap(i+2,0,3)]]);
+            }
+            
+            d1->joinedCorners.push_back(d2);
+            d1->joinedCorners.push_back(d3);
+            
+            d2->joinedCorners.push_back(d3);
+            d2->joinedCorners.push_back(d1);
+            
+            d3->joinedCorners.push_back(d1);
+            d3->joinedCorners.push_back(d2);
         }
-        
-        d1->joinedCorners.push_back(d2);
-        d1->joinedCorners.push_back(d3);
-
-        d2->joinedCorners.push_back(d3);
-        d2->joinedCorners.push_back(d1);
-        
-        d3->joinedCorners.push_back(d1);
-        d3->joinedCorners.push_back(d2);
     }
 };
 
@@ -231,6 +280,10 @@ public:
     float lightSpeed;
     ofVec3f lightPos;
     
+    ofLight pointLight;
+    ofMaterial material;
+
+    
     float colorR, colorG, colorB;
     
     ofxAutoReloadedShader debugShader;
@@ -238,6 +291,7 @@ public:
     void setGui();
     void parseOscMessage(ofxOscMessage *m);
     
+    ofFbo depthFbo;
     
 private:
     
