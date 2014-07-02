@@ -74,6 +74,10 @@ void testApp::update(){
                     lamps[i].pointAt(p);
                 }
             }
+        } else if(m.getAddress() == "/sharpy/dim"){
+                for(int i=0;i<lamps.size();i++){
+                    lamps[i].dim = m.getArgAsFloat(0)*255;
+                }
         } else {
             cout<<m.getAddress()<<endl;
         }
@@ -81,9 +85,9 @@ void testApp::update(){
         
     }
     
-    if(ofGetFrameNum() % 30 ==0){
+    /*if(ofGetFrameNum() % 30 ==0){
         loadXml();
-    }
+    }*/
     
     for(int i=0;i<lamps.size();i++){
         

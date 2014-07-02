@@ -24,11 +24,6 @@ public:
     void parseOscMessage(ofxOscMessage * m);
     void setGui();
     
-    float frequency;
-    //float lineWidth;
-    bool crazySpeed;
-    bool reverse;
-    
     float	lastTime;
 	float   deltaTime;
     
@@ -49,9 +44,7 @@ public:
     ofVec2f oldM;
     bool    bPaint, bObstacle, bBounding, bClear, bUpdate;
     
-    float gravityX;
-    float gravityY;
-    
+    ofVec2f gravity;
     ofVec2f emitPos;
     
     bool clear;

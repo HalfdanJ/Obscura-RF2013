@@ -10,6 +10,7 @@
 
 #include "ofMain.h"
 #include "ofxOsc.h"
+#include "ofxFlocking.h"
 
 #define numLamps 14
 
@@ -25,14 +26,17 @@ public:
     ofxOscReceiver oscReceiver;
     
     ofVec3f center;
-    float circleRadius;
-    float circleSpeed;
+    float circleRadius = 0;
+    float circleSpeed = 0;
     
     int type = 2;
     
     vector<ofVec3f> lampPositions;
     
-    float time;
+    float time = 0;
+    float dim = 0;
     
+    bool enable = false;
+    ofxFlocking flock;
 };
 

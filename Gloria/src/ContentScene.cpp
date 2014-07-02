@@ -91,16 +91,31 @@ void ContentScene::parseSceneOscMessage(ofxOscMessage * m){
     if(adrSplit[1] == "scene"+ofToString(index) || "/"+adrSplit[1] == oscAddress) {
         
         for(int i=0; i< gui->getWidgets().size(); i++ ) {
-        
-        ofxUIWidget * widget = gui->getWidgets()[i];
-        
-        if(widget->getName() == rest) {
-            if(widget->getKind() == OFX_UI_WIDGET_SLIDER_H) {
+            
+            ofxUIWidget * widget = gui->getWidgets()[i];
+            
+            if(widget->getName() == rest) {
                 
+                //cout<<rest<<endl;
+                
+                if(widget->getKind() == OFX_UI_WIDGET_SLIDER_H || widget->getKind() == OFX_UI_WIDGET_SLIDER_V) {
+                    
                     ofxUISlider *slider = (ofxUISlider *) widget;
-                    slider->setValue(m->getArgAsFloat(0));
+                    
+                    slider->setValue(ofMap(m->getArgAsFloat(0), 0, 1, slider->getMin(), slider->getMax()));
+                } else if(widget->getKind() == OFX_UI_WIDGET_INTSLIDER_H || widget->getKind() == OFX_UI_WIDGET_INTSLIDER_V) {
+                    
+                    ofxUISlider *slider = (ofxUISlider *) widget;
+                    slider->setValue(ofMap(m->getArgAsInt32(0), 0, 1, slider->getMin(), slider->getMax()));
+                    
+                } else if(widget->getKind() == OFX_UI_WIDGET_TOGGLE) {
+                    
+                    ofxUIToggle *toggle = (ofxUIToggle *) widget;
+                    toggle->setValue(m->getArgAsInt32(0));
+                    
                 }
             }
+            
         }
     }
 }
