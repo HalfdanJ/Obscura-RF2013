@@ -52,8 +52,8 @@ void BasicParticles::setup(){
     
     pspeed = 5;
     psize = 30;
-    pkill = 50;
-    totalCount = 5000;
+    pkill = 1000;
+    totalCount = 10000;
     fade = 5;
     pFadeWithAge = 0.03;
     
