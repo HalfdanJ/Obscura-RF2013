@@ -14,7 +14,9 @@
 
 #define OSCRECEIVEPORT 9999
 #define OSCSENDPORT 8888
-#define OSCSENDHOST "127.0.0.1"
+
+#define OSCCLIENTONE "Rumba.local"
+#define OSCCLIENTTWO "Halfdjans"
 
 #define GUIWIDTH 255
 

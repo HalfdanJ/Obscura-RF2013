@@ -11,7 +11,7 @@
 void FluidScene::setup(){
     
     name = "FluidScene";
-    oscAddress = "/fluidscene";
+    oscAddress = "/fluid";
     
     float scaleFactor = 1.0;
     
@@ -87,7 +87,7 @@ void FluidScene::update(){
     // Adding temporal Force
     //
     
-    fluid.setGravity(ofVec2f(gravityX,gravityY));
+    fluid.setGravity(gravity);
 
     ofPoint m = emitPos;
     ofPoint d = (m - oldM)*10.0;
@@ -137,12 +137,11 @@ void FluidScene::parseOscMessage(ofxOscMessage *m){
 
 void FluidScene::setGui(){
     
-    gui->addSlider("/gravity/x", -1, 1, &gravityX);
-    gui->addSlider("/gravity/y", -1, 1, &gravityY);
+    gui->addSlider("/gravity/x", -1, 1, &gravity.x);
+    gui->addSlider("/gravity/y", -1, 1, &gravity.y);
     
     gui->addSlider("/emit/x", 10, drawWidth-10, &emitPos.x);
     gui->addSlider("/emit/y", 10, drawHeight-10, &emitPos.y);
-    
     
     gui->addButton("/clear/x", &clear);
     

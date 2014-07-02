@@ -37,7 +37,8 @@ public:
     void gotMessage(ofMessage msg);
 
     ofxOscReceiver oscReceiver;
-    ofxOscSender oscSender;
+    ofxOscSender oscSenderOne;
+    ofxOscSender oscSenderTwo;
     ofxSyphonServer syphonOut;
     ofxSyphonClient * syphonIn;
     

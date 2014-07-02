@@ -2,7 +2,9 @@
 
 void ofApp::setup() {
     
-    //oscSender.setup("HalfdanJ.local", 6745);
+    oscSenderOne.setup(OSCCLIENTONE, OSCSENDPORT);
+    oscSenderTwo.setup(OSCCLIENTTWO, OSCSENDPORT);
+    
     oscReceiver.setup(OSCRECEIVEPORT);
     
     ofSetLogLevel(OF_LOG_NOTICE);
@@ -269,7 +271,7 @@ void ofApp::setGUI()
     
     mainGui->addLabel("OSC info");
     mainGui->addLabel("In: " + ofToString(OSCRECEIVEPORT));
-    mainGui->addLabel("Out: " + string(OSCSENDHOST) + ":" + ofToString(OSCSENDPORT));
+    mainGui->addLabel("Out: " + string(OSCCLIENTONE) + " & " + string(OSCCLIENTTWO) + ":" + ofToString(OSCSENDPORT));
     
     mainGui->addToggle("Draw guide", &drawGuide);
     mainGui->addToggle("Draw mask", &drawMask);
