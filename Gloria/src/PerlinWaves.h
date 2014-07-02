@@ -28,13 +28,9 @@ public:
     bool crazySpeed;
     bool reverse;
     
-    float xScatter;
-    float yScatter;
+    ofVec2f speed;
+    ofVec2f scatter;
+    ofVec2f time;
     
-    float xSpeed;
-    float ySpeed;
-    
-    float xTime;
-    float yTime;
     
 };

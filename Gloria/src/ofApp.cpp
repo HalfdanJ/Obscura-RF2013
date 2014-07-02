@@ -2,10 +2,16 @@
 
 void ofApp::setup() {
     
-    oscSenderOne.setup(OSCCLIENTONE, OSCSENDPORT);
-    oscSenderTwo.setup(OSCCLIENTTWO, OSCSENDPORT);
     
     oscReceiver.setup(OSCRECEIVEPORT);
+
+    
+    //try {
+    oscSenderOne.setup(OSCCLIENTONE, OSCSENDPORT);
+    oscSenderTwo.setup(OSCCLIENTTWO, OSCSENDPORT);
+    //} catch () {
+      //  
+    //}
     
     ofSetLogLevel(OF_LOG_NOTICE);
     ofSetFrameRate(TARGET_FRAMERATE);

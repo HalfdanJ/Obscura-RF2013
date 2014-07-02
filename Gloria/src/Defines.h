@@ -16,7 +16,7 @@
 #define OSCSENDPORT 8888
 
 #define OSCCLIENTONE "Rumba.local"
-#define OSCCLIENTTWO "Halfdjans"
+#define OSCCLIENTTWO "Halfdjan.local"
 
 #define GUIWIDTH 255
 
