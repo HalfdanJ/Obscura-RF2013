@@ -13,10 +13,14 @@ void testApp::setup() {
     
     lampPositions.assign(numLamps, ofVec3f(0,0,0));
     
+    time = 0;
+    
 }
 
 //--------------------------------------------------------------
 void testApp::update() {
+    
+    
     
     while(oscReceiver.hasWaitingMessages() > 0){
         ofxOscMessage  m;
@@ -39,7 +43,7 @@ void testApp::update() {
             circleRadius = m.getArgAsFloat(0)*7;
         }
         if(m.getAddress() == "/Speed/x"){
-            circleSpeed = m.getArgAsFloat(0)*3;
+            circleSpeed = m.getArgAsFloat(0);
         }
         
         if(m.getAddress() == "/Type/x"){
@@ -48,11 +52,13 @@ void testApp::update() {
         
     }
     
+    time += circleSpeed;
+    
     //Circle 1
     
     if(type==2) {
         for(int i=0;i<lampPositions.size();i++){
-       float t = circleSpeed * ofGetElapsedTimeMillis()/1000.0;//sin(ofGetElapsedTimeMillis()/2000.0)*3;
+       float t = time/100.0;//sin(ofGetElapsedTimeMillis()/2000.0)*3;
        float x = center.x + sin(i*TWO_PI/8+t)* (circleRadius);
        float y = center.y + cos(i*TWO_PI/8+t)* (circleRadius);
        
@@ -66,7 +72,7 @@ void testApp::update() {
     } else if(type==1) {
     for(int i=0;i<lampPositions.size();i++){
         
-        float t = floor(circleSpeed * ofGetElapsedTimeMillis()/1000.0);
+        float t = floor(time/100.0);
         
         float x = center.x + sin(i*TWO_PI/8+t)*circleRadius;
         float y = center.z + cos(i*TWO_PI/8+t)*circleRadius;
@@ -81,7 +87,7 @@ void testApp::update() {
     //Square
     for(int i=0;i<lampPositions.size();i++){
         
-        float t = 5* circleSpeed * ofGetElapsedTimeMillis()/1000.0;//sin(ofGetElapsedTimeMillis()/2000.0)*3;
+        float t = 5* time/100.0;//sin(ofGetElapsedTimeMillis()/2000.0)*3;
 
         float x, y;
         float phase = fmod(t+4*i/9.0 , 4);

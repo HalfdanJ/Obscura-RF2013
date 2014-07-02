@@ -32,5 +32,7 @@ public:
     
     vector<ofVec3f> lampPositions;
     
+    float time;
+    
 };
 
