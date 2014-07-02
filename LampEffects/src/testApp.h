@@ -11,6 +11,8 @@
 #include "ofMain.h"
 #include "ofxOsc.h"
 
+#define numLamps 14
+
 class testApp : public ofBaseApp{
 public:
 	void setup();
@@ -25,5 +27,10 @@ public:
     ofVec3f center;
     float circleRadius;
     float circleSpeed;
+    
+    int type = 0;
+    
+    vector<ofVec3f> lampPositions;
+    
 };
 
