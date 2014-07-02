@@ -21,13 +21,12 @@ void testApp::setup() {
 void testApp::update() {
     
     
-    
     while(oscReceiver.hasWaitingMessages() > 0){
         ofxOscMessage  m;
         oscReceiver.getNextMessage(&m);
         
         if(m.getAddress() == "/Center/x"){
-            center.x = (m.getArgAsFloat(0)-0.5)*2;
+            center.x = (1-m.getArgAsFloat(0)-0.5)*2;
             
         }
         if(m.getAddress() == "/Center/y"){
@@ -35,7 +34,7 @@ void testApp::update() {
             
         }
         if(m.getAddress() == "/Height/x"){
-            center.z = ((1-m.getArgAsFloat(0))-0.5)*2;
+            center.z = ((m.getArgAsFloat(0))-0.5)*2;
             //center.z = ((1-m.getArgAsFloat(0)));//*2;
             
         }
@@ -49,6 +48,11 @@ void testApp::update() {
         if(m.getAddress() == "/Type/x"){
             type = m.getArgAsInt32(0);
         }
+        
+        if(m.getAddress() == "/Dim/x"){
+            type = m.getArgAsInt32(0);
+        }
+        
     }
     
     time += circleSpeed;
@@ -57,7 +61,7 @@ void testApp::update() {
     
     if(type==2) {
         for(int i=0;i<lampPositions.size();i++){
-       float t = time/100.0;//sin(ofGetElapsedTimeMillis()/2000.0)*3;
+       float t = 5*time/100.0;//sin(ofGetElapsedTimeMillis()/2000.0)*3;
        float x = center.x + sin(i*TWO_PI/8+t)* (circleRadius);
        float y = center.y + cos(i*TWO_PI/8+t)* (circleRadius);
        
@@ -71,7 +75,7 @@ void testApp::update() {
     } else if(type==1) {
     for(int i=0;i<lampPositions.size();i++){
         
-        float t = floor(time/100.0);
+        float t = floor(5*time/100.0);
         
         float x = center.x + sin(i*TWO_PI/8+t)*circleRadius;
         float y = center.z + cos(i*TWO_PI/8+t)*circleRadius;
@@ -122,9 +126,9 @@ void testApp::update() {
         ofxOscMessage m;
         m.setAddress("/sharpy");
         m.addIntArg(i+1); // device number
-        m.addFloatArg(lampPositions[i].x);
-        m.addFloatArg(lampPositions[i].z);
-        m.addFloatArg(lampPositions[i].y);
+        m.addFloatArg(lampPositions[i].y*10);
+        m.addFloatArg(lampPositions[i].z*4);
+        m.addFloatArg(lampPositions[i].x*10);
         osc.sendMessage(m);
     }
   }

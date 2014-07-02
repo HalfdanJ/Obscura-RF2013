@@ -28,7 +28,7 @@ public:
     float circleRadius;
     float circleSpeed;
     
-    int type = 0;
+    int type = 2;
     
     vector<ofVec3f> lampPositions;
     
