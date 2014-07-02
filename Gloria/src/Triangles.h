@@ -52,7 +52,7 @@ public:
     void update(){
         
         if(level == 0){
-            drawLevel += (drawLevelGoal - drawLevel)*0.2 *1.0/ofGetFrameRate();
+            drawLevel += (drawLevelGoal - drawLevel)*0.2 *1.0/MAX(10,ofGetFrameRate());
         }
         
         for(int i=0;i<3;i++){
