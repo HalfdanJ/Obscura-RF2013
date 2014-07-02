@@ -58,6 +58,4 @@ public:
     
     bool drawObstacles;
     
-    
-        
 };

@@ -60,6 +60,14 @@ public:
     
     bool hideGUI;
     bool drawGuide;
+    bool drawSyponIn;
+    bool drawOutput;
+    bool outputCombined;
+    bool drawMask;
     
     vector<ContentScene*> scenes;
+    
+    
+    
+    
 };

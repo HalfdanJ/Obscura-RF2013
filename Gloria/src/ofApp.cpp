@@ -57,12 +57,13 @@ void ofApp::setup() {
     
     fboOut.allocate(fboSettings);
     
+    
     fboOut.begin();
     ofBackground(0,0,0,255);
     
     fboOut.end();
     
-    
+        
     for(int i=0; i<scenes.size(); i++) {
         scenes[i]->mapping = mapping;
         scenes[i]->syphonIn = syphonIn;
@@ -70,6 +71,8 @@ void ofApp::setup() {
     }
     
     setGUI();
+    
+
 }
 
 
@@ -149,6 +152,7 @@ void ofApp::draw() {
     
     ofPushStyle();{
         fboOut.begin();{
+            ofEnableAlphaBlending();
             ofClear(0, 0);
             
             for(int i=0; i<scenes.size(); i++) {
@@ -158,6 +162,11 @@ void ofApp::draw() {
                     scenes[i]->fbo.draw(0,0);
                 }
             }
+            
+            //glBlendFunc(GL_FUNC_SUBTRACT​);
+            
+            if(drawMask) mapping->drawMask();
+            
         }fboOut.end();
     } ofPopStyle();
     
@@ -260,9 +269,9 @@ void ofApp::setGUI()
     mainGui->addLabel("OSC info");
     mainGui->addLabel("In: " + ofToString(OSCRECEIVEPORT));
     mainGui->addLabel("Out: " + string(OSCSENDHOST) + ":" + ofToString(OSCSENDPORT));
-
     
     mainGui->addToggle("Draw guide", &drawGuide);
+    mainGui->addToggle("Draw mask", &drawMask);
     mainGui->autoSizeToFitWidgets();
     ofAddListener(mainGui->newGUIEvent,this,&ofApp::guiEvent);
     
