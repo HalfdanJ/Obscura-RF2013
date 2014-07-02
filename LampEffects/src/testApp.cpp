@@ -49,7 +49,6 @@ void testApp::update() {
         if(m.getAddress() == "/Type/x"){
             type = m.getArgAsInt32(0);
         }
-        
     }
     
     time += circleSpeed;
