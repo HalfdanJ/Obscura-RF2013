@@ -20,6 +20,8 @@
 		04400C60196347EB00B81298 /* OscReceivedElements.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04400C52196347EB00B81298 /* OscReceivedElements.cpp */; };
 		04400C61196347EB00B81298 /* OscTypes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04400C54196347EB00B81298 /* OscTypes.cpp */; };
 		04400CA119634A1B00B81298 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04400CA019634A1B00B81298 /* CoreVideo.framework */; };
+		04400CB2196453D100B81298 /* Boid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04400CAE196453D100B81298 /* Boid.cpp */; };
+		04400CB3196453D100B81298 /* ofxFlocking.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04400CB0196453D100B81298 /* ofxFlocking.cpp */; };
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
 		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
 		E45BE97B0E8CC7DD009D7055 /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9710E8CC7DD009D7055 /* AGL.framework */; };
@@ -103,6 +105,10 @@
 		04400C54196347EB00B81298 /* OscTypes.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = OscTypes.cpp; sourceTree = "<group>"; };
 		04400C55196347EB00B81298 /* OscTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OscTypes.h; sourceTree = "<group>"; };
 		04400CA019634A1B00B81298 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = /System/Library/Frameworks/CoreVideo.framework; sourceTree = "<absolute>"; };
+		04400CAE196453D100B81298 /* Boid.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Boid.cpp; path = ../../../addons/ofxFlocking/Boid.cpp; sourceTree = "<group>"; };
+		04400CAF196453D100B81298 /* Boid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Boid.h; path = ../../../addons/ofxFlocking/Boid.h; sourceTree = "<group>"; };
+		04400CB0196453D100B81298 /* ofxFlocking.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ofxFlocking.cpp; path = ../../../addons/ofxFlocking/ofxFlocking.cpp; sourceTree = "<group>"; };
+		04400CB1196453D100B81298 /* ofxFlocking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ofxFlocking.h; path = ../../../addons/ofxFlocking/ofxFlocking.h; sourceTree = "<group>"; };
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
 		E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openFrameworksLib.xcodeproj; path = ../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E45BE9710E8CC7DD009D7055 /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
@@ -249,9 +255,21 @@
 			path = osc;
 			sourceTree = "<group>";
 		};
+		04400CAD1964527E00B81298 /* ofxFlocking */ = {
+			isa = PBXGroup;
+			children = (
+				04400CAE196453D100B81298 /* Boid.cpp */,
+				04400CAF196453D100B81298 /* Boid.h */,
+				04400CB0196453D100B81298 /* ofxFlocking.cpp */,
+				04400CB1196453D100B81298 /* ofxFlocking.h */,
+			);
+			name = ofxFlocking;
+			sourceTree = "<group>";
+		};
 		BB4B014C10F69532006C3DED /* addons */ = {
 			isa = PBXGroup;
 			children = (
+				04400CAD1964527E00B81298 /* ofxFlocking */,
 				04400C2B196347EB00B81298 /* ofxOsc */,
 			);
 			name = addons;
@@ -429,6 +447,8 @@
 				04400C59196347EB00B81298 /* ofxOscReceiver.cpp in Sources */,
 				04400C61196347EB00B81298 /* OscTypes.cpp in Sources */,
 				04400C5A196347EB00B81298 /* ofxOscSender.cpp in Sources */,
+				04400CB2196453D100B81298 /* Boid.cpp in Sources */,
+				04400CB3196453D100B81298 /* ofxFlocking.cpp in Sources */,
 				04400C5E196347EB00B81298 /* OscOutboundPacketStream.cpp in Sources */,
 				04400C5B196347EB00B81298 /* IpEndpointName.cpp in Sources */,
 				04400C5D196347EB00B81298 /* UdpSocket.cpp in Sources */,
