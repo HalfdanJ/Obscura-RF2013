@@ -332,6 +332,8 @@
 		0438DB901781E2C2003833F8 /* ContentScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContentScene.h; sourceTree = "<group>"; };
 		0438DB921782D0D4003833F8 /* QuickTrail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuickTrail.h; sourceTree = "<group>"; };
 		0438DB931782D0E9003833F8 /* QuickTrail.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = QuickTrail.cpp; sourceTree = "<group>"; };
+		04400CA51964002500B81298 /* alphamask.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = alphamask.frag; sourceTree = "<group>"; };
+		04400CA61964002500B81298 /* alphamask.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = alphamask.vert; sourceTree = "<group>"; };
 		046C3007177ED4F6009A2EE6 /* install.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = install.xml; sourceTree = "<group>"; };
 		046C300C177ED4F6009A2EE6 /* cv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cv.h; sourceTree = "<group>"; };
 		046C300D177ED4F6009A2EE6 /* cv.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = cv.hpp; sourceTree = "<group>"; };
@@ -1354,6 +1356,8 @@
 		DD8E8DA71961997400A7F3E1 /* shaders */ = {
 			isa = PBXGroup;
 			children = (
+				04400CA51964002500B81298 /* alphamask.frag */,
+				04400CA61964002500B81298 /* alphamask.vert */,
 				DD8E8DA91961997400A7F3E1 /* TrianglesDebug.vert */,
 				DD8E8DA81961997400A7F3E1 /* TrianglesDebug.frag */,
 			);
