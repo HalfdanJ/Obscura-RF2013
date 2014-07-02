@@ -101,9 +101,20 @@ void FluidScene::update(){
     //  Update
     //
     
+    
+    
+    if(clear) {
+        fluid.clear();
+        fluid.setObstacles(obstacles);
+    } clear = false;
+    
+    
     //if(ofGetFrameNum() % 2 == 1) {
         fluid.update();
     //}
+    
+    
+    
 }
 
 void FluidScene::draw(){;
@@ -113,8 +124,6 @@ void FluidScene::draw(){;
     ofSetColor(255,255,255,255);
     fluid.draw(0,0,OUTWIDTH,OUTHEIGHT);
     //syphonIn->getTexture().draw(0,0,OUTWIDTH,OUTHEIGHT);
-    
-    
     
     if(drawObstacles) {
         ofSetColor(255,255,255,255);
@@ -133,6 +142,9 @@ void FluidScene::setGui(){
     
     gui->addSlider("/emit/x", 10, drawWidth-10, &emitPos.x);
     gui->addSlider("/emit/y", 10, drawHeight-10, &emitPos.y);
+    
+    
+    gui->addButton("/clear/x", &clear);
     
     gui->addToggle("/drawobstacles/x", &drawObstacles);
     drawObstacles = false;
