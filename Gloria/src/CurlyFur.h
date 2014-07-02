@@ -1,7 +1,7 @@
 //
 //  Gloria
 //
-//
+// Vibeke Bertelsen 2014
 //
 
 #pragma once
@@ -20,22 +20,19 @@ public:
     void debugDraw();
     void update();
     
-    void parseOscMessage(ofxOscMessage * m);
     void setGui();
     
-    void initCam();
     void createParticle();
     
     //Particles
     vector<Particle> particles;
     
-    //Camera
-    ofVideoGrabber 		vidGrabber;
-    ofTexture			videoTexture;
-    int 				camWidth;
-    int 				camHeight;
-    
     //misc
     ofFbo myfbo;
     
+    //particle
+    float plength;
+    float density;
+    float totalCount;
+    float fade;
 };

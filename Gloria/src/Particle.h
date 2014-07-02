@@ -11,8 +11,8 @@
 class Particle {
 public:
     
-    void setup();
-    void draw();
+    void setup(float length);
+    void draw(float lineWidth);
     void update();
     
     ofVec2f pos,vel,acc,oldpos;

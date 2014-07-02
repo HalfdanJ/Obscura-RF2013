@@ -117,6 +117,8 @@
 		E7E077E515D3B63C0020DFD4 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7E077E415D3B63C0020DFD4 /* CoreVideo.framework */; };
 		E7E077E815D3B6510020DFD4 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7E077E715D3B6510020DFD4 /* QTKit.framework */; };
 		E7F985F815E0DEA3003869B5 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7F985F515E0DE99003869B5 /* Accelerate.framework */; };
+		F228CDF019631AB600CE79FF /* CurlyFur.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F228CDEE19631AB600CE79FF /* CurlyFur.cpp */; };
+		F228CDF319631AC500CE79FF /* Particle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F228CDF119631AC500CE79FF /* Particle.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -486,6 +488,10 @@
 		E7E077E415D3B63C0020DFD4 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = /System/Library/Frameworks/CoreVideo.framework; sourceTree = "<absolute>"; };
 		E7E077E715D3B6510020DFD4 /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = /System/Library/Frameworks/QTKit.framework; sourceTree = "<absolute>"; };
 		E7F985F515E0DE99003869B5 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = /System/Library/Frameworks/Accelerate.framework; sourceTree = "<absolute>"; };
+		F228CDEE19631AB600CE79FF /* CurlyFur.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CurlyFur.cpp; sourceTree = "<group>"; };
+		F228CDEF19631AB600CE79FF /* CurlyFur.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurlyFur.h; sourceTree = "<group>"; };
+		F228CDF119631AC500CE79FF /* Particle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Particle.cpp; sourceTree = "<group>"; };
+		F228CDF219631AC500CE79FF /* Particle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Particle.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -915,6 +921,10 @@
 		0438DB8F1781DD78003833F8 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				F228CDF119631AC500CE79FF /* Particle.cpp */,
+				F228CDF219631AC500CE79FF /* Particle.h */,
+				F228CDEE19631AB600CE79FF /* CurlyFur.cpp */,
+				F228CDEF19631AB600CE79FF /* CurlyFur.h */,
 				043505021962D687006984A5 /* FluidScene.cpp */,
 				043505031962D687006984A5 /* FluidScene.h */,
 				0438DB921782D0D4003833F8 /* QuickTrail.h */,
@@ -1504,6 +1514,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F228CDF319631AC500CE79FF /* Particle.cpp in Sources */,
 				0425D882195ABAD5003086AC /* ofxUIWaveform.cpp in Sources */,
 				0425D87D195ABAD5003086AC /* ofxUITextArea.cpp in Sources */,
 				0425D87A195ABAD5003086AC /* ofxUISpectrum.cpp in Sources */,
@@ -1545,6 +1556,7 @@
 				0425D85C195ABAD5003086AC /* ofxUIBiLabelSlider.cpp in Sources */,
 				0425D870195ABAD5003086AC /* ofxUIMultiImageToggle.cpp in Sources */,
 				046C3089177ED4F6009A2EE6 /* ofxCvShortImage.cpp in Sources */,
+				F228CDF019631AB600CE79FF /* CurlyFur.cpp in Sources */,
 				0425D863195ABAD5003086AC /* ofxUIFPS.cpp in Sources */,
 				0425D86B195ABAD5003086AC /* ofxUILabelButton.cpp in Sources */,
 				0425D865195ABAD5003086AC /* ofxUIImage.cpp in Sources */,
@@ -1775,6 +1787,7 @@
 					"\"$(SRCROOT)/../../../addons/ofxOpenCv/libs/opencv/lib/osx\"",
 				);
 				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../../addons/ofxFft/libs/fftw/lib/osx\"";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = GloriaDebug;
 				SDKROOT = macosx10.9;
 				USER_HEADER_SEARCH_PATHS = ../../../addons/ofxOsc/libs/oscpack/src/;
@@ -1874,6 +1887,7 @@
 					"\"$(SRCROOT)/../../../addons/ofxOpenCv/libs/opencv/lib/osx\"",
 				);
 				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../../addons/ofxFft/libs/fftw/lib/osx\"";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = Gloria;
 				SDKROOT = macosx10.9;
 				USER_HEADER_SEARCH_PATHS = ../../../addons/ofxOsc/libs/oscpack/src/;

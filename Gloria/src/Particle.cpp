@@ -8,17 +8,18 @@
 
 #include "Particle.h"
 
-void Particle::setup() {
-    vel.x = 2*ofRandomf();
-    vel.y = 2*ofRandomf();
+void Particle::setup(float length) {
+    vel.x = length * ofRandomf();
+    vel.y = length * ofRandomf();
     angle = ofRandomf()*TWO_PI;
     age = 0;
 }
 
-void Particle::draw() {
+void Particle::draw(float lineWidth) {
     int mapFactor = 20;
     ofSetColor(color,ofMap(age,0,mapFactor,255,0,true));
-    ofSetLineWidth(1);
+
+    ofSetLineWidth(lineWidth*(20-age)*0.1);
     ofLine(oldpos,pos);
 }
 
