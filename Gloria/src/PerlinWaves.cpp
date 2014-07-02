@@ -50,11 +50,11 @@ void PerlinWaves::parseOscMessage(ofxOscMessage *m){
 
 void PerlinWaves::setGui(){
     
-    gui->addSlider("speed/x", -1, 1, &speed.x);
-    gui->addSlider("speed/y", -1, 1, &speed.y);
+    gui->addSlider("/speed/x", -1, 1, &speed.x);
+    gui->addSlider("/speed/y", -1, 1, &speed.y);
     
-    gui->addSlider("scatter/x", 0, 1, &scatter.x);
-    gui->addSlider("scatter/y", 0, 1, &scatter.y);
+    gui->addSlider("/scatter/x", 0, 1, &scatter.x);
+    gui->addSlider("/scatter/y", 0, 1, &scatter.y);
     
     
     
