@@ -21,9 +21,13 @@ public:
     int uid;
     vector<InputTriangle*> triangles;
     vector<Corner*> joinedCorners;
+    
+    map<Corner*, Corner*> division;
     ofVec3f pos;
     //todo: ofVec3f worldPos; for using with real lamp posisitons
     void addTriangleReference(InputTriangle* triangle);
+    
+    void createDivisionCorners();
 };
 
 class InputTriangle {

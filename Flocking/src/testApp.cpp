@@ -14,7 +14,7 @@ void testApp::setup() {
 	ofBackground(0,0,0);
 	ofSetFrameRate(60);
     
-    for(int i=0;i<9;i++){
+    for(int i=0;i<13;i++){
         flock.addBoid(ofRandom(200),ofRandom(200));
     }
     

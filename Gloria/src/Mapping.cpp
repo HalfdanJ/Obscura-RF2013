@@ -20,6 +20,27 @@ void Corner::addTriangleReference(InputTriangle* triangle) {
     }
 }
 
+void Corner::createDivisionCorners(){
+    for(int i=0;i<joinedCorners.size();i++){
+        if(joinedCorners[i]->division.find(this) != joinedCorners[i]->division.end()){
+            division[joinedCorners[i]] = joinedCorners[i]->division[this];
+        } else {
+            Corner * divisionCorner = new Corner;
+            division[joinedCorners[i]] = divisionCorner;
+            joinedCorners[i]->division[this] = divisionCorner;
+            
+            ofVec3f c2 = joinedCorners[i]->pos;
+            ofVec3f c1 = pos;
+            divisionCorner->pos = (c1 - c2)*0.5 + c2;
+            
+            divisionCorner->joinedCorners.push_back(this);
+            divisionCorner->joinedCorners.push_back(joinedCorners[i]);
+            
+        }
+        
+    }
+}
+
 InputTriangle::InputTriangle() {
 }
 

@@ -109,12 +109,12 @@ void testApp::update(){
 /*        dmx.setLevel(lamps[i].dmxAddress+lamps[i].dmxOffset+2, 128);
         dmx.setLevel(lamps[i].dmxAddress+lamps[i].dmxOffset+3, 0);
   */      
-        dmx.setLevel(lamps[i].dmxAddress+0, 0);
-        dmx.setLevel(lamps[i].dmxAddress+1, 0);
+        //dmx.setLevel(lamps[i].dmxAddress+0, 0);
+        //dmx.setLevel(lamps[i].dmxAddress+1, 0);
         if(lamps[i].coldCountdown > 0){
-            dmx.setLevel(lamps[i].dmxAddress+2, 0);
+            dmx.setLevel(lamps[i].dmxAddress+17, 0);
         } else {
-            dmx.setLevel(lamps[i].dmxAddress+2, lamps[i].dim);
+            dmx.setLevel(lamps[i].dmxAddress+17, lamps[i].dim);
             
         }
         dmx.setLevel(lamps[i].dmxAddress+3, 0);
@@ -125,6 +125,8 @@ void testApp::update(){
         dmx.setLevel(lamps[i].dmxAddress+8, 0);
         dmx.setLevel(lamps[i].dmxAddress+14, 0);//reset
         dmx.setLevel(lamps[i].dmxAddress+15, 0);//lamp
+        
+        dmx.setLevel(lamps[i].dmxAddress+16, 10);
         
     }
     
