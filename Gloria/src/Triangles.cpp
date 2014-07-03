@@ -14,8 +14,8 @@ void Triangles::setGui(){
     
     gui->addSlider("/DivideTriangleSize/x", 0,5, &divideTriangleSize);
     
-    //gui->addSlider("DivideRadius", 0,2400, &divideRadius);
-    //gui->addToggle("DivideInvert", &divideInvert);
+    gui->addSlider("DivideRadius", 0,5100, &divideRadius);
+    gui->addToggle("DivideInvert", &divideInvert);
     //gui->addSlider("TransitionTime", 0,10, &transitionTime);
     
     
@@ -206,69 +206,45 @@ void Triangles::drawTriangleWireframe(SubTriangle * triangle){
 
     }
 }
-void Triangles::drawTriangle(SubTriangle * triangle, float opacity){
-    if(triangle->subTriangles.size() > 0 && triangle->drawLevel >= triangle->subTriangles[0]->level){
+void Triangles::drawTriangle(SubTriangle * triangle, float opacity, ofVec3f parentNormal){
+    ofVec3f normal = triangle->normal();
+
+    bool subDraw = false;
+    for(int i=0;i<triangle->subTriangles.size();i++){
+        if(triangle->subTriangles[i]->drawLevel-1.5*triangle->subTriangles[i]->ageDifference  >= triangle->subTriangles[i]->level){
+            subDraw = true;
+        }
+    }
+    if(subDraw){
         for(int j=0;j<triangle->subTriangles.size();j++){
-            drawTriangle(triangle->subTriangles[j], opacity);
+            drawTriangle(triangle->subTriangles[j], opacity, normal);
         }
     } else {
         
         ofVec3f ambient = ofVec3f(10);
         
+        float a = triangle->drawLevel-1.5*triangle->ageDifference - triangle->level;
+        float aaa = MIN(1,MAX(0,a));
         
-        float aaa = MIN(1,MAX(0,(transitionTime-triangle->age)/transitionTime));
+        ofVec3f center = triangle->getCenter();
         
-        
-        ofVec3f center;
-        ofVec3f normal;
-        
-        //        if(aaa == 0){
-        center = triangle->getCenter();
-        normal = triangle->normal();
-        
-//        cout<<triangle->drawLevel<<"  "<<triangle->level<<endl;
-        /*      } else {
-         center = (1-aaa)*triangle->getCenter() + aaa* triangle->parentTriangle->getCenter();
-         normal = (1-aaa) * triangle->normal + (aaa)*triangle->parentTriangle->normal;
-         }*/
-        
+        ofVec3f n = normal * aaa + parentNormal * (1.0-aaa);
         
         ofVec3f trianglePos = center;
         ofVec3f lightDir = ( trianglePos- lightPos);
-        
-        /*
-         normal.normalize();
-         
-         float angle = lightDir.angle(normal);
-         angle = MIN(80,angle);
-         
-         
-         float dist = lightDir.length();
-        float intensity = 100000000* 1.0/(4*PI*dist*dist);
-        intensity = 1.0;
-      
-        angle *= light;
-        
-        ofVec3f color = intensity*ofVec3f(colorR*255,colorG*255,colorB*255)*fabs(90-angle)/90.0;
-        
-        
-        ofSetColor(MAX(ambient.x, color.x), MAX(ambient.y, color.y), MAX(ambient.z, color.z), 255*opacity);
-      */
+    
         //Tegn billede 1 pixel pr trekant
-        ofVec3f _normal = triangle->normal();
         for(int u=0;u<3;u++){
-            glNormal3f(_normal.x, _normal.y, _normal.z);
+            glNormal3f(n.x, n.y, n.z);
             
             glTexCoord2d(syphonIn->getWidth()* center.x/OUTWIDTH
                          , syphonIn->getHeight()*(OUTHEIGHT-center.y)/OUTHEIGHT);
-//            glTexCoord2d((float)triangle->corners[u]->pos.x, (float)triangle->corners[u]->pos.y);
-  //          glTexCoord2d((float)center.x, (float)center.y);
+            
             ofVec3f pos = triangle->getPos(u) ;
             glVertex3d(pos.x, pos.y, 0/*pos.z*/);
         }
         
 
-      //  cout<<triangle->corners[0]->joinedCorners.size()<<endl;
         
         //Tegn billede 1:1
         float bbb = directTextureOpacity;
@@ -360,7 +336,14 @@ void Triangles::draw(){
 void Triangles::update(){
     for(int i=0;i<mapping->triangles.size();i++){
         SubTriangle * triangle = subTriangles[mapping->triangles[i]];
-        triangle->drawLevelGoal = divideTriangleSize;
+        float dist = triangle->getCenter().distance(ofPoint(OUTWIDTH*0.5,OUTHEIGHT));
+        
+        if(divideInvert){
+            triangle->drawLevelGoal = MIN(divideTriangleSize,MAX(1,divideTriangleSize * ((3000-dist)/divideRadius)));
+        } else {
+            triangle->drawLevelGoal = MIN(divideTriangleSize,MAX(1,divideTriangleSize * dist/divideRadius));
+        }
+
         triangle->update();
     }
     

@@ -20,12 +20,12 @@ public:
     bool die;
     int level;
     float drawLevel;
-    int drawLevelGoal;
+    float drawLevelGoal;
     
     float ageDifference;
     
     SubTriangle(){
-        ageDifference = ofRandom(0.5,1.0);
+        ageDifference = ofRandom(0.3,1.0);
         age = 0;
         
         drawLevel = 0;
@@ -51,9 +51,16 @@ public:
     
     void update(){
         
-        if(level == 0){
-            drawLevel += (drawLevelGoal - drawLevel)*0.2 *1.0/MAX(10,ofGetFrameRate());
+        //if(level == 0){
+        if(drawLevelGoal > drawLevel){
+            drawLevel += 1.0/MAX(10,ofGetFrameRate()) * ageDifference;
         }
+        if(drawLevelGoal < drawLevel){
+            drawLevel -= 1.0/MAX(10,ofGetFrameRate()) * ageDifference;
+        }
+        drawLevel = drawLevelGoal;
+//        drawLevel += (drawLevelGoal - drawLevel)*0.2 *1.0/MAX(10,ofGetFrameRate()) * ageDifference;
+       // }
         
         for(int i=0;i<3;i++){
             ofVec3f anchor;
@@ -84,7 +91,11 @@ public:
         
         int c = subTriangles.size();
         for(int i=0;i<c;i++){
-            subTriangles[i]->drawLevel = drawLevel;
+           // subTriangles[i]->drawLevel = drawLevel;
+          /*  if(subTriangles[i]->drawLevel > drawLevel && drawLevel > drawLevelGoal){
+                drawLevel = subTriangles[i]->drawLevel;
+            }*/
+            subTriangles[i]->drawLevelGoal = drawLevelGoal;
             subTriangles[i]->update();
         }
         age += ageDifference*1.0/ofGetFrameRate();
@@ -263,7 +274,7 @@ public:
     
     void collapse(SubTriangle * triangle);
     
-    void drawTriangle(SubTriangle * triangle, float opacity);
+    void drawTriangle(SubTriangle * triangle, float opacity, ofVec3f parentNormal = ofVec3f(0,0,1));
     void drawTriangleWireframe(SubTriangle * triangle);
     
     ofVec2f center;
