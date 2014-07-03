@@ -14,6 +14,11 @@
 
 #define numLamps 14
 
+#define OSCSENDPORT 8000
+
+#define OSCCLIENTONE "Rumba.local"
+#define OSCCLIENTTWO "HalfdanJ-iPad.local"
+
 class testApp : public ofBaseApp{
 public:
 	void setup();
@@ -24,6 +29,11 @@ public:
 
     ofxOscSender osc;
     ofxOscReceiver oscReceiver;
+    
+    ofxOscSender * clientOne;
+    ofxOscSender * clientTwo;
+    
+    vector<ofxOscSender *> clients;
     
     ofVec3f center;
     float circleRadius = 0;
@@ -36,7 +46,8 @@ public:
     float time = 0;
     float dim = 0;
     
-    bool enable = false;
+    bool masterEnable = false;
+    bool flockEnable = false;
     ofxFlocking flock;
 };
 
