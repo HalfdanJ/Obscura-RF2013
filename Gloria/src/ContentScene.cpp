@@ -156,17 +156,18 @@ void ContentScene::parseSceneOscMessage(ofxOscMessage * m){
                     toggle->setValue(m->getArgAsFloat(0));
                     
                 }
-                
-                
-                for(int o=0; o<oscClients.size(); o++) {
-                    
-                    oscClients[o]->sendMessage(*(m));
-                    
-                }
+        
                 
             }
             
+            
+            
         }
+    }
+    
+    for(int o=0; o<oscClients.size(); o++) {
+        
+        oscClients[o]->sendMessage(*(m));
     }
 }
 
