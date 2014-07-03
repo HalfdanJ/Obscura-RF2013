@@ -27,11 +27,17 @@ void testApp::setup(){
     osc = new ofxOscReceiver();
     osc->setup(6000);
     
-    clients.push_back(new ofxOscSender());
-    clients.push_back(new ofxOscSender());
     
-    clients[0]->setup(OSCCLIENTONE, OSCSENDPORT);
-    clients[1]->setup(OSCCLIENTTWO, OSCSENDPORT);
+    
+    clientOne = new ofxOscSender();
+    clientTwo = new ofxOscSender();
+    
+    clientOne->setup(OSCCLIENTONE, OSCSENDPORT);
+    clientTwo->setup(OSCCLIENTTWO, OSCSENDPORT);
+    
+    clients.push_back(clientOne);
+    clients.push_back(clientTwo);
+
     
 }
 

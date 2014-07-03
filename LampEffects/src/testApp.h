@@ -30,6 +30,9 @@ public:
     ofxOscSender osc;
     ofxOscReceiver oscReceiver;
     
+    ofxOscSender * clientOne;
+    ofxOscSender * clientTwo;
+    
     vector<ofxOscSender *> clients;
     
     ofVec3f center;

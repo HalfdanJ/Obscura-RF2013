@@ -37,6 +37,10 @@ class testApp : public ofBaseApp{
     
     vector<Lamp> lamps;
     
+    
+    ofxOscSender * clientOne;
+    ofxOscSender * clientTwo;
+    
     vector<ofxOscSender *> clients;
     
     ofxDmx dmx;

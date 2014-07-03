@@ -24,13 +24,15 @@ void PerlinWaves::update(){
 
 void PerlinWaves::draw(){;
     
+    ofSetLineWidth(4);
+    glEnable(GL_LINES);
+    
      for(int i =0; i<mapping->triangles.size();i++) {
          
          ofSetColor( 255, 255, 255,
                     ofNoise( (time.y/10) - mapping->triangles[i]->centroid.y
                             / ( scatter.y*OUTHEIGHT) ) *255 );
-         ofSetLineWidth(2);
-         glEnable(GL_LINES);
+   
          mapping->triangles[i]->mesh.drawWireframe();
          
          

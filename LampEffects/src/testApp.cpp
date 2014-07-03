@@ -6,7 +6,7 @@ void testApp::setup() {
 	ofBackground(0,0,0);
 	ofSetFrameRate(30);
     
-    osc.setup("halfdanjOld.local", 6000);
+    osc.setup("127.0.0.1", 6000);
     oscReceiver.setup(9001);
     circleRadius = 0;
     circleSpeed = 0;
@@ -19,11 +19,14 @@ void testApp::setup() {
         flock.addBoid(ofRandom(200),ofRandom(200));
     }
     
-    clients.push_back(new ofxOscSender());
-    clients.push_back(new ofxOscSender());
+    clientOne = new ofxOscSender();
+    clientTwo = new ofxOscSender();
     
-    clients[0]->setup(OSCCLIENTONE, OSCSENDPORT);
-    clients[1]->setup(OSCCLIENTTWO, OSCSENDPORT);
+    clientOne->setup(OSCCLIENTONE, OSCSENDPORT);
+    clientTwo->setup(OSCCLIENTTWO, OSCSENDPORT);
+    
+    clients.push_back(clientOne);
+    clients.push_back(clientTwo);
     
 }
 
