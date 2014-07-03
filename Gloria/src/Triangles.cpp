@@ -14,8 +14,8 @@ void Triangles::setGui(){
     
     gui->addSlider("/DivideTriangleSize/x", 0,5, &divideTriangleSize);
     
-    gui->addSlider("DivideRadius", 0,5100, &divideRadius);
-    gui->addToggle("DivideInvert", &divideInvert);
+    gui->addSlider("/DivideRadius/x", 0,5100, &divideRadius);
+    gui->addToggle("/DivideInvert/x", &divideInvert);
     //gui->addSlider("TransitionTime", 0,10, &transitionTime);
     
     
@@ -25,10 +25,10 @@ void Triangles::setGui(){
     
     //gui->addSlider("Direct Opactiry", 0,1, &directTextureOpacity);
     
-    /*gui->addSlider("ColorR", 0,1, &colorR);
-    gui->addSlider("ColorG", 0,1, &colorG);
-    gui->addSlider("ColorB", 0,1, &colorB);
-*/
+    gui->addSlider("/ColorR/x", 0,1, &colorR);
+    gui->addSlider("/ColorG/x", 0,1, &colorG);
+    gui->addSlider("/ColorB/x", 0,1, &colorB);
+
 
 }
 
@@ -274,7 +274,7 @@ void Triangles::draw(){
         syphonIn->draw(0, 0, OUTWIDTH, OUTHEIGHT);
     }depthFbo.end();
  
-    ofSetColor(255,255,255);
+    ofSetColor(255*colorR,255*colorG,255*colorB);
 
     debugShader.begin();
    // debugShader.setUniformTexture("depthTex", depthFbo.getTextureReference(), 1);
