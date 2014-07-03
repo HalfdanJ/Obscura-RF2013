@@ -68,7 +68,7 @@ void ContentScene::setSceneGui(){
     
     setGui();
     gui->autoSizeToFitWidgets();
-    
+
     ofAddListener(gui->newGUIEvent,this,&ContentScene::guiEvent);
 }
 
@@ -77,6 +77,7 @@ void ContentScene::guiEvent(ofxUIEventArgs &e)
     string name = e.widget->getName();
     int kind = e.widget->getKind();
     string canvasParent = e.widget->getCanvasParent()->getName();
+    
     //cout << canvasParent << endl;
 }
 
@@ -125,7 +126,6 @@ void ContentScene::parseSceneOscMessage(ofxOscMessage * m){
         
         //cout<<"    scene:"<<rest<<endl;
         
-        
         for(int i=0; i< gui->getWidgets().size(); i++ ) {
             
             ofxUIWidget * widget = gui->getWidgets()[i];
@@ -139,6 +139,7 @@ void ContentScene::parseSceneOscMessage(ofxOscMessage * m){
                     ofxUISlider *slider = (ofxUISlider *) widget;
                     
                     slider->setValue(ofMap(m->getArgAsFloat(0), 0, 1, slider->getMin(), slider->getMax()));
+                    
                 } else if(widget->getKind() == OFX_UI_WIDGET_INTSLIDER_H || widget->getKind() == OFX_UI_WIDGET_INTSLIDER_V) {
                     
                     ofxUISlider *slider = (ofxUISlider *) widget;
@@ -155,13 +156,25 @@ void ContentScene::parseSceneOscMessage(ofxOscMessage * m){
                     toggle->setValue(m->getArgAsFloat(0));
                     
                 }
+                
+                
+                for(int o=0; o<oscClients.size(); o++) {
+                    
+                    oscClients[o]->sendMessage(*(m));
+                    
+                }
+                
             }
             
         }
     }
 }
 
+
 void ContentScene::updateScene() {
+    
+    
+    
     if(enabled) {
         update();
     }

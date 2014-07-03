@@ -7,8 +7,11 @@ void ofApp::setup() {
 
     
     //try {
-    oscSenderOne.setup(OSCCLIENTONE, OSCSENDPORT);
-    oscSenderTwo.setup(OSCCLIENTTWO, OSCSENDPORT);
+    oscSenderOne = new ofxOscSender();
+    oscSenderOne->setup(OSCCLIENTONE, OSCSENDPORT);
+
+    oscSenderTwo = new ofxOscSender();
+    oscSenderTwo->setup(OSCCLIENTTWO, OSCSENDPORT);
     //} catch () {
       //  
     //}
@@ -69,13 +72,14 @@ void ofApp::setup() {
     
     fboOut.begin();
     ofBackground(0,0,0,255);
-    
     fboOut.end();
     
         
     for(int i=0; i<scenes.size(); i++) {
         scenes[i]->mapping = mapping;
         scenes[i]->syphonIn = syphonIn;
+        scenes[i]->oscClients.push_back(oscSenderOne);
+        scenes[i]->oscClients.push_back(oscSenderTwo);
         scenes[i]->setupScene(OUTWIDTH, OUTHEIGHT, i);
     }
     
