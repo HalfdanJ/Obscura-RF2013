@@ -79,8 +79,7 @@ void BasicParticles::draw(){;
     
     //Draw particles
     for (int i=0; i<particles.size(); i++) {
-        BasicParticle &p = particles[i];
-        p.draw();
+        particles[i].draw();
     }
     
     for (int i=0; i<pkill; i++) {
@@ -127,8 +126,12 @@ void BasicParticles::createParticle() {
     p.SetVelocity(pspeed);
     p.SetSize(psize);
     p.pos.set(OUTWIDTH * ofRandomf(), OUTHEIGHT * ofRandomf());
-
-    p.color = pixels.getColor(p.pos.x/10,p.pos.y/10);
     
+    if(pixels.getWidth() > p.pos.x/10 && pixels.getHeight() > p.pos.y/10 && p.pos.y >= 0 && p.pos.x >= 0){
+        p.color = pixels.getColor(p.pos.x/10,p.pos.y/10);
+    } else {
+        p.color = ofColor(0);
+    }
+
     particles.push_back(p);
 }

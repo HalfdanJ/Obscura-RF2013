@@ -10,28 +10,32 @@
 
 
 void Triangles::setGui(){
-    gui->addSlider("SyphonOpacity", 0,1, &syphonOpacity);
-    gui->addSlider("DivideTriangleSize", 0,5, &divideTriangleSize);
-    gui->addSlider("DivideRadius", 0,2400, &divideRadius);
-    gui->addToggle("DivideInvert", &divideInvert);
-    gui->addSlider("TransitionTime", 0,10, &transitionTime);
+    gui->addSlider("/SyphonOpacity/x", 0,1, &syphonOpacity);
+    
+    gui->addSlider("/DivideTriangleSize/x", 0,5, &divideTriangleSize);
+    
+    //gui->addSlider("DivideRadius", 0,2400, &divideRadius);
+    //gui->addToggle("DivideInvert", &divideInvert);
+    //gui->addSlider("TransitionTime", 0,10, &transitionTime);
     
     
     
-    gui->addSlider("Light", 0,1, &light);
-    gui->addSlider("LightSpeed", 0,1, &lightSpeed);
+    gui->addSlider("/light/x", 0,1, &light);
+    gui->addSlider("/LightSpeed/x", 0,1, &lightSpeed);
     
-    gui->addSlider("Direct Opactiry", 0,1, &directTextureOpacity);
+    //gui->addSlider("Direct Opactiry", 0,1, &directTextureOpacity);
     
-    gui->addSlider("ColorR", 0,1, &colorR);
+    /*gui->addSlider("ColorR", 0,1, &colorR);
     gui->addSlider("ColorG", 0,1, &colorG);
     gui->addSlider("ColorB", 0,1, &colorB);
+*/
+
 }
 
 
 void Triangles::setup(){
     name = "Triangles";
-    oscAddress = "/triangles";
+    oscAddress = "/tri";
     
     map<Corner*, Corner*> cornerRefs;
     

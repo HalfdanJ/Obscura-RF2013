@@ -37,8 +37,10 @@ public:
     void gotMessage(ofMessage msg);
 
     ofxOscReceiver oscReceiver;
-    ofxOscSender oscSenderOne;
-    ofxOscSender oscSenderTwo;
+    
+    ofxOscSender * oscSenderOne;
+    ofxOscSender * oscSenderTwo;
+    
     ofxSyphonServer syphonOut;
     ofxSyphonClient * syphonIn;
     
@@ -68,8 +70,5 @@ public:
     bool drawMask;
     
     vector<ContentScene*> scenes;
-    
-    
-    
     
 };

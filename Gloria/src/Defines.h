@@ -13,10 +13,10 @@
 #define OUTHEIGHT 1200
 
 #define OSCRECEIVEPORT 9999
-#define OSCSENDPORT 8888
+#define OSCSENDPORT 8000
 
 #define OSCCLIENTONE "Rumba.local"
-#define OSCCLIENTTWO "Halfdjans"
+#define OSCCLIENTTWO "HalfdanJ-iPad.local"
 
 #define GUIWIDTH 255
 
