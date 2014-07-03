@@ -315,6 +315,7 @@ void Triangles::draw(){
     ofDisableLighting();
     
     debugShader.end();
+    syphonIn->unbind();
 
 /*    ofDisableDepthTest();
     depthFbo.draw(0,0);
