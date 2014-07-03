@@ -26,7 +26,7 @@ public:
     ofVec2f pos,vel,oldpos;
     float angle;
     ofColor color;
-    int age;
+    float age;
     float fadeWithAge;
     float radius;
 };
@@ -45,11 +45,14 @@ public:
     void setGui();
     
     void createParticle();
+    void reassignParticle();
+    void updateParticleSettings(BasicParticle& p);
     
     bool trace;
         
     //Particles
     vector<BasicParticle> particles;
+    int iterate;
     
     //syphon to fbo
     ofFbo myfbo;
