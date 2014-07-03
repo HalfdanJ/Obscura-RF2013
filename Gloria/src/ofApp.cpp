@@ -162,7 +162,7 @@ void ofApp::draw() {
     }
     ofPopStyle();
     
-    ofPushStyle();{
+   /* ofPushStyle();{
         fboOut.begin();{
             ofEnableAlphaBlending();
             ofClear(0, 0);
@@ -181,7 +181,7 @@ void ofApp::draw() {
             
         }fboOut.end();
     } ofPopStyle();
-    
+    */
     ofDisableDepthTest();
     ofBackground(0, 0, 0);
     ofSetColor(255,255,255,255);
@@ -217,8 +217,11 @@ void ofApp::draw() {
 
             if(drawGuide) {
                 //ofSetColor(255,255,255,96);
+                ofPushMatrix();
+                ofScale(scale, scale);
                 drawGrid();
                 debugDraw();
+                ofPopMatrix();
             }
             
             ofTranslate(0, scale*fboOut.getHeight()+30);
