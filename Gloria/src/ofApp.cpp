@@ -158,7 +158,11 @@ void ofApp::draw() {
     ofPushStyle();
     ofNoFill();
     for(int i=0; i<scenes.size(); i++) {
+        ofSetColor(255);
+        ofFill();
+        ofPushStyle();
         scenes[i]->drawScene();
+        ofPopStyle();
     }
     ofPopStyle();
     

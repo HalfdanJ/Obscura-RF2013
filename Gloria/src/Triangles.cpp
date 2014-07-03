@@ -14,8 +14,8 @@ void Triangles::setGui(){
     
     gui->addSlider("/DivideTriangleSize/x", 0,5, &divideTriangleSize);
     
-    //gui->addSlider("DivideRadius", 0,2400, &divideRadius);
-    //gui->addToggle("DivideInvert", &divideInvert);
+    gui->addSlider("DivideRadius", 0,5100, &divideRadius);
+    gui->addToggle("DivideInvert", &divideInvert);
     //gui->addSlider("TransitionTime", 0,10, &transitionTime);
     
     
@@ -336,7 +336,14 @@ void Triangles::draw(){
 void Triangles::update(){
     for(int i=0;i<mapping->triangles.size();i++){
         SubTriangle * triangle = subTriangles[mapping->triangles[i]];
-        triangle->drawLevelGoal = divideTriangleSize;
+        float dist = triangle->getCenter().distance(ofPoint(OUTWIDTH*0.5,OUTHEIGHT));
+        
+        if(divideInvert){
+            triangle->drawLevelGoal = MIN(divideTriangleSize,MAX(1,divideTriangleSize * ((3000-dist)/divideRadius)));
+        } else {
+            triangle->drawLevelGoal = MIN(divideTriangleSize,MAX(1,divideTriangleSize * dist/divideRadius));
+        }
+
         triangle->update();
     }
     
