@@ -31,11 +31,17 @@ void Corner::createDivisionCorners(){
             
             ofVec3f c2 = joinedCorners[i]->pos;
             ofVec3f c1 = pos;
-            divisionCorner->pos = (c1 - c2)*0.5 + c2;
+            divisionCorner->anchorRatio = ofRandom(0.3,0.7);
+
+            divisionCorner->pos = (c1 - c2)*divisionCorner->anchorRatio + c2;
+            divisionCorner->origPos = (c1 - c2)*divisionCorner->anchorRatio + c2;
+            divisionCorner->randomSeed = ofVec3f(ofRandom(1),ofRandom(1),ofRandom(1));
             
             divisionCorner->joinedCorners.push_back(this);
             divisionCorner->joinedCorners.push_back(joinedCorners[i]);
             
+            divisionCorner->anchor1 = this;
+            divisionCorner->anchor2 = joinedCorners[i];
         }
         
     }
@@ -178,7 +184,7 @@ void Mapping::generate() {
     int numTriangles = 0;
     int numCorners = 0;
     int maxTriangleSize = 1000000;
-    float cornerThreshold = 20;
+    float cornerThreshold = 10;
     
     for (int i = 0; i < svg.getNumPath(); i++){
 		ofPath p = svg.getPathAt(i);

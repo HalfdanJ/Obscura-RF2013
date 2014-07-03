@@ -8,18 +8,39 @@ void testApp::setup() {
     
     osc.setup("halfdanjOld.local", 6000);
     oscReceiver.setup(9001);
-    circleRadius = 4;
-    circleSpeed = 0.1;
+    circleRadius = 0;
+    circleSpeed = 0;
     
     lampPositions.assign(numLamps, ofVec3f(0,0,0));
     
     time = 0;
     
+    for(int i=0;i<13;i++){
+        flock.addBoid(ofRandom(200),ofRandom(200));
+    }
+    
+}
+
+bool isMouseMoving() {
+    static ofPoint pmouse;
+    ofPoint mouse(ofGetMouseX(),ofGetMouseY());
+    bool mouseIsMoving = (mouse!=pmouse);
+    pmouse = mouse;
+    return mouseIsMoving;
 }
 
 //--------------------------------------------------------------
 void testApp::update() {
     
+    
+    if (isMouseMoving()) {
+        for(int i=0; i<flock.boids.size(); i++) {
+            flock.boids[i].avoid(ofPoint(mouseX,mouseY));
+        }
+    }
+    
+	flock.update();
+
     
     
     while(oscReceiver.hasWaitingMessages() > 0){
@@ -27,7 +48,7 @@ void testApp::update() {
         oscReceiver.getNextMessage(&m);
         
         if(m.getAddress() == "/Center/x"){
-            center.x = (m.getArgAsFloat(0)-0.5)*2;
+            center.x = (1-m.getArgAsFloat(0)-0.5)*2;
             
         }
         if(m.getAddress() == "/Center/y"){
@@ -35,12 +56,12 @@ void testApp::update() {
             
         }
         if(m.getAddress() == "/Height/x"){
-            center.z = ((1-m.getArgAsFloat(0))-0.5)*2;
+            center.z = ((m.getArgAsFloat(0))-0.5)*2;
             //center.z = ((1-m.getArgAsFloat(0)));//*2;
             
         }
         if(m.getAddress() == "/Radius/x"){
-            circleRadius = m.getArgAsFloat(0)*7;
+            circleRadius = m.getArgAsFloat(0)*1.2;
         }
         if(m.getAddress() == "/Speed/x"){
             circleSpeed = m.getArgAsFloat(0);
@@ -48,6 +69,14 @@ void testApp::update() {
         
         if(m.getAddress() == "/Type/x"){
             type = m.getArgAsInt32(0);
+        }
+        
+        /*if(m.getAddress() == "/Dim/x"){
+            dim = m.getArgAsInt32(0);
+        }*/
+        
+        if(m.getAddress() == "/Flocking/x"){
+            enable = (m.getArgAsInt32(0) == 1);
         }
         
     }
@@ -58,7 +87,7 @@ void testApp::update() {
     
     if(type==2) {
         for(int i=0;i<lampPositions.size();i++){
-       float t = time/100.0;//sin(ofGetElapsedTimeMillis()/2000.0)*3;
+       float t = 5*time/100.0;//sin(ofGetElapsedTimeMillis()/2000.0)*3;
        float x = center.x + sin(i*TWO_PI/8+t)* (circleRadius);
        float y = center.y + cos(i*TWO_PI/8+t)* (circleRadius);
        
@@ -72,7 +101,7 @@ void testApp::update() {
     } else if(type==1) {
     for(int i=0;i<lampPositions.size();i++){
         
-        float t = floor(time/100.0);
+        float t = floor(5*time/100.0);
         
         float x = center.x + sin(i*TWO_PI/8+t)*circleRadius;
         float y = center.z + cos(i*TWO_PI/8+t)*circleRadius;
@@ -113,27 +142,50 @@ void testApp::update() {
             x = -circleRadius/2;
         }
         
-        lampPositions[i].x = x + center.x;
-        lampPositions[i].y = y + center.y;
-        lampPositions[i].z = center.z;
+
     }
     }
+    
+    
+    if(enable) {
+        
+        for(int i=0;i<flock.boids.size();i++){
+            
+            float x = 15 * (flock.boids[i].loc.x / ofGetWidth() - 0.5);
+            float y = 30 * (flock.boids[i].loc.y / ofGetHeight() - 0.5);
+            
+            ofxOscMessage m;
+            
+            m.setAddress("/sharpy");
+            m.addIntArg(i+1); // device number
+            m.addFloatArg(x); // x
+            m.addFloatArg(0); // y
+            m.addFloatArg(y); // x
+            osc.sendMessage(m);
+            
+        }
+    } else {
+    
 
     for(int i=0;i<lampPositions.size();i++){
         ofxOscMessage m;
         m.setAddress("/sharpy");
         m.addIntArg(i+1); // device number
-        m.addFloatArg(lampPositions[i].x);
-        m.addFloatArg(lampPositions[i].z);
-        m.addFloatArg(lampPositions[i].y);
+        m.addFloatArg(lampPositions[i].y*10);
+        m.addFloatArg(lampPositions[i].z*4);
+        m.addFloatArg(lampPositions[i].x*10);
         osc.sendMessage(m);
     }
+        
+    }
+    
   }
 
 //--------------------------------------------------------------
 void testApp::draw() {
 //    glScaled(ofGetWidth(), ofGetHeight(), 1);
     
+    ofPushMatrix();
     
     ofNoFill();
     ofTranslate(0.5*ofGetWidth(), 0.5*ofGetHeight());
@@ -155,7 +207,9 @@ void testApp::draw() {
     }
     ofPopMatrix();
     
+    ofPopMatrix();
     
+    flock.draw();
     
 
     

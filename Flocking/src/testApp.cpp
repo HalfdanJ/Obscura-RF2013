@@ -19,11 +19,14 @@ void testApp::setup() {
     }
     
     osc.setup("halfdanjOld.local", 6000);
+    oscReceiver.setup(6001);
 }
 
 //--------------------------------------------------------------
 void testApp::update() {
     
+    
+        
     if (isMouseMoving()) {
         for(int i=0; i<flock.boids.size(); i++) {            
             flock.boids[i].avoid(ofPoint(mouseX,mouseY));
@@ -31,6 +34,9 @@ void testApp::update() {
     }
     
 	flock.update();
+    
+    
+    if(enable) {
     
     for(int i=0;i<flock.boids.size();i++){
         
@@ -45,9 +51,18 @@ void testApp::update() {
         m.addFloatArg(0); // y
         m.addFloatArg(y); // x
         osc.sendMessage(m);
-
-
         
+    }
+    }
+    
+    
+    while(oscReceiver.hasWaitingMessages() > 0){
+        ofxOscMessage m;
+        oscReceiver.getNextMessage(&m);
+        
+        if(m.getAddress() == "/Flocking/x"){
+            enable = (m.getArgAsInt32(0) == 1);
+        }
     }
     
     

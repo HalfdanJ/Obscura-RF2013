@@ -74,6 +74,10 @@ void testApp::update(){
                     lamps[i].pointAt(p);
                 }
             }
+        } else if(m.getAddress() == "/sharpy/dim"){
+                for(int i=0;i<lamps.size();i++){
+                    lamps[i].dim = m.getArgAsFloat(0)*255;
+                }
         } else {
             cout<<m.getAddress()<<endl;
         }
@@ -81,9 +85,9 @@ void testApp::update(){
         
     }
     
-    if(ofGetFrameNum() % 30 ==0){
+    /*if(ofGetFrameNum() % 30 ==0){
         loadXml();
-    }
+    }*/
     
     for(int i=0;i<lamps.size();i++){
         
@@ -123,11 +127,16 @@ void testApp::update(){
         dmx.setLevel(lamps[i].dmxAddress+6, 0);
         dmx.setLevel(lamps[i].dmxAddress+7, 0);
         dmx.setLevel(lamps[i].dmxAddress+8, 0);
-        dmx.setLevel(lamps[i].dmxAddress+14, 0);//reset
+//        dmx.setLevel(lamps[i].dmxAddress+14, 0);//reset
         dmx.setLevel(lamps[i].dmxAddress+15, 0);//lamp
         
         dmx.setLevel(lamps[i].dmxAddress+16, 10);
-        
+
+
+        //Gobo
+        dmx.setLevel(lamps[i].dmxAddress+9, 5);
+                dmx.setLevel(lamps[i].dmxAddress+14, 255);
+
     }
     
 //      dmx.setLevel(13, 128+ sin(ofGetElapsedTimeMillis()/5000.)*128);
@@ -217,7 +226,6 @@ void testApp::loadXml(){
     
     float dmxPanMin = XML.getAttribute("PANDMX", "min", 0.0);
     float dmxPanMax = XML.getAttribute("PANDMX", "max", 0.0);
-
 
     float panMin = XML.getAttribute("PAN", "min", 0.0);
     float panMax = XML.getAttribute("PAN", "max", 0.0);

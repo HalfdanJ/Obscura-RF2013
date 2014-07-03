@@ -23,6 +23,8 @@ public:
 	
 	ofxFlocking flock;
     ofxOscSender osc;
+    ofxOscReceiver oscReceiver;
+    bool enable = false;
 
 };
 

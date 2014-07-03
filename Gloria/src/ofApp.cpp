@@ -2,8 +2,19 @@
 
 void ofApp::setup() {
     
-    //oscSender.setup("HalfdanJ.local", 6745);
+    
     oscReceiver.setup(OSCRECEIVEPORT);
+
+    
+    //try {
+    oscSenderOne = new ofxOscSender();
+    oscSenderOne->setup(OSCCLIENTONE, OSCSENDPORT);
+
+    oscSenderTwo = new ofxOscSender();
+    oscSenderTwo->setup(OSCCLIENTTWO, OSCSENDPORT);
+    //} catch () {
+      //  
+    //}
     
     ofSetLogLevel(OF_LOG_NOTICE);
     ofSetFrameRate(TARGET_FRAMERATE);
@@ -61,13 +72,14 @@ void ofApp::setup() {
     
     fboOut.begin();
     ofBackground(0,0,0,255);
-    
     fboOut.end();
     
         
     for(int i=0; i<scenes.size(); i++) {
         scenes[i]->mapping = mapping;
         scenes[i]->syphonIn = syphonIn;
+        scenes[i]->oscClients.push_back(oscSenderOne);
+        scenes[i]->oscClients.push_back(oscSenderTwo);
         scenes[i]->setupScene(OUTWIDTH, OUTHEIGHT, i);
     }
     
@@ -142,7 +154,6 @@ void ofApp::update() {
 
 void ofApp::draw() {
     
-    
     // Draw scene fbo's
     ofPushStyle();
     ofNoFill();
@@ -174,47 +185,82 @@ void ofApp::draw() {
     ofDisableDepthTest();
     ofBackground(0, 0, 0);
     ofSetColor(255,255,255,255);
-    
+
+    float scale = 0.08;
     ofPushMatrix();{
-        ofTranslate(380, 40);
+        ofTranslate(ofGetWidth()-scale*fboOut.getWidth()-40, 40);
         
-        ofScale(0.2, 0.2);
-        ofBackground(0);
+        //ofScale(0.08, 0.08);
         
         ofSetColor(255,255,255,255);
         ofNoFill();
         ofSetLineWidth(1);
         
-        ofRect(-1, -1, fboOut.getWidth()+2, fboOut.getHeight()+2);
-        fboOut.draw(0, 0);
-        
-        if(drawGuide) {
-            //ofSetColor(255,255,255,96);
-            drawGrid();
-            debugDraw();
+        for(int i=0; i<scenes.size(); i++) {
+            if(scenes[i]->enabled){
+                ofSetColor(255);
+            } else {
+                ofSetColor(255,0,0,100);
+            }
+
+            ofRect(-1, -1, scale*fboOut.getWidth()+2, scale*fboOut.getHeight()+2);
+           // fboOut.draw(0, 0);
+            ofSetColor(255,255,255,scenes[i]->opacity*255);
+            
+            if(scenes[i]->enabled) {
+                scenes[i]->fbo.draw(0,0, scenes[i]->fbo.getWidth()*scale, scenes[i]->fbo.getHeight()*scale);
+            }
+            
+            ofSetColor(255);
+            
+            ofDrawBitmapString(scenes[i]->name + "    ("+ofToString(scenes[i]->opacity*100.,0)+"%)", ofPoint(0,-3));
+
+            if(drawGuide) {
+                //ofSetColor(255,255,255,96);
+                drawGrid();
+                debugDraw();
+            }
+            
+            ofTranslate(0, scale*fboOut.getHeight()+30);
         }
         
-    }ofPopMatrix();
     
-    ofPushMatrix();{
-        ofTranslate(380, 320);
+        ofTranslate(0, 30);
+        //Syphon
+        ofPushMatrix();
+    
+        ofSetColor(0,0,255);
+        ofSetLineWidth(1);
+        ofRect(-1, -1, scale*syphonIn->getWidth()+2, scale*syphonIn->getHeight()+2);
+        
+        ofSetColor(255);
+        ofDrawBitmapString("Syphon input - (Press 'i' to change)",  ofPoint(0,-18));
+        ofDrawBitmapString(syphonIn->getApplicationName()+" "+syphonIn->getServerName(),  ofPoint(0,-3));
+
+        syphonIn->draw(0, 0, scale*syphonIn->getWidth(), scale*syphonIn->getHeight());
+        
+        ofPopMatrix();
+        
+    }ofPopMatrix();
+   
+    /*ofPushMatrix();{
+        ofTranslate(80, 520);
         
         if(syphonIn->isSetup()){
             
             ofPushMatrix();
             
-            ofScale(0.2, 0.2);
             ofSetColor(255);
             ofSetLineWidth(1);
-            ofRect(-1, -1, syphonIn->getWidth()+2, syphonIn->getHeight()+2);
-            syphonIn->draw(0, 0, syphonIn->getWidth(), syphonIn->getHeight());
+            ofRect(-1, -1, scale*syphonIn->getWidth()+2, scale*syphonIn->getHeight()+2);
+            syphonIn->draw(0, 0, scale*syphonIn->getWidth(), scale*syphonIn->getHeight());
             
             ofPopMatrix();
             
             ofDrawBitmapString("Syphon input - (Press 'i' to change)", 10,18);
-            ofDrawBitmapString(syphonIn->getApplicationName(), 10,34);
+            ofDrawBitmapString(syphonIn->getApplicationName()+" "+syphonIn->getServerName(), 10,34);
         }
-    }ofPopMatrix();
+    }ofPopMatrix();*/
     
     
     ofSetColor(255);
@@ -269,7 +315,7 @@ void ofApp::setGUI()
     
     mainGui->addLabel("OSC info");
     mainGui->addLabel("In: " + ofToString(OSCRECEIVEPORT));
-    mainGui->addLabel("Out: " + string(OSCSENDHOST) + ":" + ofToString(OSCSENDPORT));
+    mainGui->addLabel("Out: " + string(OSCCLIENTONE) + " & " + string(OSCCLIENTTWO) + ":" + ofToString(OSCSENDPORT));
     
     mainGui->addToggle("Draw guide", &drawGuide);
     mainGui->addToggle("Draw mask", &drawMask);

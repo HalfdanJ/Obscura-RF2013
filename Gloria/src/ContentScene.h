@@ -19,6 +19,8 @@ public:
     ofxUICanvas* gui;
     ofxSyphonServer syphonOut;
     
+    vector<ofxOscSender *> oscClients;
+    
     int index;
     string name;
     string oscAddress = "/default";
