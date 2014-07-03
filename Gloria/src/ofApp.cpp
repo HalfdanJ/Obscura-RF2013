@@ -69,7 +69,6 @@ void ofApp::setup() {
     
     fboOut.allocate(fboSettings);
     
-    
     fboOut.begin();
     ofBackground(0,0,0,255);
     fboOut.end();

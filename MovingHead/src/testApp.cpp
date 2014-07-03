@@ -27,6 +27,12 @@ void testApp::setup(){
     osc = new ofxOscReceiver();
     osc->setup(6000);
     
+    clients.push_back(new ofxOscSender());
+    clients.push_back(new ofxOscSender());
+    
+    clients[0]->setup(OSCCLIENTONE, OSCSENDPORT);
+    clients[1]->setup(OSCCLIENTTWO, OSCSENDPORT);
+    
 }
 
 //--------------------------------------------------------------
@@ -78,8 +84,15 @@ void testApp::update(){
                 for(int i=0;i<lamps.size();i++){
                     lamps[i].dim = m.getArgAsFloat(0)*255;
                 }
+            
+        } else if(m.getAddress() == "/sharpy/enabled/x"){
+            masterEnable = (m.getArgAsFloat(0));
         } else {
-            cout<<m.getAddress()<<endl;
+            //cout<<m.getAddress()<<endl;
+        }
+        
+        for(int o=0; o<clients.size(); o++) {
+            clients[o]->sendMessage(m);
         }
 
         
@@ -88,6 +101,8 @@ void testApp::update(){
     /*if(ofGetFrameNum() % 30 ==0){
         loadXml();
     }*/
+    
+    if(masterEnable) {
     
     for(int i=0;i<lamps.size();i++){
         
@@ -127,20 +142,22 @@ void testApp::update(){
         dmx.setLevel(lamps[i].dmxAddress+6, 0);
         dmx.setLevel(lamps[i].dmxAddress+7, 0);
         dmx.setLevel(lamps[i].dmxAddress+8, 0);
-//        dmx.setLevel(lamps[i].dmxAddress+14, 0);//reset
+//      dmx.setLevel(lamps[i].dmxAddress+14, 0);//reset
         dmx.setLevel(lamps[i].dmxAddress+15, 0);//lamp
-        
         dmx.setLevel(lamps[i].dmxAddress+16, 10);
-
 
         //Gobo
         dmx.setLevel(lamps[i].dmxAddress+9, 5);
-                dmx.setLevel(lamps[i].dmxAddress+14, 255);
-
+        dmx.setLevel(lamps[i].dmxAddress+14, 255);
+        
     }
     
 //      dmx.setLevel(13, 128+ sin(ofGetElapsedTimeMillis()/5000.)*128);
     dmx.update();
+    } else {
+        dmx.clear();
+        dmx.update();
+    }
 
 }
 
@@ -186,13 +203,13 @@ void testApp::draw(){
         
         ofSetColor(255, 0, 0,80);
         ofFill();
-        ofBox(1);
+        ofDrawBox(1);
         
         
 
         ofNoFill();
         ofSetColor(255);
-        ofBox(1);
+        ofDrawBox(1);
         
         
         ofPopMatrix();
@@ -206,6 +223,9 @@ void testApp::draw(){
     ofSetColor(240, 240, 240);
 /*	TTF.drawString(message, 170, 12);*/
     ofDrawBitmapString(message, 170,12);
+    
+    
+    ofDrawBitmapString("Enabled: " + ofToString(masterEnable), 10,10);
 }
 
 void testApp::loadXml(){

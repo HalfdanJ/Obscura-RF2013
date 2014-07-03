@@ -7,6 +7,12 @@
 
 #include "Lamp.h"
 
+#define OSCSENDPORT 8000
+
+#define OSCCLIENTONE "Rumba.local"
+#define OSCCLIENTTWO "HalfdanJ-iPad.local"
+
+
 class testApp : public ofBaseApp{
 	public:
 		void setup();
@@ -31,8 +37,11 @@ class testApp : public ofBaseApp{
     
     vector<Lamp> lamps;
     
+    vector<ofxOscSender *> clients;
+    
     ofxDmx dmx;
 
+    bool masterEnable = false;
     
     string message;
     
