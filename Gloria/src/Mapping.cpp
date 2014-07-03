@@ -184,7 +184,7 @@ void Mapping::generate() {
     int numTriangles = 0;
     int numCorners = 0;
     int maxTriangleSize = 1000000;
-    float cornerThreshold = 20;
+    float cornerThreshold = 10;
     
     for (int i = 0; i < svg.getNumPath(); i++){
 		ofPath p = svg.getPathAt(i);
