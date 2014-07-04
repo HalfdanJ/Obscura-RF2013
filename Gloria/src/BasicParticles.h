@@ -58,6 +58,9 @@ public:
     ofFbo myfbo;
     ofPixels pixels;
     
+    //Scene to fbo
+    ofFbo sceneFbo;
+    
     //particle
     float pspeed;
     float psize;

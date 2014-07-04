@@ -50,7 +50,11 @@ void BasicParticles::setup(){
     oscAddress = "/basicparticles";
     
     myfbo.allocate(OUTWIDTH/10, OUTHEIGHT/10, GL_RGBA);
+    sceneFbo.allocate(OUTWIDTH, OUTHEIGHT, GL_RGBA);
 
+    //sceneFbo.begin();
+    //ofClear(0,0,0);
+    //sceneFbo.end();
     
     pspeed = 5;
     psize = 20;
@@ -74,13 +78,16 @@ void BasicParticles::update(){
 void BasicParticles::draw(){;
     float lineWidth = 5;
     
-    if (!trace) {
-        ofClear(0,0,0);
-    }
-
     //read syphon fbo
     myfbo.readToPixels(pixels);
     
+    sceneFbo.begin();
+    
+    ofSetColor(255, 255, 255, 255);
+    
+    if (!trace) {
+        ofClear(0,0,0,255);
+    }
 
     //Draw particles
     for (int i=0; i<particles.size(); i++) {
@@ -89,7 +96,6 @@ void BasicParticles::draw(){;
     
     //Create new particles
     while (particles.size()<totalCount) {
-        cout << "create " << ", totalcount: " << totalCount << endl;
         createParticle();
     }
     
@@ -100,20 +106,20 @@ void BasicParticles::draw(){;
     
     // Erase particles
     while (particles.size()>totalCount) {
-        cout << "particles size: " << particles.size() << " totalCount: " << totalCount << endl;
-        particles.pop_back();
+       particles.pop_back();
         if (iterate >= particles.size())
             iterate = 0;
     }
 
     
     if (trace) {
-    
         //Fade out the old stuff
         ofSetColor(0,0,0,fade);
         ofFill();
         ofRect(0,0,OUTWIDTH,OUTHEIGHT);
     }
+    
+    sceneFbo.end();
     
     //Syphon fbo
     myfbo.begin();
@@ -122,6 +128,8 @@ void BasicParticles::draw(){;
     ofSetColor(255, 255, 255, 255);
     syphonIn->draw(0, 0, OUTWIDTH/10,OUTHEIGHT/10);
     myfbo.end();
+    
+    sceneFbo.draw(0,0);
     
     //myfbo.draw(0,0);
 }
