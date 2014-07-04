@@ -49,12 +49,9 @@ void BasicParticles::setup(){
     name = "BasicParticles";
     oscAddress = "/basicparticles";
     
-    myfbo.allocate(OUTWIDTH/10, OUTHEIGHT/10, GL_RGBA);
-    sceneFbo.allocate(OUTWIDTH, OUTHEIGHT, GL_RGBA);
-
-    //sceneFbo.begin();
-    //ofClear(0,0,0);
-    //sceneFbo.end();
+    syphonFbo.allocate(OUTWIDTH/10, OUTHEIGHT/10, GL_RGBA);
+    pingPongFbo1.allocate(OUTWIDTH, OUTHEIGHT, GL_RGBA);
+    pingPongFbo2.allocate(OUTWIDTH, OUTHEIGHT, GL_RGBA);
     
     pspeed = 5;
     psize = 20;
@@ -65,6 +62,14 @@ void BasicParticles::setup(){
     
     particles.reserve(totalCount);
     iterate = 0;
+    
+    pingPongFbo1.begin();
+    ofClear(0, 0, 0, 255);
+    pingPongFbo1.end();
+
+    pingPongFbo2.begin();
+    ofClear(0, 0, 0, 255);
+    pingPongFbo2.end();
 }
 
 void BasicParticles::update(){
@@ -79,14 +84,24 @@ void BasicParticles::draw(){;
     float lineWidth = 5;
     
     //read syphon fbo
-    myfbo.readToPixels(pixels);
+    syphonFbo.readToPixels(pixels);
     
-    sceneFbo.begin();
+    //Begin FBO
+    toggleFbo ? pingPongFbo1.begin() : pingPongFbo2.begin();
+    ofEnableAlphaBlending();
     
-    ofSetColor(255, 255, 255, 255);
+    ofClearAlpha();
     
-    if (!trace) {
-        ofClear(0,0,0,255);
+    if (trace) {
+        ofSetColor(255, 255, 255, 255);
+        !toggleFbo ? pingPongFbo1.draw(0, 0) : pingPongFbo2.draw(0, 0);
+
+        //Fade out the old stuff
+        ofSetColor(0,0,0,fade);
+        ofFill();
+        ofRect(0,0,OUTWIDTH,OUTHEIGHT);
+    } else {
+        ofClear(0, 0, 0, 255);
     }
 
     //Draw particles
@@ -110,28 +125,26 @@ void BasicParticles::draw(){;
         if (iterate >= particles.size())
             iterate = 0;
     }
+    
+    //FBO end
+    toggleFbo ? pingPongFbo1.end() : pingPongFbo2.end();
 
+    ofSetColor(255, 255, 255, 255);
+    toggleFbo ? pingPongFbo1.draw(0, 0) : pingPongFbo2.draw(0, 0);
     
-    if (trace) {
-        //Fade out the old stuff
-        ofSetColor(0,0,0,fade);
-        ofFill();
-        ofRect(0,0,OUTWIDTH,OUTHEIGHT);
-    }
+    ofDisableAlphaBlending();
     
-    sceneFbo.end();
+    toggleFbo = !toggleFbo;
     
     //Syphon fbo
-    myfbo.begin();
+    syphonFbo.begin();
     ofClear(0);
     ofClearAlpha();
     ofSetColor(255, 255, 255, 255);
     syphonIn->draw(0, 0, OUTWIDTH/10,OUTHEIGHT/10);
-    myfbo.end();
+    syphonFbo.end();
     
-    sceneFbo.draw(0,0);
-    
-    //myfbo.draw(0,0);
+    //syphonFbo.draw(0,0);
 }
 
 void BasicParticles::setGui(){
