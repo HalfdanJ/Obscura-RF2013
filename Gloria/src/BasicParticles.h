@@ -55,11 +55,13 @@ public:
     int iterate;
     
     //syphon to fbo
-    ofFbo myfbo;
+    ofFbo syphonFbo;
     ofPixels pixels;
     
     //Scene to fbo
-    ofFbo sceneFbo;
+    ofFbo pingPongFbo1;
+    ofFbo pingPongFbo2;
+    bool toggleFbo;
     
     //particle
     float pspeed;
