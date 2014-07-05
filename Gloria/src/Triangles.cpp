@@ -32,7 +32,7 @@ void Triangles::setGui(){
     gui->addSlider("/Wireframe/x", 0,1, &wireframeAlpha);
     gui->addSlider("/Fill/x", 0,1, &fillAlpha);
 
-    gui->addSlider("/Noise/x", 0,30, &noise);
+    gui->addSlider("/Noise/x", 0,2, &noise);
     gui->addSlider("/NoiseSeed/x", 0,1, &noiseSeed);
     gui->addSlider("/NoiseSeedSpeed/x", 0,1, &noiseSeedSpeed);
 
