@@ -29,6 +29,11 @@ void Triangles::setGui(){
     gui->addSlider("/ColorG/x", 0,1, &colorG);
     gui->addSlider("/ColorB/x", 0,1, &colorB);
 
+    gui->addSlider("/Wireframe/x", 0,1, &wireframeAlpha);
+    gui->addSlider("/Fill/x", 0,1, &fillAlpha);
+
+    gui->addSlider("/Noise/x", 0,30, &noise);
+    gui->addSlider("/NoiseSeed/x", 0,1, &noiseSeed);
 
 }
 
@@ -53,7 +58,7 @@ void Triangles::setup(){
                 subTriangle->corners[j] = new Corner();
                 subTriangle->corners[j]->pos = triangle->corners[j]->pos;
                 subTriangle->corners[j]->origPos = triangle->corners[j]->pos;
-                subTriangle->corners[j]->randomSeed = ofVec3f(0,0,ofRandom(-0.5,0.5));
+               // subTriangle->corners[j]->randomSeed = ofVec3f(0,0,ofRandom(-0.5,0.5));
                 
                 
                 cornerRefs[triangle->corners[j]] = subTriangle->corners[j];
@@ -195,13 +200,22 @@ float ease(float t, float b, float c, float d) {
 
 
 void Triangles::drawTriangleWireframe(SubTriangle * triangle){
-    if(triangle->subTriangles.size() > 0){
+    bool subDraw = false;
+    for(int i=0;i<triangle->subTriangles.size();i++){
+        if(triangle->subTriangles[i]->drawLevel-1.5*triangle->subTriangles[i]->ageDifference  >= triangle->subTriangles[i]->level){
+            subDraw = true;
+        }
+    }
+  
+    if(subDraw){
         for(int j=0;j<triangle->subTriangles.size();j++){
             drawTriangleWireframe(triangle->subTriangles[j]);
         }
     } else {
-        for(int u=0;u<3;u++){
-            glVertex3d(triangle->corners[u]->pos.x, triangle->corners[u]->pos.y, 0/*triangle->corners[u]->pos.z*/);
+          for(int u=0;u<3;u++){
+              ofVec3f pos = triangle->getPos(u) ;
+
+            glVertex3d(pos.x, pos.y, 0/*triangle->corners[u]->pos.z*/);
         }
 
     }
@@ -264,7 +278,7 @@ void Triangles::drawTriangle(SubTriangle * triangle, float opacity, ofVec3f pare
 }
 
 void Triangles::draw(){
-    
+    ofClear(0);
     ofSetColor(255,255,255);
     
     depthFbo.begin();{
@@ -274,7 +288,7 @@ void Triangles::draw(){
         syphonIn->draw(0, 0, OUTWIDTH, OUTHEIGHT);
     }depthFbo.end();
  
-    ofSetColor(255*colorR,255*colorG,255*colorB);
+    ofSetColor(255*colorR*fillAlpha,255*colorG*fillAlpha,255*colorB*fillAlpha);
 
     debugShader.begin();
    // debugShader.setUniformTexture("depthTex", depthFbo.getTextureReference(), 1);
@@ -297,18 +311,6 @@ void Triangles::draw(){
     glEnd();
     
 
-    ofSetColor(255,255,255);
-
-   /* if(syphonOpacity){
-        syphonIn->bind();
-        glBegin(GL_TRIANGLES);
-        for(int i=0;i<mapping->triangles.size();i++){
-         //   drawTriangle(subTriangles[mapping->triangles[i]],syphonOpacity);
-        }
-        
-        glEnd();
-        syphonIn->unbind();
-    }*/
     material.end();
 
     pointLight.disable();
@@ -320,18 +322,24 @@ void Triangles::draw(){
 /*    ofDisableDepthTest();
     depthFbo.draw(0,0);
 */
-  /*  ofNoFill();
+    ofNoFill();
     
     glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
+//    glEnable(GL_LINE_SMOOTH);
+
     glBegin(GL_TRIANGLES);
-    ofSetColor(255);
+    ofSetColor(255*colorR*wireframeAlpha,255*colorG*wireframeAlpha,255*colorB*wireframeAlpha);
+
     for(int i=0;i<mapping->triangles.size();i++){
         drawTriangleWireframe(subTriangles[mapping->triangles[i]]);
     }
     glEnd();
     glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
-   
-    ofFill();*/
+    ofFill();
+    
+    ofSetColor(255);
+  //  glDisable(GL_LINE_SMOOTH);
+
 }
 
 void Triangles::update(){
@@ -344,6 +352,9 @@ void Triangles::update(){
         } else {
             triangle->drawLevelGoal = MIN(divideTriangleSize,MAX(1,divideTriangleSize * dist/divideRadius));
         }
+        
+        triangle->noise = noise;
+        triangle->noiseSeed = noiseSeed;
 
         triangle->update();
     }

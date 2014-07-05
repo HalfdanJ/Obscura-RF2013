@@ -137,7 +137,7 @@ void main()
 {
 
     vec3 color = texture2DRect(tex0, gl_TexCoord[0].xy).rgb;
-    color =color*textureAmount + (1.-textureAmount) * vec3(1.);
+    color =color*textureAmount + (1.-textureAmount) * gl_Color.rgb;
  //   vec3 bump = texture2DRect(depthTex, gl_TexCoord[0].xy).rgb;
     
     vec3 n = (vertexNormal);

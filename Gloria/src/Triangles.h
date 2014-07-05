@@ -21,6 +21,7 @@ public:
     int level;
     float drawLevel;
     float drawLevelGoal;
+    float noise, noiseSeed;
     
     float ageDifference;
     
@@ -96,6 +97,8 @@ public:
                 drawLevel = subTriangles[i]->drawLevel;
             }*/
             subTriangles[i]->drawLevelGoal = drawLevelGoal;
+            subTriangles[i]->noise = noise;
+            subTriangles[i]->noiseSeed = noiseSeed;
             subTriangles[i]->update();
         }
         age += ageDifference*1.0/ofGetFrameRate();
@@ -103,8 +106,13 @@ public:
     
     ofVec3f getPos(int i){
         float f = MIN(1,MAX(0,drawLevel-level));
+        srand(corners[i]->randomSeed.x*100 + noiseSeed*100.);
+        float rx = (rand()%100)*noise * corners[i]->randomSeed.x;
+
+        srand(corners[i]->randomSeed.y*100+ noiseSeed*100.);
+        float ry = (rand()%100)*noise * corners[i]->randomSeed.y;
         
-        return corners[i]->getPos(f);
+        return corners[i]->getPos(f) + ofVec2f(rx, ry);
     }
     
     float getLowestAge(){
@@ -286,6 +294,9 @@ public:
     float divideTriangleSize;
     float divideRadius;
     bool divideInvert;
+    float wireframeAlpha, fillAlpha;
+    
+    float noise, noiseSeed;
     
     float light;
     float lightSpeed;

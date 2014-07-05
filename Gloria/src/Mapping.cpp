@@ -35,7 +35,7 @@ void Corner::createDivisionCorners(){
 
             divisionCorner->pos = (c1 - c2)*divisionCorner->anchorRatio + c2;
             divisionCorner->origPos = (c1 - c2)*divisionCorner->anchorRatio + c2;
-            divisionCorner->randomSeed = ofVec3f(ofRandom(1),ofRandom(1),ofRandom(1));
+            divisionCorner->randomSeed = ofVec3f(ofRandom(-1,1),ofRandom(-1,1),ofRandom(-1,1));
             
             divisionCorner->joinedCorners.push_back(this);
             divisionCorner->joinedCorners.push_back(joinedCorners[i]);
