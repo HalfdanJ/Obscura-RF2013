@@ -34,6 +34,7 @@ void Triangles::setGui(){
 
     gui->addSlider("/Noise/x", 0,30, &noise);
     gui->addSlider("/NoiseSeed/x", 0,1, &noiseSeed);
+    gui->addSlider("/NoiseSeedSpeed/x", 0,1, &noiseSeedSpeed);
 
 }
 
@@ -214,6 +215,10 @@ void Triangles::drawTriangleWireframe(SubTriangle * triangle){
     } else {
           for(int u=0;u<3;u++){
               ofVec3f pos = triangle->getPos(u) ;
+              ofVec3f center = triangle->getCenter();
+
+              glTexCoord2d(syphonIn->getWidth()* center.x/OUTWIDTH
+                           , syphonIn->getHeight()*(OUTHEIGHT-center.y)/OUTHEIGHT);
 
             glVertex3d(pos.x, pos.y, 0/*triangle->corners[u]->pos.z*/);
         }
@@ -280,69 +285,90 @@ void Triangles::drawTriangle(SubTriangle * triangle, float opacity, ofVec3f pare
 void Triangles::draw(){
     ofClear(0);
     ofSetColor(255,255,255);
-    
+   /*
     depthFbo.begin();{
         ofFill();
         ofClear(255);
         ofSetColor(255,255,255);
         syphonIn->draw(0, 0, OUTWIDTH, OUTHEIGHT);
     }depthFbo.end();
- 
-    ofSetColor(255*colorR*fillAlpha,255*colorG*fillAlpha,255*colorB*fillAlpha);
-
-    debugShader.begin();
-   // debugShader.setUniformTexture("depthTex", depthFbo.getTextureReference(), 1);
-    debugShader.setUniform1f("lightAmount", light);
-    debugShader.setUniform1f("textureAmount", syphonOpacity);
-    syphonIn->bind();
-    material.setShininess(15);
+ */
     
-
-
-    ofEnableLighting();
-    pointLight.enable();
-    material.begin();
-
-    
-    glBegin(GL_TRIANGLES);
-    for(int i=0;i<mapping->triangles.size();i++){
-        drawTriangle(subTriangles[mapping->triangles[i]],1);
+    if(fillAlpha > 0){
+        ofSetColor(255*colorR*fillAlpha,255*colorG*fillAlpha,255*colorB*fillAlpha);
+        
+        debugShader.begin();
+        // debugShader.setUniformTexture("depthTex", depthFbo.getTextureReference(), 1);
+        debugShader.setUniform1f("lightAmount", light);
+        debugShader.setUniform1f("textureAmount", syphonOpacity);
+        syphonIn->bind();
+        material.setShininess(15);
+        
+        
+        
+        ofEnableLighting();
+        pointLight.enable();
+        material.begin();
+        
+        
+        glBegin(GL_TRIANGLES);
+        for(int i=0;i<mapping->triangles.size();i++){
+            drawTriangle(subTriangles[mapping->triangles[i]],1);
+        }
+        glEnd();
+        
+        
+        material.end();
+        
+        pointLight.disable();
+        ofDisableLighting();
+        
+        debugShader.end();
+        syphonIn->unbind();
     }
-    glEnd();
     
-
-    material.end();
-
-    pointLight.disable();
-    ofDisableLighting();
-    
-    debugShader.end();
-    syphonIn->unbind();
-
-/*    ofDisableDepthTest();
-    depthFbo.draw(0,0);
-*/
+    /*    ofDisableDepthTest();
+     depthFbo.draw(0,0);
+     */
     ofNoFill();
     
-    glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
-//    glEnable(GL_LINE_SMOOTH);
+    if(wireframeAlpha > 0){
+        
+        debugShader.begin();
+        // debugShader.setUniformTexture("depthTex", depthFbo.getTextureReference(), 1);
+        debugShader.setUniform1f("lightAmount", light);
+        debugShader.setUniform1f("textureAmount", syphonOpacity);
+        syphonIn->bind();
+        material.setShininess(15);
 
-    glBegin(GL_TRIANGLES);
-    ofSetColor(255*colorR*wireframeAlpha,255*colorG*wireframeAlpha,255*colorB*wireframeAlpha);
-
-    for(int i=0;i<mapping->triangles.size();i++){
-        drawTriangleWireframe(subTriangles[mapping->triangles[i]]);
+        
+        
+        glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
+        //    glEnable(GL_LINE_SMOOTH);
+        
+        glBegin(GL_TRIANGLES);
+        ofSetColor(255*colorR*wireframeAlpha,255*colorG*wireframeAlpha,255*colorB*wireframeAlpha);
+        
+        for(int i=0;i<mapping->triangles.size();i++){
+            drawTriangleWireframe(subTriangles[mapping->triangles[i]]);
+        }
+        glEnd();
+        glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
+        ofFill();
+        
+        syphonIn->unbind();
+        debugShader.end();
     }
-    glEnd();
-    glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
-    ofFill();
     
     ofSetColor(255);
-  //  glDisable(GL_LINE_SMOOTH);
-
+    //  glDisable(GL_LINE_SMOOTH);
+    
 }
 
 void Triangles::update(){
+    noiseSeed += noiseSeedSpeed * 1.0/MAX(10,ofGetFrameRate());
+    if(noiseSeed > 1)
+        noiseSeed = 0;
     for(int i=0;i<mapping->triangles.size();i++){
         SubTriangle * triangle = subTriangles[mapping->triangles[i]];
         float dist = triangle->getCenter().distance(ofPoint(OUTWIDTH*0.5,OUTHEIGHT));

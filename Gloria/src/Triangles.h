@@ -296,7 +296,7 @@ public:
     bool divideInvert;
     float wireframeAlpha, fillAlpha;
     
-    float noise, noiseSeed;
+    float noise, noiseSeed, noiseSeedSpeed;
     
     float light;
     float lightSpeed;
