@@ -14,6 +14,7 @@
 #include "Mapping.h"
 #include "FluidScene.h"
 #include "BasicParticles.h"
+#include "petriDish.h"
 
 class ofApp : public ofBaseApp {
 public:

@@ -59,6 +59,7 @@ void ofApp::setup() {
     scenes.push_back(new Triangles());
     scenes.push_back(new PerlinWaves());
     scenes.push_back(new BasicParticles());
+    scenes.push_back(new PetriDish());
     
     ofFbo::Settings fboSettings;
     fboSettings.height = OUTHEIGHT;
