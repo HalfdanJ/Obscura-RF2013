@@ -225,6 +225,10 @@ void Triangles::drawTriangleWireframe(SubTriangle * triangle){
 
     }
 }
+
+
+
+
 void Triangles::drawTriangle(SubTriangle * triangle, float opacity, ofVec3f parentNormal){
     ofVec3f normal = triangle->normal();
 
@@ -266,8 +270,8 @@ void Triangles::drawTriangle(SubTriangle * triangle, float opacity, ofVec3f pare
 
         
         //Tegn billede 1:1
-        float bbb = directTextureOpacity;
-       /* if(bbb){
+/*        float bbb = directTextureOpacity;
+        if(bbb){
             
             ofSetColor(255,255,255,255*bbb);
             for(int u=0;u<3;u++){
@@ -295,7 +299,7 @@ void Triangles::draw(){
  */
     
     if(fillAlpha > 0){
-        ofSetColor(255*colorR*fillAlpha,255*colorG*fillAlpha,255*colorB*fillAlpha);
+        ofSetColor(255*colorR,255*colorG,255*colorB, 255*fillAlpha);
         
         debugShader.begin();
         // debugShader.setUniformTexture("depthTex", depthFbo.getTextureReference(), 1);
@@ -331,23 +335,27 @@ void Triangles::draw(){
      depthFbo.draw(0,0);
      */
     ofNoFill();
-    
+    ofEnableAlphaBlending();
     if(wireframeAlpha > 0){
-        
+        ofSetColor(255*colorR,255*colorG,255*colorB, 255*wireframeAlpha);
+
         debugShader.begin();
+
         // debugShader.setUniformTexture("depthTex", depthFbo.getTextureReference(), 1);
         debugShader.setUniform1f("lightAmount", light);
         debugShader.setUniform1f("textureAmount", syphonOpacity);
         syphonIn->bind();
         material.setShininess(15);
+        ofEnableLighting();
 
-        
+        pointLight.enable();
+        material.begin();
+
         
         glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
         //    glEnable(GL_LINE_SMOOTH);
         
         glBegin(GL_TRIANGLES);
-        ofSetColor(255*colorR*wireframeAlpha,255*colorG*wireframeAlpha,255*colorB*wireframeAlpha);
         
         for(int i=0;i<mapping->triangles.size();i++){
             drawTriangleWireframe(subTriangles[mapping->triangles[i]]);
@@ -357,9 +365,12 @@ void Triangles::draw(){
         ofFill();
         
         syphonIn->unbind();
+        material.end();
+        pointLight.disable();
         debugShader.end();
     }
-    
+    ofDisableLighting();
+
     ofSetColor(255);
     //  glDisable(GL_LINE_SMOOTH);
     
@@ -387,7 +398,7 @@ void Triangles::update(){
     
     
     _lightPhase += 2*lightSpeed * 1.0 / MAX(10, MIN(ofGetFrameRate(),60));
-    lightPos = ofVec3f(2996+1500*sin(_lightPhase),200,2000);
+    lightPos = ofVec3f(2596+1500*sin(_lightPhase),200,2000);
     
     center.x = 2996;
     center.y = 1200;
