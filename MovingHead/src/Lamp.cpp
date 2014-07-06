@@ -74,7 +74,7 @@ void Lamp::pointAt(ofVec3f point){
     
     
     float newDist = fabs(_pan - pan);
-    cout<<newDist<<endl;
+    //cout<<newDist<<endl;
     
     if(newDist > 20){
         coldCountdown = 1.7;

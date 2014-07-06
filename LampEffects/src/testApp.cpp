@@ -112,8 +112,8 @@ void testApp::update() {
     if(type==2) {
         for(int i=0;i<lampPositions.size();i++){
             float t = 5*time/100.0;//sin(ofGetElapsedTimeMillis()/2000.0)*3;
-            float x = center.x + sin(i*TWO_PI/8+t)* (circleRadius);
-            float y = center.y + cos(i*TWO_PI/8+t)* (circleRadius);
+            float x = center.x + sin(i*TWO_PI/12+t)* (circleRadius);
+            float y = center.y + cos(i*TWO_PI/12+t)* (circleRadius);
             
             lampPositions[i].x = x;
             lampPositions[i].y = y;
