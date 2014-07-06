@@ -51,4 +51,6 @@ public:
     
     bool drawObstacles;
     
+    float intensity; 
+    
 };

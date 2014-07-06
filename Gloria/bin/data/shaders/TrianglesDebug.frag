@@ -137,7 +137,7 @@ void main()
 {
 
     vec3 color = texture2DRect(tex0, gl_TexCoord[0].xy).rgb;
-    color =color*textureAmount + (1.-textureAmount) * vec3(1.);
+    color =color*textureAmount* gl_Color.rgb + (1.-textureAmount) * gl_Color.rgb;
  //   vec3 bump = texture2DRect(depthTex, gl_TexCoord[0].xy).rgb;
     
     vec3 n = (vertexNormal);
@@ -145,8 +145,8 @@ void main()
     
     color *= 2.*calc_lighting_color(n).rgb * lightAmount + (1. - lightAmount) ;
 
-    gl_FragColor.rgb = color;
-	gl_FragColor.a = 1.0;
+    gl_FragColor.rgb += color;
+	gl_FragColor.a +=  gl_Color.a;
     
 	//gl_FragColor = gl_Color;//vec4(normal, 1.0);// vec4(1.0) * length(vec3(0.0, 0.0, 1.0) * normal); // vec4(normal.x, 0., 0.0, 1.0);//gl_Color; //* texture2D(tex, gl_TexCoord[0].xy);
 }

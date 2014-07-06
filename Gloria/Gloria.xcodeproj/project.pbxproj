@@ -119,6 +119,7 @@
 		E7F985F815E0DEA3003869B5 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7F985F515E0DE99003869B5 /* Accelerate.framework */; };
 		F228CDF019631AB600CE79FF /* CurlyFur.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F228CDEE19631AB600CE79FF /* CurlyFur.cpp */; };
 		F228CDF319631AC500CE79FF /* Particle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F228CDF119631AC500CE79FF /* Particle.cpp */; };
+		F28F2C6B19683D3A005B5107 /* petriDish.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F28F2C6919683D3A005B5107 /* petriDish.cpp */; };
 		F2BF3F8C1964167D00D4B07B /* BasicParticles.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2BF3F8A1964167D00D4B07B /* BasicParticles.cpp */; };
 /* End PBXBuildFile section */
 
@@ -495,6 +496,8 @@
 		F228CDEF19631AB600CE79FF /* CurlyFur.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurlyFur.h; sourceTree = "<group>"; };
 		F228CDF119631AC500CE79FF /* Particle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Particle.cpp; sourceTree = "<group>"; };
 		F228CDF219631AC500CE79FF /* Particle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Particle.h; sourceTree = "<group>"; };
+		F28F2C6919683D3A005B5107 /* petriDish.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = petriDish.cpp; sourceTree = "<group>"; };
+		F28F2C6A19683D3A005B5107 /* petriDish.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = petriDish.h; sourceTree = "<group>"; };
 		F2BF3F8A1964167D00D4B07B /* BasicParticles.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BasicParticles.cpp; sourceTree = "<group>"; };
 		F2BF3F8B1964167D00D4B07B /* BasicParticles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicParticles.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -942,6 +945,8 @@
 				04C6D22C17847D8900AC12B9 /* PerlinWaves.cpp */,
 				F2BF3F8A1964167D00D4B07B /* BasicParticles.cpp */,
 				F2BF3F8B1964167D00D4B07B /* BasicParticles.h */,
+				F28F2C6919683D3A005B5107 /* petriDish.cpp */,
+				F28F2C6A19683D3A005B5107 /* petriDish.h */,
 			);
 			name = Scenes;
 			sourceTree = "<group>";
@@ -1558,6 +1563,7 @@
 				046C3086177ED4F6009A2EE6 /* ofxCvGrayscaleImage.cpp in Sources */,
 				046C3087177ED4F6009A2EE6 /* ofxCvHaarFinder.cpp in Sources */,
 				0425D881195ABAD5003086AC /* ofxUIValuePlotter.cpp in Sources */,
+				F28F2C6B19683D3A005B5107 /* petriDish.cpp in Sources */,
 				043505041962D687006984A5 /* FluidScene.cpp in Sources */,
 				046C3088177ED4F6009A2EE6 /* ofxCvImage.cpp in Sources */,
 				0425D85D195ABAD5003086AC /* ofxUIButton.cpp in Sources */,

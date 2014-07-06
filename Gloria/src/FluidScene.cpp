@@ -93,7 +93,7 @@ void FluidScene::update(){
     ofPoint d = (m - oldM)*10.0;
     oldM = m;
     
-    fluid.addTemporalForce(m, d, ofFloatColor(1, 1, 1),16.0f);
+    fluid.addTemporalForce(m, d, ofFloatColor(1, 1, 1),intensity);
     
     //fluid.addTemporalForce(m, d, ofFloatColor(1, 1, 1),16.0f);
     
@@ -146,7 +146,9 @@ void FluidScene::setGui(){
     gui->addButton("/clear/x", &clear);
     
     gui->addToggle("/drawobstacles/x", &drawObstacles);
-    drawObstacles = false;
     
+    gui->addSlider("/intensity/x", 0, 30, &intensity);
+    
+    drawObstacles = false;
     
 }
